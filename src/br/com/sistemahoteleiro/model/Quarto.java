@@ -3,23 +3,58 @@
  */
 package br.com.sistemahoteleiro.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
 /**
  * @author ayrtons
  *
  */
+@Entity
+@Table(name = "quarto")
+@SequenceGenerator(name = Entidade.SEQUENCE_ENTIDADE, sequenceName = Quarto.SEQUENCE_ENTIDADE, initialValue = 1, allocationSize = 1)
 public class Quarto extends Entidade {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected static final String SEQUENCE_ENTIDADE = "quarto_sequence";
+
+	@Column(name = "qtd_camas")
 	private int qtdCamas;
+	
+	@Column(name = "num_quarto")
 	private int numQuarto;
+	
+	@Column(name = "tipo_quarto")
 	private String tipoQuarto;
+	
+	@Column(name = "tv_a_cabo")
 	private boolean tvACabo;
+	
+	@Column
 	private boolean cofre;
+	
+	@Column(name = "tv_led")
 	private boolean tvLed;
+	
+	@Column
 	private boolean telefone;
+	
+	@Column(name = "ar_condicionado")
 	private boolean arCondicionado;
+	
+	@Column
 	private boolean wifi;
+	
+	@Column
 	private boolean miniBar;
-	private boolean situacao;
+	
+	@Column
+	private boolean disponivel;
 	
 	
 	/**
@@ -143,18 +178,17 @@ public class Quarto extends Entidade {
 		this.miniBar = miniBar;
 	}
 	/**
-	 * @return the situacao
+	 * @return the disponivel
 	 */
-	public boolean isSituacao() {
-		return situacao;
+	public boolean isDisponivel() {
+		return disponivel;
 	}
 	/**
-	 * @param situacao the situacao to set
+	 * @param disponivel the disponivel to set
 	 */
-	public void setSituacao(boolean situacao) {
-		this.situacao = situacao;
+	public void setDisponivel(boolean disponivel) {
+		this.disponivel = disponivel;
 	}
-	
 	
 	
 }

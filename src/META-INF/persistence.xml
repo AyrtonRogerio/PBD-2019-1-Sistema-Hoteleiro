@@ -8,6 +8,20 @@
 
     <persistence-unit name="Hotel" transaction-type="RESOURCE_LOCAL">
 
+		<class>br.com.sistemahoteleiro.model.Administrador</class>
+		<class>br.com.sistemahoteleiro.model.Aluga</class>
+		<class>br.com.sistemahoteleiro.model.Caixa</class>
+		<class>br.com.sistemahoteleiro.model.Contato</class>
+		<class>br.com.sistemahoteleiro.model.Endereco</class>
+		<class>br.com.sistemahoteleiro.model.Funcionario</class>
+		<class>br.com.sistemahoteleiro.model.Log</class>
+		<class>br.com.sistemahoteleiro.model.Parcela</class>
+		<class>br.com.sistemahoteleiro.model.PessoaFisica</class>
+		<class>br.com.sistemahoteleiro.model.PessoaJuridica</class>
+		<class>br.com.sistemahoteleiro.model.Quarto</class>
+		<class>br.com.sistemahoteleiro.model.Reserva</class>
+		<class>br.com.sistemahoteleiro.model.SuperUsuario</class>
+
         <properties>
 			<property name="hibernate.archive.autodetection" value="class" />
 			

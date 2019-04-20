@@ -4,18 +4,34 @@
 package br.com.sistemahoteleiro.model;
 
 import java.math.BigDecimal;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  * @author ayrtons
  *
  */
+@Entity
+@Table(name = "caixa")
+@SequenceGenerator(name = Entidade.SEQUENCE_ENTIDADE, sequenceName = Caixa.SEQUENCE_ENTIDADE, initialValue = 1,allocationSize = 1)
 public class Caixa extends Entidade {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected static final String SEQUENCE_ENTIDADE = "caixa_sequence";
+	
+	@Column
 	private BigDecimal entrada;
+	
+	@Column
 	private BigDecimal saida;
+	
+	@Column
 	private BigDecimal saldo;
-	private List<Parcela> parcelas;
 	
 	/**
 	 * @return the entrada
@@ -56,15 +72,6 @@ public class Caixa extends Entidade {
 	/**
 	 * @return the parcelas
 	 */
-	public List<Parcela> getParcelas() {
-		return parcelas;
-	}
-	/**
-	 * @param parcelas the parcelas to set
-	 */
-	public void setParcelas(List<Parcela> parcelas) {
-		this.parcelas = parcelas;
-	}
 	
 	
 }

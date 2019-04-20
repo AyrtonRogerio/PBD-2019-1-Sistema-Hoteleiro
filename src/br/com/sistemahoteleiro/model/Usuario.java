@@ -3,17 +3,41 @@
  */
 package br.com.sistemahoteleiro.model;
 
+import javax.persistence.Column;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
+
 /**
  * @author ayrtons
  *
  */
+@MappedSuperclass
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Usuario extends Entidade {
 
-	public String nome;
-	public String rg;
-	public String cpf;
-	public String login;
-	public String senha;
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	protected static final String SEQUENCE_ENTIDADE = "usuario_sequence";
+	
+	@Column(length = 50, nullable = false)
+	private String nome;
+	
+	@Column(length = 12, nullable = false, unique = true)
+	private String rg;
+	
+	@Column(length = 14, nullable = false, unique = true)
+	private String cpf;
+	
+	@Column(nullable = false, unique = true)
+	private String login;
+	
+	@Column(nullable = false)
+	private String senha;
 	
 	
 	/**

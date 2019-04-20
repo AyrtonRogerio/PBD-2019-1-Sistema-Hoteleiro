@@ -3,14 +3,33 @@
  */
 package br.com.sistemahoteleiro.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
 /**
  * @author ayrtons
  *
  */
+@Entity
+@Table(name = "contato")
+@SequenceGenerator(name = Entidade.SEQUENCE_ENTIDADE, sequenceName = Contato.SEQUENCE_ENTIDADE, initialValue = 1, allocationSize = 1)
 public class Contato extends Entidade{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected static final String SEQUENCE_ENTIDADE = "contato_sequence";
+
+	@Column(length = 40, nullable = false)
 	private String email;
+	
+	@Column(length = 13)
 	private String telefone;
+	
+	@Column(length = 14, nullable = false)
 	private String celular;
 	
 	

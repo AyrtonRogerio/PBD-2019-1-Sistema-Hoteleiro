@@ -3,17 +3,42 @@
  */
 package br.com.sistemahoteleiro.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
 /**
  * @author ayrtons
  *
  */
+@Entity
+@Table(name = "endereco")
+@SequenceGenerator(name = Entidade.SEQUENCE_ENTIDADE, sequenceName = Endereco.SEQUENCE_ENTIDADE, initialValue = 1, allocationSize = 1)
 public class Endereco extends Entidade{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected static final String SEQUENCE_ENTIDADE = "endereco_sequence";
+
+	@Column(length = 50, nullable = false)
 	private String logradouro;
+	
+	@Column(length = 20, nullable = false)
 	private String numero;
+	
+	@Column(length = 30, nullable = false)
 	private String bairro;
+	
+	@Column(length = 9, nullable = false)
 	private String cep;
+	
+	@Column(length = 30, nullable = false)
 	private String cidade;
+	
+	@Column(length = 2, nullable = false)
 	private String uf;
 	
 	
