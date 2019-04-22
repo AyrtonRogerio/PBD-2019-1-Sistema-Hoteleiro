@@ -40,6 +40,7 @@ public abstract class DaoGeneric <T extends Entidade> implements IDaoGeneric<T>{
 		} catch (Exception e) {
 		
 			System.err.println(e.getMessage());
+			e.printStackTrace();
 			em.getTransaction().rollback();
 			throw new DaoException("Erro ao inserir " + t.getClass().getSimpleName() + e.getMessage());
 		
@@ -54,22 +55,27 @@ public abstract class DaoGeneric <T extends Entidade> implements IDaoGeneric<T>{
 
 		EntityManager em = entityManager(); 
 		T result = null;
+		
 		try {
+			
 			result = em.find(t, id);
 			
 		}catch (NoResultException ex) {
 			
 			System.err.println(ex.getMessage());
+			ex.printStackTrace();
 			throw new DaoException("Nenhum resultado encontrado para " + t.getSimpleName());
 			
 		} catch (Exception e) {
 
 			System.err.println(e.getMessage());
+			e.printStackTrace();
 			throw new DaoException("Erro ao buscar " + t.getSimpleName() + " " + e.getMessage());
 			
 		}finally {
 			
 			em.close();
+		
 		}
 		
 		return result;
@@ -79,32 +85,78 @@ public abstract class DaoGeneric <T extends Entidade> implements IDaoGeneric<T>{
 	public void remove(Class<T> t, int id) throws DaoException {
 		
 		EntityManager em = entityManager();
+		T ent = null;
 		
 		try {
 			
 			em.getTransaction().begin();
 			
-			T ent = em.find(t, id);
+			ent = em.find(t, id);
 			em.remove(ent);
 			em.getTransaction().commit();
 			
 		} catch (Exception e) {
-			
+		
+			System.err.println(e.getMessage());
+			e.printStackTrace();
 			em.getTransaction().rollback();
+			throw new DaoException("Erro ao remover " + ent.getClass().getSimpleName() + ". " + e.getMessage());
+	
+		} finally {
+		
+			em.close();
+		
 		}
 		
 	}
 
 	@Override
-	public void update(T entidade) throws DaoException {
-		// TODO Auto-generated method stub
+	public void update(T t) throws DaoException {
+		
+		EntityManager em = entityManager();
+		
+		try {
+			
+			em.getTransaction().begin();
+			em.merge(t);
+			em.getTransaction().commit();
+			
+		} catch (Exception e) {
+		
+			System.err.println(e.getMessage());
+			e.printStackTrace();
+			em.getTransaction().rollback();
+			throw new DaoException("Erro ao atualizar " + t.getClass().getSimpleName() + ". " + e.getMessage());
+		
+		} finally {
+		
+			em.close();
+		
+		}
 		
 	}
 
 	@Override
-	public List<T> searchAll() throws DaoException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<T> searchAll(Class<T> t) throws DaoException {
+		
+		EntityManager em = entityManager();
+		List<T> ent = null;
+		
+		try {
+			
+			ent = em.createQuery("from " + t.getSimpleName() + "where entidade.status = true", t).getResultList();
+			
+			
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+			e.printStackTrace();
+			throw new DaoException("Erro ao buscar a lista " + t.getSimpleName());
+			
+		}finally {
+			em.close();
+		}
+		
+		return ent;
 	}
 	
 	

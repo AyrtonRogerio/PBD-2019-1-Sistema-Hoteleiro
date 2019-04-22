@@ -39,18 +39,15 @@ public interface IDaoGeneric <T extends Entidade>{
      */
     public void update(T t) throws DaoException;
 
+    
     /**
-     * @return
+     * @author ayrtons
+     *
+     * @param <T>
+     * @return 
      * @throws DaoException
      */
-    public List<T> searchAll() throws DaoException;
+    public List<T> searchAll(Class<T> t) throws DaoException;
 
-	/**
-	 * @param classe
-	 * @param id
-	 * @return
-	 * @throws DaoException
-	 */
-	
-	
+
 }

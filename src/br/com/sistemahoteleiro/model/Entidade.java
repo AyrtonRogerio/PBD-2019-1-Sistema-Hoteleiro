@@ -31,7 +31,7 @@ public abstract class Entidade implements Serializable {
 	private Integer id;
 	
 	@Column
-	private boolean status;
+	private boolean status = true;
 	
 	
 	/**
