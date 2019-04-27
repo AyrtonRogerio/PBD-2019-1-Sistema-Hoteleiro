@@ -11,4 +11,14 @@ import br.com.sistemahoteleiro.model.Contato;
  */
 public class DaoContato extends DaoGeneric<Contato> implements IDaoContato{
 
+	/**
+	 * @param class1
+	 */
+	public DaoContato() {
+		super(Contato.class);
+		// TODO Auto-generated constructor stub
+	}
+
+	
+	
 }

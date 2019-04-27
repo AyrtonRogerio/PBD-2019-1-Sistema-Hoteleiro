@@ -11,4 +11,14 @@ import br.com.sistemahoteleiro.model.Quarto;
  */
 public class DaoQuarto extends DaoGeneric<Quarto> implements IDaoQuarto{
 
+	/**
+	 * @param class1
+	 */
+	public DaoQuarto() {
+		super(Quarto.class);
+		// TODO Auto-generated constructor stub
+	}
+
+	
+	
 }

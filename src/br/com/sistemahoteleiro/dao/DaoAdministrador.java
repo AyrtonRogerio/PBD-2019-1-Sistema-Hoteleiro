@@ -11,4 +11,14 @@ import br.com.sistemahoteleiro.model.Administrador;
  */
 public class DaoAdministrador extends DaoGeneric<Administrador> implements IDaoAdministrador {
 
+	/**
+	 * @param class1
+	 */
+	public DaoAdministrador() {
+		super(Administrador.class);
+		// TODO Auto-generated constructor stub
+	}
+
+	
+	
 }

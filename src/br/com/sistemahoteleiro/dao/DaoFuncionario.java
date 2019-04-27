@@ -11,4 +11,14 @@ import br.com.sistemahoteleiro.model.Funcionario;
  */
 public class DaoFuncionario extends DaoGeneric<Funcionario> implements IDaoFuncionario{
 
+	/**
+	 * @param class1
+	 */
+	public DaoFuncionario() {
+		super(Funcionario.class);
+		// TODO Auto-generated constructor stub
+	}
+
+	
+	
 }

@@ -11,4 +11,14 @@ import br.com.sistemahoteleiro.model.Aluga;
  */
 public class DaoAluga extends DaoGeneric<Aluga> implements IDaoAluga {
 
+	/**
+	 * @param class1
+	 */
+	public DaoAluga() {
+		super(Aluga.class);
+		// TODO Auto-generated constructor stub
+	}
+
+	
+	
 }

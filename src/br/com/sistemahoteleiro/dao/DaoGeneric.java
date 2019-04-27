@@ -4,12 +4,10 @@
 package br.com.sistemahoteleiro.dao;
 
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
-
 import br.com.sistemahoteleiro.exception.DaoException;
 import br.com.sistemahoteleiro.model.Entidade;
 
@@ -19,10 +17,22 @@ import br.com.sistemahoteleiro.model.Entidade;
  */
 public abstract class DaoGeneric <T extends Entidade> implements IDaoGeneric<T>{
 
-	private EntityManagerFactory emf;
+	protected Class<T> class1;
+	
+	
+	
+	/**
+	 * @param class1
+	 */
+	public DaoGeneric(Class<T> class1) {
+		this.class1 = class1;
+	}
+
+	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("Hotel");
+
+	
 	
 	public EntityManager entityManager() {
-		emf = Persistence.createEntityManagerFactory("Hotel");
 		return emf.createEntityManager();
 	}
 
@@ -81,33 +91,67 @@ public abstract class DaoGeneric <T extends Entidade> implements IDaoGeneric<T>{
 		return result;
 	}
 
+	
 	@Override
-	public void remove(Class<T> t, int id) throws DaoException {
+	public void disable(T t) throws DaoException {
+		// TODO Auto-generated method stub
+		EntityManager em = entityManager();
+		
+		try {
+		
+			t.setStatus(false);
+			em.getTransaction().begin();
+			em.merge(t);
+			em.merge(t);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			System.err.println(e.getMessage());
+			em.getTransaction().rollback();
+			throw new DaoException(e.getMessage());
+			
+		} finally {
+			
+			em.close();
+			
+		}
+	}
+
+	@Override
+	public void remove(T t) throws DaoException {
 		
 		EntityManager em = entityManager();
-		T ent = null;
+//		T ent = null;
 		
 		try {
 			
 			em.getTransaction().begin();
 			
-			ent = em.find(t, id);
-			em.remove(ent);
+//			ent = em.find(t);
+			em.remove(t);
 			em.getTransaction().commit();
+			
+		}catch (NoResultException e) {
+			// TODO: handle exception
+			
+			e.printStackTrace();
+			System.err.println(e.getMessage());
+			em.getTransaction().rollback();
+			throw new DaoException(e.getMessage());
 			
 		} catch (Exception e) {
 		
 			System.err.println(e.getMessage());
 			e.printStackTrace();
 			em.getTransaction().rollback();
-			throw new DaoException("Erro ao remover " + ent.getClass().getSimpleName() + ". " + e.getMessage());
+			throw new DaoException("Erro ao remover " + t.getClass().getSimpleName() + ". " + e.getMessage());
 	
 		} finally {
 		
 			em.close();
 		
 		}
-		
 	}
 
 	@Override
@@ -133,7 +177,6 @@ public abstract class DaoGeneric <T extends Entidade> implements IDaoGeneric<T>{
 			em.close();
 		
 		}
-		
 	}
 
 	@Override
@@ -145,20 +188,21 @@ public abstract class DaoGeneric <T extends Entidade> implements IDaoGeneric<T>{
 		try {
 			
 			ent = em.createQuery("from " + t.getSimpleName() + "where entidade.status = true", t).getResultList();
-			
-			
+				
 		} catch (Exception e) {
+		
 			System.err.println(e.getMessage());
 			e.printStackTrace();
 			throw new DaoException("Erro ao buscar a lista " + t.getSimpleName());
 			
 		}finally {
+			
 			em.close();
+			
 		}
 		
 		return ent;
 	}
-	
 	
 	
 }
