@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -32,31 +33,31 @@ public class Aluga extends Entidade {
 	private static final long serialVersionUID = 1L;
 	protected static final String SEQUENCE_ENTIDADE = "aluga_sequence";
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cliente")
 	private Cliente cliente;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "funcionario")
 	private Funcionario funcionario;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "caixa")
 	private Caixa caixa;
 	
-	@Temporal(TemporalType.DATE)
+	
 	@Column(name = "data_entrada")
 	private LocalDate dataEntrada;
 	
-	@Temporal(TemporalType.TIME)
+	
 	@Column(name = "hora_entrada")
 	private LocalTime horaEntrada;
 	
-	@Temporal(TemporalType.DATE)
+	
 	@Column(name = "data_saida")
 	private LocalDate dataSaida;
 	
-	@Temporal(TemporalType.TIME)
+	
 	@Column(name = "hora_saida")
 	private LocalTime horaSaida;
 	

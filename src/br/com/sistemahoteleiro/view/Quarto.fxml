@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane prefHeight="500.0" prefWidth="1024.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171">
+   <children>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab fx:id="listaQuartosTab" text="Lista de Quartos">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #D3D4D6;">
+                     <children>
+                        <TableView prefHeight="312.0" prefWidth="1024.0" style="-fx-background-color: #EBEDF0;">
+                          <columns>
+                            <TableColumn fx:id="quartoCollum" prefWidth="119.0" text="Quarto" />
+                            <TableColumn fx:id="qtCamasCollum" prefWidth="102.0" text="Qtd. Camas" />
+                              <TableColumn fx:id="tipoColum" prefWidth="287.0" text="Tipo" />
+                              <TableColumn fx:id="tvCaboColum" prefWidth="81.0" text="TV Cabo" />
+                              <TableColumn fx:id="cofreColum" prefWidth="58.0" text="Cofre" />
+                              <TableColumn fx:id="tvLedColum" prefWidth="65.0" text="TV Led" />
+                              <TableColumn fx:id="telColum" prefWidth="42.0" text="Tel." />
+                              <TableColumn fx:id="arCondColum" prefWidth="72.0" text="Ar-Cond." />
+                              <TableColumn fx:id="wifiColum" prefWidth="41.0" text="Wifi" />
+                              <TableColumn fx:id="miniBarColum" prefWidth="66.0" text="MiniBar" />
+                              <TableColumn fx:id="disponivelColum" prefWidth="90.0" text="Disponível" />
+                          </columns>
+                        </TableView>
+                        <Button fx:id="editarButton" mnemonicParsing="false" onAction="#action" text="Editar">
+                           <VBox.margin>
+                              <Insets left="512.0" top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+               </content>
+          </Tab>
+          <Tab fx:id="novoAlugelTab" text="Novo aluguel">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #D3D4D6;">
+                     <children>
+                        <GridPane>
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <VBox.margin>
+                              <Insets left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                           <children>
+                              <Label text="Label" />
+                              <Label text="Label" GridPane.rowIndex="1" />
+                              <Label text="Label" GridPane.rowIndex="2" />
+                              <Label text="Label" GridPane.rowIndex="3" />
+                              <TextField GridPane.columnIndex="1" />
+                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </VBox>
+               </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -32,27 +33,27 @@ public class Reserva extends Entidade {
 	private static final long serialVersionUID = 1L;
 	protected static final String SEQUENCE_ENTIDADE = "reserva_sequence";
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "caixa")
 	private Caixa caixa;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "funcionario")
 	private Funcionario funcionario;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cliente")
 	private Cliente cliente;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "quarto")
 	private Quarto quarto;
 	
-	@Temporal(TemporalType.DATE)
+	
 	@Column(name = "data_reserva")
 	private LocalDate dataReserva;
 	
-	@Temporal(TemporalType.TIME)
+	
 	@Column(name = "hora_reserva")
 	private LocalTime horaReserva;
 	

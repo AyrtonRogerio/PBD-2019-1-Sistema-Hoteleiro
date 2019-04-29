@@ -3,19 +3,23 @@
  */
 package br.com.sistemahoteleiro.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  * @author ayrtons
  *
  */
-@MappedSuperclass
+@Entity
+@Table(name = "cliente")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @SequenceGenerator(name = Entidade.SEQUENCE_ENTIDADE, sequenceName = Cliente.SEQUENCE_ENTIDADE, initialValue = 1, allocationSize = 1)
 public abstract class Cliente extends Entidade{
@@ -30,12 +34,12 @@ public abstract class Cliente extends Entidade{
 	@Column(length = 50, nullable = false, unique = true)
 	private String nome;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "contato")
 	private Contato contato;
 	
-	@OneToOne
-	@Column(name = "endereco")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "endereco")
 	private Endereco endereco;
 	
 	

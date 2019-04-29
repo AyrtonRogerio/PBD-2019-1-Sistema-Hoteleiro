@@ -5,6 +5,7 @@ package br.com.sistemahoteleiro.model;
 
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -39,7 +40,7 @@ public class Parcela extends Entidade {
 	@Column(name = "qtd_paga")
 	private int qtdPaga;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "caixa")
 	private Caixa caixa;
 	

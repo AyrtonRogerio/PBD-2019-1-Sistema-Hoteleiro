@@ -37,11 +37,11 @@ public class Log extends Entidade{
 	@Column
 	private String alteracao;
 	
-	@Temporal(TemporalType.DATE)
+	
 	@Column
 	private LocalDate data;
 	
-	@Temporal(TemporalType.TIME)
+	
 	@Column
 	private LocalTime hora;
 	
