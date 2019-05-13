@@ -25,48 +25,48 @@ public class Caixa extends Entidade {
 	protected static final String SEQUENCE_ENTIDADE = "caixa_sequence";
 	
 	@Column
-	private BigDecimal entrada;
+	private double entrada;
 	
 	@Column
-	private BigDecimal saida;
+	private double saida;
 	
 	@Column
-	private BigDecimal saldo;
+	private double saldo;
 	
 	/**
 	 * @return the entrada
 	 */
-	public BigDecimal getEntrada() {
+	public double getEntrada() {
 		return entrada;
 	}
 	/**
 	 * @param entrada the entrada to set
 	 */
-	public void setEntrada(BigDecimal entrada) {
+	public void setEntrada(double entrada) {
 		this.entrada = entrada;
 	}
 	/**
 	 * @return the saida
 	 */
-	public BigDecimal getSaida() {
+	public double getSaida() {
 		return saida;
 	}
 	/**
 	 * @param saida the saida to set
 	 */
-	public void setSaida(BigDecimal saida) {
+	public void setSaida(double saida) {
 		this.saida = saida;
 	}
 	/**
 	 * @return the saldo
 	 */
-	public BigDecimal getSaldo() {
+	public double getSaldo() {
 		return saldo;
 	}
 	/**
 	 * @param saldo the saldo to set
 	 */
-	public void setSaldo(BigDecimal saldo) {
+	public void setSaldo(double saldo) {
 		this.saldo = saldo;
 	}
 	/**

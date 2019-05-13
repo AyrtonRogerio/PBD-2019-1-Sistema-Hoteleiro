@@ -35,11 +35,11 @@ public abstract class Cliente extends Entidade{
 	private String nome;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "contato")
+	@JoinColumn(name = "contato_id")
 	private Contato contato;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "endereco")
+	@JoinColumn(name = "endereco_id")
 	private Endereco endereco;
 	
 	

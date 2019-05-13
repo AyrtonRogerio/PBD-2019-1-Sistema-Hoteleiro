@@ -21,17 +21,17 @@
                     <MenuItem mnemonicParsing="false" text="Close" />
                   </items>
                      <graphic>
-                        <Button fx:id="homeButton" minHeight="40.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#action" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #9CBBD9;">
-                           <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="40.0">
-                                 <image>
-                                    <Image url="@../../../../../res/091-hotel.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
+                        <Button fx:id="homeButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#action" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: #9CBBD9;">
                            <tooltip>
                               <Tooltip text="Início" />
                            </tooltip>
+                           <graphic>
+                              <ImageView fitHeight="80.0" fitWidth="80.0">
+                                 <image>
+                                    <Image url="@../../../../../res/hotel-6.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Button>
                      </graphic>
                 </Menu>
@@ -40,17 +40,17 @@
                     <MenuItem mnemonicParsing="false" text="Delete" />
                   </items>
                      <graphic>
-                        <Button fx:id="quartosButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#action" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #9CBBD9;">
-                           <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="40.0">
-                                 <image>
-                                    <Image url="@../../../../../res/066-room-door.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
+                        <Button fx:id="quartosButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#action" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: #9CBBD9;">
                            <tooltip>
                               <Tooltip text="Quartos" />
                            </tooltip>
+                           <graphic>
+                              <ImageView fitHeight="80.0" fitWidth="80.0">
+                                 <image>
+                                    <Image url="@../../../../../res/bed-1.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Button>
                      </graphic>
                 </Menu>
@@ -59,17 +59,17 @@
                     <MenuItem mnemonicParsing="false" text="About" />
                   </items>
                      <graphic>
-                        <Button fx:id="reservaButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#action" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #9CBBD9;">
-                           <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="40.0">
-                                 <image>
-                                    <Image url="@../../../../../res/010-calendar.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
+                        <Button fx:id="reservaButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#action" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: #9CBBD9;">
                            <tooltip>
                               <Tooltip text="Reservas" />
                            </tooltip>
+                           <graphic>
+                              <ImageView fitHeight="80.0" fitWidth="80.0">
+                                 <image>
+                                    <Image url="@../../../../../res/notes.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Button>
                      </graphic>
                 </Menu>
@@ -78,17 +78,17 @@
                       <MenuItem mnemonicParsing="false" text="Action 1" />
                     </items>
                      <graphic>
-                        <Button fx:id="checkinButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#action" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #9CBBD9;">
-                           <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="40.0">
-                                 <image>
-                                    <Image url="@../../../../../res/009-check-in.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
+                        <Button fx:id="checkinButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#action" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: #9CBBD9;">
                            <tooltip>
                               <Tooltip text="Check-In" />
                            </tooltip>
+                           <graphic>
+                              <ImageView fitHeight="80.0" fitWidth="80.0">
+                                 <image>
+                                    <Image url="@../../../../../res/reception.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Button>
                      </graphic>
                   </Menu>
@@ -97,36 +97,17 @@
                       <MenuItem mnemonicParsing="false" text="Action 1" />
                     </items>
                      <graphic>
-                        <Button fx:id="checkouButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#action" prefHeight="42.0" prefWidth="40.0" style="-fx-background-color: #9CBBD9;">
-                           <graphic>
-                              <ImageView fitHeight="42.0" fitWidth="40.0">
-                                 <image>
-                                    <Image url="@../../../../../res/008-check-out.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
+                        <Button fx:id="checkouButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#action" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: #9CBBD9;">
                            <tooltip>
                               <Tooltip text="Check-Out" />
                            </tooltip>
-                        </Button>
-                     </graphic>
-                  </Menu>
-                  <Menu mnemonicParsing="false">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                    </items>
-                     <graphic>
-                        <Button fx:id="pagamentoButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#action" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #9CBBD9;">
                            <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="40.0">
+                              <ImageView fitHeight="80.0" fitWidth="80.0">
                                  <image>
-                                    <Image url="@../../../../../res/040-credit-card.png" />
+                                    <Image url="@../../../../../res/passport.png" />
                                  </image>
                               </ImageView>
                            </graphic>
-                           <tooltip>
-                              <Tooltip text="Pagamento" />
-                           </tooltip>
                         </Button>
                      </graphic>
                   </Menu>
@@ -135,9 +116,28 @@
                       <MenuItem mnemonicParsing="false" text="Action 1" />
                     </items>
                      <graphic>
-                        <Button fx:id="logoutButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#action" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #9CBBD9;">
+                        <Button fx:id="pagamentoButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#action" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: #9CBBD9;">
+                           <tooltip>
+                              <Tooltip text="Pagamento" />
+                           </tooltip>
                            <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="40.0">
+                              <ImageView fitHeight="80.0" fitWidth="80.0">
+                                 <image>
+                                    <Image url="@../../../../../res/money.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </graphic>
+                  </Menu>
+                  <Menu mnemonicParsing="false">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                    </items>
+                     <graphic>
+                        <Button fx:id="logoutButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#action" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: #9CBBD9;">
+                           <graphic>
+                              <ImageView fitHeight="80.0" fitWidth="80.0">
                                  <image>
                                     <Image url="@../../../../../res/logout.png" />
                                  </image>

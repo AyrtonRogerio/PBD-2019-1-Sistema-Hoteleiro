@@ -14,8 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 
 /**
@@ -34,19 +32,19 @@ public class Reserva extends Entidade {
 	protected static final String SEQUENCE_ENTIDADE = "reserva_sequence";
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "caixa")
+	@JoinColumn(name = "caixa_id")
 	private Caixa caixa;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "funcionario")
+	@JoinColumn(name = "funcionario_id")
 	private Funcionario funcionario;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "cliente")
+	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "quarto")
+	@JoinColumn(name = "quarto_id")
 	private Quarto quarto;
 	
 	
@@ -58,7 +56,7 @@ public class Reserva extends Entidade {
 	private LocalTime horaReserva;
 	
 	@Column
-	private BigDecimal valor;
+	private double valor;
 	
 	@Column
 	private boolean situacao;
@@ -91,13 +89,13 @@ public class Reserva extends Entidade {
 	/**
 	 * @return the valor
 	 */
-	public BigDecimal getValor() {
+	public double getValor() {
 		return valor;
 	}
 	/**
 	 * @param valor the valor to set
 	 */
-	public void setValor(BigDecimal valor) {
+	public void setValor(double valor) {
 		this.valor = valor;
 	}
 	/**
@@ -160,6 +158,7 @@ public class Reserva extends Entidade {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
+	
 	/**
 	 * @return the sequenceEntidade
 	 */

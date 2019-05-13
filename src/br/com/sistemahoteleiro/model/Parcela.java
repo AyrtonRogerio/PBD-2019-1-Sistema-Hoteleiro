@@ -29,10 +29,10 @@ public class Parcela extends Entidade {
 	protected static final String SEQUENCE_ENTIDADE = "parcela_sequence";
 	
 	@Column(name = "valor_total")
-	private BigDecimal valorTotal;
+	private double valorTotal;
 	
 	@Column(name = "valor_parcela")
-	private BigDecimal valorParcela;
+	private double valorParcela;
 	
 	@Column(name = "qtd")
 	private int qtd;
@@ -41,34 +41,34 @@ public class Parcela extends Entidade {
 	private int qtdPaga;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "caixa")
+	@JoinColumn(name = "caixa_id")
 	private Caixa caixa;
 	
 	/**
 	 * @return the valorTotal
 	 */
-	public BigDecimal getValorTotal() {
+	public double getValorTotal() {
 		return valorTotal;
 	}
 	
 	/**
 	 * @param valorTotal the valorTotal to set
 	 */
-	public void setValorTotal(BigDecimal valorTotal) {
+	public void setValorTotal(double valorTotal) {
 		this.valorTotal = valorTotal;
 	}
 	
 	/**
 	 * @return the valorParcela
 	 */
-	public BigDecimal getValorParcela() {
+	public double getValorParcela() {
 		return valorParcela;
 	}
 	
 	/**
 	 * @param valorParcela the valorParcela to set
 	 */
-	public void setValorParcela(BigDecimal valorParcela) {
+	public void setValorParcela(double valorParcela) {
 		this.valorParcela = valorParcela;
 	}
 	

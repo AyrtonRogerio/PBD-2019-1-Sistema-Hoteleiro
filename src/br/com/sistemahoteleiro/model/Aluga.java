@@ -34,15 +34,15 @@ public class Aluga extends Entidade {
 	protected static final String SEQUENCE_ENTIDADE = "aluga_sequence";
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "cliente")
+	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "funcionario")
+	@JoinColumn(name = "funcionario_id")
 	private Funcionario funcionario;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "caixa")
+	@JoinColumn(name = "caixa_id")
 	private Caixa caixa;
 	
 	
@@ -65,10 +65,10 @@ public class Aluga extends Entidade {
 	private int diaria;
 	
 	@Column(name = "valor_diaria")
-	private BigDecimal valorDiaria;
+	private double valorDiaria;
 	
 	@Column(name = "valor_adicional")
-	private BigDecimal valorAdicional;
+	private double valorAdicional;
 	
 	
 	/**
@@ -144,28 +144,28 @@ public class Aluga extends Entidade {
 	/**
 	 * @return the valorDiaria
 	 */
-	public BigDecimal getValorDiaria() {
+	public double getValorDiaria() {
 		return valorDiaria;
 	}
 	
 	/**
 	 * @param valorDiaria the valorDiaria to set
 	 */
-	public void setValorDiaria(BigDecimal valorDiaria) {
+	public void setValorDiaria(double valorDiaria) {
 		this.valorDiaria = valorDiaria;
 	}
 	
 	/**
 	 * @return the valorAdicional
 	 */
-	public BigDecimal getValorAdicional() {
+	public double getValorAdicional() {
 		return valorAdicional;
 	}
 	
 	/**
 	 * @param valorAdicional the valorAdicional to set
 	 */
-	public void setValorAdicional(BigDecimal valorAdicional) {
+	public void setValorAdicional(double valorAdicional) {
 		this.valorAdicional = valorAdicional;
 	}
 

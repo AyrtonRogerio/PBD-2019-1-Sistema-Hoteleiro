@@ -28,7 +28,7 @@ public class Log extends Entidade{
 	private static final long serialVersionUID = 1L;
 	protected static final String SEQUENCE_ENTIDADE = "log_sequence";
 
-	@Column()
+	@Column
 	private String autor;
 	
 	@Column

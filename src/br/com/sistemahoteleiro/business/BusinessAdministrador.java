@@ -28,7 +28,9 @@ public class BusinessAdministrador extends BusinessGeneric<Administrador> implem
 	@Override
 	public void isValid(Administrador t) throws ValidationException {
 		// TODO Auto-generated method stub
-		
+		//if(t.getLogin().isEmpty()) {
+			
+		//}
 	}
 
 }
