@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.sistemahoteleiro.controler.ControlerCliente">
+   <children>
+      <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+            <Tab fx:id="listaClienteTab" text="Lista de Clientes">
+               <content>
+                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0">
+                           <top>
+                              <GridPane prefWidth="590.0" BorderPane.alignment="CENTER">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label text="Buscar" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <GridPane.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label text="Clientes">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                       <GridPane.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <TextField fx:id="buscaCliField" promptText="Busca..." GridPane.rowIndex="2">
+                                       <GridPane.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </GridPane.margin>
+                                    </TextField>
+                                    <Button fx:id="buscaCliBtn" mnemonicParsing="false" onAction="#action" text="Buscar" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <GridPane.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </GridPane.margin>
+                                    </Button>
+                                    <Button fx:id="novoCliBtn" mnemonicParsing="false" onAction="#action" text="Novo Cliente" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <GridPane.margin>
+                                          <Insets left="75.0" right="5.0" />
+                                       </GridPane.margin>
+                                    </Button>
+                                 </children>
+                                 <BorderPane.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </BorderPane.margin>
+                              </GridPane>
+                           </top>
+                           <center>
+                              <TableView fx:id="cliTabela" prefHeight="75.0" prefWidth="569.0" BorderPane.alignment="CENTER">
+                                 <columns>
+                                    <TableColumn fx:id="nomeCliCol" prefWidth="89.0" text="Nome" />
+                                    <TableColumn fx:id="cpfCliCol" prefWidth="77.0" text="CPF" />
+                                    <TableColumn fx:id="nascCliCol" prefWidth="97.0" text="Nascimento" />
+                                    <TableColumn fx:id="ruaCliCol" prefWidth="143.0" text="Rua" />
+                                    <TableColumn fx:id="bairroCliCol" prefWidth="122.0" text="Bairro" />
+                                    <TableColumn fx:id="numCliCol" prefWidth="71.0" text="Nº" />
+                                 </columns>
+                              </TableView>
+                           </center>
+                           <bottom>
+                              <FlowPane alignment="CENTER" prefHeight="35.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Button fx:id="detalhesCliBtn" mnemonicParsing="false" onAction="#action" text="Detalhes">
+                                       <FlowPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </FlowPane.margin>
+                                    </Button>
+                                    <Button fx:id="editarCliBtn" mnemonicParsing="false" onAction="#action" text="Editar">
+                                       <FlowPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </FlowPane.margin>
+                                    </Button>
+                                 </children></FlowPane>
+                           </bottom>
+                        </BorderPane>
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+          <Tab fx:id="dadosCliTab" text="Dados Gerais">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <BorderPane prefHeight="369.0" prefWidth="600.0">
+                           <top>
+                              <FlowPane prefHeight="57.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+                           </top>
+                           <center>
+                              <GridPane hgap="10.0" prefHeight="54.0" prefWidth="598.0" vgap="5.0" BorderPane.alignment="CENTER">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="421.0" minWidth="10.0" prefWidth="186.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="421.0" minWidth="10.0" prefWidth="186.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="421.0" minWidth="10.0" prefWidth="186.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label text="Cpf" GridPane.columnIndex="1" />
+                                    <Label text="Nome" />
+                                    <TextField fx:id="nomeCliField" onAction="#action" prefHeight="26.0" prefWidth="159.0" promptText="Digite aqui.." GridPane.rowIndex="1">
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin>
+                                    </TextField>
+                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField fx:id="cpfCliField" onAction="#action" prefHeight="26.0" prefWidth="273.0" promptText="Digite aqui..." GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label text="Data de Nascimento" GridPane.columnIndex="2" />
+                                    <Label text="Sexo" GridPane.rowIndex="2" />
+                                    <Label text="Estado Civil" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label text="Ocupação" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                    <ComboBox fx:id="sexoCliCbox" onAction="#action" prefHeight="26.0" prefWidth="194.0" promptText="Sexo" GridPane.rowIndex="3" />
+                                    <ComboBox fx:id="estadCivCliCbox" onAction="#action" prefHeight="26.0" prefWidth="189.0" promptText="Estado civil" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <ComboBox fx:id="ocupacaoCliCbox" onAction="#action" prefHeight="26.0" prefWidth="189.0" promptText="Ocupação" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                    <DatePicker fx:id="dataCli" onAction="#action" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="5.0" right="5.0" />
+                                 </padding>
+                              </GridPane>
+                           </center>
+                           <bottom>
+                              <FlowPane alignment="CENTER" prefHeight="219.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Button fx:id="voltarCliBtn" mnemonicParsing="false" onAction="#action" text="Voltar">
+                                       <FlowPane.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </FlowPane.margin>
+                                    </Button>
+                                    <Button fx:id="continuarCliBtn" mnemonicParsing="false" onAction="#action" text="Continuar">
+                                       <FlowPane.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </FlowPane.margin>
+                                    </Button>
+                                 </children>
+                              </FlowPane>
+                           </bottom>
+                        </BorderPane>
+                     </children>
+                  </VBox>
+               </content>
+          </Tab>
+          <Tab fx:id="endClienteTab" text="Endereço">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <BorderPane prefHeight="367.0" prefWidth="601.0">
+                           <center>
+                              <GridPane hgap="10.0" prefHeight="124.0" prefWidth="589.0" vgap="5.0" BorderPane.alignment="CENTER">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label text="Rua" />
+                                    <Label text="Cep" GridPane.columnIndex="1" />
+                                    <TextField fx:id="ruaEndCliField" onAction="#action" promptText="Digite aqui..." GridPane.rowIndex="1" />
+                                    <TextField fx:id="cepEndCliField" onAction="#action" promptText="Digite aqui..." GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField fx:id="numEndCliField" onAction="#action" promptText="Digite aqui..." GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <Label text="Número" GridPane.columnIndex="2" />
+                                    <Label text="Bairro" GridPane.rowIndex="2" />
+                                    <Label text="Cidade" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label text="Estado" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                    <TextField fx:id="bairroEndCliField" onAction="#action" promptText="Digite aqui..." GridPane.rowIndex="3" />
+                                    <TextField fx:id="cidadeEndCliField" onAction="#action" promptText="Digite aqui..." GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <TextField fx:id="ufEndCliField" onAction="#action" promptText="Digite aqui..." GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="5.0" right="5.0" />
+                                 </padding>
+                              </GridPane>
+                           </center>
+                           <top>
+                              <FlowPane prefHeight="72.0" prefWidth="601.0" BorderPane.alignment="CENTER" />
+                           </top>
+                           <bottom>
+                              <FlowPane alignment="CENTER" prefHeight="141.0" prefWidth="601.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Button fx:id="voltarEndCliBtn" mnemonicParsing="false" onAction="#action" text="Voltar" />
+                                    <Button fx:id="continEndCliBtn" mnemonicParsing="false" onAction="#action" text="Continuar">
+                                       <FlowPane.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </FlowPane.margin>
+                                    </Button>
+                                 </children>
+                              </FlowPane>
+                           </bottom>
+                        </BorderPane>
+                     </children>
+                  </VBox>
+               </content>
+          </Tab>
+            <Tab fx:id="contClienteTab" text="Contatos">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <BorderPane prefHeight="367.0" prefWidth="600.0">
+                           <top>
+                              <FlowPane prefHeight="51.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+                           </top>
+                           <center>
+                              <GridPane prefHeight="70.0" prefWidth="599.0" BorderPane.alignment="CENTER">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="289.0" minWidth="10.0" prefWidth="126.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="473.0" minWidth="10.0" prefWidth="184.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="473.0" minWidth="10.0" prefWidth="302.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <TextField fx:id="foneContCliField" onAction="#action" prefHeight="26.0" prefWidth="261.0" promptText="Digite aqui..." GridPane.columnIndex="1" />
+                                    <Label text="Fone">
+                                       <GridPane.margin>
+                                          <Insets left="75.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label text="E-mail" GridPane.rowIndex="1">
+                                       <GridPane.margin>
+                                          <Insets left="65.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <TextField fx:id="emailContCliField" onAction="#action" promptText="Digite aqui..." GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField fx:id="foneContCliField2" disable="true" onAction="#action" prefHeight="26.0" prefWidth="196.0" promptText="Digite aqui..." GridPane.columnIndex="2">
+                                       <GridPane.margin>
+                                          <Insets left="110.0" right="20.0" />
+                                       </GridPane.margin>
+                                    </TextField>
+                                    <Label prefHeight="21.0" prefWidth="108.0" text="Fone (Opcional)" GridPane.columnIndex="2">
+                                       <GridPane.margin>
+                                          <Insets left="5.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label text="*" textFill="RED">
+                                       <GridPane.margin>
+                                          <Insets left="110.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label text="*" textFill="RED" GridPane.rowIndex="1">
+                                       <GridPane.margin>
+                                          <Insets left="110.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                 </children>
+                              </GridPane>
+                           </center>
+                           <bottom>
+                              <FlowPane alignment="CENTER" prefHeight="197.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Button fx:id="voltarContCliBtn" mnemonicParsing="false" onAction="#action" text="Voltar">
+                                       <FlowPane.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </FlowPane.margin>
+                                    </Button>
+                                    <Button fx:id="cadastCliBtn" mnemonicParsing="false" onAction="#action" text="Cadastrar">
+                                       <FlowPane.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </FlowPane.margin>
+                                    </Button>
+                                 </children>
+                              </FlowPane>
+                           </bottom>
+                        </BorderPane>
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

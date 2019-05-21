@@ -28,7 +28,12 @@ public class BusinessQuarto extends BusinessGeneric<Quarto> implements IBusiness
 	@Override
 	public void isValid(Quarto t) throws ValidationException {
 		// TODO Auto-generated method stub
-		
+		if(t.getNumQuarto() == 0)
+		{
+			int i = 0;
+			
+		}
+	
 	}
 
 }

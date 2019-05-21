@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.sistemahoteleiro.controler.ControlerFuncionario">
+   <children>
+      <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <top>
+            <FlowPane alignment="TOP_CENTER" BorderPane.alignment="CENTER">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Funcionário">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Text>
+               </children>
+            </FlowPane>
+         </top>
+         <center>
+            <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+               <tabs>
+                  <Tab fx:id="listFuncTab" text="Lista de Funcionários">
+                     <content>
+                        <VBox alignment="TOP_CENTER">
+                           <children>
+                              <GridPane prefHeight="35.0" prefWidth="580.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="213.0" minWidth="10.0" prefWidth="71.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="398.0" minWidth="10.0" prefWidth="229.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.0" minWidth="10.0" prefWidth="71.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.0" minWidth="10.0" prefWidth="70.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.0" minWidth="10.0" prefWidth="151.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label text="Buscar:">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="buscaField" onAction="#action" prefWidth="219.0" promptText="Informe nome, cpf ou cargo..." GridPane.columnIndex="1">
+                                       <GridPane.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </GridPane.margin>
+                                    </TextField>
+                                    <Button fx:id="buscaFuncBtn" mnemonicParsing="false" onAction="#action" text="Buscar" GridPane.columnIndex="2" />
+                                    <Button fx:id="editarFuncBtn" mnemonicParsing="false" onAction="#action" text="Editar" GridPane.columnIndex="3">
+                                       <GridPane.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </GridPane.margin>
+                                    </Button>
+                                    <Button fx:id="novoFuncBtn" mnemonicParsing="false" onAction="#action" text="Novo Funcionário" GridPane.columnIndex="4" />
+                                 </children>
+                              </GridPane>
+                              <TableView fx:id="tabelaFuncList" prefHeight="259.0" prefWidth="580.0">
+                                 <columns>
+                                    <TableColumn fx:id="nomeCol" prefWidth="84.0" text="Nome" />
+                                    <TableColumn fx:id="cpfCol" prefWidth="95.0" text="CPF" />
+                                    <TableColumn fx:id="cargoCol" prefWidth="72.0" text="Cargo" />
+                                    <TableColumn fx:id="ruaCol" prefWidth="106.0" text="Rua" />
+                                    <TableColumn fx:id="bairroCol" prefWidth="144.0" text="Bairro" />
+                                    <TableColumn fx:id="situacaoCol" prefWidth="78.0" text="Situação" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </VBox>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="funcTab" text="Novo Funcionário">
+                     <content>
+                        <VBox alignment="TOP_CENTER">
+                           <children>
+                              <BorderPane>
+                                 <bottom>
+                                    <FlowPane alignment="CENTER" columnHalignment="CENTER" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Button fx:id="voltarFuncBtn" mnemonicParsing="false" onAction="#action" text="Voltar">
+                                             <FlowPane.margin>
+                                                <Insets left="5.0" right="5.0" />
+                                             </FlowPane.margin>
+                                          </Button>
+                                          <Button fx:id="contFuncBtn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#action" text="Continuar" />
+                                       </children>
+                                       <padding>
+                                          <Insets top="5.0" />
+                                       </padding>
+                                    </FlowPane>
+                                 </bottom>
+                                 <center>
+                                    <GridPane hgap="10.0" vgap="5.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <TextField fx:id="nomeField" onAction="#action" promptText="Insira um nome..." GridPane.rowIndex="2">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                          </TextField>
+                                          <Label alignment="CENTER" text="Nome:" textAlignment="CENTER" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                             <GridPane.margin>
+                                                <Insets />
+                                             </GridPane.margin>
+                                          </Label>
+                                          <Label text="CPF:" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                             <GridPane.margin>
+                                                <Insets />
+                                             </GridPane.margin>
+                                          </Label>
+                                          <TextField fx:id="cpfField" onAction="#action" promptText="Insira um CPF..." GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                          </TextField>
+                                          <Label text="Cargo:" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                             <GridPane.margin>
+                                                <Insets />
+                                             </GridPane.margin>
+                                          </Label>
+                                          <TextField fx:id="cargoField" onAction="#action" promptText="Insira um cargo..." GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                          </TextField>
+                                          <Label text="Login:" GridPane.rowIndex="3">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Senha:" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="loginField" onAction="#action" promptText="Insira um login..." GridPane.rowIndex="4">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                          </TextField>
+                                          <PasswordField fx:id="senhaField" onAction="#action" prefHeight="33.0" promptText="Insira uma senha..." GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                          </PasswordField>
+                                          <PasswordField fx:id="confSenhaField" onAction="#action" prefHeight="33.0" promptText="Confirme a senha..." GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                          </PasswordField>
+                                          <Label text="Confirmar senha:" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <CheckBox fx:id="situacaoCbox" mnemonicParsing="false" onAction="#action" selected="true" text="Ativo" visible="false" GridPane.rowIndex="5">
+                                             <GridPane.margin>
+                                                <Insets left="5.0" right="5.0" />
+                                             </GridPane.margin>
+                                          </CheckBox>
+                                       </children>
+                                    </GridPane>
+                                 </center>
+                              </BorderPane>
+                           </children>
+                        </VBox>
+                     </content>
+                  </Tab>
+               </tabs>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </TabPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

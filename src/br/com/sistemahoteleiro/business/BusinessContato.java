@@ -30,6 +30,19 @@ public class BusinessContato extends BusinessGeneric<Contato> implements IBusine
 	public void isValid(Contato t) throws ValidationException {
 		// TODO Auto-generated method stub
 		
+		if(t.getCelular().isEmpty()) {
+			throw new ValidationException("O campo Celular não pode estar vazio!");
+		}
+		
+		if(t.getEmail().isEmpty()) {
+			throw new ValidationException("O campo E-mail não pode estar vazio!");
+		}
+		
+		if(t.getTelefone().isEmpty()) {
+			throw new ValidationException("O campo Telefone não pode estar vazio!");
+		}
+		
+		
 	}
 
 }

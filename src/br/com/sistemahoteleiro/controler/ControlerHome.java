@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
  */
 public class ControlerHome implements Initializable{
 
+	
 
     @FXML // fx:id="homeButton"
     private Button homeButton; // Value injected by FXMLLoader
@@ -50,4 +51,8 @@ public class ControlerHome implements Initializable{
 		
 	}
 
+	public void atualizarFrame(String nameFrame) {
+		
+	}
+	
 }

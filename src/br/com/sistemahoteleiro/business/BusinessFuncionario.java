@@ -28,6 +28,29 @@ public class BusinessFuncionario extends BusinessGeneric<Funcionario> implements
 	@Override
 	public void isValid(Funcionario t) throws ValidationException {
 		// TODO Auto-generated method stub
+		if(t.getCpf().isEmpty()) {
+			throw new ValidationException("O campo CPF não pode estar vazio!");
+		}
+		
+		if(t.getLogin().isEmpty()) {
+			throw new ValidationException("O campo Login não pode estar vazio!");
+		}
+		
+		if(t.getNome().isEmpty()) {
+			throw new ValidationException("O campo Nome não pode estar vazio!");
+		}
+		
+		if(t.getRg().isEmpty()) {
+			throw new ValidationException("O campo RG não pode estar vazio!");
+		}
+		
+		if(t.getSenha().isEmpty()) {
+			throw new ValidationException("O campo Senha não pode estar vazio!");
+		}
+		
+		if(t.getSenha().length() < 6) {
+			
+		}
 		
 	}
 
