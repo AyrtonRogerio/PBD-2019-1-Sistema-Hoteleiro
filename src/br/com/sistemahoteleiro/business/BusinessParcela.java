@@ -30,6 +30,7 @@ public class BusinessParcela extends BusinessGeneric<Parcela> implements IBusine
 	public void isValid(Parcela t) throws ValidationException {
 		// TODO Auto-generated method stub
 		
+//		if(t.get)
 	}
 
 }

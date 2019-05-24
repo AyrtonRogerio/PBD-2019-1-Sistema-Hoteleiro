@@ -30,10 +30,17 @@ public class BusinessQuarto extends BusinessGeneric<Quarto> implements IBusiness
 		// TODO Auto-generated method stub
 		if(t.getNumQuarto() == 0)
 		{
-			int i = 0;
-			
+		throw new ValidationException("O campo referente ao número do quarto não pode estar vazio!");	
 		}
 	
+		if(t.getQtdCamas() == 0) {
+			throw new ValidationException("O campo referente a quantidades de camas não pode estar vazio!");
+		}
+		
+		if(t.getTipoQuarto().isEmpty()) {
+			throw new ValidationException("O campo referente ao tipo do quarto não pode estar vazio!");
+		}
+		
 	}
 
 }
