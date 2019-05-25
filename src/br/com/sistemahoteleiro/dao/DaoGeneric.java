@@ -180,20 +180,21 @@ public abstract class DaoGeneric <T extends Entidade> implements IDaoGeneric<T>{
 	}
 
 	@Override
-	public List<T> searchAll(Class<T> t) throws DaoException {
+	public List<T> searchAll() throws DaoException {
 		
 		EntityManager em = entityManager();
+		
 		List<T> ent = null;
 		
 		try {
 			
-			ent = em.createQuery("from " + t.getSimpleName() + "where entidade.status = true", t).getResultList();
-				
+//			ent = em.createQuery("from " + class1.getName() + " entidade e where e.status = true").getResultList();
+			ent = em.createQuery("from " + class1.getName()).getResultList();	
 		} catch (Exception e) {
 		
 			System.err.println(e.getMessage());
 			e.printStackTrace();
-			throw new DaoException("Erro ao buscar a lista " + t.getSimpleName());
+			throw new DaoException("Erro ao buscar a lista " + class1.getSimpleName());
 			
 		}finally {
 			

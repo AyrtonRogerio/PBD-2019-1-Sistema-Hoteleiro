@@ -72,12 +72,13 @@ public abstract class BusinessGeneric<T extends Entidade> implements IBusinessGe
 	}
 
 	@Override
-	public List<T> searchAll(Class<T> t) throws BusinessException {
+	public List<T> searchAll() throws BusinessException {
 		// TODO Auto-generated method stub
-		List<T> tList = null;
+//		List<T> tList = null;
 		
 		try {
-			dao.searchAll(t);
+//			dao.searchAll(t);
+		return	dao.searchAll();
 		} catch (DaoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -85,7 +86,7 @@ public abstract class BusinessGeneric<T extends Entidade> implements IBusinessGe
 			throw new BusinessException(e.getMessage());
 		}
 		
-		return tList;
+//		return tList;
 	}
 
 	@Override

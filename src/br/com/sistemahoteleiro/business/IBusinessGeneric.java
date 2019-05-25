@@ -40,7 +40,7 @@ public interface IBusinessGeneric <T extends Entidade> {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public List<T> searchAll(Class<T> t) throws BusinessException;
+	public List<T> searchAll() throws BusinessException;
 	
 	/**
 	 * @param t

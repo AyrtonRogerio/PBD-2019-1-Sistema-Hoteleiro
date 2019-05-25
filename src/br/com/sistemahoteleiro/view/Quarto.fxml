@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
@@ -44,46 +44,51 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </GridPane.margin>
                               </Label>
-                              <TextField fx:id="pesquisaField" onAction="#action" promptText="Digite aqui..." GridPane.rowIndex="1">
+                              <JFXTextField fx:id="pesqQuartField" onAction="#action" promptText="Pesquisar quartos" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </GridPane.margin>
-                              </TextField>
-                              <Button fx:id="pesquisaButton" mnemonicParsing="false" onAction="#action" text="Pesquisar" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              </JFXTextField>
+                              <JFXButton fx:id="pesqQuartBtn" onAction="#action" text="Buscar" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </GridPane.margin>
-                              </Button>
+                              </JFXButton>
+                              <JFXButton fx:id="novoQuartBtn" onAction="#action" text="Novo quarto" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" left="75.0" right="5.0" top="5.0" />
+                                 </GridPane.margin>
+                              </JFXButton>
                            </children>
                         </GridPane>
-                        <TableView fx:id="tabelaQuarto" prefHeight="312.0" prefWidth="1024.0" style="-fx-background-color: #EBEDF0;">
+                        <TableView fx:id="quartoTabela" prefHeight="312.0" prefWidth="1024.0" style="-fx-background-color: #EBEDF0;">
                            <columns>
-                              <TableColumn fx:id="quartoCollum" prefWidth="96.0" text="Quarto" />
-                              <TableColumn fx:id="qtCamasCollum" prefWidth="93.0" text="Qtd. Camas" />
-                              <TableColumn fx:id="tipoColum" prefWidth="319.0" text="Tipo" />
-                              <TableColumn fx:id="tvCaboColum" prefWidth="67.0" text="TV Cabo" />
-                              <TableColumn fx:id="cofreColum" prefWidth="58.0" text="Cofre" />
-                              <TableColumn fx:id="tvLedColum" prefWidth="66.0" text="TV Led" />
-                              <TableColumn fx:id="telColum" prefWidth="36.0" text="Tel." />
-                              <TableColumn fx:id="arCondColum" text="Ar-Cond." />
-                              <TableColumn fx:id="wifiColum" prefWidth="38.0" text="Wifi" />
-                              <TableColumn fx:id="miniBarColum" prefWidth="66.0" text="MiniBar" />
-                              <TableColumn fx:id="disponivelColum" prefWidth="104.0" text="Disponível" />
+                              <TableColumn fx:id="quartoCol" prefWidth="96.0" text="Quarto" />
+                              <TableColumn fx:id="qtCamasCol" prefWidth="93.0" text="Qtd. Camas" />
+                              <TableColumn fx:id="tipoCol" prefWidth="319.0" text="Tipo" />
+                              <TableColumn fx:id="tvCaboCol" prefWidth="67.0" text="TV Cabo" />
+                              <TableColumn fx:id="cofreCol" prefWidth="58.0" text="Cofre" />
+                              <TableColumn fx:id="tvLedCol" prefWidth="66.0" text="TV Led" />
+                              <TableColumn fx:id="telCol" prefWidth="36.0" text="Tel." />
+                              <TableColumn fx:id="arCondCol" text="Ar-Cond." />
+                              <TableColumn fx:id="wifiCol" prefWidth="38.0" text="Wifi" />
+                              <TableColumn fx:id="miniBarCol" prefWidth="66.0" text="MiniBar" />
+                              <TableColumn fx:id="disponivelCol" prefWidth="104.0" text="Disponível" />
                            </columns>
                            <VBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
                         </TableView>
-                        <Button fx:id="editarButton" mnemonicParsing="false" onAction="#action" text="Editar">
+                        <JFXButton fx:id="editarQuartBtn" onAction="#action" text="Editar">
                            <VBox.margin>
-                              <Insets top="5.0" />
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
-                        </Button>
+                        </JFXButton>
                      </children>
                   </VBox>
                </content>
           </Tab>
-          <Tab fx:id="novoAlugelTab" text="Novo aluguel">
+          <Tab fx:id="novoAlugelTab" disable="true" text="Novo aluguel">
                <content>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #D3D4D6;">
                      <children>
@@ -116,72 +121,80 @@
                                  <GridPane.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </GridPane.margin></Label>
-                              <TextField fx:id="numQuartoField" onAction="#action" promptText="Digite aqui..." GridPane.rowIndex="1">
-                                 <GridPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </GridPane.margin></TextField>
-                              <TextField fx:id="qtdCamaField" onAction="#action" promptText="Digite aqui..." GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                 <GridPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </GridPane.margin></TextField>
-                              <TextField fx:id="tipoField" onAction="#action" promptText="Digite aqui..." GridPane.rowIndex="3">
-                                 <GridPane.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </GridPane.margin></TextField>
-                              <CheckBox fx:id="tvCaboCBox" mnemonicParsing="false" onAction="#action" text="Tv a Cabo" GridPane.columnIndex="2">
+                              <JFXTextField fx:id="numQuartCadField" onAction="#action" promptText="Numero do quarto" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </GridPane.margin>
-                              </CheckBox>
-                              <CheckBox fx:id="cofreCBox" mnemonicParsing="false" onAction="#action" text="Cofre" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                              </JFXTextField>
+                              <JFXTextField fx:id="qtdCamaCadField" onAction="#action" promptText="Quantidade de camas" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </GridPane.margin>
-                              </CheckBox>
-                              <CheckBox fx:id="tvLedCBox" mnemonicParsing="false" onAction="#action" text="Tv de Led" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                              </JFXTextField>
+                              <JFXTextField fx:id="tipoQuartCadField" onAction="#action" promptText="Tipo do quarto" GridPane.rowIndex="3">
                                  <GridPane.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </GridPane.margin>
-                              </CheckBox>
-                              <CheckBox fx:id="telefoneCBox" mnemonicParsing="false" onAction="#action" text="Telefone" GridPane.columnIndex="3">
+                              </JFXTextField>
+                              <JFXCheckBox fx:id="tvCaboCBox" onAction="#action" text="Tv a Cabo" unCheckedColor="RED" GridPane.columnIndex="2">
                                  <GridPane.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </GridPane.margin>
-                              </CheckBox>
-                              <CheckBox fx:id="arCondCBox" mnemonicParsing="false" onAction="#action" text="Ar-Condicionado" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                              </JFXCheckBox>
+                              <JFXCheckBox fx:id="cofreCBox" onAction="#action" text="Cofre" unCheckedColor="RED" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </GridPane.margin>
-                              </CheckBox>
-                              <CheckBox fx:id="wifiCBox" mnemonicParsing="false" onAction="#action" text="Wifi" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                              </JFXCheckBox>
+                              <JFXCheckBox fx:id="tvLedCBox" layoutX="518.0" layoutY="46.0" onAction="#action" text="Tv de Led" unCheckedColor="RED" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </GridPane.margin>
-                              </CheckBox>
-                              <CheckBox fx:id="miniBarCBox" mnemonicParsing="false" onAction="#action" text="Mini-Bar" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                              </JFXCheckBox>
+                              <JFXCheckBox fx:id="miniBarCBox" onAction="#action" text="Mini-Bar" unCheckedColor="RED" GridPane.columnIndex="2" GridPane.rowIndex="3">
                                  <GridPane.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </GridPane.margin>
-                              </CheckBox>
-                              <CheckBox fx:id="disponivelCBox" mnemonicParsing="false" onAction="#action" text="Disponibilidade" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                              </JFXCheckBox>
+                              <JFXCheckBox fx:id="telefoneCBox" onAction="#action" text="Telefone" unCheckedColor="RED" GridPane.columnIndex="3">
                                  <GridPane.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </GridPane.margin>
-                              </CheckBox>
+                              </JFXCheckBox>
+                              <JFXCheckBox fx:id="arCondCBox" onAction="#action" text="Ar-Condicionado" unCheckedColor="RED" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </GridPane.margin>
+                              </JFXCheckBox>
+                              <JFXCheckBox fx:id="wifiCBox" onAction="#action" text="Wifi" unCheckedColor="RED" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </GridPane.margin>
+                              </JFXCheckBox>
+                              <JFXCheckBox fx:id="disponivelCBox" onAction="#action" selected="true" text="Disponível" unCheckedColor="RED" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </GridPane.margin>
+                              </JFXCheckBox>
+                              <JFXCheckBox fx:id="statusCBox" onAction="#action" selected="true" text="Ativo" unCheckedColor="RED" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </GridPane.margin>
+                              </JFXCheckBox>
                            </children>
                         </GridPane>
-                        <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="200.0" prefWidth="200.0">
+                        <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="165.0" prefWidth="1024.0">
                            <children>
-                              <Button fx:id="cancelarButton" mnemonicParsing="false" onAction="#action" text="Cancelar">
+                              <JFXButton fx:id="cancelQuartCadBtn" onAction="#action" text="Cancelar">
                                  <FlowPane.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </FlowPane.margin>
-                              </Button>
-                              <Button fx:id="cadastrarButton" mnemonicParsing="false" onAction="#action" text="Cadastrar">
+                              </JFXButton>
+                              <JFXButton fx:id="cadQuartBtn" onAction="#action" text="Cadastrar">
                                  <FlowPane.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </FlowPane.margin>
-                              </Button>
+                              </JFXButton>
                            </children>
                         </FlowPane>
                      </children>

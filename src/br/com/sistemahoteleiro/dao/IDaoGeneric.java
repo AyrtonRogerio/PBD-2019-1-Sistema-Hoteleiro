@@ -53,6 +53,6 @@ public interface IDaoGeneric<T extends Entidade> {
 	 * @return
 	 * @throws DaoException
 	 */
-	public List<T> searchAll(Class<T> t) throws DaoException;
+	public List<T> searchAll() throws DaoException;
 
 }

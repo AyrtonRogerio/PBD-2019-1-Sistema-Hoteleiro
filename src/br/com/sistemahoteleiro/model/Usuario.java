@@ -10,6 +10,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
 
+import br.com.sistemahoteleiro.enuns.TipoCargo;
+
 /**
  * @author ayrtons
  *
@@ -36,7 +38,7 @@ public abstract class Usuario extends Entidade {
 	private String cpf;
 	
 	@Enumerated(EnumType.STRING)
-	private String cargo;
+	private TipoCargo cargo;
 	
 	@Column(nullable = false, unique = true)
 	private String login;
@@ -104,6 +106,18 @@ public abstract class Usuario extends Entidade {
 	 */
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	/**
+	 * @return the cargo
+	 */
+	public TipoCargo getCargo() {
+		return cargo;
+	}
+	/**
+	 * @param cargo the cargo to set
+	 */
+	public void setCargo(TipoCargo cargo) {
+		this.cargo = cargo;
 	}
 	
 }

@@ -50,7 +50,7 @@ public class Quarto extends Entidade {
 	@Column
 	private boolean wifi;
 	
-	@Column
+	@Column(name = "mini_bar")
 	private boolean miniBar;
 	
 	@Column

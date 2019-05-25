@@ -114,9 +114,9 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public List<Administrador> searchAllAdministrador(Administrador administrador) throws BusinessException {
+	public List<Administrador> searchAllAdministrador() throws BusinessException {
 		// TODO Auto-generated method stub
-		return businessAdministrador.searchAll(Administrador.class);
+		return businessAdministrador.searchAll();
 	}
 
 	@Override
@@ -146,9 +146,9 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public List<Aluga> searchAllAluga(Aluga aluga) throws BusinessException {
+	public List<Aluga> searchAllAluga() throws BusinessException {
 		// TODO Auto-generated method stub
-		return businessAluga.searchAll(Aluga.class);
+		return businessAluga.searchAll();
 	}
 
 	@Override
@@ -178,9 +178,9 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public List<Caixa> searchAllCaixa(Caixa caixa) throws BusinessException {
+	public List<Caixa> searchAllCaixa() throws BusinessException {
 		// TODO Auto-generated method stub
-		return businessCaixa.searchAll(Caixa.class);
+		return businessCaixa.searchAll();
 	}
 
 	@Override
@@ -210,9 +210,9 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public List<Contato> searchAllContato(Contato contato) throws BusinessException {
+	public List<Contato> searchAllContato() throws BusinessException {
 		// TODO Auto-generated method stub
-		return businessContato.searchAll(Contato.class);
+		return businessContato.searchAll();
 	}
 
 	@Override
@@ -242,9 +242,9 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public List<Endereco> searchAllEndereco(Endereco endereco) throws BusinessException {
+	public List<Endereco> searchAllEndereco() throws BusinessException {
 		// TODO Auto-generated method stub
-		return businessEndereco.searchAll(Endereco.class);
+		return businessEndereco.searchAll();
 	}
 
 	@Override
@@ -274,9 +274,9 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public List<Funcionario> searchAllFuncionario(Funcionario funcionario) throws BusinessException {
+	public List<Funcionario> searchAllFuncionario() throws BusinessException {
 		// TODO Auto-generated method stub
-		return businessFuncionario.searchAll(Funcionario.class);
+		return businessFuncionario.searchAll();
 	}
 
 	@Override
@@ -306,9 +306,9 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public List<Log> searchAllLog(Log log) throws BusinessException {
+	public List<Log> searchAllLog() throws BusinessException {
 		// TODO Auto-generated method stub
-		return businessLog.searchAll(Log.class);
+		return businessLog.searchAll();
 	}
 
 	@Override
@@ -338,9 +338,9 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public List<Parcela> searchAllParcela(Parcela parcela) throws BusinessException {
+	public List<Parcela> searchAllParcela() throws BusinessException {
 		// TODO Auto-generated method stub
-		return businessParcela.searchAll(Parcela.class);
+		return businessParcela.searchAll();
 	}
 
 	@Override
@@ -370,9 +370,9 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public List<PessoaFisica> searchAllPessoaFisica(PessoaFisica pessoaFisica) throws BusinessException {
+	public List<PessoaFisica> searchAllPessoaFisica() throws BusinessException {
 		// TODO Auto-generated method stub
-		return businessPessoaFisica.searchAll(PessoaFisica.class);
+		return businessPessoaFisica.searchAll();
 	}
 
 	@Override
@@ -402,9 +402,9 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public List<PessoaJuridica> searchAllPessoaJuridica(PessoaJuridica pessoaJuridica) throws BusinessException {
+	public List<PessoaJuridica> searchAllPessoaJuridica() throws BusinessException {
 		// TODO Auto-generated method stub
-		return businessPessoaJuridica.searchAll(PessoaJuridica.class);
+		return businessPessoaJuridica.searchAll();
 	}
 
 	@Override
@@ -434,9 +434,9 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public List<Quarto> searchAllQuarto(Quarto quarto) throws BusinessException {
+	public List<Quarto> searchAllQuarto() throws BusinessException {
 		// TODO Auto-generated method stub
-		return businessQuarto.searchAll(Quarto.class);
+		return businessQuarto.searchAll();
 	}
 
 	@Override
@@ -466,9 +466,9 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public List<Reserva> searchAllReserva(Reserva reserva) throws BusinessException {
+	public List<Reserva> searchAllReserva() throws BusinessException {
 		// TODO Auto-generated method stub
-		return businessReserva.searchAll(Reserva.class);
+		return businessReserva.searchAll();
 	}
 
 	@Override
@@ -498,9 +498,9 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public List<SuperUsuario> searchAllSuperUsuario(SuperUsuario superUsuario) throws BusinessException {
+	public List<SuperUsuario> searchAllSuperUsuario() throws BusinessException {
 		// TODO Auto-generated method stub
-		return businessSuperUsuario.searchAll(SuperUsuario.class);
+		return businessSuperUsuario.searchAll();
 	}
 
 	@Override

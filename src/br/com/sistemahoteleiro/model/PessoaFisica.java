@@ -11,6 +11,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import br.com.sistemahoteleiro.enuns.TipoEstadoCivil;
+import br.com.sistemahoteleiro.enuns.TipoOcupacao;
+import br.com.sistemahoteleiro.enuns.TipoSexo;
+
 /**
  * @author ayrtons
  *
@@ -33,13 +37,13 @@ public class PessoaFisica extends Cliente {
 	private String cpf;
 	
 	@Enumerated(EnumType.STRING)
-	private String sexo;
+	private TipoSexo sexo;
 	
 	@Enumerated(EnumType.STRING)
-	private String estado_civil;
+	private TipoEstadoCivil estado_civil;
 	
 	@Enumerated(EnumType.STRING)
-	private String ocupacao;
+	private TipoOcupacao ocupacao;
 	
 	@Column
 	private LocalDate data_nascimento;
@@ -68,40 +72,41 @@ public class PessoaFisica extends Cliente {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+	
 	/**
 	 * @return the sexo
 	 */
-	public String getSexo() {
+	public TipoSexo getSexo() {
 		return sexo;
 	}
 	/**
 	 * @param sexo the sexo to set
 	 */
-	public void setSexo(String sexo) {
+	public void setSexo(TipoSexo sexo) {
 		this.sexo = sexo;
 	}
 	/**
 	 * @return the estado_civil
 	 */
-	public String getEstado_civil() {
+	public TipoEstadoCivil getEstado_civil() {
 		return estado_civil;
 	}
 	/**
 	 * @param estado_civil the estado_civil to set
 	 */
-	public void setEstado_civil(String estado_civil) {
+	public void setEstado_civil(TipoEstadoCivil estado_civil) {
 		this.estado_civil = estado_civil;
 	}
 	/**
 	 * @return the ocupacao
 	 */
-	public String getOcupacao() {
+	public TipoOcupacao getOcupacao() {
 		return ocupacao;
 	}
 	/**
 	 * @param ocupacao the ocupacao to set
 	 */
-	public void setOcupacao(String ocupacao) {
+	public void setOcupacao(TipoOcupacao ocupacao) {
 		this.ocupacao = ocupacao;
 	}
 	/**
@@ -116,7 +121,6 @@ public class PessoaFisica extends Cliente {
 	public void setData_nascimento(LocalDate data_nascimento) {
 		this.data_nascimento = data_nascimento;
 	}
-	
 	
 	
 }

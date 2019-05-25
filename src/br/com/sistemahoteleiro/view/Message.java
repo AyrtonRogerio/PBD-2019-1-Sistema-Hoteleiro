@@ -36,6 +36,9 @@ public class Message {
 	 * @return the instance
 	 */
 	public static Message getInstance() {
+		if(instance == null) {
+			instance = new Message();
+		}
 		return instance;
 	}
 	
