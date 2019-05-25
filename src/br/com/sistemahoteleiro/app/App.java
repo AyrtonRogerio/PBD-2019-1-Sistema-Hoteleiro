@@ -36,8 +36,8 @@ public class App extends Application {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		launch(args);
 		IFacade facade = Facade.getInstance();
+		launch(args);
 	}
 
 	@Override
@@ -103,16 +103,7 @@ public class App extends Application {
 	/**
 	 * @return the Pane quarto
 	 */
-/*	public static Pane getQuarto() {
-		return quarto;
-	}
 
-	/**
-	 * @return the Pane reserva
-	 */
-/*	public static Pane getReserva() {
-		return reserva;
-	}*/
 	
 	
 	
