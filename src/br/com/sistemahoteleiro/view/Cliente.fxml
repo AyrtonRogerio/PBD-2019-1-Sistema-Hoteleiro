@@ -58,9 +58,9 @@
                                           <Insets left="5.0" right="5.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <JFXTextField promptText="Buscar cliente(s)" GridPane.rowIndex="2" />
-                                    <JFXButton text="Buscar" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <JFXButton text="Novo Cliente" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                    <JFXTextField fx:id="buscCliField" onAction="#action" promptText="Buscar cliente(s)" GridPane.rowIndex="2" />
+                                    <JFXButton fx:id="buscCliBtn" onAction="#action" text="Buscar" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <JFXButton fx:id="navoCliBtn" text="Novo Cliente" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                        <GridPane.margin>
                                           <Insets left="75.0" />
                                        </GridPane.margin>
@@ -117,12 +117,12 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <RadioButton mnemonicParsing="false" selected="true" text="Pessoa Física" GridPane.rowIndex="1">
+                                          <RadioButton fx:id="pessFisRadBtn" mnemonicParsing="false" onAction="#action" selected="true" text="Pessoa Física" GridPane.rowIndex="1">
                                              <GridPane.margin>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                              </GridPane.margin>
                                           </RadioButton>
-                                          <RadioButton mnemonicParsing="false" text="Pessoa Jurídica" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                          <RadioButton fx:id="pessJurRadBtn" mnemonicParsing="false" onAction="#action" text="Pessoa Jurídica" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <GridPane.margin>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                              </GridPane.margin>
@@ -210,7 +210,7 @@
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                              </GridPane.margin>
                                           </JFXTextField>
-                                          <JFXDatePicker fx:id="dataCli" promptText="Data de nascimento" GridPane.columnIndex="1">
+                                          <JFXDatePicker fx:id="dataCli" onAction="#action" promptText="Data de nascimento" GridPane.columnIndex="1">
                                              <GridPane.margin>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                              </GridPane.margin>
