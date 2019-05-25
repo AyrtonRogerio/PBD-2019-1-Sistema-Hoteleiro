@@ -21,5 +21,6 @@ public class Funcionario extends Usuario {
 	 */
 	private static final long serialVersionUID = 1L;
 	protected static final String SEQUENCE_ENTIDADE = "sequence_funcionario";
+
 	
 }

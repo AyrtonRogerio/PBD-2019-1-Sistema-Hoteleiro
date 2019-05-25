@@ -8,11 +8,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import br.com.sistemahoteleiro.view.Message;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -22,51 +25,60 @@ import javafx.scene.layout.Pane;
  */
 public class ControlerHome implements Initializable {
 
-	private Pane clientePane, funcionarioPane, quartoPane, reservaPane;
+	private Pane clientePane;
+	private Pane funcionarioPane;
+	private Pane quartoPane;
+	private Pane reservaPane;
+
+	@FXML
+	private MenuItem inicioMenuItem;
+
+	@FXML
+	private MenuItem quartosMenuItem;
+
+	@FXML
+	private MenuItem clientesMenuItem;
+
+	@FXML
+	private MenuItem reservasMenuItem;
+
+	@FXML
+	private MenuItem checkInMenuItem;
+
+	@FXML
+	private MenuItem checkOutMenuItem;
+
+	@FXML
+	private MenuItem pgmntMenuItem;
+
+	@FXML
+	private MenuItem funcMenuItem;
+
+	@FXML
+	private MenuItem logoutMenuItem;
 
 	@FXML
 	private AnchorPane pane;
 
-	@FXML // fx:id="homeButton"
-	private Button homeButton; // Value injected by FXMLLoader
-
-	@FXML // fx:id="quartosButton"
-	private Button quartosButton; // Value injected by FXMLLoader
-
-	@FXML // fx:id="reservaButton"
-	private Button reservaButton; // Value injected by FXMLLoader
-
-	@FXML // fx:id="checkinButton"
-	private Button checkinButton; // Value injected by FXMLLoader
-
-	@FXML // fx:id="checkouButton"
-	private Button checkouButton; // Value injected by FXMLLoader
-
-	@FXML // fx:id="pagamentoButton"
-	private Button pagamentoButton; // Value injected by FXMLLoader
-
-	@FXML // fx:id="logoutButton"
-	private Button logoutButton; // Value injected by FXMLLoader
-
 	@FXML
 	void action(ActionEvent event) {
 
-		if(event.getSource() == quartosButton) {
+		if (event.getSource() == reservasMenuItem) {
+			updateFrame("reserva");
+		}
+
+		if (event.getSource() == clientesMenuItem) {
+			updateFrame("cliente");
+		}
+
+		if (event.getSource() == quartosMenuItem) {
 			updateFrame("quarto");
 		}
-		
-		if(event.getSource() == reservaButton) {
-			updateFrame("reservar");
+
+		if (event.getSource() == funcMenuItem) {
+			updateFrame("funcionario");
 		}
-		
-		if(event.getSource() == quartosButton) {
-			updateFrame("quarto");
-		}
-		
-		if(event.getSource() == quartosButton) {
-			updateFrame("quarto");
-		}
-		
+
 	}
 
 	@Override
@@ -86,10 +98,11 @@ public class ControlerHome implements Initializable {
 			reservaPane = FXMLLoader
 					.load(getClass().getClassLoader().getResource("br/com/sistemahoteleiro/view/Reserva.fxml"));
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Message.getInstance().viewMessage(AlertType.ERROR, "Erro ao carregar!", "Ocorreu um erro ao tentar carregar os componentes gráficos!", "" + e.getMessage());
+			Message.getInstance().viewMessage(AlertType.ERROR, "Erro ao carregar!",
+					"Ocorreu um erro ao tentar carregar os componentes gráficos!", "" + e.getMessage());
 		}
 	}
 
@@ -124,7 +137,11 @@ public class ControlerHome implements Initializable {
 
 		if (nameFrame.equalsIgnoreCase("reserva")) {
 
+			System.out.println("Principal: " + pane);
+			System.out.println("Reserva: " + reservaPane);
+
 			AnchorPane.setBottomAnchor(reservaPane, 0.0);
+			;
 			AnchorPane.setLeftAnchor(reservaPane, 0.0);
 			AnchorPane.setRightAnchor(reservaPane, 0.0);
 			AnchorPane.setTopAnchor(reservaPane, 0.0);

@@ -6,6 +6,12 @@ package br.com.sistemahoteleiro.controler;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTextField;
+
+import br.com.sistemahoteleiro.model.Cliente;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,6 +22,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 
 /**
  * @author ayrton
@@ -23,121 +30,128 @@ import javafx.scene.control.TextField;
  */
 public class ControlerCliente implements Initializable{
 
-	@FXML
-    private Tab listaClienteTab;
+	 @FXML
+	    private Tab listaClienteTab;
 
-    @FXML
-    private TextField buscaCliField;
+	    @FXML
+	    private TableView<Cliente> cliTabela;
 
-    @FXML
-    private Button buscaCliBtn;
+	    @FXML
+	    private TableColumn<Cliente, String> nomeCliCol;
 
-    @FXML
-    private Button novoCliBtn;
+	    @FXML
+	    private TableColumn<Cliente, String> cpfCliCol;
 
-    @FXML
-    private TableView<?> cliTabela;
+	    @FXML
+	    private TableColumn<Cliente, String> cnpjCliCol;
 
-    @FXML
-    private TableColumn<?, ?> nomeCliCol;
+	    @FXML
+	    private TableColumn<Cliente, String> ruaCliCol;
 
-    @FXML
-    private TableColumn<?, ?> cpfCliCol;
+	    @FXML
+	    private TableColumn<Cliente, String> bairroCliCol;
 
-    @FXML
-    private TableColumn<?, ?> nascCliCol;
+	    @FXML
+	    private TableColumn<Cliente, String> numCliCol;
 
-    @FXML
-    private TableColumn<?, ?> ruaCliCol;
+	    @FXML
+	    private JFXButton detalhesCliBtn;
 
-    @FXML
-    private TableColumn<?, ?> bairroCliCol;
+	    @FXML
+	    private JFXButton editarCliBtn;
 
-    @FXML
-    private TableColumn<?, ?> numCliCol;
+	    @FXML
+	    private Tab dadosCliTab;
 
-    @FXML
-    private Button detalhesCliBtn;
+	    @FXML
+	    private JFXButton voltarCliBtn;
 
-    @FXML
-    private Button editarCliBtn;
+	    @FXML
+	    private JFXButton contCliBtn;
 
-    @FXML
-    private Tab dadosCliTab;
+	    @FXML
+	    private GridPane CliJuriGridLay;
 
-    @FXML
-    private TextField nomeCliField;
+	    @FXML
+	    private JFXTextField razaoSociCliField;
 
-    @FXML
-    private TextField cpfCliField;
+	    @FXML
+	    private JFXTextField cnpjCliField;
 
-    @FXML
-    private ComboBox<?> sexoCliCbox;
+	    @FXML
+	    private JFXTextField nomeCliField;
 
-    @FXML
-    private ComboBox<?> estadCivCliCbox;
+	    @FXML
+	    private GridPane CliFisGridLay;
 
-    @FXML
-    private ComboBox<?> ocupacaoCliCbox;
+	    @FXML
+	    private JFXTextField cpfCliField;
 
-    @FXML
-    private DatePicker dataCli;
+	    @FXML
+	    private JFXDatePicker dataCli;
 
-    @FXML
-    private Button voltarCliBtn;
+	    @FXML
+	    private JFXComboBox<?> sexoCliCbox;
 
-    @FXML
-    private Button continuarCliBtn;
+	    @FXML
+	    private JFXComboBox<?> estadCivCliCbox;
 
-    @FXML
-    private Tab endClienteTab;
+	    @FXML
+	    private JFXComboBox<?> ocupacaoCliCbox;
 
-    @FXML
-    private TextField ruaEndCliField;
+	    @FXML
+	    private Tab endClienteTab;
 
-    @FXML
-    private TextField cepEndCliField;
+	    @FXML
+	    private JFXButton voltarEndCliBtn;
 
-    @FXML
-    private TextField numEndCliField;
+	    @FXML
+	    private JFXButton continEndCliBtn;
 
-    @FXML
-    private TextField bairroEndCliField;
+	    @FXML
+	    private JFXTextField ruaEndCliField;
 
-    @FXML
-    private TextField cidadeEndCliField;
+	    @FXML
+	    private JFXTextField cepEndCliField;
 
-    @FXML
-    private TextField ufEndCliField;
+	    @FXML
+	    private JFXTextField numEndCliField;
 
-    @FXML
-    private Button voltarEndCliBtn;
+	    @FXML
+	    private JFXTextField bairroEndCliField;
 
-    @FXML
-    private Button continEndCliBtn;
+	    @FXML
+	    private JFXTextField cidadeEndCliField;
 
-    @FXML
-    private Tab contClienteTab;
+	    @FXML
+	    private JFXTextField ufEndCliField;
 
-    @FXML
-    private TextField foneContCliField;
+	    @FXML
+	    private Tab contClienteTab;
 
-    @FXML
-    private TextField emailContCliField;
+	    @FXML
+	    private JFXTextField foneContCliField;
 
-    @FXML
-    private TextField foneContCliField2;
+	    @FXML
+	    private JFXTextField foneContCliField2;
 
-    @FXML
-    private Button voltarContCliBtn;
+	    @FXML
+	    private JFXTextField emailContCliField;
 
-    @FXML
-    private Button cadastCliBtn;
+	    @FXML
+	    private JFXButton voltarContCliBtn;
 
-    @FXML
-    void action(ActionEvent event) {
+	    @FXML
+	    private JFXButton cadastCliBtn;
 
-    }
+	    @FXML
+	    void action(ActionEvent event) {
+
+	    	
+	    	
+	    	
+	    	
+	    }
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

@@ -16,83 +16,82 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-
 /**
  * @author ayrton
  *
  */
 public class ControlerFuncionario implements Initializable {
 
-	@FXML
-    private Tab listFuncTab;
+	 @FXML
+	    private Tab listFuncTab;
 
-    @FXML
-    private TextField buscaField;
+	    @FXML
+	    private TextField buscaField;
 
-    @FXML
-    private Button buscaFuncBtn;
+	    @FXML
+	    private Button buscaFuncBtn;
 
-    @FXML
-    private Button editarFuncBtn;
+	    @FXML
+	    private Button editarFuncBtn;
 
-    @FXML
-    private Button novoFuncBtn;
+	    @FXML
+	    private Button novoFuncBtn;
 
-    @FXML
-    private TableView<?> tabelaFuncList;
+	    @FXML
+	    private TableView<?> funcListTabela;
 
-    @FXML
-    private TableColumn<?, ?> nomeCol;
+	    @FXML
+	    private TableColumn<?, ?> nomeCol;
 
-    @FXML
-    private TableColumn<?, ?> cpfCol;
+	    @FXML
+	    private TableColumn<?, ?> cpfCol;
 
-    @FXML
-    private TableColumn<?, ?> cargoCol;
+	    @FXML
+	    private TableColumn<?, ?> cargoCol;
 
-    @FXML
-    private TableColumn<?, ?> ruaCol;
+	    @FXML
+	    private TableColumn<?, ?> ruaCol;
 
-    @FXML
-    private TableColumn<?, ?> bairroCol;
+	    @FXML
+	    private TableColumn<?, ?> bairroCol;
 
-    @FXML
-    private TableColumn<?, ?> situacaoCol;
+	    @FXML
+	    private TableColumn<?, ?> situacaoCol;
 
-    @FXML
-    private Tab funcTab;
+	    @FXML
+	    private Tab funcTab;
 
-    @FXML
-    private Button voltarFuncBtn;
+	    @FXML
+	    private Button voltarFuncBtn;
 
-    @FXML
-    private Button contFuncBtn;
+	    @FXML
+	    private Button contFuncBtn;
 
-    @FXML
-    private TextField nomeField;
+	    @FXML
+	    private TextField nomeField;
 
-    @FXML
-    private TextField cpfField;
+	    @FXML
+	    private TextField cpfField;
 
-    @FXML
-    private TextField cargoField;
+	    @FXML
+	    private TextField cargoField;
 
-    @FXML
-    private TextField loginField;
+	    @FXML
+	    private TextField loginField;
 
-    @FXML
-    private PasswordField senhaField;
+	    @FXML
+	    private PasswordField senhaField;
 
-    @FXML
-    private PasswordField confSenhaField;
+	    @FXML
+	    private PasswordField confSenhaField;
 
-    @FXML
-    private CheckBox situacaoCbox;
+	    @FXML
+	    private CheckBox situacaoCbox;
 
-    @FXML
-    void action(ActionEvent event) {
+	    @FXML
+	    void action(ActionEvent event) {
 
-    }
+	    }
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

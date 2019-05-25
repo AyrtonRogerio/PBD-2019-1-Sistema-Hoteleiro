@@ -4,6 +4,8 @@
 package br.com.sistemahoteleiro.model;
 
 import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
@@ -32,6 +34,9 @@ public abstract class Usuario extends Entidade {
 	
 	@Column(length = 14, nullable = false, unique = true)
 	private String cpf;
+	
+	@Enumerated(EnumType.STRING)
+	private String cargo;
 	
 	@Column(nullable = false, unique = true)
 	private String login;

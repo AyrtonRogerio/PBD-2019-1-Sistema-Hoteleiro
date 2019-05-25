@@ -7,9 +7,11 @@ import java.io.IOException;
 
 import br.com.sistemahoteleiro.facade.Facade;
 import br.com.sistemahoteleiro.facade.IFacade;
+import br.com.sistemahoteleiro.view.Message;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -21,8 +23,8 @@ public class App extends Application {
 
 	private static Pane login;
 	private static Pane home;
-	private static Pane quarto;
-	private static Pane reserva;
+	//private static Pane quarto;
+	//private static Pane reserva;
 
 	private static Scene sceneLogin;
 	private static Scene sceneHome;
@@ -34,8 +36,8 @@ public class App extends Application {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		IFacade facade = Facade.getInstance();
 		launch(args);
+		IFacade facade = Facade.getInstance();
 	}
 
 	@Override
@@ -43,19 +45,15 @@ public class App extends Application {
 		// TODO Auto-generated method stub
 		try {
 
+			
 			home = FXMLLoader.load(getClass().getClassLoader().
 					getResource("br/com/sistemahoteleiro/view/Home.fxml"));
-			
-			quarto = FXMLLoader.load(getClass().getClassLoader().
-					getResource("br/com/sistemahoteleiro/view/Quarto.fxml"));
-			
-			reserva = FXMLLoader.load(getClass().getClassLoader().
-					getResource("br/com/sistemahoteleiro/view/Reserva.fxml"));
 			
 			
 			
 		} catch (IOException e) {
 			// TODO: handle exception
+//			Message.getInstance().viewMessage(AlertType.ERROR, "Erro ao carregar!", "Ocorreu um erro ao tentar carregar os componentes gráficos!", "" + e.getMessage());
 		}
 
 		//sceneLogin = new Scene(login);
@@ -68,6 +66,15 @@ public class App extends Application {
 		stage = primaryStage;
 		
 		
+	}
+
+	
+	
+	@Override
+	public void stop() throws Exception {
+		// TODO Auto-generated method stub
+		super.stop();
+		System.exit(0);
 	}
 
 	public static void changeStage(String nameStage) {
@@ -96,16 +103,16 @@ public class App extends Application {
 	/**
 	 * @return the Pane quarto
 	 */
-	public static Pane getQuarto() {
+/*	public static Pane getQuarto() {
 		return quarto;
 	}
 
 	/**
 	 * @return the Pane reserva
 	 */
-	public static Pane getReserva() {
+/*	public static Pane getReserva() {
 		return reserva;
-	}
+	}*/
 	
 	
 	
