@@ -142,9 +142,11 @@ public class ControlerQuarto implements Initializable {
 		}
 
 		if (event.getSource() == cancelQuartCadBtn) {
+		
 			listaQuartosTab.getTabPane().getSelectionModel().select(listaQuartosTab);
 			novoAlugelTab.setDisable(true);
 			limparCampos();
+		
 		}
 
 		if (event.getSource() == cadQuartBtn) {
@@ -152,6 +154,7 @@ public class ControlerQuarto implements Initializable {
 			cadastrarQuarto();
 
 			try {
+				
 				Facade.getInstance().createOrUpdateQuarto(quarto);
 				quartos = Facade.getInstance().searchAllQuarto();
 				quartoTabela.getItems().setAll(quartos);
@@ -164,7 +167,9 @@ public class ControlerQuarto implements Initializable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				Message.getInstance().viewMessage(AlertType.ERROR, "Erro", "Erro ao salvar o quarto", e.getMessage());
+				
 			}
+			
 		}
 
 		if (event.getSource() == editarQuartBtn) {
@@ -180,6 +185,7 @@ public class ControlerQuarto implements Initializable {
 		if (event.getSource() == atualizaQuartCadBtn) {
 
 			atualizarQuarto(quartoAtualiza);
+			
 		}
 
 	}
@@ -203,18 +209,20 @@ public class ControlerQuarto implements Initializable {
 		disponivelCol.setCellValueFactory(new PropertyValueFactory<>("disponivel"));
 
 		try {
+
 			quartos = Facade.getInstance().searchAllQuarto();
 			quartoTabela.getItems().setAll(quartos);
+		
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Message.getInstance().viewMessage(AlertType.ERROR, "Erro", "Erro ao buscar registros dos quartos",
 					e.getMessage());
+		
 		}
 
 	}
 
-	
 	/**
 	 * Método para cadastrar um quarto.
 	 */

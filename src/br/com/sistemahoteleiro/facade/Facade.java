@@ -8,6 +8,7 @@ import java.util.List;
 import br.com.sistemahoteleiro.business.BusinessAdministrador;
 import br.com.sistemahoteleiro.business.BusinessAluga;
 import br.com.sistemahoteleiro.business.BusinessCaixa;
+import br.com.sistemahoteleiro.business.BusinessCliente;
 import br.com.sistemahoteleiro.business.BusinessContato;
 import br.com.sistemahoteleiro.business.BusinessEndereco;
 import br.com.sistemahoteleiro.business.BusinessFuncionario;
@@ -18,9 +19,11 @@ import br.com.sistemahoteleiro.business.BusinessPessoaJuridica;
 import br.com.sistemahoteleiro.business.BusinessQuarto;
 import br.com.sistemahoteleiro.business.BusinessReserva;
 import br.com.sistemahoteleiro.business.BusinessSuperUsuario;
+import br.com.sistemahoteleiro.business.BusinessUsuario;
 import br.com.sistemahoteleiro.business.IBusinessAdministrador;
 import br.com.sistemahoteleiro.business.IBusinessAluga;
 import br.com.sistemahoteleiro.business.IBusinessCaixa;
+import br.com.sistemahoteleiro.business.IBusinessCliente;
 import br.com.sistemahoteleiro.business.IBusinessContato;
 import br.com.sistemahoteleiro.business.IBusinessEndereco;
 import br.com.sistemahoteleiro.business.IBusinessFuncionario;
@@ -31,10 +34,12 @@ import br.com.sistemahoteleiro.business.IBusinessPessoaJuridica;
 import br.com.sistemahoteleiro.business.IBusinessQuarto;
 import br.com.sistemahoteleiro.business.IBusinessReserva;
 import br.com.sistemahoteleiro.business.IBusinessSuperUsuario;
+import br.com.sistemahoteleiro.business.IBusinessUsuario;
 import br.com.sistemahoteleiro.exception.BusinessException;
 import br.com.sistemahoteleiro.model.Administrador;
 import br.com.sistemahoteleiro.model.Aluga;
 import br.com.sistemahoteleiro.model.Caixa;
+import br.com.sistemahoteleiro.model.Cliente;
 import br.com.sistemahoteleiro.model.Contato;
 import br.com.sistemahoteleiro.model.Endereco;
 import br.com.sistemahoteleiro.model.Funcionario;
@@ -45,6 +50,7 @@ import br.com.sistemahoteleiro.model.PessoaJuridica;
 import br.com.sistemahoteleiro.model.Quarto;
 import br.com.sistemahoteleiro.model.Reserva;
 import br.com.sistemahoteleiro.model.SuperUsuario;
+import br.com.sistemahoteleiro.model.Usuario;
 
 /**
  * @author ayrtons
@@ -80,6 +86,8 @@ public class Facade implements IFacade {
 	private IBusinessQuarto businessQuarto;
 	private IBusinessReserva businessReserva;
 	private IBusinessSuperUsuario businessSuperUsuario;
+	private IBusinessCliente businessCliente;
+	private IBusinessUsuario businessUsuario;
 	
 	private Facade() {
 		
@@ -96,6 +104,8 @@ public class Facade implements IFacade {
 		businessQuarto = new BusinessQuarto();
 		businessReserva = new BusinessReserva();
 		businessSuperUsuario = new BusinessSuperUsuario();
+		businessCliente = new BusinessCliente();
+		businessUsuario = new BusinessUsuario();
 		
 	}
 
@@ -514,7 +524,67 @@ public class Facade implements IFacade {
 		// TODO Auto-generated method stub
 		businessSuperUsuario.disable(superUsuario);
 	}
-	
-	
+
+	//Cliente
+	@Override
+	public void createOrUpdateCliente(Cliente cliente) throws BusinessException {
+		// TODO Auto-generated method stub
+		businessCliente.createOrUpdate(cliente);
+	}
+
+	@Override
+	public Cliente searchCliente(Cliente cliente, int id) throws BusinessException {
+		// TODO Auto-generated method stub
+		return businessCliente.search(Cliente.class, id);
+	}
+
+	@Override
+	public List<Cliente> searchAllCliente() throws BusinessException {
+		// TODO Auto-generated method stub
+		return businessCliente.searchAll();
+	}
+
+	@Override
+	public void removeCliente(Cliente cliente) throws BusinessException {
+		// TODO Auto-generated method stub
+		businessCliente.remove(cliente);
+	}
+
+	@Override
+	public void disableCliente(Cliente cliente) throws BusinessException {
+		// TODO Auto-generated method stub
+		businessCliente.disable(cliente);
+	}
+
+	//Usuario
+	@Override
+	public void createOrUpdateUsuario(Usuario usuario) throws BusinessException {
+		// TODO Auto-generated method stub
+		businessUsuario.createOrUpdate(usuario);
+	}
+
+	@Override
+	public Usuario searchUsuario(Usuario usuario, int id) throws BusinessException {
+		// TODO Auto-generated method stub
+		return businessUsuario.search(Usuario.class, id);
+	}
+
+	@Override
+	public List<Usuario> searchAllUsuario() throws BusinessException {
+		// TODO Auto-generated method stub
+		return businessUsuario.searchAll();
+	}
+
+	@Override
+	public void removeUsuario(Usuario usuario) throws BusinessException {
+		// TODO Auto-generated method stub
+		businessUsuario.remove(usuario);
+	}
+
+	@Override
+	public void disableUsuario(Usuario usuario) throws BusinessException {
+		// TODO Auto-generated method stub
+		businessUsuario.disable(usuario);
+	}	
 	
 }

@@ -9,6 +9,7 @@ import br.com.sistemahoteleiro.exception.BusinessException;
 import br.com.sistemahoteleiro.model.Administrador;
 import br.com.sistemahoteleiro.model.Aluga;
 import br.com.sistemahoteleiro.model.Caixa;
+import br.com.sistemahoteleiro.model.Cliente;
 import br.com.sistemahoteleiro.model.Contato;
 import br.com.sistemahoteleiro.model.Endereco;
 import br.com.sistemahoteleiro.model.Funcionario;
@@ -19,6 +20,7 @@ import br.com.sistemahoteleiro.model.PessoaJuridica;
 import br.com.sistemahoteleiro.model.Quarto;
 import br.com.sistemahoteleiro.model.Reserva;
 import br.com.sistemahoteleiro.model.SuperUsuario;
+import br.com.sistemahoteleiro.model.Usuario;
 
 /**
  * @author ayrtons
@@ -205,4 +207,30 @@ public interface IFacade {
 
 	public void disableSuperUsuario(SuperUsuario superUsuario) throws BusinessException;
 
+	//Cliente
+	
+	public void createOrUpdateCliente(Cliente cliente) throws BusinessException;
+	
+	public Cliente searchCliente(Cliente cliente, int id) throws BusinessException;
+
+	public List<Cliente> searchAllCliente() throws BusinessException;
+
+	public void removeCliente(Cliente cliente) throws BusinessException;
+
+	public void disableCliente(Cliente cliente) throws BusinessException;
+
+	
+	//Usuario
+
+	public void createOrUpdateUsuario(Usuario usuario) throws BusinessException;
+	
+	public Usuario searchUsuario(Usuario usuario, int id) throws BusinessException;
+
+	public List<Usuario> searchAllUsuario() throws BusinessException;
+
+	public void removeUsuario(Usuario usuario) throws BusinessException;
+
+	public void disableUsuario(Usuario usuario) throws BusinessException;
+
+	
 }

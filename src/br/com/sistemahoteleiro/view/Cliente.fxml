@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
@@ -60,9 +61,14 @@
                                     </Label>
                                     <JFXTextField fx:id="buscCliField" onAction="#action" promptText="Buscar cliente(s)" GridPane.rowIndex="2" />
                                     <JFXButton fx:id="buscCliBtn" onAction="#action" text="Buscar" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <JFXButton fx:id="navoCliBtn" text="Novo Cliente" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                    <JFXButton fx:id="novoCliBtn" onAction="#action" text="Novo Cliente" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                        <GridPane.margin>
                                           <Insets left="75.0" />
+                                       </GridPane.margin>
+                                    </JFXButton>
+                                    <JFXButton fx:id="atualizarTabelaBtn" onAction="#action" text="Atualizar" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                       <GridPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </GridPane.margin>
                                     </JFXButton>
                                  </children>
@@ -189,6 +195,11 @@
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                              </GridPane.margin>
                                           </JFXTextField>
+                                          <JFXCheckBox fx:id="statusClienteCBox" onAction="#action" selected="true" text="Ativo" unCheckedColor="RED" GridPane.columnIndex="2">
+                                             <GridPane.margin>
+                                                <Insets bottom="5.0" left="70.0" right="5.0" top="5.0" />
+                                             </GridPane.margin>
+                                          </JFXCheckBox>
                                        </children>
                                        <GridPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -210,26 +221,27 @@
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                              </GridPane.margin>
                                           </JFXTextField>
-                                          <JFXDatePicker fx:id="dataCli" onAction="#action" promptText="Data de nascimento" GridPane.columnIndex="1">
+                                          <JFXDatePicker fx:id="dataCli" onAction="#action" promptText="Data de nascimento" GridPane.columnIndex="2">
                                              <GridPane.margin>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                              </GridPane.margin>
                                           </JFXDatePicker>
-                                          <JFXComboBox fx:id="sexoCliCbox" onAction="#action" prefHeight="26.0" prefWidth="219.0" promptText="Sexo" GridPane.rowIndex="1">
+                                          <JFXComboBox fx:id="sexoCliCobBox" onAction="#action" prefHeight="26.0" prefWidth="219.0" promptText="Sexo" GridPane.rowIndex="1">
                                              <GridPane.margin>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                              </GridPane.margin>
                                           </JFXComboBox>
-                                          <JFXComboBox fx:id="estadCivCliCbox" onAction="#action" prefHeight="26.0" prefWidth="202.0" promptText="Estado Civil" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                          <JFXComboBox fx:id="estadCivCliCobBox" onAction="#action" prefHeight="26.0" prefWidth="202.0" promptText="Estado Civil" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                              <GridPane.margin>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                              </GridPane.margin>
                                           </JFXComboBox>
-                                          <JFXComboBox fx:id="ocupacaoCliCbox" onAction="#action" prefHeight="26.0" prefWidth="194.0" promptText="Ocupação" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                          <JFXComboBox fx:id="ocupacaoCliCobBox" onAction="#action" prefHeight="26.0" prefWidth="194.0" promptText="Ocupação" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <GridPane.margin>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                              </GridPane.margin>
                                           </JFXComboBox>
+                                          <JFXTextField fx:id="rgCliField" layoutX="20.0" layoutY="25.0" onAction="#action" promptText="Insira o RG" GridPane.columnIndex="1" />
                                        </children>
                                        <padding>
                                           <Insets left="5.0" right="5.0" />
@@ -274,6 +286,11 @@
                                     <JFXTextField fx:id="bairroEndCliField" onAction="#action" promptText="Informe o bairro" GridPane.rowIndex="3" />
                                     <JFXTextField fx:id="cidadeEndCliField" onAction="#action" promptText="Informe a cidade" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                     <JFXTextField fx:id="ufEndCliField" onAction="#action" promptText="Informe o estado" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                    <JFXCheckBox fx:id="statusEnderecoCBox" onAction="#action" selected="true" text="Ativo" unCheckedColor="RED" GridPane.columnIndex="2">
+                                       <GridPane.margin>
+                                          <Insets bottom="5.0" left="110.0" right="5.0" top="5.0" />
+                                       </GridPane.margin>
+                                    </JFXCheckBox>
                                  </children>
                                  <padding>
                                     <Insets left="5.0" right="5.0" />
@@ -307,8 +324,9 @@
                            <center>
                               <GridPane prefHeight="70.0" prefWidth="599.0" BorderPane.alignment="CENTER">
                                  <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="289.0" minWidth="10.0" prefWidth="84.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="516.0" minWidth="10.0" prefWidth="516.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="289.0" minWidth="10.0" prefWidth="81.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="583.0" minWidth="10.0" prefWidth="413.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="516.0" minWidth="7.0" prefWidth="109.0" />
                                  </columnConstraints>
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -346,21 +364,26 @@
                                           <Insets left="65.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <JFXTextField fx:id="foneContCliField" onAction="#action" promptText="Informe o celular" GridPane.columnIndex="1">
+                                    <JFXTextField fx:id="celularContCliField" onAction="#action" promptText="Informe o celular" GridPane.columnIndex="1">
                                        <GridPane.margin>
-                                          <Insets right="350.0" />
+                                          <Insets bottom="5.0" left="5.0" right="250.0" top="5.0" />
                                        </GridPane.margin>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="foneContCliField2" onAction="#action" promptText="Informe o telefone" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <JFXTextField fx:id="foneContCliField" onAction="#action" promptText="Informe o telefone" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <GridPane.margin>
-                                          <Insets right="350.0" />
+                                          <Insets bottom="5.0" left="5.0" right="250.0" top="5.0" />
                                        </GridPane.margin>
                                     </JFXTextField>
                                     <JFXTextField fx:id="emailContCliField" onAction="#action" promptText="Informe o e-mail" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                        <GridPane.margin>
-                                          <Insets right="250.0" />
+                                          <Insets bottom="5.0" left="5.0" right="150.0" top="5.0" />
                                        </GridPane.margin>
                                     </JFXTextField>
+                                    <JFXCheckBox fx:id="statusContatoCBox" onAction="#action" selected="true" text="Ativo" unCheckedColor="RED" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                       <GridPane.margin>
+                                          <Insets bottom="5.0" left="40.0" right="5.0" top="5.0" />
+                                       </GridPane.margin>
+                                    </JFXCheckBox>
                                  </children>
                               </GridPane>
                            </center>
@@ -369,6 +392,7 @@
                                  <children>
                                     <JFXButton fx:id="voltarContCliBtn" onAction="#action" text="Voltar" />
                                     <JFXButton fx:id="cadastCliBtn" onAction="#action" text="Cadastrar" />
+                                    <JFXButton fx:id="atualizarCliBtn" layoutX="298.0" layoutY="96.0" onAction="#action" text="Atualizar" />
                                  </children>
                               </FlowPane>
                            </bottom>
