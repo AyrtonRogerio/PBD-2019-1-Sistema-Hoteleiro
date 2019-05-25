@@ -29,9 +29,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class ControlerQuarto implements Initializable {
 
-	private Quarto quarto;
+	private Quarto quarto, quartoAtualiza;
 	private List<Quarto> quartos = null;
-	
+
 	@FXML
 	private Tab listaQuartosTab;
 
@@ -129,6 +129,9 @@ public class ControlerQuarto implements Initializable {
 	private JFXButton cadQuartBtn;
 
 	@FXML
+	private JFXButton atualizaQuartCadBtn;
+
+	@FXML
 	void action(ActionEvent event) {
 
 		if (event.getSource() == novoQuartBtn) {
@@ -141,19 +144,42 @@ public class ControlerQuarto implements Initializable {
 		if (event.getSource() == cancelQuartCadBtn) {
 			listaQuartosTab.getTabPane().getSelectionModel().select(listaQuartosTab);
 			novoAlugelTab.setDisable(true);
+			limparCampos();
 		}
-		
-		if(event.getSource() == cadQuartBtn) {
+
+		if (event.getSource() == cadQuartBtn) {
+
 			cadastrarQuarto();
+
 			try {
 				Facade.getInstance().createOrUpdateQuarto(quarto);
 				quartos = Facade.getInstance().searchAllQuarto();
 				quartoTabela.getItems().setAll(quartos);
+				limparCampos();
+
+				listaQuartosTab.getTabPane().getSelectionModel().select(listaQuartosTab);
+				novoAlugelTab.setDisable(true);
+
 			} catch (BusinessException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				Message.getInstance().viewMessage(AlertType.ERROR, "Erro", "Erro ao salvar o quarto", e.getMessage());
-			}			
+			}
+		}
+
+		if (event.getSource() == editarQuartBtn) {
+
+			novoAlugelTab.setDisable(false);
+			novoAlugelTab.getTabPane().getSelectionModel().select(novoAlugelTab);
+
+			preencherCampos();
+			
+			cadQuartBtn.setDisable(true);
+		}
+
+		if (event.getSource() == atualizaQuartCadBtn) {
+
+			atualizarQuarto(quartoAtualiza);
 		}
 
 	}
@@ -182,12 +208,16 @@ public class ControlerQuarto implements Initializable {
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Message.getInstance().viewMessage(AlertType.ERROR, "Erro", "Erro ao buscar registros dos quartos"
-					, e.getMessage());
+			Message.getInstance().viewMessage(AlertType.ERROR, "Erro", "Erro ao buscar registros dos quartos",
+					e.getMessage());
 		}
-		
+
 	}
 
+	
+	/**
+	 * Método para cadastrar um quarto.
+	 */
 	public void cadastrarQuarto() {
 
 		quarto = new Quarto();
@@ -210,27 +240,94 @@ public class ControlerQuarto implements Initializable {
 
 	}
 
-	public void atualizarQuarto() {
-		
-		Quarto q = quartoTabela.getSelectionModel().getSelectedItem();
-		
-		numQuartCadField.setText(""+q.getNumQuarto());
-		qtdCamaCadField.setText(""+q.getQtdCamas());
+	/**
+	 * Método para preencher campos para atualizar o quarto.
+	 */
+	public void preencherCampos() {
 
-		tipoQuartCadField.setText(q.getTipoQuarto());
+		quartoAtualiza = quartoTabela.getSelectionModel().getSelectedItem();
 
-		arCondCBox.setSelected(q.isArCondicionado());
-		cofreCBox.setSelected(q.isCofre());
-		disponivelCBox.setSelected(q.isDisponivel());
-		miniBarCBox.setSelected(q.isMiniBar());
-		telefoneCBox.setSelected(q.isTelefone());
-		tvCaboCBox.setSelected(q.isTvACabo());
-		tvLedCBox.setSelected(q.isTvLed());
-		wifiCBox.setSelected(q.isWifi());
+		numQuartCadField.setText("" + quartoAtualiza.getNumQuarto());
+		qtdCamaCadField.setText("" + quartoAtualiza.getQtdCamas());
 
-		statusCBox.setSelected(q.isStatus());
+		tipoQuartCadField.setText(quartoAtualiza.getTipoQuarto());
 
-		
+		arCondCBox.setSelected(quartoAtualiza.isArCondicionado());
+		cofreCBox.setSelected(quartoAtualiza.isCofre());
+		disponivelCBox.setSelected(quartoAtualiza.isDisponivel());
+		miniBarCBox.setSelected(quartoAtualiza.isMiniBar());
+		telefoneCBox.setSelected(quartoAtualiza.isTelefone());
+		tvCaboCBox.setSelected(quartoAtualiza.isTvACabo());
+		tvLedCBox.setSelected(quartoAtualiza.isTvLed());
+		wifiCBox.setSelected(quartoAtualiza.isWifi());
+
+		statusCBox.setSelected(quartoAtualiza.isStatus());
+
 	}
+
 	
+	/**
+	 * Método para atualizar quarto selecionado da tabela.
+	 * @param q
+	 */
+	public void atualizarQuarto(Quarto q) {
+
+		q.setNumQuarto(Integer.parseInt(numQuartCadField.getText()));
+		q.setQtdCamas(Integer.parseInt(qtdCamaCadField.getText()));
+
+		q.setTipoQuarto(tipoQuartCadField.getText());
+
+		q.setArCondicionado(arCondCBox.isSelected());
+		q.setCofre(cofreCBox.isSelected());
+		q.setDisponivel(disponivelCBox.isSelected());
+		q.setMiniBar(miniBarCBox.isSelected());
+		q.setTelefone(telefoneCBox.isSelected());
+		q.setTvACabo(tvCaboCBox.isSelected());
+		q.setTvLed(tvLedCBox.isSelected());
+		q.setWifi(wifiCBox.isSelected());
+
+		q.setStatus(statusCBox.isSelected());
+
+		try {
+
+			Facade.getInstance().createOrUpdateQuarto(q);
+
+			limparCampos();
+
+			quartos = Facade.getInstance().searchAllQuarto();
+			quartoTabela.getItems().setAll(quartos);
+
+			listaQuartosTab.getTabPane().getSelectionModel().select(listaQuartosTab);
+			novoAlugelTab.setDisable(true);
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Message.getInstance().viewMessage(AlertType.ERROR, "Erro", "Erro ao salvar o quarto", e.getMessage());
+		}
+
+	}
+
+	/**
+	 * Método para limpar os campos.
+	 */
+	public void limparCampos() {
+
+		numQuartCadField.clear();
+		qtdCamaCadField.clear();
+
+		tipoQuartCadField.clear();
+
+		arCondCBox.setSelected(false);
+		cofreCBox.setSelected(false);
+		disponivelCBox.setSelected(false);
+		miniBarCBox.setSelected(false);
+		telefoneCBox.setSelected(false);
+		tvCaboCBox.setSelected(false);
+		tvLedCBox.setSelected(false);
+		wifiCBox.setSelected(false);
+
+		statusCBox.setSelected(true);
+
+	}
+
 }

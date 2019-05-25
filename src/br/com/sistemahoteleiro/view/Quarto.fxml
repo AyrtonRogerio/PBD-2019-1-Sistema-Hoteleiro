@@ -195,6 +195,7 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </FlowPane.margin>
                               </JFXButton>
+                              <JFXButton fx:id="atualizaQuartCadBtn" layoutX="438.0" layoutY="80.0" onAction="#action" text="Atualizar" />
                            </children>
                         </FlowPane>
                      </children>
