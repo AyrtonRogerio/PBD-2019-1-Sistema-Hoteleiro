@@ -124,17 +124,35 @@ public class ControlerFuncionario implements Initializable {
 
 		if (event.getSource() == novoFuncBtn) {
 
+			atualizarFuncBtn.setDisable(true);
+			funcTab.setDisable(false);
+			funcTab.getTabPane().getSelectionModel().select(funcTab);
 		}
 
 		if (event.getSource() == atualizaTabelaBtn) {
 
+			try
+
+			{
+				usuarios = Facade.getInstance().searchAllUsuario();
+				funcListTabela.getItems().setAll(usuarios);
+			} catch (BusinessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
 
 		if (event.getSource() == editarFuncBtn) {
+			cadFuncBtn.setDisable(true);
+			funcTab.getTabPane().getSelectionModel().select(funcTab);
+			preencherCampos();
 
 		}
 
 		if (event.getSource() == detalhesFuncBtn) {
+
+			preencherCampos();
 
 		}
 
@@ -145,15 +163,13 @@ public class ControlerFuncionario implements Initializable {
 		if (event.getSource() == cadFuncBtn) {
 
 			cadastrarUsuario();
-			limparCampos();
-			carregarComboBoxTabela();
+			
 
 		}
 
 		if (event.getSource() == atualizarFuncBtn) {
 
-			limparCampos();
-			carregarComboBoxTabela();
+			atualizarFuncionario(usuarioAtualiza);
 
 		}
 
@@ -181,6 +197,9 @@ public class ControlerFuncionario implements Initializable {
 		confSenhaFuncPassField.getText();
 		situacaoCbox.isSelected();
 
+		/**
+		 * 
+		 */
 		if (cargoCobBox.getValue().equals(TipoCargo.SUPER_USUARIO)) {
 
 			superUsuario = new SuperUsuario();
@@ -194,9 +213,33 @@ public class ControlerFuncionario implements Initializable {
 			superUsuario.setStatus(situacaoCbox.isSelected());
 
 			try {
-				Facade.getInstance().createOrUpdateSuperUsuario(superUsuario);
-				Message.getInstance().viewMessage(AlertType.CONFIRMATION, "Sucesso", "Cadastro realizado!",
-						"Cadastro do Super usuário feito com sucesso");
+
+				if (senhaFuncPassField.getText().trim().equals(confSenhaFuncPassField.getText().trim())) {
+					Facade.getInstance().createOrUpdateSuperUsuario(superUsuario);
+					Message.getInstance().viewMessage(AlertType.CONFIRMATION, "Sucesso", "Cadastro realizado!",
+							"Cadastro do Super usuário feito com sucesso");
+
+					limparCampos();
+					carregarComboBoxTabela();
+					try
+
+					{
+						usuarios = Facade.getInstance().searchAllUsuario();
+						funcListTabela.getItems().setAll(usuarios);
+					} catch (BusinessException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					funcTab.setDisable(true);
+					listFuncTab.getTabPane().getSelectionModel().select(listFuncTab);
+
+				} else {
+
+					Message.getInstance().viewMessage(AlertType.INFORMATION, "Atenção!", "Senhas incorretas!",
+							"Digite uma senha válida!");
+				}
+
 			} catch (BusinessException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -206,6 +249,9 @@ public class ControlerFuncionario implements Initializable {
 
 		}
 
+		/**
+		 * 
+		 */
 		if (cargoCobBox.getValue().equals(TipoCargo.GERENTE)) {
 
 			administrador = new Administrador();
@@ -219,9 +265,33 @@ public class ControlerFuncionario implements Initializable {
 			administrador.setStatus(situacaoCbox.isSelected());
 
 			try {
-				Facade.getInstance().createOrUpdateAdministrador(administrador);
-				Message.getInstance().viewMessage(AlertType.CONFIRMATION, "Sucesso", "Cadastro realizado!",
-						"Cadastro do Administrador feito com sucesso");
+
+				if (senhaFuncPassField.getText().trim().equals(confSenhaFuncPassField.getText().trim())) {
+					Facade.getInstance().createOrUpdateAdministrador(administrador);
+					Message.getInstance().viewMessage(AlertType.CONFIRMATION, "Sucesso", "Cadastro realizado!",
+							"Cadastro do Administrador feito com sucesso");
+
+					limparCampos();
+					carregarComboBoxTabela();
+					try
+
+					{
+						usuarios = Facade.getInstance().searchAllUsuario();
+						funcListTabela.getItems().setAll(usuarios);
+					} catch (BusinessException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					funcTab.setDisable(true);
+					listFuncTab.getTabPane().getSelectionModel().select(listFuncTab);
+
+				} else {
+
+					Message.getInstance().viewMessage(AlertType.INFORMATION, "Atenção!", "Senhas incorretas!",
+							"Digite uma senha válida!");
+				}
+
 			} catch (BusinessException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -231,6 +301,9 @@ public class ControlerFuncionario implements Initializable {
 
 		}
 
+		/**
+		 * 
+		 */
 		if (cargoCobBox.getValue().equals(TipoCargo.ATENDENTE)
 				|| cargoCobBox.getValue().equals(TipoCargo.AUX_SERV_GERAIS)
 				|| cargoCobBox.getValue().equals(TipoCargo.CAMAREIRA)) {
@@ -246,9 +319,33 @@ public class ControlerFuncionario implements Initializable {
 			funcionario.setStatus(situacaoCbox.isSelected());
 
 			try {
-				Facade.getInstance().createOrUpdateFuncionario(funcionario);
-				Message.getInstance().viewMessage(AlertType.CONFIRMATION, "Sucesso", "Cadastro realizado!",
-						"Cadastro do Funcionário feito com sucesso");
+
+				if (senhaFuncPassField.getText().trim().equals(confSenhaFuncPassField.getText().trim())) {
+					Facade.getInstance().createOrUpdateFuncionario(funcionario);
+					Message.getInstance().viewMessage(AlertType.CONFIRMATION, "Sucesso", "Cadastro realizado!",
+							"Cadastro do Funcionário feito com sucesso");
+
+					limparCampos();
+					carregarComboBoxTabela();
+					try
+
+					{
+						usuarios = Facade.getInstance().searchAllUsuario();
+						funcListTabela.getItems().setAll(usuarios);
+					} catch (BusinessException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					funcTab.setDisable(true);
+					listFuncTab.getTabPane().getSelectionModel().select(listFuncTab);
+
+				} else {
+
+					Message.getInstance().viewMessage(AlertType.INFORMATION, "Atenção!", "Senhas incorretas!",
+							"Digite uma senha válida!");
+				}
+
 			} catch (BusinessException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -269,20 +366,153 @@ public class ControlerFuncionario implements Initializable {
 
 		if (u instanceof SuperUsuario) {
 
+			superUsuarioAtualiza = (SuperUsuario) u;
+
+			superUsuarioAtualiza.setNome(nomeFuncField.getText());
+			superUsuarioAtualiza.setCpf(cpfFuncField.getText());
+			superUsuarioAtualiza.setRg(rgFuncField.getText());
+			superUsuarioAtualiza.setCargo(cargoCobBox.getValue());
+			superUsuarioAtualiza.setLogin(loginFuncField.getText());
+			superUsuarioAtualiza.setSenha(senhaFuncPassField.getText());
+			superUsuarioAtualiza.setStatus(situacaoCbox.isSelected());
+
+			try {
+
+				if (senhaFuncPassField.getText().trim().equals(confSenhaFuncPassField.getText().trim())) {
+
+					Facade.getInstance().createOrUpdateSuperUsuario(superUsuarioAtualiza);
+
+					Message.getInstance().viewMessage(AlertType.CONFIRMATION, "Atualizado!", "Atualização concluida!",
+							"Super usuário atualizado com sucesso!");
+
+					limparCampos();
+					carregarComboBoxTabela();
+					try
+
+					{
+						usuarios = Facade.getInstance().searchAllUsuario();
+						funcListTabela.getItems().setAll(usuarios);
+					} catch (BusinessException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					funcTab.setDisable(true);
+					listFuncTab.getTabPane().getSelectionModel().select(listFuncTab);
+
+				} else {
+
+					Message.getInstance().viewMessage(AlertType.INFORMATION, "Atenção!", "Senhas incorretas!",
+							"Digite uma senha válida!");
+				}
+			} catch (BusinessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Message.getInstance().viewMessage(AlertType.ERROR, "Erro!", "Erro ao atualizar Super usuário",
+						e.getMessage());
+			}
+
 		}
 
 		if (u instanceof Administrador) {
 
+			administradorAtualiza = (Administrador) u;
+
+			administradorAtualiza.setNome(nomeFuncField.getText());
+			administradorAtualiza.setCpf(cpfFuncField.getText());
+			administradorAtualiza.setRg(rgFuncField.getText());
+			administradorAtualiza.setCargo(cargoCobBox.getValue());
+			administradorAtualiza.setLogin(loginFuncField.getText());
+			administradorAtualiza.setSenha(senhaFuncPassField.getText());
+			administradorAtualiza.setStatus(situacaoCbox.isSelected());
+
+			try {
+
+				if (senhaFuncPassField.getText().trim().equals(confSenhaFuncPassField.getText().trim())) {
+
+					Facade.getInstance().createOrUpdateAdministrador(administradorAtualiza);
+
+					Message.getInstance().viewMessage(AlertType.CONFIRMATION, "Atualizado!", "Atualização concluida!",
+							"Administrador atualizado com sucesso!");
+
+					limparCampos();
+					carregarComboBoxTabela();
+
+					try {
+						usuarios = Facade.getInstance().searchAllUsuario();
+						funcListTabela.getItems().setAll(usuarios);
+					} catch (BusinessException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					funcTab.setDisable(true);
+					listFuncTab.getTabPane().getSelectionModel().select(listFuncTab);
+
+				} else {
+					Message.getInstance().viewMessage(AlertType.INFORMATION, "Atenção!", "Senhas incorretas!",
+							"Digite uma senha válida!");
+				}
+			} catch (BusinessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Message.getInstance().viewMessage(AlertType.ERROR, "Erro!", "Erro ao atualizar Administrador",
+						e.getMessage());
+			}
+
 		}
 
 		if (u instanceof Funcionario) {
+
+			funcionarioAtualiza = (Funcionario) u;
+
+			funcionarioAtualiza.setNome(nomeFuncField.getText());
+			funcionarioAtualiza.setCpf(cpfFuncField.getText());
+			funcionarioAtualiza.setRg(rgFuncField.getText());
+			funcionarioAtualiza.setCargo(cargoCobBox.getValue());
+			funcionarioAtualiza.setLogin(loginFuncField.getText());
+			funcionarioAtualiza.setSenha(senhaFuncPassField.getText());
+			funcionarioAtualiza.setStatus(situacaoCbox.isSelected());
+
+			try {
+
+				if (senhaFuncPassField.getText().trim().equals(confSenhaFuncPassField.getText().trim())) {
+
+					Facade.getInstance().createOrUpdateFuncionario(funcionarioAtualiza);
+
+					Message.getInstance().viewMessage(AlertType.CONFIRMATION, "Atualizado!", "Atualização concluida!",
+							"Funcionário atualizado com sucesso!");
+
+					limparCampos();
+					carregarComboBoxTabela();
+					try {
+						usuarios = Facade.getInstance().searchAllUsuario();
+						funcListTabela.getItems().setAll(usuarios);
+					} catch (BusinessException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					funcTab.setDisable(true);
+					listFuncTab.getTabPane().getSelectionModel().select(listFuncTab);
+
+				} else {
+
+					Message.getInstance().viewMessage(AlertType.INFORMATION, "Atenção!", "Senhas incorretas!",
+							"Digite uma senha válida!");
+				}
+			} catch (BusinessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Message.getInstance().viewMessage(AlertType.ERROR, "Erro!", "Erro ao atualizar Funcionário",
+						e.getMessage());
+			}
 
 		}
 
 	}
 
 	/**
-	 * Método para preencher os campos do funcinário
+	 * Método para preencher os campos dos usuários.
 	 */
 	public void preencherCampos() {
 
@@ -298,7 +528,7 @@ public class ControlerFuncionario implements Initializable {
 				Message.getInstance().viewMessage(AlertType.ERROR, "Erro", "Erro ao buscar o Super usuário!",
 						e.getMessage());
 			}
-			
+
 			nomeFuncField.setText(superUsuarioAtualiza.getNome());
 			cpfFuncField.setText(superUsuarioAtualiza.getCpf());
 			rgFuncField.setText(superUsuarioAtualiza.getRg());
@@ -306,10 +536,9 @@ public class ControlerFuncionario implements Initializable {
 			loginFuncField.setText(superUsuarioAtualiza.getLogin());
 			senhaFuncPassField.setText(superUsuarioAtualiza.getSenha());
 			confSenhaFuncPassField.setText(superUsuarioAtualiza.getSenha());
-			
-		}
+			situacaoCbox.setSelected(superUsuarioAtualiza.isStatus());
 
-		if (usuarioAtualiza instanceof Administrador) {
+		} else if (usuarioAtualiza instanceof Administrador) {
 
 			try {
 				administradorAtualiza = Facade.getInstance().searchAdministrador(usuarioAtualiza.getId());
@@ -319,7 +548,7 @@ public class ControlerFuncionario implements Initializable {
 				Message.getInstance().viewMessage(AlertType.ERROR, "Erro", "Erro ao buscar o Administrador!",
 						e.getMessage());
 			}
-			
+
 			nomeFuncField.setText(administradorAtualiza.getNome());
 			cpfFuncField.setText(administradorAtualiza.getCpf());
 			rgFuncField.setText(administradorAtualiza.getRg());
@@ -327,10 +556,9 @@ public class ControlerFuncionario implements Initializable {
 			loginFuncField.setText(administradorAtualiza.getLogin());
 			senhaFuncPassField.setText(administradorAtualiza.getSenha());
 			confSenhaFuncPassField.setText(administradorAtualiza.getSenha());
-			
-		}
+			situacaoCbox.setSelected(administradorAtualiza.isStatus());
 
-		if (usuarioAtualiza instanceof Funcionario) {
+		} else if (usuarioAtualiza instanceof Funcionario) {
 
 			try {
 				funcionarioAtualiza = Facade.getInstance().searchFuncionario(usuarioAtualiza.getId());
@@ -340,7 +568,7 @@ public class ControlerFuncionario implements Initializable {
 				Message.getInstance().viewMessage(AlertType.ERROR, "Erro", "Erro ao buscar o Funcionário!",
 						e.getMessage());
 			}
-			
+
 			nomeFuncField.setText(funcionarioAtualiza.getNome());
 			cpfFuncField.setText(funcionarioAtualiza.getCpf());
 			rgFuncField.setText(funcionarioAtualiza.getRg());
@@ -348,16 +576,8 @@ public class ControlerFuncionario implements Initializable {
 			loginFuncField.setText(funcionarioAtualiza.getLogin());
 			senhaFuncPassField.setText(funcionarioAtualiza.getSenha());
 			confSenhaFuncPassField.setText(funcionarioAtualiza.getSenha());
-			
-		}
 
-		nomeFuncField.getText();
-		cpfFuncField.getText();
-		rgFuncField.getText();
-		cargoCobBox.getValue();
-		loginFuncField.getText();
-		senhaFuncPassField.getText();
-		confSenhaFuncPassField.getText();
+		}
 
 	}
 

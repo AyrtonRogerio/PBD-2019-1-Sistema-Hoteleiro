@@ -39,7 +39,33 @@ public class BusinessSuperUsuario extends BusinessGeneric<SuperUsuario> implemen
 	@Override
 	public void isValid(SuperUsuario t) throws ValidationException {
 		// TODO Auto-generated method stub
+		if(t.getCpf().isEmpty()) {
+			throw new ValidationException("O campo CPF não pode estar vazio!");
+		}
 		
+		if(t.getLogin().isEmpty()) {
+			throw new ValidationException("O campo Login não pode estar vazio!");
+		}
+		
+		if(t.getNome().isEmpty()) {
+			throw new ValidationException("O campo Nome não pode estar vazio!");
+		}
+		
+		if(t.getRg().isEmpty()) {
+			throw new ValidationException("O campo RG não pode estar vazio!");
+		}
+		
+		if(t.getSenha().isEmpty()) {
+			throw new ValidationException("O campo Senha não pode estar vazio!");
+		}
+		
+		if(t.getCargo() == null) {
+			throw new ValidationException("O campo Cargo não pode estar vazio!");
+		}
+		
+		if(t.getSenha().length() < 7 || t.getSenha().length() > 12) {
+			throw new ValidationException("A senha tem que ter no mínimo 6 e no máximo 11 caracteres!");
+		}
 	}
 
 }

@@ -61,8 +61,12 @@ public class BusinessFuncionario extends BusinessGeneric<Funcionario> implements
 			throw new ValidationException("O campo Senha não pode estar vazio!");
 		}
 		
-		if(t.getSenha().length() < 6) {
-			
+		if(t.getCargo() == null) {
+			throw new ValidationException("O campo Cargo não pode estar vazio!");
+		}
+		
+		if(t.getSenha().length() < 7 || t.getSenha().length() > 12) {
+			throw new ValidationException("A senha tem que ter no mínimo 6 e no máximo 11 caracteres!");
 		}
 		
 	}
