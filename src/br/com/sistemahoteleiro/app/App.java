@@ -5,8 +5,12 @@ package br.com.sistemahoteleiro.app;
 
 import java.io.IOException;
 
+import br.com.sistemahoteleiro.enuns.TipoCargo;
+import br.com.sistemahoteleiro.exception.BusinessException;
 import br.com.sistemahoteleiro.facade.Facade;
 import br.com.sistemahoteleiro.facade.IFacade;
+import br.com.sistemahoteleiro.model.SuperUsuario;
+import br.com.sistemahoteleiro.model.Usuario;
 import br.com.sistemahoteleiro.view.Message;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -20,11 +24,9 @@ import javafx.stage.Stage;
  *
  */
 public class App extends Application {
-
+	
 	private static Pane login;
 	private static Pane home;
-	//private static Pane quarto;
-	//private static Pane reserva;
 
 	private static Scene sceneLogin;
 	private static Scene sceneHome;
@@ -38,6 +40,8 @@ public class App extends Application {
 		// TODO Auto-generated method stub
 		IFacade facade = Facade.getInstance();
 		launch(args);
+		
+		
 	}
 
 	@Override

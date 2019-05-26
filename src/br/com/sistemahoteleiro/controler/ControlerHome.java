@@ -29,6 +29,7 @@ public class ControlerHome implements Initializable {
 	private Pane funcionarioPane;
 	private Pane quartoPane;
 	private Pane reservaPane;
+	private Pane configurarPane;
 
 	@FXML
 	private MenuItem inicioMenuItem;
@@ -55,6 +56,9 @@ public class ControlerHome implements Initializable {
 	private MenuItem funcMenuItem;
 
 	@FXML
+	private MenuItem configMenuItem;
+
+	@FXML
 	private MenuItem logoutMenuItem;
 
 	@FXML
@@ -78,6 +82,10 @@ public class ControlerHome implements Initializable {
 		if (event.getSource() == funcMenuItem) {
 			updateFrame("funcionario");
 		}
+		
+		if(event.getSource() == configMenuItem) {
+			updateFrame("configurar");
+		}
 
 	}
 
@@ -97,6 +105,9 @@ public class ControlerHome implements Initializable {
 
 			reservaPane = FXMLLoader
 					.load(getClass().getClassLoader().getResource("br/com/sistemahoteleiro/view/Reserva.fxml"));
+			
+			configurarPane = FXMLLoader
+					.load(getClass().getClassLoader().getResource("br/com/sistemahoteleiro/view/ResetarSenha.fxml"));
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -137,16 +148,22 @@ public class ControlerHome implements Initializable {
 
 		if (nameFrame.equalsIgnoreCase("reserva")) {
 
-			System.out.println("Principal: " + pane);
-			System.out.println("Reserva: " + reservaPane);
-
 			AnchorPane.setBottomAnchor(reservaPane, 0.0);
-			;
 			AnchorPane.setLeftAnchor(reservaPane, 0.0);
 			AnchorPane.setRightAnchor(reservaPane, 0.0);
 			AnchorPane.setTopAnchor(reservaPane, 0.0);
 			pane.getChildren().setAll(reservaPane);
 		}
+		
+		if (nameFrame.equalsIgnoreCase("configurar")) {
+
+			AnchorPane.setBottomAnchor(configurarPane, 0.0);
+			AnchorPane.setLeftAnchor(configurarPane, 0.0);
+			AnchorPane.setRightAnchor(configurarPane, 0.0);
+			AnchorPane.setTopAnchor(configurarPane, 0.0);
+			pane.getChildren().setAll(configurarPane);
+		}		
+		
 	}
 
 }

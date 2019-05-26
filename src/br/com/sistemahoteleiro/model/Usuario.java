@@ -4,20 +4,23 @@
 package br.com.sistemahoteleiro.model;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
-
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import br.com.sistemahoteleiro.enuns.TipoCargo;
 
 /**
  * @author ayrtons
  *
  */
-@MappedSuperclass
+@Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@SequenceGenerator(name = Entidade.SEQUENCE_ENTIDADE, sequenceName = Usuario.SEQUENCE_ENTIDADE, initialValue = 1, allocationSize = 1)
 public abstract class Usuario extends Entidade {
 
 	

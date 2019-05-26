@@ -112,6 +112,18 @@
                   </Menu>
                   <Menu mnemonicParsing="false">
                     <items>
+                      <MenuItem fx:id="configMenuItem" mnemonicParsing="false" onAction="#action" text="Configurações" />
+                    </items>
+                     <graphic>
+                        <ImageView fitHeight="80.0" fitWidth="80.0">
+                           <image>
+                              <Image url="@../../../../../res/laptop.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Menu>
+                  <Menu mnemonicParsing="false">
+                    <items>
                       <MenuItem fx:id="logoutMenuItem" mnemonicParsing="false" onAction="#action" text="Logout" />
                     </items>
                      <graphic>

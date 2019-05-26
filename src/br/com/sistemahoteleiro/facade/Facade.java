@@ -585,6 +585,18 @@ public class Facade implements IFacade {
 	public void disableUsuario(Usuario usuario) throws BusinessException {
 		// TODO Auto-generated method stub
 		businessUsuario.disable(usuario);
+	}
+
+	@Override
+	public Usuario searchLoginUsuario(String login, String senha) throws BusinessException {
+		// TODO Auto-generated method stub
+		return businessUsuario.searchLoginUsuario(login, senha);
+	}
+
+	@Override
+	public List<Usuario> seearchBuscarTodosUsuario(String busca) throws BusinessException {
+		// TODO Auto-generated method stub
+		return businessUsuario.searchBuscarTodos(busca);
 	}	
 	
 }

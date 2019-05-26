@@ -225,6 +225,10 @@ public interface IFacade {
 	public void createOrUpdateUsuario(Usuario usuario) throws BusinessException;
 	
 	public Usuario searchUsuario(int id) throws BusinessException;
+	
+	public Usuario searchLoginUsuario(String login, String senha) throws BusinessException;
+	
+	public List<Usuario> seearchBuscarTodosUsuario(String busca) throws BusinessException;
 
 	public List<Usuario> searchAllUsuario() throws BusinessException;
 
