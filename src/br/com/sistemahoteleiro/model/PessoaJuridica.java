@@ -26,7 +26,7 @@ public class PessoaJuridica extends Cliente {
 	@Column(name = "razao_social", length = 50)
 	private String razaoSocial;
 	
-	@Column(length = 18, nullable = false, unique = true)
+	@Column(nullable = false, unique = true)
 	private String cnpj;
 	
 	

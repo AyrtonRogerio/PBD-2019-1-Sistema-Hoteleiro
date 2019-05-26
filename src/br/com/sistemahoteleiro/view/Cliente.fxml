@@ -27,9 +27,9 @@
         <tabs>
             <Tab fx:id="listaClienteTab" text="Lista de Clientes">
                <content>
-                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <BorderPane prefHeight="200.0" prefWidth="200.0">
+                        <BorderPane prefHeight="282.0" prefWidth="600.0">
                            <top>
                               <GridPane prefWidth="590.0" BorderPane.alignment="CENTER">
                                  <columnConstraints>
@@ -78,7 +78,7 @@
                               </GridPane>
                            </top>
                            <center>
-                              <TableView fx:id="cliTabela" prefHeight="75.0" prefWidth="569.0" BorderPane.alignment="CENTER">
+                              <TableView fx:id="cliTabela" prefHeight="169.0" prefWidth="590.0" BorderPane.alignment="CENTER">
                                  <columns>
                                     <TableColumn fx:id="nomeCliCol" prefWidth="89.0" text="Nome" />
                                     <TableColumn fx:id="ruaCliCol" prefWidth="143.0" text="Rua" />
@@ -93,19 +93,14 @@
                                  </columnResizePolicy>
                               </TableView>
                            </center>
-                           <bottom>
-                              <FlowPane alignment="CENTER" prefHeight="35.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-                                 <children>
-                                    <JFXButton fx:id="detalhesCliBtn" onAction="#action" text="Detalhes" />
-                                    <JFXButton fx:id="editarCliBtn" onAction="#action" text="Editar" />
-                                 </children></FlowPane>
-                           </bottom>
                         </BorderPane>
+                        <JFXButton fx:id="detalhesCliBtn" onAction="#action" text="Detalhes" />
+                        <JFXButton fx:id="editarCliBtn" onAction="#action" text="Editar" />
                      </children>
                   </VBox>
                </content>
             </Tab>
-          <Tab fx:id="dadosCliTab" text="Dados Gerais">
+          <Tab fx:id="dadosCliTab" disable="true" text="Dados Gerais">
                <content>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
@@ -256,7 +251,7 @@
                   </VBox>
                </content>
           </Tab>
-          <Tab fx:id="endClienteTab" text="Endereço">
+          <Tab fx:id="endClienteTab" disable="true" text="Endereço">
                <content>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
@@ -286,12 +281,16 @@
                                     <JFXTextField fx:id="numEndCliField" onAction="#action" promptText="Informe o número" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                                     <JFXTextField fx:id="bairroEndCliField" onAction="#action" promptText="Informe o bairro" GridPane.rowIndex="3" />
                                     <JFXTextField fx:id="cidadeEndCliField" onAction="#action" promptText="Informe a cidade" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <JFXTextField fx:id="ufEndCliField" onAction="#action" promptText="Informe o estado" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                                     <JFXCheckBox fx:id="statusEnderecoCBox" onAction="#action" selected="true" text="Ativo" unCheckedColor="RED" GridPane.columnIndex="2">
                                        <GridPane.margin>
                                           <Insets bottom="5.0" left="110.0" right="5.0" top="5.0" />
                                        </GridPane.margin>
                                     </JFXCheckBox>
+                                    <JFXComboBox fx:id="ufEndCliCobBox" onAction="#action" promptText="Estado (UF)" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                       <GridPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </GridPane.margin>
+                                    </JFXComboBox>
                                  </children>
                                  <padding>
                                     <Insets left="5.0" right="5.0" />
@@ -314,7 +313,7 @@
                   </VBox>
                </content>
           </Tab>
-            <Tab fx:id="contClienteTab" text="Contatos">
+            <Tab fx:id="contClienteTab" disable="true" text="Contatos">
                <content>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>

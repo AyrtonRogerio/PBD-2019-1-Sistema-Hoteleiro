@@ -48,9 +48,13 @@ public class BusinessEndereco extends BusinessGeneric<Endereco> implements IBusi
 			throw new ValidationException("O campo Número não pode estar vazio!");
 		}
 		
-		if(t.getUf().isEmpty()) {
-			throw new ValidationException("O campo UF não pode estar vazio!");
-		}
+//		if(t.getUf().isEmpty()) {
+//			throw new ValidationException("O campo UF não pode estar vazio!");
+//		}
+//		
+//		if(t.getUf().length() > 2) {
+//			throw new ValidationException("O campo estado só pode conter 2 caracteres!");
+//		}
 	}
 
 }

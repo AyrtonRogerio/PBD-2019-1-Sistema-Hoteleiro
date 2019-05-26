@@ -5,8 +5,12 @@ package br.com.sistemahoteleiro.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import br.com.sistemahoteleiro.enuns.TipoEstadoUF;
 
 /**
  * @author ayrtons
@@ -23,23 +27,23 @@ public class Endereco extends Entidade{
 	private static final long serialVersionUID = 1L;
 	protected static final String SEQUENCE_ENTIDADE = "endereco_sequence";
 
-	@Column(length = 50, nullable = false)
+	@Column(length = 120, nullable = false)
 	private String logradouro;
 	
 	@Column(length = 20, nullable = false)
 	private String numero;
 	
-	@Column(length = 30, nullable = false)
+	@Column(length = 40, nullable = false)
 	private String bairro;
 	
 	@Column(length = 9, nullable = false)
 	private String cep;
 	
-	@Column(length = 30, nullable = false)
+	@Column(length = 50, nullable = false)
 	private String cidade;
 	
-	@Column(length = 2, nullable = false)
-	private String uf;
+	@Enumerated(EnumType.STRING)
+	private TipoEstadoUF uf;
 	
 	
 	/**
@@ -105,13 +109,13 @@ public class Endereco extends Entidade{
 	/**
 	 * @return the uf
 	 */
-	public String getUf() {
+	public TipoEstadoUF getUf() {
 		return uf;
 	}
 	/**
 	 * @param uf the uf to set
 	 */
-	public void setUf(String uf) {
+	public void setUf(TipoEstadoUF uf) {
 		this.uf = uf;
 	}
 	

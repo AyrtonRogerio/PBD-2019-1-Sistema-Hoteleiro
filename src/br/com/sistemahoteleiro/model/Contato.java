@@ -23,10 +23,10 @@ public class Contato extends Entidade{
 	private static final long serialVersionUID = 1L;
 	protected static final String SEQUENCE_ENTIDADE = "contato_sequence";
 
-	@Column(length = 40, nullable = false)
+	@Column(length = 50, nullable = false)
 	private String email;
 	
-	@Column(length = 13)
+	@Column(length = 14, nullable = false)
 	private String telefone;
 	
 	@Column(length = 14, nullable = false)

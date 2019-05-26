@@ -118,7 +118,7 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public Administrador searchAdministrador(Administrador administrador, int id) throws BusinessException {
+	public Administrador searchAdministrador(int id) throws BusinessException {
 		// TODO Auto-generated method stub
 		return businessAdministrador.search(Administrador.class, id);
 	}
@@ -150,7 +150,7 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public Aluga searchAluga(Aluga aluga, int id) throws BusinessException {
+	public Aluga searchAluga(int id) throws BusinessException {
 		// TODO Auto-generated method stub
 		return businessAluga.search(Aluga.class, id);
 	}
@@ -182,7 +182,7 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public Caixa searchCaixa(Caixa caixa, int id) throws BusinessException {
+	public Caixa searchCaixa(int id) throws BusinessException {
 		// TODO Auto-generated method stub
 		return businessCaixa.search(Caixa.class, id);
 	}
@@ -214,7 +214,7 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public Contato searchContato(Contato contato, int id) throws BusinessException {
+	public Contato searchContato(int id) throws BusinessException {
 		// TODO Auto-generated method stub
 		return businessContato.search(Contato.class, id);
 	}
@@ -246,7 +246,7 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public Endereco searchEndereco(Endereco endereco, int id) throws BusinessException {
+	public Endereco searchEndereco(int id) throws BusinessException {
 		// TODO Auto-generated method stub
 		return businessEndereco.search(Endereco.class, id);
 	}
@@ -278,7 +278,7 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public Funcionario searchFuncionario(Funcionario funcionario, int id) throws BusinessException {
+	public Funcionario searchFuncionario(int id) throws BusinessException {
 		// TODO Auto-generated method stub
 		return businessFuncionario.search(Funcionario.class, id);
 	}
@@ -310,7 +310,7 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public Log searchLog(Log log, int id) throws BusinessException {
+	public Log searchLog(int id) throws BusinessException {
 		// TODO Auto-generated method stub
 		return businessLog.search(Log.class, id);
 	}
@@ -342,7 +342,7 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public Parcela searchParcela(Parcela parcela, int id) throws BusinessException {
+	public Parcela searchParcela(int id) throws BusinessException {
 		// TODO Auto-generated method stub
 		return businessParcela.search(Parcela.class, id);
 	}
@@ -406,7 +406,7 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public PessoaJuridica searchPessoaJuridica(PessoaJuridica pessoaJuridica, int id) throws BusinessException {
+	public PessoaJuridica searchPessoaJuridica(int id) throws BusinessException {
 		// TODO Auto-generated method stub
 		return businessPessoaJuridica.search(PessoaJuridica.class, id);
 	}
@@ -438,7 +438,7 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public Quarto searchQuarto(Quarto quarto, int id) throws BusinessException {
+	public Quarto searchQuarto(int id) throws BusinessException {
 		// TODO Auto-generated method stub
 		return businessQuarto.search(Quarto.class, id);
 	}
@@ -470,7 +470,7 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public Reserva searchReserva(Reserva reserva, int id) throws BusinessException {
+	public Reserva searchReserva(int id) throws BusinessException {
 		// TODO Auto-generated method stub
 		return businessReserva.search(Reserva.class, id);
 	}
@@ -502,7 +502,7 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public SuperUsuario searchSuperUsuario(SuperUsuario superUsuario, int id) throws BusinessException {
+	public SuperUsuario searchSuperUsuario(int id) throws BusinessException {
 		// TODO Auto-generated method stub
 		return businessSuperUsuario.search(SuperUsuario.class, id);
 	}
@@ -533,7 +533,7 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public Cliente searchCliente(Cliente cliente, int id) throws BusinessException {
+	public Cliente searchCliente(int id) throws BusinessException {
 		// TODO Auto-generated method stub
 		return businessCliente.search(Cliente.class, id);
 	}
@@ -564,7 +564,7 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public Usuario searchUsuario(Usuario usuario, int id) throws BusinessException {
+	public Usuario searchUsuario(int id) throws BusinessException {
 		// TODO Auto-generated method stub
 		return businessUsuario.search(Usuario.class, id);
 	}

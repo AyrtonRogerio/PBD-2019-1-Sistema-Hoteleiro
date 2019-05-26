@@ -42,7 +42,7 @@ public interface IFacade {
 	 * @return {@link Administrador}
 	 * @throws BusinessException
 	 */
-	public Administrador searchAdministrador(Administrador administrador, int id) throws BusinessException;
+	public Administrador searchAdministrador(int id) throws BusinessException;
 
 	/**
 	 * @param administrador
@@ -67,7 +67,7 @@ public interface IFacade {
 
 	public void createOrUpdateAluga(Aluga aluga) throws BusinessException;
 
-	public Aluga searchAluga(Aluga aluga, int id) throws BusinessException;
+	public Aluga searchAluga(int id) throws BusinessException;
 
 	public List<Aluga> searchAllAluga() throws BusinessException;
 
@@ -79,7 +79,7 @@ public interface IFacade {
 
 	public void createOrUpdateCaixa(Caixa caixa) throws BusinessException;
 
-	public Caixa searchCaixa(Caixa caixa, int id) throws BusinessException;
+	public Caixa searchCaixa(int id) throws BusinessException;
 
 	public List<Caixa> searchAllCaixa() throws BusinessException;
 
@@ -91,7 +91,7 @@ public interface IFacade {
 
 	public void createOrUpdateContato(Contato contato) throws BusinessException;
 
-	public Contato searchContato(Contato contato, int id) throws BusinessException;
+	public Contato searchContato(int id) throws BusinessException;
 
 	public List<Contato> searchAllContato() throws BusinessException;
 
@@ -103,7 +103,7 @@ public interface IFacade {
 
 	public void createOrUpdateEndereco(Endereco endereco) throws BusinessException;
 
-	public Endereco searchEndereco(Endereco endereco, int id) throws BusinessException;
+	public Endereco searchEndereco(int id) throws BusinessException;
 
 	public List<Endereco> searchAllEndereco() throws BusinessException;
 
@@ -115,7 +115,7 @@ public interface IFacade {
 
 	public void createOrUpdateFuncionario(Funcionario funcionario) throws BusinessException;
 
-	public Funcionario searchFuncionario(Funcionario funcionario, int id) throws BusinessException;
+	public Funcionario searchFuncionario(int id) throws BusinessException;
 
 	public List<Funcionario> searchAllFuncionario() throws BusinessException;
 
@@ -127,7 +127,7 @@ public interface IFacade {
 
 	public void createOrUpdateLog(Log log) throws BusinessException;
 
-	public Log searchLog(Log log, int id) throws BusinessException;
+	public Log searchLog(int id) throws BusinessException;
 
 	public List<Log> searchAllLog() throws BusinessException;
 
@@ -139,7 +139,7 @@ public interface IFacade {
 
 	public void createOrUpdateParcela(Parcela parcela) throws BusinessException;
 
-	public Parcela searchParcela(Parcela parcela, int id) throws BusinessException;
+	public Parcela searchParcela(int id) throws BusinessException;
 
 	public List<Parcela> searchAllParcela() throws BusinessException;
 
@@ -163,7 +163,7 @@ public interface IFacade {
 
 	public void createOrUpdatePessoaJuridica(PessoaJuridica pessoaJuridica) throws BusinessException;
 
-	public PessoaJuridica searchPessoaJuridica(PessoaJuridica pessoaJuridica, int id) throws BusinessException;
+	public PessoaJuridica searchPessoaJuridica(int id) throws BusinessException;
 
 	public List<PessoaJuridica> searchAllPessoaJuridica() throws BusinessException;
 
@@ -175,7 +175,7 @@ public interface IFacade {
 
 	public void createOrUpdateQuarto(Quarto quarto) throws BusinessException;
 
-	public Quarto searchQuarto(Quarto quarto, int id) throws BusinessException;
+	public Quarto searchQuarto(int id) throws BusinessException;
 
 	public List<Quarto> searchAllQuarto() throws BusinessException;
 
@@ -187,7 +187,7 @@ public interface IFacade {
 
 	public void createOrUpdateReserva(Reserva reserva) throws BusinessException;
 
-	public Reserva searchReserva(Reserva reserva, int id) throws BusinessException;
+	public Reserva searchReserva(int id) throws BusinessException;
 
 	public List<Reserva> searchAllReserva() throws BusinessException;
 
@@ -199,7 +199,7 @@ public interface IFacade {
 
 	public void createOrUpdateSuperUsuario(SuperUsuario superUsuario) throws BusinessException;
 
-	public SuperUsuario searchSuperUsuario(SuperUsuario superUsuario, int id) throws BusinessException;
+	public SuperUsuario searchSuperUsuario(int id) throws BusinessException;
 
 	public List<SuperUsuario> searchAllSuperUsuario() throws BusinessException;
 
@@ -211,7 +211,7 @@ public interface IFacade {
 	
 	public void createOrUpdateCliente(Cliente cliente) throws BusinessException;
 	
-	public Cliente searchCliente(Cliente cliente, int id) throws BusinessException;
+	public Cliente searchCliente(int id) throws BusinessException;
 
 	public List<Cliente> searchAllCliente() throws BusinessException;
 
@@ -224,7 +224,7 @@ public interface IFacade {
 
 	public void createOrUpdateUsuario(Usuario usuario) throws BusinessException;
 	
-	public Usuario searchUsuario(Usuario usuario, int id) throws BusinessException;
+	public Usuario searchUsuario(int id) throws BusinessException;
 
 	public List<Usuario> searchAllUsuario() throws BusinessException;
 

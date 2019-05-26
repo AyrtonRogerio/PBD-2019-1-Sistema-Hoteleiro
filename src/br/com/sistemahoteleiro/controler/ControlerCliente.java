@@ -13,6 +13,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import br.com.sistemahoteleiro.enuns.TipoEstadoCivil;
+import br.com.sistemahoteleiro.enuns.TipoEstadoUF;
 import br.com.sistemahoteleiro.enuns.TipoOcupacao;
 import br.com.sistemahoteleiro.enuns.TipoSexo;
 import br.com.sistemahoteleiro.exception.BusinessException;
@@ -161,7 +162,7 @@ public class ControlerCliente implements Initializable {
 	private JFXTextField cidadeEndCliField;
 
 	@FXML
-	private JFXTextField ufEndCliField;
+    private JFXComboBox<TipoEstadoUF> ufEndCliCobBox;
 	@FXML
 	private JFXCheckBox statusEnderecoCBox;
 
@@ -217,8 +218,13 @@ public class ControlerCliente implements Initializable {
 		 */
 		if (event.getSource() == editarCliBtn) {
 
+			cadastCliBtn.setDisable(true);
+			atualizarCliBtn.setDisable(false);
 			preencherCampos();
-
+			
+			dadosCliTab.setDisable(false);
+			dadosCliTab.getTabPane().getSelectionModel().select(dadosCliTab);
+			
 		}
 
 		/**
@@ -226,6 +232,9 @@ public class ControlerCliente implements Initializable {
 		 */
 		if (event.getSource() == novoCliBtn) {
 
+			cadastCliBtn.setDisable(false);
+			atualizarCliBtn.setDisable(true);
+			
 			dadosCliTab.setDisable(false);
 			dadosCliTab.getTabPane().getSelectionModel().select(dadosCliTab);
 
@@ -260,6 +269,8 @@ public class ControlerCliente implements Initializable {
 		if (event.getSource() == voltarCliBtn) {
 
 			dadosCliTab.setDisable(true);
+			endClienteTab.setDisable(true);
+			contClienteTab.setDisable(true);
 			listaClienteTab.getTabPane().getSelectionModel().select(listaClienteTab);
 
 		}
@@ -280,6 +291,7 @@ public class ControlerCliente implements Initializable {
 		if (event.getSource() == voltarEndCliBtn) {
 
 			endClienteTab.setDisable(true);
+			contClienteTab.setDisable(true);
 			dadosCliTab.getTabPane().getSelectionModel().select(dadosCliTab);
 
 		}
@@ -310,33 +322,451 @@ public class ControlerCliente implements Initializable {
 		if (event.getSource() == cadastCliBtn) {
 
 			if(pessFisRadBtn.isSelected()) {
-			cadastrarClienteFisico();
-			} //else if(pessJurRadBtn.isSelected()) {
-				///cadastrarClienteJuridico();
-			//}
+			
+				cadastrarClienteFisico();
+			
+			dadosCliTab.setDisable(true);
+			endClienteTab.setDisable(true);
+			contClienteTab.setDisable(true);
+			listaClienteTab.getTabPane().getSelectionModel().select(listaClienteTab);
 
+			} else if(pessJurRadBtn.isSelected()) {
+				
+				cadastrarClienteJuridico();
+
+				dadosCliTab.setDisable(true);
+				endClienteTab.setDisable(true);
+				contClienteTab.setDisable(true);
+				listaClienteTab.getTabPane().getSelectionModel().select(listaClienteTab);
+
+			}
+			
+			try
+
+			{
+				clientes = Facade.getInstance().searchAllCliente();
+				cliTabela.getItems().setAll(clientes);
+			} catch (BusinessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 
 		/**
 		 * Evento pra atualizar o cliente
 		 */
 		if (event.getSource() == atualizarCliBtn) {
+			cadastCliBtn.setDisable(false);
+			atualizarCliBtn.setDisable(true);
+			
+			atualizarCliente(clienteAtualiza);
+			
+			dadosCliTab.setDisable(true);
+			endClienteTab.setDisable(true);
+			contClienteTab.setDisable(true);
+			listaClienteTab.getTabPane().getSelectionModel().select(listaClienteTab);
 
+			
+			try
+
+			{
+				clientes = Facade.getInstance().searchAllCliente();
+				cliTabela.getItems().setAll(clientes);
+			} catch (BusinessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub	
+		comboBoxTabela();
+		mascarasField();
+		
 
+	}
+
+	
+	
+	
+	
+	
+	
+	/**
+	 * Método para cadastrar um cliente físico.
+	 */
+	public void cadastrarClienteFisico() {
+
+		enderecoFisico = new Endereco();
+
+		enderecoFisico.setBairro(bairroEndCliField.getText());
+		enderecoFisico.setCep(cepEndCliField.getText());
+		enderecoFisico.setCidade(cidadeEndCliField.getText());
+		enderecoFisico.setLogradouro(ruaEndCliField.getText());
+		enderecoFisico.setNumero(numEndCliField.getText());
+		enderecoFisico.setStatus(statusEnderecoCBox.isSelected());
+		enderecoFisico.setUf(ufEndCliCobBox.getValue());
+
+		contatoFisico = new Contato();
+
+		contatoFisico.setCelular(celularContCliField.getText());
+		contatoFisico.setTelefone(foneContCliField.getText());
+		contatoFisico.setEmail(emailContCliField.getText());
+		contatoFisico.setStatus(statusContatoCBox.isSelected());
+
+		clienteFisico = new PessoaFisica();
+
+		clienteFisico.setNome(nomeCliField.getText());
+		clienteFisico.setCpf(cpfCliField.getText());
+		clienteFisico.setData_nascimento(dataCli.getValue());
+		clienteFisico.setEndereco(enderecoFisico);
+		clienteFisico.setContato(contatoFisico);
+		clienteFisico.setEstado_civil(estadCivCliCobBox.getValue());
+		clienteFisico.setOcupacao(ocupacaoCliCobBox.getValue());
+		clienteFisico.setRg(rgCliField.getText());
+		clienteFisico.setSexo(sexoCliCobBox.getValue());
+		clienteFisico.setStatus(statusClienteCBox.isSelected());
+
+		
+		
+		try {
+
+			Facade.getInstance().createOrUpdatePessoaFisica(clienteFisico);
+			
+			Message.getInstance().viewMessage(AlertType.CONFIRMATION, "Cadastrado", 
+					"Cliente foi cadastrado!", "O cliente foi cadastrado com sucesso!");
+			
+			clientes = Facade.getInstance().searchAllCliente();
+			cliTabela.getItems().setAll(clientes);
+
+			dadosCliTab.setDisable(true);
+			endClienteTab.setDisable(true);
+			contClienteTab.setDisable(true);
+			listaClienteTab.getTabPane().getSelectionModel().select(listaClienteTab);
+
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Message.getInstance().viewMessage(AlertType.ERROR, "Erro", "Erro ao salvar a pessoa física",
+					e.getMessage());
+		}
+
+		
+	}
+
+	
+	
+	
+	
+	/**
+	 * Método para cadastrar um cliente jurídico
+	 */
+	public void cadastrarClienteJuridico() {
+
+		enderecoJuridico = new Endereco();
+
+		enderecoJuridico.setBairro(bairroEndCliField.getText());
+		enderecoJuridico.setCep(cepEndCliField.getText());
+		enderecoJuridico.setCidade(cidadeEndCliField.getText());
+		enderecoJuridico.setLogradouro(ruaEndCliField.getText());
+		enderecoJuridico.setNumero(numEndCliField.getText());
+		enderecoJuridico.setStatus(statusEnderecoCBox.isSelected());
+		enderecoJuridico.setUf(ufEndCliCobBox.getValue());
+
+		contatoJuridico = new Contato();
+
+		contatoJuridico.setCelular(celularContCliField.getText());
+		contatoJuridico.setTelefone(foneContCliField.getText());
+		contatoJuridico.setEmail(emailContCliField.getText());
+		contatoJuridico.setStatus(statusContatoCBox.isSelected());
+		
+		clienteJuridico = new PessoaJuridica();
+
+		clienteJuridico.setNome(nomeCliField.getText());
+		clienteJuridico.setCnpj(cnpjCliField.getText());
+		clienteJuridico.setContato(contatoJuridico);
+		clienteJuridico.setEndereco(enderecoJuridico);
+		clienteJuridico.setRazaoSocial(razaoSociCliField.getText());
+		clienteJuridico.setStatus(statusClienteCBox.isSelected());
+
+		try {
+
+			Facade.getInstance().createOrUpdatePessoaJuridica(clienteJuridico);
+			
+			Message.getInstance().viewMessage(AlertType.CONFIRMATION, "Cadastrado", 
+					"Cliente foi cadastrado!", "O cliente foi cadastrado com sucesso!");
+			
+			clientes = Facade.getInstance().searchAllCliente();
+			cliTabela.getItems().setAll(clientes);
+
+			dadosCliTab.setDisable(true);
+			endClienteTab.setDisable(true);
+			contClienteTab.setDisable(true);
+			listaClienteTab.getTabPane().getSelectionModel().select(listaClienteTab);
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Message.getInstance().viewMessage(AlertType.ERROR, "Erro", "Erro ao salvar a pessoa física",
+					e.getMessage());
+		}
+
+	}
+
+	
+	
+	
+	
+	
+	/**
+	 * Método para preencher campos para atualizar o cliente.
+	 */
+	public void preencherCampos() {
+
+		clienteAtualiza = cliTabela.getSelectionModel().getSelectedItem();
+
+		if (clienteAtualiza instanceof PessoaFisica) {
+
+			CliFisGridLay.setDisable(false);
+			CliJuriGridLay.setDisable(true);
+
+			try {
+				
+				fisica = Facade.getInstance().searchPessoaFisica(clienteAtualiza.getId());
+				
+				System.out.println(fisica.getCpf());
+			} catch (BusinessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Message.getInstance().viewMessage(AlertType.ERROR, "Erro", "Erro ao buscar a pessoa física",
+						e.getMessage());
+			}
+
+			nomeCliField.setText(fisica.getNome());
+			cpfCliField.setText(fisica.getCpf());
+			dataCli.setValue(fisica.getData_nascimento());
+
+			estadCivCliCobBox.setValue(fisica.getEstado_civil());
+			ocupacaoCliCobBox.setValue(fisica.getOcupacao());
+			rgCliField.setText(fisica.getRg());
+			sexoCliCobBox.setValue(fisica.getSexo());
+			statusClienteCBox.setSelected(fisica.isStatus());
+
+			// Endereco
+			bairroEndCliField.setText(fisica.getEndereco().getBairro());
+			cepEndCliField.setText(fisica.getEndereco().getCep());
+			cidadeEndCliField.setText(fisica.getEndereco().getCidade());
+			ruaEndCliField.setText(fisica.getEndereco().getLogradouro());
+			numEndCliField.setText(fisica.getEndereco().getNumero());
+			statusEnderecoCBox.setSelected(fisica.getEndereco().isStatus());
+			ufEndCliCobBox.setValue(fisica.getEndereco().getUf());
+
+			// Contato
+			celularContCliField.setText(fisica.getContato().getCelular());
+			foneContCliField.setText(fisica.getContato().getTelefone());
+			emailContCliField.setText(fisica.getContato().getEmail());
+			statusContatoCBox.setSelected(fisica.getContato().isStatus());
+
+		}
+
+		if (clienteAtualiza instanceof PessoaJuridica) {
+
+			//Pane da pessoa Jurídica habilitado, pane da pessoa física desabilitado
+			CliFisGridLay.setDisable(false);
+			CliJuriGridLay.setDisable(true);
+		
+			try {
+				
+				juridica = Facade.getInstance().searchPessoaJuridica(clienteAtualiza.getId());
+				
+				
+			} catch (BusinessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Message.getInstance().viewMessage(AlertType.ERROR, "Erro", "Erro ao buscar a pessoa jurídica",
+						e.getMessage());
+			}
+
+			//Pessoa Jurídica
+			nomeCliField.setText(juridica.getNome());
+			cnpjCliField.setText(juridica.getCnpj());
+			razaoSociCliField.setText(juridica.getRazaoSocial());
+			statusClienteCBox.setSelected(juridica.isStatus());
+
+			// Endereco
+			bairroEndCliField.setText(juridica.getEndereco().getBairro());
+			cepEndCliField.setText(juridica.getEndereco().getCep());
+			cidadeEndCliField.setText(juridica.getEndereco().getCidade());
+			ruaEndCliField.setText(juridica.getEndereco().getLogradouro());
+			numEndCliField.setText(juridica.getEndereco().getNumero());
+			statusEnderecoCBox.setSelected(juridica.getEndereco().isStatus());
+			ufEndCliCobBox.setValue(juridica.getEndereco().getUf());
+
+			// Contato
+			celularContCliField.setText(juridica.getContato().getCelular());
+			foneContCliField.setText(juridica.getContato().getTelefone());
+			emailContCliField.setText(juridica.getContato().getEmail());
+			statusContatoCBox.setSelected(juridica.getContato().isStatus());
+
+			
+		}
+
+	}
+
+	
+	
+	
+	
+	/**
+	 * Método para atualizar cliente selecionado da tabela.
+	 * 
+	 * @param c
+	 */
+	public void atualizarCliente(Cliente c) {
+
+		if(c instanceof PessoaFisica) {
+			PessoaFisica cF = (PessoaFisica) c;
+
+			
+			Endereco novoEndFis = cF.getEndereco();
+
+			novoEndFis.setBairro(bairroEndCliField.getText());
+			novoEndFis.setCep(cepEndCliField.getText());
+			novoEndFis.setCidade(cidadeEndCliField.getText());
+			novoEndFis.setLogradouro(ruaEndCliField.getText());
+			novoEndFis.setNumero(numEndCliField.getText());
+			novoEndFis.setStatus(statusEnderecoCBox.isSelected());
+			novoEndFis.setUf(ufEndCliCobBox.getValue());
+
+			Contato novoContFis = cF.getContato();
+
+			novoContFis.setCelular(celularContCliField.getText());
+			novoContFis.setTelefone(foneContCliField.getText());
+			novoContFis.setEmail(emailContCliField.getText());
+			novoContFis.setStatus(statusContatoCBox.isSelected());
+
+			
+
+			cF.setNome(nomeCliField.getText());
+			cF.setCpf(cpfCliField.getText());
+			cF.setData_nascimento(dataCli.getValue());
+			cF.setEndereco(novoEndFis);
+			cF.setContato(novoContFis);
+			cF.setEstado_civil(estadCivCliCobBox.getValue());
+			cF.setOcupacao(ocupacaoCliCobBox.getValue());
+			cF.setRg(rgCliField.getText());
+			cF.setSexo(sexoCliCobBox.getValue());
+			cF.setStatus(statusClienteCBox.isSelected());
+			
+			
+			try {
+				Facade.getInstance().createOrUpdatePessoaFisica(cF);
+				Message.getInstance().viewMessage(AlertType.CONFIRMATION, "Atualizado", 
+						"Cliente atualizado!", "O cliente foi atualizado com sucesso!");
+			} catch (BusinessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Message.getInstance().viewMessage(AlertType.ERROR, "Erro ao atualizar", 
+						"Ocorreu um erro ao atualizar o cliente físico!", e.getMessage());
+			}
+
+			
+		} else if(c instanceof PessoaJuridica) {
+			
+			PessoaJuridica cJ = (PessoaJuridica) c;
+
+			Endereco novoEndJur = cJ.getEndereco();
+			
+			novoEndJur.setBairro(bairroEndCliField.getText());
+			novoEndJur.setCep(cepEndCliField.getText());
+			novoEndJur.setCidade(cidadeEndCliField.getText());
+			novoEndJur.setLogradouro(ruaEndCliField.getText());
+			novoEndJur.setNumero(numEndCliField.getText());
+			novoEndJur.setStatus(statusEnderecoCBox.isSelected());
+			novoEndJur.setUf(ufEndCliCobBox.getValue());
+
+			Contato novoContJur = cJ.getContato();
+
+			novoContJur.setCelular(celularContCliField.getText());
+			novoContJur.setTelefone(foneContCliField.getText());
+			novoContJur.setEmail(emailContCliField.getText());
+			novoContJur.setStatus(statusContatoCBox.isSelected());
+			
+			
+
+			cJ.setNome(nomeCliField.getText());
+			cJ.setCnpj(cnpjCliField.getText());
+			cJ.setContato(novoContJur);
+			cJ.setEndereco(novoEndJur);
+			cJ.setRazaoSocial(razaoSociCliField.getText());
+			cJ.setStatus(statusClienteCBox.isSelected());
+			
+			try {
+				Facade.getInstance().createOrUpdatePessoaJuridica(cJ);
+				Message.getInstance().viewMessage(AlertType.CONFIRMATION, "Atualizado", 
+						"Cliente atualizado!", "O cliente foi atualizado com sucesso!");
+			} catch (BusinessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Message.getInstance().viewMessage(AlertType.ERROR, "Erro ao atualizar", 
+						"Ocorreu um erro ao atualizar o cliente jurídico!", e.getMessage());
+			}
+			
+		}
+		
+		
+		
+	}
+
+	
+	
+	
+	
+	
+	
+	/**
+	 * Método para limpar os campos.
+	 */
+	public void limparCampos() {
+
+	}
+
+	
+	
+	
+	
+	
+	
+	/**
+	 * Método para colocar mascaras nos texfields.
+	 */
+	public void mascarasField() {
+
+		MaskFieldUtil.cpfField(cpfCliField);
+		MaskFieldUtil.cepField(cepEndCliField);
+		MaskFieldUtil.cnpjField(cnpjCliField);
+		MaskFieldUtil.foneField(celularContCliField);
+		MaskFieldUtil.foneField(foneContCliField);
+
+	}
+	
+	
+	/**
+	 * Método para carregar combo box e customização da tabela
+	 */
+	public void comboBoxTabela() {
+		
+		
 		sexoCliCobBox.getItems().setAll(TipoSexo.values());
 		estadCivCliCobBox.getItems().setAll(TipoEstadoCivil.values());
 		ocupacaoCliCobBox.getItems().setAll(TipoOcupacao.values());
+		ufEndCliCobBox.getItems().setAll(TipoEstadoUF.values());
 
 		nomeCliCol.setCellValueFactory(new PropertyValueFactory<>("nome"));
-//		cpfCliCol.setCellValueFactory(new PropertyValueFactory<>("cpf"));
-//		cnpjCliCol.setCellValueFactory(new PropertyValueFactory<>("cnpj"));
 		ruaCliCol.setCellValueFactory(new PropertyValueFactory<>("endereco"));
 		bairroCliCol.setCellValueFactory(new PropertyValueFactory<>("endereco"));
 		numCliCol.setCellValueFactory(new PropertyValueFactory<>("endereco"));
@@ -397,219 +827,9 @@ public class ControlerCliente implements Initializable {
 			e.printStackTrace();
 		}
 
-		mascarasField();
-
-	}
-
-	/**
-	 * Método para cadastrar um cliente físico.
-	 */
-	public void cadastrarClienteFisico() {
-
-		enderecoFisico = new Endereco();
-
-		enderecoFisico.setBairro(bairroEndCliField.getText());
-		enderecoFisico.setCep(cepEndCliField.getText());
-		enderecoFisico.setCidade(cidadeEndCliField.getText());
-		enderecoFisico.setLogradouro(ruaEndCliField.getText());
-		enderecoFisico.setNumero(numEndCliField.getText());
-		enderecoFisico.setStatus(statusEnderecoCBox.isSelected());
-		enderecoFisico.setUf(ufEndCliField.getText());
-
-		contatoFisico = new Contato();
-
-		contatoFisico.setCelular(celularContCliField.getText());
-		contatoFisico.setTelefone(foneContCliField.getText());
-		contatoFisico.setEmail(emailContCliField.getText());
-		contatoFisico.setStatus(statusContatoCBox.isSelected());
-
-		clienteFisico = new PessoaFisica();
-
-		clienteFisico.setNome(nomeCliField.getText());
-		clienteFisico.setCpf(cpfCliField.getText());
-		clienteFisico.setData_nascimento(dataCli.getValue());
-		clienteFisico.setEndereco(enderecoFisico);
-		clienteFisico.setContato(contatoFisico);
-		clienteFisico.setEstado_civil(estadCivCliCobBox.getValue());
-		clienteFisico.setOcupacao(ocupacaoCliCobBox.getValue());
-		clienteFisico.setRg(rgCliField.getText());
-		clienteFisico.setSexo(sexoCliCobBox.getValue());
-		clienteFisico.setStatus(statusClienteCBox.isSelected());
-
-		try {
-
-			Facade.getInstance().createOrUpdatePessoaFisica(clienteFisico);
-			clientes = Facade.getInstance().searchAllCliente();
-			cliTabela.getItems().setAll(clientes);
-
-			dadosCliTab.setDisable(true);
-			endClienteTab.setDisable(true);
-			contClienteTab.setDisable(true);
-			listaClienteTab.getTabPane().getSelectionModel().select(listaClienteTab);
-
-		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Message.getInstance().viewMessage(AlertType.ERROR, "Erro", "Erro ao salvar a pessoa física",
-					e.getMessage());
-		}
-
-	}
-
-	public void cadastrarClienteJuridico() {
-
-		enderecoJuridico = new Endereco();
-
-		enderecoJuridico.setBairro(bairroEndCliField.getText());
-		enderecoJuridico.setCep(cepEndCliField.getText());
-		enderecoJuridico.setCidade(cidadeEndCliField.getText());
-		enderecoJuridico.setLogradouro(ruaEndCliField.getText());
-		enderecoJuridico.setNumero(numEndCliField.getText());
-		enderecoJuridico.setStatus(statusEnderecoCBox.isSelected());
-		enderecoJuridico.setUf(ufEndCliField.getText());
-
-		contatoJuridico = new Contato();
-
-		contatoJuridico.setCelular(celularContCliField.getText());
-		contatoJuridico.setTelefone(foneContCliField.getText());
-		contatoJuridico.setEmail(emailContCliField.getText());
-		contatoJuridico.setStatus(statusContatoCBox.isSelected());
 		
-		clienteJuridico = new PessoaJuridica();
-
-		clienteJuridico.setNome(nomeCliField.getText());
-		clienteJuridico.setCnpj(cnpjCliField.getText());
-		clienteJuridico.setContato(contatoJuridico);
-		clienteJuridico.setEndereco(enderecoJuridico);
-		clienteJuridico.setRazaoSocial(razaoSociCliField.getText());
-		clienteJuridico.setStatus(statusClienteCBox.isSelected());
-
-		try {
-
-			Facade.getInstance().createOrUpdatePessoaJuridica(clienteJuridico);
-			clientes = Facade.getInstance().searchAllCliente();
-			cliTabela.getItems().setAll(clientes);
-
-			dadosCliTab.setDisable(true);
-			endClienteTab.setDisable(true);
-			contClienteTab.setDisable(true);
-			listaClienteTab.getTabPane().getSelectionModel().select(listaClienteTab);
-		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Message.getInstance().viewMessage(AlertType.ERROR, "Erro", "Erro ao salvar a pessoa física",
-					e.getMessage());
-		}
-
 	}
-
-	/**
-	 * Método para preencher campos para atualizar o cliente.
-	 */
-	public void preencherCampos() {
-
-		clienteAtualiza = cliTabela.getSelectionModel().getSelectedItem();
-
-		if (clienteAtualiza instanceof PessoaFisica) {
-
-			CliFisGridLay.setDisable(true);
-			CliJuriGridLay.setDisable(false);
-
-			try {
-				fisica = Facade.getInstance().searchPessoaFisica(clienteAtualiza.getId());
-				System.out.println(fisica.getCpf());
-			} catch (BusinessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				Message.getInstance().viewMessage(AlertType.ERROR, "Erro", "Erro ao buscar a pessoa física",
-						e.getMessage());
-			}
-
-			nomeCliField.setText(fisica.getNome());
-			cpfCliField.setText(fisica.getCpf());
-			dataCli.setValue(fisica.getData_nascimento());
-
-			estadCivCliCobBox.setValue(fisica.getEstado_civil());
-			ocupacaoCliCobBox.setValue(fisica.getOcupacao());
-			rgCliField.setText(fisica.getRg());
-			sexoCliCobBox.setValue(fisica.getSexo());
-			statusClienteCBox.setSelected(fisica.isStatus());
-
-			// Endereco
-			bairroEndCliField.setText(fisica.getEndereco().getBairro());
-			cepEndCliField.setText(fisica.getEndereco().getCep());
-			cidadeEndCliField.setText(fisica.getEndereco().getCidade());
-			ruaEndCliField.setText(fisica.getEndereco().getLogradouro());
-			numEndCliField.setText(fisica.getEndereco().getNumero());
-			statusEnderecoCBox.setSelected(fisica.getEndereco().isStatus());
-			ufEndCliField.setText(fisica.getEndereco().getUf());
-
-			// Contato
-			celularContCliField.setText(fisica.getContato().getCelular());
-			foneContCliField.setText(fisica.getContato().getTelefone());
-			emailContCliField.setText(fisica.getContato().getEmail());
-			statusContatoCBox.setSelected(fisica.getContato().isStatus());
-
-		}
-
-		if (clienteAtualiza instanceof PessoaJuridica) {
-
-			CliFisGridLay.setDisable(false);
-			CliJuriGridLay.setDisable(true);
-
-			juridica = (PessoaJuridica) clienteAtualiza;
-
-			nomeCliField.setText(juridica.getNome());
-			cnpjCliField.setText(juridica.getCnpj());
-			razaoSociCliField.setText(juridica.getRazaoSocial());
-			statusClienteCBox.setSelected(juridica.isStatus());
-
-			// Endereco
-			bairroEndCliField.setText(juridica.getEndereco().getBairro());
-			cepEndCliField.setText(juridica.getEndereco().getCep());
-			cidadeEndCliField.setText(juridica.getEndereco().getCidade());
-			ruaEndCliField.setText(juridica.getEndereco().getLogradouro());
-			numEndCliField.setText(juridica.getEndereco().getNumero());
-			statusEnderecoCBox.setSelected(juridica.getEndereco().isStatus());
-			ufEndCliField.setText(juridica.getEndereco().getUf());
-
-			// Contato
-			celularContCliField.setText(juridica.getContato().getCelular());
-			foneContCliField.setText(juridica.getContato().getTelefone());
-			emailContCliField.setText(juridica.getContato().getEmail());
-			statusContatoCBox.setSelected(juridica.getContato().isStatus());
-
-		}
-
-	}
-
-	/**
-	 * Método para atualizar cliente selecionado da tabela.
-	 * 
-	 * @param c
-	 */
-	public void atualizarCliente(Cliente c) {
-
-	}
-
-	/**
-	 * Método para limpar os campos.
-	 */
-	public void limparCampos() {
-
-	}
-
-	/**
-	 * Método para colocar mascaras nos texfields.
-	 */
-	public void mascarasField() {
-
-		MaskFieldUtil.cpfField(cpfCliField);
-		MaskFieldUtil.cepField(cepEndCliField);
-		MaskFieldUtil.cnpjField(cnpjCliField);
-		MaskFieldUtil.foneField(celularContCliField);
-		MaskFieldUtil.foneField(foneContCliField);
-
-	}
-
+	
+	
+	
 }
