@@ -390,9 +390,6 @@ public class ControlerCliente implements Initializable {
 		
 
 	}
-
-	
-	
 	
 	
 	
@@ -458,7 +455,6 @@ public class ControlerCliente implements Initializable {
 
 		
 	}
-
 	
 	
 	
@@ -733,10 +729,9 @@ public class ControlerCliente implements Initializable {
 	 */
 	public void limparCampos() {
 
-	}
-
-	
-	
+		
+		
+	}	
 	
 	
 	
@@ -753,6 +748,7 @@ public class ControlerCliente implements Initializable {
 		MaskFieldUtil.foneField(foneContCliField);
 
 	}
+
 	
 	
 	/**

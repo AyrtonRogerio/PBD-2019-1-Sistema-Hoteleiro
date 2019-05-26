@@ -10,7 +10,7 @@ package br.com.sistemahoteleiro.enuns;
 public enum TipoCargo {
 
 	ATENDENTE ("Atendente"), AUX_SERV_GERAIS ("Aux. serviço gerais"), 
-	CAMAREIRA ("Camareira");
+	CAMAREIRA ("Camareira"), SUPER_USUARIO("Super usuário"), GERENTE("Gerente");
 	
 	private String descricao;
 	
