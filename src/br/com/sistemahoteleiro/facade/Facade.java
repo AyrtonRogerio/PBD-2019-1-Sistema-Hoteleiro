@@ -374,7 +374,7 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public PessoaFisica searchPessoaFisica(PessoaFisica pessoaFisica, int id) throws BusinessException {
+	public PessoaFisica searchPessoaFisica(int id) throws BusinessException {
 		// TODO Auto-generated method stub
 		return businessPessoaFisica.search(PessoaFisica.class, id);
 	}

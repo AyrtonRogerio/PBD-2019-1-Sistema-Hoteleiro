@@ -5,8 +5,10 @@ package br.com.sistemahoteleiro.business;
 
 import br.com.sistemahoteleiro.dao.DaoFuncionario;
 import br.com.sistemahoteleiro.dao.IDaoFuncionario;
+import br.com.sistemahoteleiro.exception.BusinessException;
 import br.com.sistemahoteleiro.exception.ValidationException;
 import br.com.sistemahoteleiro.model.Funcionario;
+import br.com.sistemahoteleiro.util.Cryptography;
 
 /**
  * @author ayrtons
@@ -25,6 +27,17 @@ public class BusinessFuncionario extends BusinessGeneric<Funcionario> implements
 		init(daoFuncionario);
 	}
 	
+	
+	
+	@Override
+	public void createOrUpdate(Funcionario t) throws BusinessException {
+		// TODO Auto-generated method stub
+		t.setSenha(Cryptography.cryptography(t.getSenha().getBytes()));
+		super.createOrUpdate(t);
+	}
+
+
+
 	@Override
 	public void isValid(Funcionario t) throws ValidationException {
 		// TODO Auto-generated method stub

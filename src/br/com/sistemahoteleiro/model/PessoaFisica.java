@@ -30,10 +30,10 @@ public class PessoaFisica extends Cliente {
 	private static final long serialVersionUID = 1L;
 	protected static final String SEQUENCE_ENTIDADE = "pessoa_fisica_sequence";
 
-	@Column(length = 12, nullable = false, unique = true)
+	@Column(nullable = false, unique = true)
 	private String rg;
 	
-	@Column(length = 14, nullable = false, unique = true)
+	@Column(nullable = false, unique = true)
 	private String cpf;
 	
 	@Enumerated(EnumType.STRING)

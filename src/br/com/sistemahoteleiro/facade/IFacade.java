@@ -151,7 +151,7 @@ public interface IFacade {
 
 	public void createOrUpdatePessoaFisica(PessoaFisica pessoaFisica) throws BusinessException;
 
-	public PessoaFisica searchPessoaFisica(PessoaFisica pessoaFisica, int id) throws BusinessException;
+	public PessoaFisica searchPessoaFisica(int id) throws BusinessException;
 
 	public List<PessoaFisica> searchAllPessoaFisica() throws BusinessException;
 

@@ -18,6 +18,8 @@ public class DaoSuperUsuario extends DaoGeneric<SuperUsuario> implements IDaoSup
 		super(SuperUsuario.class);
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 
 	
 	

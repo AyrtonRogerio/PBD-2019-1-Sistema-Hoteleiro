@@ -12,7 +12,6 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
-
 import br.com.sistemahoteleiro.enuns.TipoEstadoCivil;
 import br.com.sistemahoteleiro.enuns.TipoOcupacao;
 import br.com.sistemahoteleiro.enuns.TipoSexo;
@@ -23,7 +22,6 @@ import br.com.sistemahoteleiro.model.Contato;
 import br.com.sistemahoteleiro.model.Endereco;
 import br.com.sistemahoteleiro.model.PessoaFisica;
 import br.com.sistemahoteleiro.model.PessoaJuridica;
-import br.com.sistemahoteleiro.model.Quarto;
 import br.com.sistemahoteleiro.util.MaskFieldUtil;
 import br.com.sistemahoteleiro.view.Message;
 import javafx.event.ActionEvent;
@@ -31,6 +29,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -44,13 +43,13 @@ import javafx.scene.layout.GridPane;
 public class ControlerCliente implements Initializable {
 
 //	private Cliente clienteFisico, clienteJuridico, clienteAtualiza;
-	private PessoaFisica clienteFisico;
-	private PessoaJuridica clienteJuridico;
+	private PessoaFisica clienteFisico, fisica;
+	private PessoaJuridica clienteJuridico, juridica;
 	private Cliente clienteAtualiza;
 	private List<Cliente> clientes;
 
-	private Endereco endereco;
-	private Contato contato;
+	private Endereco enderecoFisico, enderecoJuridico;
+	private Contato contatoFisico, contatoJuridico;
 
 	@FXML
 	private Tab listaClienteTab;
@@ -73,20 +72,20 @@ public class ControlerCliente implements Initializable {
 	@FXML
 	private TableColumn<Cliente, String> nomeCliCol;
 
-	@FXML
-	private TableColumn<Cliente, String> cpfCliCol;
+//	@FXML
+//	private TableColumn<PessoaFisica, String> cpfCliCol;
+//
+//	@FXML
+//	private TableColumn<PessoaJuridica, String> cnpjCliCol;
 
 	@FXML
-	private TableColumn<Cliente, String> cnpjCliCol;
+	private TableColumn<Cliente, Endereco> ruaCliCol;
 
 	@FXML
-	private TableColumn<Cliente, String> ruaCliCol;
+	private TableColumn<Cliente, Endereco> bairroCliCol;
 
 	@FXML
-	private TableColumn<Cliente, String> bairroCliCol;
-
-	@FXML
-	private TableColumn<Cliente, String> numCliCol;
+	private TableColumn<Cliente, Endereco> numCliCol;
 
 	@FXML
 	private JFXButton detalhesCliBtn;
@@ -218,6 +217,8 @@ public class ControlerCliente implements Initializable {
 		 */
 		if (event.getSource() == editarCliBtn) {
 
+			preencherCampos();
+
 		}
 
 		/**
@@ -308,7 +309,11 @@ public class ControlerCliente implements Initializable {
 		 */
 		if (event.getSource() == cadastCliBtn) {
 
-			cadastrarCliente();
+			if(pessFisRadBtn.isSelected()) {
+			cadastrarClienteFisico();
+			} //else if(pessJurRadBtn.isSelected()) {
+				///cadastrarClienteJuridico();
+			//}
 
 		}
 
@@ -330,90 +335,170 @@ public class ControlerCliente implements Initializable {
 		ocupacaoCliCobBox.getItems().setAll(TipoOcupacao.values());
 
 		nomeCliCol.setCellValueFactory(new PropertyValueFactory<>("nome"));
-		cpfCliCol.setCellValueFactory(new PropertyValueFactory<>("cpf"));
-		cnpjCliCol.setCellValueFactory(new PropertyValueFactory<>("cnpj"));
+//		cpfCliCol.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+//		cnpjCliCol.setCellValueFactory(new PropertyValueFactory<>("cnpj"));
 		ruaCliCol.setCellValueFactory(new PropertyValueFactory<>("endereco"));
 		bairroCliCol.setCellValueFactory(new PropertyValueFactory<>("endereco"));
 		numCliCol.setCellValueFactory(new PropertyValueFactory<>("endereco"));
 
-		try {
+		ruaCliCol.setCellFactory(coluna -> {
+			return new TableCell<Cliente, Endereco>() {
+				protected void updateItem(Endereco item, boolean empty) {
+					super.updateItem(item, empty);
+
+					if (item == null || empty) {
+						setText(null);
+					} else {
+						setText("" + item.getLogradouro());
+
+					}
+				}
+			};
+		});
+
+		bairroCliCol.setCellFactory(coluna -> {
+			return new TableCell<Cliente, Endereco>() {
+
+				protected void updateItem(Endereco item, boolean empty) {
+					super.updateItem(item, empty);
+
+					if (item == null || empty) {
+						setText(null);
+					} else {
+						setText("" + item.getBairro());
+
+					}
+				}
+			};
+		});
+
+		numCliCol.setCellFactory(coluna -> {
+			return new TableCell<Cliente, Endereco>() {
+				protected void updateItem(Endereco item, boolean empty) {
+					super.updateItem(item, empty);
+
+					if (item == null || empty) {
+						setText(null);
+					} else {
+						setText("" + item.getNumero());
+
+					}
+				}
+			};
+		});
+
+		try
+
+		{
 			clientes = Facade.getInstance().searchAllCliente();
 			cliTabela.getItems().setAll(clientes);
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		mascarasField();
 
 	}
 
 	/**
-	 * Método para cadastrar um quarto.
+	 * Método para cadastrar um cliente físico.
 	 */
-	public void cadastrarCliente() {
+	public void cadastrarClienteFisico() {
 
-		endereco = new Endereco();
+		enderecoFisico = new Endereco();
 
-		endereco.setBairro(bairroEndCliField.getText());
-		endereco.setCep(cepEndCliField.getText());
-		endereco.setCidade(cidadeEndCliField.getText());
-		endereco.setLogradouro(ruaEndCliField.getText());
-		endereco.setNumero(numEndCliField.getText());
-		endereco.setStatus(statusEnderecoCBox.isSelected());
-		endereco.setUf(ufEndCliField.getText());
+		enderecoFisico.setBairro(bairroEndCliField.getText());
+		enderecoFisico.setCep(cepEndCliField.getText());
+		enderecoFisico.setCidade(cidadeEndCliField.getText());
+		enderecoFisico.setLogradouro(ruaEndCliField.getText());
+		enderecoFisico.setNumero(numEndCliField.getText());
+		enderecoFisico.setStatus(statusEnderecoCBox.isSelected());
+		enderecoFisico.setUf(ufEndCliField.getText());
 
-		contato = new Contato();
+		contatoFisico = new Contato();
 
-		contato.setCelular(celularContCliField.getText());
-		contato.setTelefone(foneContCliField.getText());
-		contato.setEmail(emailContCliField.getText());
-		contato.setStatus(true);
+		contatoFisico.setCelular(celularContCliField.getText());
+		contatoFisico.setTelefone(foneContCliField.getText());
+		contatoFisico.setEmail(emailContCliField.getText());
+		contatoFisico.setStatus(statusContatoCBox.isSelected());
 
-		if (pessFisRadBtn.isSelected()) {
+		clienteFisico = new PessoaFisica();
 
-			clienteFisico = new PessoaFisica();
+		clienteFisico.setNome(nomeCliField.getText());
+		clienteFisico.setCpf(cpfCliField.getText());
+		clienteFisico.setData_nascimento(dataCli.getValue());
+		clienteFisico.setEndereco(enderecoFisico);
+		clienteFisico.setContato(contatoFisico);
+		clienteFisico.setEstado_civil(estadCivCliCobBox.getValue());
+		clienteFisico.setOcupacao(ocupacaoCliCobBox.getValue());
+		clienteFisico.setRg(rgCliField.getText());
+		clienteFisico.setSexo(sexoCliCobBox.getValue());
+		clienteFisico.setStatus(statusClienteCBox.isSelected());
 
-			clienteFisico.setNome(nomeCliField.getText());
-			clienteFisico.setCpf(cpfCliField.getText());
-			clienteFisico.setData_nascimento(dataCli.getValue());
-			clienteFisico.setEndereco(endereco);
-			clienteFisico.setEstado_civil(estadCivCliCobBox.getValue());
-			clienteFisico.setOcupacao(ocupacaoCliCobBox.getValue());
-			clienteFisico.setRg(rgCliField.getText());
-			clienteFisico.setSexo(sexoCliCobBox.getValue());
-			clienteFisico.setStatus(statusClienteCBox.isSelected());
+		try {
 
-			try {
-				Facade.getInstance().createOrUpdatePessoaFisica(clienteFisico);
-			} catch (BusinessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
+			Facade.getInstance().createOrUpdatePessoaFisica(clienteFisico);
+			clientes = Facade.getInstance().searchAllCliente();
+			cliTabela.getItems().setAll(clientes);
+
+			dadosCliTab.setDisable(true);
+			endClienteTab.setDisable(true);
+			contClienteTab.setDisable(true);
+			listaClienteTab.getTabPane().getSelectionModel().select(listaClienteTab);
+
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Message.getInstance().viewMessage(AlertType.ERROR, "Erro", "Erro ao salvar a pessoa física",
+					e.getMessage());
 		}
 
-		if (pessJurRadBtn.isSelected()) {
+	}
 
-			clienteJuridico = new PessoaJuridica();
+	public void cadastrarClienteJuridico() {
 
-			clienteJuridico.setNome(nomeCliField.getText());
-			clienteJuridico.setCnpj(cnpjCliField.getText());
-			clienteJuridico.setContato(contato);
-			clienteJuridico.setEndereco(endereco);
-			clienteJuridico.setRazaoSocial(razaoSociCliField.getText());
-			clienteJuridico.setStatus(statusClienteCBox.isSelected());
-			
-			try {
-			
-				Facade.getInstance().createOrUpdatePessoaJuridica(clienteJuridico);
-				
-				
-			} catch (BusinessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
+		enderecoJuridico = new Endereco();
+
+		enderecoJuridico.setBairro(bairroEndCliField.getText());
+		enderecoJuridico.setCep(cepEndCliField.getText());
+		enderecoJuridico.setCidade(cidadeEndCliField.getText());
+		enderecoJuridico.setLogradouro(ruaEndCliField.getText());
+		enderecoJuridico.setNumero(numEndCliField.getText());
+		enderecoJuridico.setStatus(statusEnderecoCBox.isSelected());
+		enderecoJuridico.setUf(ufEndCliField.getText());
+
+		contatoJuridico = new Contato();
+
+		contatoJuridico.setCelular(celularContCliField.getText());
+		contatoJuridico.setTelefone(foneContCliField.getText());
+		contatoJuridico.setEmail(emailContCliField.getText());
+		contatoJuridico.setStatus(statusContatoCBox.isSelected());
+		
+		clienteJuridico = new PessoaJuridica();
+
+		clienteJuridico.setNome(nomeCliField.getText());
+		clienteJuridico.setCnpj(cnpjCliField.getText());
+		clienteJuridico.setContato(contatoJuridico);
+		clienteJuridico.setEndereco(enderecoJuridico);
+		clienteJuridico.setRazaoSocial(razaoSociCliField.getText());
+		clienteJuridico.setStatus(statusClienteCBox.isSelected());
+
+		try {
+
+			Facade.getInstance().createOrUpdatePessoaJuridica(clienteJuridico);
+			clientes = Facade.getInstance().searchAllCliente();
+			cliTabela.getItems().setAll(clientes);
+
+			dadosCliTab.setDisable(true);
+			endClienteTab.setDisable(true);
+			contClienteTab.setDisable(true);
+			listaClienteTab.getTabPane().getSelectionModel().select(listaClienteTab);
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Message.getInstance().viewMessage(AlertType.ERROR, "Erro", "Erro ao salvar a pessoa física",
+					e.getMessage());
 		}
 
 	}
@@ -422,6 +507,79 @@ public class ControlerCliente implements Initializable {
 	 * Método para preencher campos para atualizar o cliente.
 	 */
 	public void preencherCampos() {
+
+		clienteAtualiza = cliTabela.getSelectionModel().getSelectedItem();
+
+		if (clienteAtualiza instanceof PessoaFisica) {
+
+			CliFisGridLay.setDisable(true);
+			CliJuriGridLay.setDisable(false);
+
+			try {
+				fisica = Facade.getInstance().searchPessoaFisica(clienteAtualiza.getId());
+				System.out.println(fisica.getCpf());
+			} catch (BusinessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Message.getInstance().viewMessage(AlertType.ERROR, "Erro", "Erro ao buscar a pessoa física",
+						e.getMessage());
+			}
+
+			nomeCliField.setText(fisica.getNome());
+			cpfCliField.setText(fisica.getCpf());
+			dataCli.setValue(fisica.getData_nascimento());
+
+			estadCivCliCobBox.setValue(fisica.getEstado_civil());
+			ocupacaoCliCobBox.setValue(fisica.getOcupacao());
+			rgCliField.setText(fisica.getRg());
+			sexoCliCobBox.setValue(fisica.getSexo());
+			statusClienteCBox.setSelected(fisica.isStatus());
+
+			// Endereco
+			bairroEndCliField.setText(fisica.getEndereco().getBairro());
+			cepEndCliField.setText(fisica.getEndereco().getCep());
+			cidadeEndCliField.setText(fisica.getEndereco().getCidade());
+			ruaEndCliField.setText(fisica.getEndereco().getLogradouro());
+			numEndCliField.setText(fisica.getEndereco().getNumero());
+			statusEnderecoCBox.setSelected(fisica.getEndereco().isStatus());
+			ufEndCliField.setText(fisica.getEndereco().getUf());
+
+			// Contato
+			celularContCliField.setText(fisica.getContato().getCelular());
+			foneContCliField.setText(fisica.getContato().getTelefone());
+			emailContCliField.setText(fisica.getContato().getEmail());
+			statusContatoCBox.setSelected(fisica.getContato().isStatus());
+
+		}
+
+		if (clienteAtualiza instanceof PessoaJuridica) {
+
+			CliFisGridLay.setDisable(false);
+			CliJuriGridLay.setDisable(true);
+
+			juridica = (PessoaJuridica) clienteAtualiza;
+
+			nomeCliField.setText(juridica.getNome());
+			cnpjCliField.setText(juridica.getCnpj());
+			razaoSociCliField.setText(juridica.getRazaoSocial());
+			statusClienteCBox.setSelected(juridica.isStatus());
+
+			// Endereco
+			bairroEndCliField.setText(juridica.getEndereco().getBairro());
+			cepEndCliField.setText(juridica.getEndereco().getCep());
+			cidadeEndCliField.setText(juridica.getEndereco().getCidade());
+			ruaEndCliField.setText(juridica.getEndereco().getLogradouro());
+			numEndCliField.setText(juridica.getEndereco().getNumero());
+			statusEnderecoCBox.setSelected(juridica.getEndereco().isStatus());
+			ufEndCliField.setText(juridica.getEndereco().getUf());
+
+			// Contato
+			celularContCliField.setText(juridica.getContato().getCelular());
+			foneContCliField.setText(juridica.getContato().getTelefone());
+			emailContCliField.setText(juridica.getContato().getEmail());
+			statusContatoCBox.setSelected(juridica.getContato().isStatus());
+
+		}
 
 	}
 
