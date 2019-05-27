@@ -38,6 +38,10 @@ public class Aluga extends Entidade {
 	private Cliente cliente;
 	
 	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "quarto_id")	
+	private Quarto quarto;
+	
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "funcionario_id")
 	private Funcionario funcionario;
 	
@@ -67,8 +71,6 @@ public class Aluga extends Entidade {
 	@Column(name = "valor_diaria")
 	private double valorDiaria;
 	
-	@Column(name = "valor_adicional")
-	private double valorAdicional;
 	
 	
 	/**
@@ -154,20 +156,6 @@ public class Aluga extends Entidade {
 	public void setValorDiaria(double valorDiaria) {
 		this.valorDiaria = valorDiaria;
 	}
-	
-	/**
-	 * @return the valorAdicional
-	 */
-	public double getValorAdicional() {
-		return valorAdicional;
-	}
-	
-	/**
-	 * @param valorAdicional the valorAdicional to set
-	 */
-	public void setValorAdicional(double valorAdicional) {
-		this.valorAdicional = valorAdicional;
-	}
 
 	/**
 	 * @return the cliente
@@ -209,6 +197,20 @@ public class Aluga extends Entidade {
 	 */
 	public void setCaixa(Caixa caixa) {
 		this.caixa = caixa;
+	}
+
+	/**
+	 * @return the quarto
+	 */
+	public Quarto getQuarto() {
+		return quarto;
+	}
+
+	/**
+	 * @param quarto the quarto to set
+	 */
+	public void setQuarto(Quarto quarto) {
+		this.quarto = quarto;
 	}
 	
 	

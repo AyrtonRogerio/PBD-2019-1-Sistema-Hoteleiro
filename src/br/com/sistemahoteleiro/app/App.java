@@ -41,7 +41,6 @@ public class App extends Application {
 		IFacade facade = Facade.getInstance();
 		launch(args);
 		
-		
 	}
 
 	@Override

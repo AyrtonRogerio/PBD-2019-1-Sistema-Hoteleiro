@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="73aa84f7-8495-4640-877b-32b71458c9b6" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="SistemaHotel@localhost" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="SistemaHotel@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="SistemaHotel@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="SistemaHotel: database" type="162271b6:PgImplModel$Database" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="SistemaHotel@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="SistemaHotel: database" type="162271b6:PgImplModel$Database" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="SistemaHotel@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="SistemaHotel: database" type="162271b6:PgImplModel$Database" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="public: schema" type="983ebcf7:PgImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="SistemaHotel@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="SistemaHotel: database" type="162271b6:PgImplModel$Database" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="public: schema" type="983ebcf7:PgImplModel$Schema" />
+        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="213" />
+    <option name="y" value="119" />
+    <option name="width" value="989" />
+    <option name="height" value="557" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DBE.Init.BalloonShown" value="true" />
+    <property name="DatabaseDriversLRU" value="postgresql" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="true" />
+    <property name="database.console.LAST_STATE" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="49" y="27" width="1317" height="741" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Database" order="0" visible="true" weight="0.25727773" />
+      <window_info id="Favorites" order="1" side_tool="true" />
+      <window_info anchor="bottom" id="Database Console" weight="0.3294893" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Inspection" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="4" />
+      <window_info anchor="bottom" id="Debug" order="5" />
+      <window_info anchor="bottom" id="Database Changes" order="6" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="right" content_ui="combo" id="Project" order="0" weight="0.25" />
+      <window_info anchor="right" id="Structure" order="1" side_tool="true" weight="0.25" />
+    </layout>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="uml://DATABASE/500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.administrador">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>DATABASE</ID>
+          <OriginalElement>500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.administrador</OriginalElement>
+          <nodes>
+            <node x="132.66666666666669" y="413.0">500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.reserva</node>
+            <node x="0.0" y="1066.0">500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.pessoa_juridica</node>
+            <node x="471.0" y="749.0">500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.administrador</node>
+            <node x="220.0" y="1018.0">500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.pessoa_fisica</node>
+            <node x="227.0" y="60.0">500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.funcionario</node>
+            <node x="450.04166666666663" y="96.0">500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.caixa</node>
+            <node x="885.0" y="749.0">500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.log</node>
+            <node x="678.0" y="749.0">500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.super_usuario</node>
+            <node x="-99.27170868347338" y="7.090836334533815">500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.quarto</node>
+            <node x="341.66666666666674" y="389.0">500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.aluga</node>
+            <node x="617.6666666666667" y="449.0">500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.parcela</node>
+            <node x="6.25" y="785.0">500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.contato</node>
+            <node x="225.25" y="749.0">500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.endereco</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.aluga" target="500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.funcionario">
+              <point x="-64.00000000000006" y="-157.5" />
+              <point x="405.6666666666667" y="359.0" />
+              <point x="348.5" y="359.0" />
+              <point x="40.5" y="109.5" />
+            </edge>
+            <edge source="500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.reserva" target="500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.quarto">
+              <point x="-62.0" y="-133.5" />
+              <point x="163.66666666666669" y="369.0" />
+              <point x="103.5" y="369.0" />
+              <point x="0.0" y="169.5" />
+            </edge>
+            <edge source="500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.pessoa_fisica" target="500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.endereco">
+              <point x="51.5" y="-145.5" />
+              <point x="49.75" y="109.5" />
+            </edge>
+            <edge source="500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.pessoa_juridica" target="500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.contato">
+              <point x="-50.0" y="-97.5" />
+              <point x="-43.75" y="73.5" />
+            </edge>
+            <edge source="500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.pessoa_juridica" target="500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.endereco">
+              <point x="50.0" y="-97.5" />
+              <point x="150.0" y="998.0" />
+              <point x="275.0" y="998.0" />
+              <point x="-49.75" y="109.5" />
+            </edge>
+            <edge source="500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.parcela" target="500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.caixa">
+              <point x="0.0" y="-97.5" />
+              <point x="740.1666666666667" y="369.0" />
+              <point x="620.0416666666666" y="369.0" />
+              <point x="68.0" y="73.5" />
+            </edge>
+            <edge source="500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.reserva" target="500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.caixa">
+              <point x="62.0" y="-133.5" />
+              <point x="287.6666666666667" y="369.0" />
+              <point x="484.04166666666663" y="369.0" />
+              <point x="-68.0" y="73.5" />
+            </edge>
+            <edge source="500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.pessoa_fisica" target="500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.contato">
+              <point x="-51.5" y="-145.5" />
+              <point x="271.5" y="988.0" />
+              <point x="137.5" y="988.0" />
+              <point x="43.75" y="73.5" />
+            </edge>
+            <edge source="500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.aluga" target="500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.caixa">
+              <point x="63.99999999999994" y="-157.5" />
+              <point x="533.6666666666667" y="369.0" />
+              <point x="552.0416666666666" y="369.0" />
+              <point x="0.0" y="73.5" />
+            </edge>
+            <edge source="500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.reserva" target="500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.funcionario">
+              <point x="0.0" y="-133.5" />
+              <point x="225.66666666666669" y="369.0" />
+              <point x="267.5" y="369.0" />
+              <point x="-40.5" y="109.5" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="0.5641083521444695" x="125.23149259703888" y="1035.4501800720288" />
+          <SelectedNodes>
+            <node>500c26fa-686b-4dab-a402-29e30cdbed1f.TABLE:SistemaHotel.public.quarto</node>
+          </SelectedNodes>
+          <Categories>
+            <Category>Key columns</Category>
+            <Category>Columns</Category>
+          </Categories>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://500c26fa-686b-4dab-a402-29e30cdbed1f/database/SistemaHotel/schema/public/table/aluga">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="faeb65b0-5339-4834-8edd-e63a207ae5ac">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/500c26fa-686b-4dab-a402-29e30cdbed1f/console.sql">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+  </component>
+</project>
