@@ -384,6 +384,12 @@ public class Facade implements IFacade {
 		// TODO Auto-generated method stub
 		return businessPessoaFisica.searchAll();
 	}
+	
+	@Override
+	public List<PessoaFisica> seearchBuscarTodosPessoasFisica(String busca) throws BusinessException {
+		// TODO Auto-generated method stub
+		return businessPessoaFisica.searchBuscarTodos(busca);
+	}
 
 	@Override
 	public void removePessoaFisica(PessoaFisica pessoaFisica) throws BusinessException {
@@ -415,6 +421,12 @@ public class Facade implements IFacade {
 	public List<PessoaJuridica> searchAllPessoaJuridica() throws BusinessException {
 		// TODO Auto-generated method stub
 		return businessPessoaJuridica.searchAll();
+	}
+	
+	@Override
+	public List<PessoaJuridica> searchBuscarTodosPessoasJuridica(String busca) throws BusinessException {
+		// TODO Auto-generated method stub
+		return businessPessoaJuridica.searchBuscarTodos(busca);
 	}
 
 	@Override
@@ -449,6 +461,12 @@ public class Facade implements IFacade {
 		return businessQuarto.searchAll();
 	}
 
+	@Override
+	public List<Quarto> seearchBuscarTodosQuarto(String busca) throws BusinessException {
+		// TODO Auto-generated method stub
+		return businessQuarto.searchBuscarTodos(busca);
+	}
+	
 	@Override
 	public void removeQuarto(Quarto quarto) throws BusinessException {
 		// TODO Auto-generated method stub
@@ -543,7 +561,7 @@ public class Facade implements IFacade {
 		// TODO Auto-generated method stub
 		return businessCliente.searchAll();
 	}
-
+	
 	@Override
 	public void removeCliente(Cliente cliente) throws BusinessException {
 		// TODO Auto-generated method stub

@@ -62,6 +62,9 @@ public class ControlerHome implements Initializable {
 	private MenuItem logoutMenuItem;
 
 	@FXML
+	private MenuItem sairMenuItem;
+
+	@FXML
 	private AnchorPane pane;
 
 	@FXML
@@ -82,8 +85,8 @@ public class ControlerHome implements Initializable {
 		if (event.getSource() == funcMenuItem) {
 			updateFrame("funcionario");
 		}
-		
-		if(event.getSource() == configMenuItem) {
+
+		if (event.getSource() == configMenuItem) {
 			updateFrame("configurar");
 		}
 
@@ -105,7 +108,7 @@ public class ControlerHome implements Initializable {
 
 			reservaPane = FXMLLoader
 					.load(getClass().getClassLoader().getResource("br/com/sistemahoteleiro/view/Reserva.fxml"));
-			
+
 			configurarPane = FXMLLoader
 					.load(getClass().getClassLoader().getResource("br/com/sistemahoteleiro/view/ResetarSenha.fxml"));
 
@@ -154,7 +157,7 @@ public class ControlerHome implements Initializable {
 			AnchorPane.setTopAnchor(reservaPane, 0.0);
 			pane.getChildren().setAll(reservaPane);
 		}
-		
+
 		if (nameFrame.equalsIgnoreCase("configurar")) {
 
 			AnchorPane.setBottomAnchor(configurarPane, 0.0);
@@ -162,8 +165,8 @@ public class ControlerHome implements Initializable {
 			AnchorPane.setRightAnchor(configurarPane, 0.0);
 			AnchorPane.setTopAnchor(configurarPane, 0.0);
 			pane.getChildren().setAll(configurarPane);
-		}		
-		
+		}
+
 	}
 
 }

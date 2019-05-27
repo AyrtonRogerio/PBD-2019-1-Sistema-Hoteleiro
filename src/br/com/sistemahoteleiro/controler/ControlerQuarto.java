@@ -140,6 +140,21 @@ public class ControlerQuarto implements Initializable {
 			novoAlugelTab.getTabPane().getSelectionModel().select(novoAlugelTab);
 
 		}
+		
+		if(event.getSource() == pesqQuartBtn) {
+			
+			try {
+				quartos = Facade.getInstance().seearchBuscarTodosQuarto(pesqQuartField.getText());
+				quartoTabela.getItems().setAll(quartos);
+			} catch (BusinessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+//		if(event.getSource() == )
+		
 
 		if (event.getSource() == cancelQuartCadBtn) {
 		

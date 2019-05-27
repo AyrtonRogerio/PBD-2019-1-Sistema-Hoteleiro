@@ -62,36 +62,36 @@
                         </ImageView>
                      </graphic>
                 </Menu>
-                  <Menu mnemonicParsing="false">
+                  <Menu disable="true" mnemonicParsing="false" visible="false">
                     <items>
-                      <MenuItem fx:id="checkInMenuItem" mnemonicParsing="false" onAction="#action" text="Check-in" />
+                      <MenuItem fx:id="checkInMenuItem" mnemonicParsing="false" onAction="#action" text="Check-in" visible="false" />
                     </items>
                      <graphic>
-                        <ImageView fitHeight="80.0" fitWidth="80.0">
+                        <ImageView disable="true" fitHeight="80.0" fitWidth="80.0" visible="false">
                            <image>
                               <Image url="@../../../../../res/reception.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Menu>
-                  <Menu mnemonicParsing="false">
+                  <Menu disable="true" mnemonicParsing="false" visible="false">
                     <items>
-                      <MenuItem fx:id="checkOutMenuItem" mnemonicParsing="false" onAction="#action" text="Check-out" />
+                      <MenuItem fx:id="checkOutMenuItem" disable="true" mnemonicParsing="false" onAction="#action" text="Check-out" visible="false" />
                     </items>
                      <graphic>
-                        <ImageView fitHeight="80.0" fitWidth="80.0">
+                        <ImageView disable="true" fitHeight="80.0" fitWidth="80.0" visible="false">
                            <image>
                               <Image url="@../../../../../res/passport.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Menu>
-                  <Menu mnemonicParsing="false">
+                  <Menu disable="true" mnemonicParsing="false" visible="false">
                     <items>
-                      <MenuItem fx:id="pgmntMenuItem" mnemonicParsing="false" onAction="#action" text="Pagamento" />
+                      <MenuItem fx:id="pgmntMenuItem" disable="true" mnemonicParsing="false" onAction="#action" text="Pagamento" visible="false" />
                     </items>
                      <graphic>
-                        <ImageView fitHeight="80.0" fitWidth="80.0">
+                        <ImageView disable="true" fitHeight="80.0" fitWidth="80.0" visible="false">
                            <image>
                               <Image url="@../../../../../res/money.png" />
                            </image>
@@ -125,6 +125,7 @@
                   <Menu mnemonicParsing="false">
                     <items>
                       <MenuItem fx:id="logoutMenuItem" mnemonicParsing="false" onAction="#action" text="Logout" />
+                        <MenuItem fx:id="sairMenuItem" mnemonicParsing="false" onAction="#action" text="Sair" />
                     </items>
                      <graphic>
                         <ImageView fitHeight="80.0" fitWidth="80.0">

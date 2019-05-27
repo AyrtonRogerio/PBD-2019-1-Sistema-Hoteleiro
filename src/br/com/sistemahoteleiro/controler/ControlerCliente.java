@@ -11,6 +11,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import br.com.sistemahoteleiro.enuns.TipoEstadoCivil;
 import br.com.sistemahoteleiro.enuns.TipoEstadoUF;
@@ -47,7 +48,8 @@ public class ControlerCliente implements Initializable {
 	private PessoaFisica clienteFisico, fisica;
 	private PessoaJuridica clienteJuridico, juridica;
 	private Cliente clienteAtualiza;
-	private List<Cliente> clientes;
+	private List<PessoaFisica> pessoaFisicas;
+	private List<PessoaJuridica> pessoaJuridicas;
 
 	private Endereco enderecoFisico, enderecoJuridico;
 	private Contato contatoFisico, contatoJuridico;
@@ -68,25 +70,52 @@ public class ControlerCliente implements Initializable {
 	private JFXButton atualizarTabelaBtn;
 
 	@FXML
-	private TableView<Cliente> cliTabela;
+	private JFXRadioButton cliFisiRadio;
 
 	@FXML
-	private TableColumn<Cliente, String> nomeCliCol;
-
-//	@FXML
-//	private TableColumn<PessoaFisica, String> cpfCliCol;
-//
-//	@FXML
-//	private TableColumn<PessoaJuridica, String> cnpjCliCol;
+	private JFXRadioButton cliJuriRadio;
 
 	@FXML
-	private TableColumn<Cliente, Endereco> ruaCliCol;
+	private Tab cliFisiTab;
 
 	@FXML
-	private TableColumn<Cliente, Endereco> bairroCliCol;
+	private TableView<PessoaFisica> cliTabela;
 
 	@FXML
-	private TableColumn<Cliente, Endereco> numCliCol;
+	private TableColumn<PessoaFisica, String> nomeCliCol;
+
+	@FXML
+	private TableColumn<PessoaFisica, String> cpfCliCol;
+
+	@FXML
+	private TableColumn<PessoaFisica, Endereco> ruaCliCol;
+
+	@FXML
+	private TableColumn<PessoaFisica, Endereco> bairroCliCol;
+
+	@FXML
+	private TableColumn<PessoaFisica, Endereco> numCliCol;
+
+	@FXML
+	private Tab cliJuriTab;
+
+	@FXML
+	private TableView<PessoaJuridica> cliJuriTabela;
+
+	@FXML
+	private TableColumn<PessoaJuridica, String> nomeCliJuriCol;
+
+	@FXML
+	private TableColumn<PessoaJuridica, String> cnpjJuriCol;
+
+	@FXML
+	private TableColumn<PessoaJuridica, Endereco> ruaCliJuriCol;
+
+	@FXML
+	private TableColumn<PessoaJuridica, Endereco> bairroCliJuriCol;
+
+	@FXML
+	private TableColumn<PessoaJuridica, Endereco> numCliJuriCol;
 
 	@FXML
 	private JFXButton detalhesCliBtn;
@@ -162,7 +191,7 @@ public class ControlerCliente implements Initializable {
 	private JFXTextField cidadeEndCliField;
 
 	@FXML
-    private JFXComboBox<TipoEstadoUF> ufEndCliCobBox;
+	private JFXComboBox<TipoEstadoUF> ufEndCliCobBox;
 	@FXML
 	private JFXCheckBox statusEnderecoCBox;
 
@@ -202,7 +231,30 @@ public class ControlerCliente implements Initializable {
 		/**
 		 * Evento para buscar clientes.
 		 */
-		if (event.getSource() == buscCliBtn) {
+		if (event.getSource() == buscCliBtn && (cliFisiRadio.isSelected() || cliJuriRadio.isSelected())) {
+
+			if (cliFisiRadio.isSelected()) {
+				cliJuriRadio.setSelected(false);
+				try {
+					pessoaFisicas = Facade.getInstance().seearchBuscarTodosPessoasFisica(buscCliField.getText());
+					cliTabela.getItems().setAll(pessoaFisicas);
+				} catch (BusinessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			} else if (cliJuriRadio.isSelected()) {
+
+				cliJuriRadio.setSelected(false);
+				try {
+					pessoaJuridicas = Facade.getInstance().searchBuscarTodosPessoasJuridica(buscCliField.getText());
+					cliTabela.getItems().setAll(pessoaFisicas);
+				} catch (BusinessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
 
 		}
 
@@ -220,11 +272,14 @@ public class ControlerCliente implements Initializable {
 
 			cadastCliBtn.setDisable(true);
 			atualizarCliBtn.setDisable(false);
-			preencherCampos();
-			
+			if(cliFisiRadio.isSelected()) {
+			preencherCamposFisico();
+			} else if(cliJuriRadio.isSelected()) {
+				preencherCamposJuridicos();
+			}
 			dadosCliTab.setDisable(false);
 			dadosCliTab.getTabPane().getSelectionModel().select(dadosCliTab);
-			
+
 		}
 
 		/**
@@ -234,7 +289,7 @@ public class ControlerCliente implements Initializable {
 
 			cadastCliBtn.setDisable(false);
 			atualizarCliBtn.setDisable(true);
-			
+
 			dadosCliTab.setDisable(false);
 			dadosCliTab.getTabPane().getSelectionModel().select(dadosCliTab);
 
@@ -263,6 +318,31 @@ public class ControlerCliente implements Initializable {
 			}
 		}
 
+		
+		/**
+		 * Evento para habilitar cliente físico e desabilitar cliente jurídico de pesquisa.
+		 */
+		if (event.getSource() == cliFisiRadio) {
+			if (pessFisRadBtn.isSelected()) {
+				cliJuriRadio.setSelected(false);
+				cliFisiRadio.setSelected(true);
+			}
+		}
+
+		/**
+		 * Evento para habilitar cliente jurídico e desabilitar cliente físico de pesquisa.
+		 */
+		if (event.getSource() == cliJuriRadio) {
+			if (cliJuriRadio.isSelected()) {
+				cliFisiRadio.setSelected(false);
+				cliJuriRadio.setSelected(true);
+				
+
+			}
+		}
+
+		
+		
 		/**
 		 * Evento para voltar para a Lista de Clientes
 		 */
@@ -321,17 +401,17 @@ public class ControlerCliente implements Initializable {
 		 */
 		if (event.getSource() == cadastCliBtn) {
 
-			if(pessFisRadBtn.isSelected()) {
-			
-				cadastrarClienteFisico();
-			
-			dadosCliTab.setDisable(true);
-			endClienteTab.setDisable(true);
-			contClienteTab.setDisable(true);
-			listaClienteTab.getTabPane().getSelectionModel().select(listaClienteTab);
+			if (pessFisRadBtn.isSelected()) {
 
-			} else if(pessJurRadBtn.isSelected()) {
-				
+				cadastrarClienteFisico();
+
+				dadosCliTab.setDisable(true);
+				endClienteTab.setDisable(true);
+				contClienteTab.setDisable(true);
+				listaClienteTab.getTabPane().getSelectionModel().select(listaClienteTab);
+
+			} else if (pessJurRadBtn.isSelected()) {
+
 				cadastrarClienteJuridico();
 
 				dadosCliTab.setDisable(true);
@@ -340,17 +420,21 @@ public class ControlerCliente implements Initializable {
 				listaClienteTab.getTabPane().getSelectionModel().select(listaClienteTab);
 
 			}
-			
+
 			try
 
 			{
-				clientes = Facade.getInstance().searchAllCliente();
-				cliTabela.getItems().setAll(clientes);
+				pessoaFisicas = Facade.getInstance().searchAllPessoaFisica();
+				cliTabela.getItems().setAll(pessoaFisicas);
+				
+				pessoaJuridicas = Facade.getInstance().searchAllPessoaJuridica();
+				cliJuriTabela.getItems().setAll(pessoaJuridicas);
+				
 			} catch (BusinessException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		}
 
 		/**
@@ -359,41 +443,39 @@ public class ControlerCliente implements Initializable {
 		if (event.getSource() == atualizarCliBtn) {
 			cadastCliBtn.setDisable(false);
 			atualizarCliBtn.setDisable(true);
-			
+
 			atualizarCliente(clienteAtualiza);
-			
+
 			dadosCliTab.setDisable(true);
 			endClienteTab.setDisable(true);
 			contClienteTab.setDisable(true);
 			listaClienteTab.getTabPane().getSelectionModel().select(listaClienteTab);
 
-			
 			try
 
 			{
-				clientes = Facade.getInstance().searchAllCliente();
-				cliTabela.getItems().setAll(clientes);
+				pessoaFisicas = Facade.getInstance().searchAllPessoaFisica();
+				cliTabela.getItems().setAll(pessoaFisicas);
+				
+				pessoaJuridicas = Facade.getInstance().searchAllPessoaJuridica();
+				cliJuriTabela.getItems().setAll(pessoaJuridicas);
 			} catch (BusinessException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		}
 
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub	
+		// TODO Auto-generated method stub
 		comboBoxTabela();
 		mascarasField();
-		
 
 	}
-	
-	
-	
-	
+
 	/**
 	 * Método para cadastrar um cliente físico.
 	 */
@@ -429,17 +511,15 @@ public class ControlerCliente implements Initializable {
 		clienteFisico.setSexo(sexoCliCobBox.getValue());
 		clienteFisico.setStatus(statusClienteCBox.isSelected());
 
-		
-		
 		try {
 
 			Facade.getInstance().createOrUpdatePessoaFisica(clienteFisico);
-			
-			Message.getInstance().viewMessage(AlertType.CONFIRMATION, "Cadastrado", 
-					"Cliente foi cadastrado!", "O cliente foi cadastrado com sucesso!");
-			
-			clientes = Facade.getInstance().searchAllCliente();
-			cliTabela.getItems().setAll(clientes);
+
+			Message.getInstance().viewMessage(AlertType.CONFIRMATION, "Cadastrado", "Cliente foi cadastrado!",
+					"O cliente foi cadastrado com sucesso!");
+
+			pessoaFisicas = Facade.getInstance().searchAllPessoaFisica();
+			cliTabela.getItems().setAll(pessoaFisicas);
 
 			dadosCliTab.setDisable(true);
 			endClienteTab.setDisable(true);
@@ -453,12 +533,8 @@ public class ControlerCliente implements Initializable {
 					e.getMessage());
 		}
 
-		
 	}
-	
-	
-	
-	
+
 	/**
 	 * Método para cadastrar um cliente jurídico
 	 */
@@ -480,7 +556,7 @@ public class ControlerCliente implements Initializable {
 		contatoJuridico.setTelefone(foneContCliField.getText());
 		contatoJuridico.setEmail(emailContCliField.getText());
 		contatoJuridico.setStatus(statusContatoCBox.isSelected());
-		
+
 		clienteJuridico = new PessoaJuridica();
 
 		clienteJuridico.setNome(nomeCliField.getText());
@@ -493,12 +569,12 @@ public class ControlerCliente implements Initializable {
 		try {
 
 			Facade.getInstance().createOrUpdatePessoaJuridica(clienteJuridico);
-			
-			Message.getInstance().viewMessage(AlertType.CONFIRMATION, "Cadastrado", 
-					"Cliente foi cadastrado!", "O cliente foi cadastrado com sucesso!");
-			
-			clientes = Facade.getInstance().searchAllCliente();
-			cliTabela.getItems().setAll(clientes);
+
+			Message.getInstance().viewMessage(AlertType.CONFIRMATION, "Cadastrado", "Cliente foi cadastrado!",
+					"O cliente foi cadastrado com sucesso!");
+
+			pessoaJuridicas = Facade.getInstance().searchAllPessoaJuridica();
+			cliJuriTabela.getItems().setAll(pessoaJuridicas);
 
 			dadosCliTab.setDisable(true);
 			endClienteTab.setDisable(true);
@@ -513,15 +589,10 @@ public class ControlerCliente implements Initializable {
 
 	}
 
-	
-	
-	
-	
-	
 	/**
-	 * Método para preencher campos para atualizar o cliente.
+	 * Método para preencher campos para atualizar o cliente físico.
 	 */
-	public void preencherCampos() {
+	public void preencherCamposFisico() {
 
 		clienteAtualiza = cliTabela.getSelectionModel().getSelectedItem();
 
@@ -531,9 +602,9 @@ public class ControlerCliente implements Initializable {
 			CliJuriGridLay.setDisable(true);
 
 			try {
-				
+
 				fisica = Facade.getInstance().searchPessoaFisica(clienteAtualiza.getId());
-				
+
 				System.out.println(fisica.getCpf());
 			} catch (BusinessException e) {
 				// TODO Auto-generated catch block
@@ -569,17 +640,28 @@ public class ControlerCliente implements Initializable {
 
 		}
 
+		
+
+	}
+	
+	/**
+	 * Método para preencher campos para atualizar o cliente físico.
+	 */
+	public void preencherCamposJuridicos() {
+		
+		
+		clienteAtualiza = cliJuriTabela.getSelectionModel().getSelectedItem();
+		
 		if (clienteAtualiza instanceof PessoaJuridica) {
 
-			//Pane da pessoa Jurídica habilitado, pane da pessoa física desabilitado
+			// Pane da pessoa Jurídica habilitado, pane da pessoa física desabilitado
 			CliFisGridLay.setDisable(false);
 			CliJuriGridLay.setDisable(true);
-		
+
 			try {
-				
+
 				juridica = Facade.getInstance().searchPessoaJuridica(clienteAtualiza.getId());
-				
-				
+
 			} catch (BusinessException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -587,7 +669,7 @@ public class ControlerCliente implements Initializable {
 						e.getMessage());
 			}
 
-			//Pessoa Jurídica
+			// Pessoa Jurídica
 			nomeCliField.setText(juridica.getNome());
 			cnpjCliField.setText(juridica.getCnpj());
 			razaoSociCliField.setText(juridica.getRazaoSocial());
@@ -608,15 +690,10 @@ public class ControlerCliente implements Initializable {
 			emailContCliField.setText(juridica.getContato().getEmail());
 			statusContatoCBox.setSelected(juridica.getContato().isStatus());
 
-			
 		}
-
+		
 	}
 
-	
-	
-	
-	
 	/**
 	 * Método para atualizar cliente selecionado da tabela.
 	 * 
@@ -624,10 +701,9 @@ public class ControlerCliente implements Initializable {
 	 */
 	public void atualizarCliente(Cliente c) {
 
-		if(c instanceof PessoaFisica) {
+		if (c instanceof PessoaFisica) {
 			PessoaFisica cF = (PessoaFisica) c;
 
-			
 			Endereco novoEndFis = cF.getEndereco();
 
 			novoEndFis.setBairro(bairroEndCliField.getText());
@@ -645,8 +721,6 @@ public class ControlerCliente implements Initializable {
 			novoContFis.setEmail(emailContCliField.getText());
 			novoContFis.setStatus(statusContatoCBox.isSelected());
 
-			
-
 			cF.setNome(nomeCliField.getText());
 			cF.setCpf(cpfCliField.getText());
 			cF.setData_nascimento(dataCli.getValue());
@@ -657,26 +731,24 @@ public class ControlerCliente implements Initializable {
 			cF.setRg(rgCliField.getText());
 			cF.setSexo(sexoCliCobBox.getValue());
 			cF.setStatus(statusClienteCBox.isSelected());
-			
-			
+
 			try {
 				Facade.getInstance().createOrUpdatePessoaFisica(cF);
-				Message.getInstance().viewMessage(AlertType.CONFIRMATION, "Atualizado", 
-						"Cliente atualizado!", "O cliente foi atualizado com sucesso!");
+				Message.getInstance().viewMessage(AlertType.CONFIRMATION, "Atualizado", "Cliente atualizado!",
+						"O cliente foi atualizado com sucesso!");
 			} catch (BusinessException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				Message.getInstance().viewMessage(AlertType.ERROR, "Erro ao atualizar", 
+				Message.getInstance().viewMessage(AlertType.ERROR, "Erro ao atualizar",
 						"Ocorreu um erro ao atualizar o cliente físico!", e.getMessage());
 			}
 
-			
-		} else if(c instanceof PessoaJuridica) {
-			
+		} else if (c instanceof PessoaJuridica) {
+
 			PessoaJuridica cJ = (PessoaJuridica) c;
 
 			Endereco novoEndJur = cJ.getEndereco();
-			
+
 			novoEndJur.setBairro(bairroEndCliField.getText());
 			novoEndJur.setCep(cepEndCliField.getText());
 			novoEndJur.setCidade(cidadeEndCliField.getText());
@@ -691,8 +763,6 @@ public class ControlerCliente implements Initializable {
 			novoContJur.setTelefone(foneContCliField.getText());
 			novoContJur.setEmail(emailContCliField.getText());
 			novoContJur.setStatus(statusContatoCBox.isSelected());
-			
-			
 
 			cJ.setNome(nomeCliField.getText());
 			cJ.setCnpj(cnpjCliField.getText());
@@ -700,42 +770,29 @@ public class ControlerCliente implements Initializable {
 			cJ.setEndereco(novoEndJur);
 			cJ.setRazaoSocial(razaoSociCliField.getText());
 			cJ.setStatus(statusClienteCBox.isSelected());
-			
+
 			try {
 				Facade.getInstance().createOrUpdatePessoaJuridica(cJ);
-				Message.getInstance().viewMessage(AlertType.CONFIRMATION, "Atualizado", 
-						"Cliente atualizado!", "O cliente foi atualizado com sucesso!");
+				Message.getInstance().viewMessage(AlertType.CONFIRMATION, "Atualizado", "Cliente atualizado!",
+						"O cliente foi atualizado com sucesso!");
 			} catch (BusinessException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				Message.getInstance().viewMessage(AlertType.ERROR, "Erro ao atualizar", 
+				Message.getInstance().viewMessage(AlertType.ERROR, "Erro ao atualizar",
 						"Ocorreu um erro ao atualizar o cliente jurídico!", e.getMessage());
 			}
-			
+
 		}
-		
-		
-		
+
 	}
 
-	
-	
-	
-	
-	
-	
 	/**
 	 * Método para limpar os campos.
 	 */
 	public void limparCampos() {
 
-		
-		
-	}	
-	
-	
-	
-	
+	}
+
 	/**
 	 * Método para colocar mascaras nos texfields.
 	 */
@@ -749,26 +806,24 @@ public class ControlerCliente implements Initializable {
 
 	}
 
-	
-	
 	/**
 	 * Método para carregar combo box e customização da tabela
 	 */
 	public void comboBoxTabela() {
-		
-		
+
 		sexoCliCobBox.getItems().setAll(TipoSexo.values());
 		estadCivCliCobBox.getItems().setAll(TipoEstadoCivil.values());
 		ocupacaoCliCobBox.getItems().setAll(TipoOcupacao.values());
 		ufEndCliCobBox.getItems().setAll(TipoEstadoUF.values());
 
 		nomeCliCol.setCellValueFactory(new PropertyValueFactory<>("nome"));
+		cpfCliCol.setCellValueFactory(new PropertyValueFactory<>("cpf"));
 		ruaCliCol.setCellValueFactory(new PropertyValueFactory<>("endereco"));
 		bairroCliCol.setCellValueFactory(new PropertyValueFactory<>("endereco"));
 		numCliCol.setCellValueFactory(new PropertyValueFactory<>("endereco"));
 
 		ruaCliCol.setCellFactory(coluna -> {
-			return new TableCell<Cliente, Endereco>() {
+			return new TableCell<PessoaFisica, Endereco>() {
 				protected void updateItem(Endereco item, boolean empty) {
 					super.updateItem(item, empty);
 
@@ -783,7 +838,7 @@ public class ControlerCliente implements Initializable {
 		});
 
 		bairroCliCol.setCellFactory(coluna -> {
-			return new TableCell<Cliente, Endereco>() {
+			return new TableCell<PessoaFisica, Endereco>() {
 
 				protected void updateItem(Endereco item, boolean empty) {
 					super.updateItem(item, empty);
@@ -799,7 +854,59 @@ public class ControlerCliente implements Initializable {
 		});
 
 		numCliCol.setCellFactory(coluna -> {
-			return new TableCell<Cliente, Endereco>() {
+			return new TableCell<PessoaFisica, Endereco>() {
+				protected void updateItem(Endereco item, boolean empty) {
+					super.updateItem(item, empty);
+
+					if (item == null || empty) {
+						setText(null);
+					} else {
+						setText("" + item.getNumero());
+
+					}
+				}
+			};
+		});
+		
+		nomeCliJuriCol.setCellValueFactory(new PropertyValueFactory<>("nome"));
+		cnpjJuriCol.setCellValueFactory(new PropertyValueFactory<>("cnpj"));
+		ruaCliJuriCol.setCellValueFactory(new PropertyValueFactory<>("endereco"));
+		bairroCliJuriCol.setCellValueFactory(new PropertyValueFactory<>("endereco"));
+		numCliJuriCol.setCellValueFactory(new PropertyValueFactory<>("endereco"));
+
+		ruaCliJuriCol.setCellFactory(coluna -> {
+			return new TableCell<PessoaJuridica, Endereco>() {
+				protected void updateItem(Endereco item, boolean empty) {
+					super.updateItem(item, empty);
+
+					if (item == null || empty) {
+						setText(null);
+					} else {
+						setText("" + item.getLogradouro());
+
+					}
+				}
+			};
+		});
+
+		bairroCliJuriCol.setCellFactory(coluna -> {
+			return new TableCell<PessoaJuridica, Endereco>() {
+
+				protected void updateItem(Endereco item, boolean empty) {
+					super.updateItem(item, empty);
+
+					if (item == null || empty) {
+						setText(null);
+					} else {
+						setText("" + item.getBairro());
+
+					}
+				}
+			};
+		});
+
+		numCliJuriCol.setCellFactory(coluna -> {
+			return new TableCell<PessoaJuridica, Endereco>() {
 				protected void updateItem(Endereco item, boolean empty) {
 					super.updateItem(item, empty);
 
@@ -816,16 +923,20 @@ public class ControlerCliente implements Initializable {
 		try
 
 		{
-			clientes = Facade.getInstance().searchAllCliente();
-			cliTabela.getItems().setAll(clientes);
+			pessoaFisicas = Facade.getInstance().searchAllPessoaFisica();
+			if(!pessoaFisicas.isEmpty()) {
+			cliTabela.getItems().setAll(pessoaFisicas);
+			}
+			pessoaJuridicas = Facade.getInstance().searchAllPessoaJuridica();
+			if(!pessoaJuridicas.isEmpty()) {
+			cliJuriTabela.getItems().setAll(pessoaJuridicas);
+			}
+			
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		
 	}
-	
-	
-	
+
 }

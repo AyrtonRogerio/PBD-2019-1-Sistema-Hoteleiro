@@ -3,10 +3,15 @@
  */
 package br.com.sistemahoteleiro.business;
 
+import java.util.List;
+
 import br.com.sistemahoteleiro.dao.DaoQuarto;
 import br.com.sistemahoteleiro.dao.IDaoQuarto;
+import br.com.sistemahoteleiro.exception.BusinessException;
+import br.com.sistemahoteleiro.exception.DaoException;
 import br.com.sistemahoteleiro.exception.ValidationException;
 import br.com.sistemahoteleiro.model.Quarto;
+
 
 /**
  * @author ayrtons
@@ -42,5 +47,23 @@ public class BusinessQuarto extends BusinessGeneric<Quarto> implements IBusiness
 		}
 		
 	}
+	
+	
+	@Override
+	public List<Quarto> searchBuscarTodos(String string) throws BusinessException {
+		// TODO Auto-generated method stub
+		 
+		try {
+			List<Quarto> quartos = daoQuarto.searchBuscarTodos(string);
+		
+			return quartos;
+		
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BusinessException(e.getMessage());
+		}
+	}
+	
 
 }

@@ -3,9 +3,14 @@
  */
 package br.com.sistemahoteleiro.business;
 
+import java.util.List;
+
 import br.com.sistemahoteleiro.dao.DaoPessoaFisica;
 import br.com.sistemahoteleiro.dao.IDaoPessoaFisica;
+import br.com.sistemahoteleiro.exception.BusinessException;
+import br.com.sistemahoteleiro.exception.DaoException;
 import br.com.sistemahoteleiro.exception.ValidationException;
+import br.com.sistemahoteleiro.model.Cliente;
 import br.com.sistemahoteleiro.model.PessoaFisica;
 
 /**
@@ -52,5 +57,23 @@ public class BusinessPessoaFisica extends BusinessGeneric<PessoaFisica> implemen
 		
 		
 	}
+	
+	@Override
+	public List<PessoaFisica> searchBuscarTodos(String string) throws BusinessException {
+		// TODO Auto-generated method stub
+		 
+		try {
+			List<PessoaFisica> pessoaFisicas = daoPessoaFisica.searchBuscarTodos(string);
+		
+			return pessoaFisicas;
+		
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BusinessException(e.getMessage());
+		}
+	}
+	
+	
 
 }

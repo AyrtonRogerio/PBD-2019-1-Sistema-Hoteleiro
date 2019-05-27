@@ -3,10 +3,15 @@
  */
 package br.com.sistemahoteleiro.business;
 
+import java.util.List;
+
 import br.com.sistemahoteleiro.dao.DaoCliente;
 import br.com.sistemahoteleiro.dao.IDaoCliente;
+import br.com.sistemahoteleiro.exception.BusinessException;
+import br.com.sistemahoteleiro.exception.DaoException;
 import br.com.sistemahoteleiro.exception.ValidationException;
 import br.com.sistemahoteleiro.model.Cliente;
+
 
 /**
  * @author ayrton
@@ -32,4 +37,6 @@ public class BusinessCliente extends BusinessGeneric<Cliente> implements IBusine
 		
 	}
 
+	
+	
 }

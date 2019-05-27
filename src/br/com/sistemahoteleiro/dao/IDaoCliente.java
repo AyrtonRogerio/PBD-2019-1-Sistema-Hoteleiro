@@ -3,6 +3,9 @@
  */
 package br.com.sistemahoteleiro.dao;
 
+import java.util.List;
+
+import br.com.sistemahoteleiro.exception.DaoException;
 import br.com.sistemahoteleiro.model.Cliente;
 
 /**
@@ -11,4 +14,6 @@ import br.com.sistemahoteleiro.model.Cliente;
  */
 public interface IDaoCliente extends IDaoGeneric<Cliente> {
 
+	
+	
 }

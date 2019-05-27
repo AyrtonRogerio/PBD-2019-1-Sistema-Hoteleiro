@@ -155,6 +155,8 @@ public interface IFacade {
 
 	public List<PessoaFisica> searchAllPessoaFisica() throws BusinessException;
 
+	public List<PessoaFisica> seearchBuscarTodosPessoasFisica(String busca) throws BusinessException;
+	
 	public void removePessoaFisica(PessoaFisica pessoaFisica) throws BusinessException;
 
 	public void disablePessoaFisica(PessoaFisica pessoaFisica) throws BusinessException;
@@ -166,6 +168,8 @@ public interface IFacade {
 	public PessoaJuridica searchPessoaJuridica(int id) throws BusinessException;
 
 	public List<PessoaJuridica> searchAllPessoaJuridica() throws BusinessException;
+	
+	public List<PessoaJuridica> searchBuscarTodosPessoasJuridica(String busca) throws BusinessException;
 
 	public void removePessoaJuridica(PessoaJuridica pessoaJuridica) throws BusinessException;
 
@@ -178,6 +182,8 @@ public interface IFacade {
 	public Quarto searchQuarto(int id) throws BusinessException;
 
 	public List<Quarto> searchAllQuarto() throws BusinessException;
+	
+	public List<Quarto> seearchBuscarTodosQuarto(String busca) throws BusinessException;
 
 	public void removeQuarto(Quarto quarto) throws BusinessException;
 
@@ -214,6 +220,7 @@ public interface IFacade {
 	public Cliente searchCliente(int id) throws BusinessException;
 
 	public List<Cliente> searchAllCliente() throws BusinessException;
+	
 
 	public void removeCliente(Cliente cliente) throws BusinessException;
 
