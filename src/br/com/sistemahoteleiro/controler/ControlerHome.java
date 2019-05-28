@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import br.com.sistemahoteleiro.app.App;
 import br.com.sistemahoteleiro.view.Message;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -70,6 +71,17 @@ public class ControlerHome implements Initializable {
 	@FXML
 	void action(ActionEvent event) {
 
+		if(event.getSource() == sairMenuItem) {
+			System.exit(0);
+		}
+		
+		if(event.getSource() == logoutMenuItem) {
+			
+			
+			App.changeStage("Login");
+			
+		}
+		
 		if (event.getSource() == reservasMenuItem) {
 			updateFrame("reserva");
 		}

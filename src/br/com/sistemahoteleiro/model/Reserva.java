@@ -36,8 +36,8 @@ public class Reserva extends Entidade {
 	private Caixa caixa;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "funcionario_id")
-	private Funcionario funcionario;
+	@JoinColumn(name = "usuario_id")
+	private Usuario usuario;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cliente_id")
@@ -137,14 +137,14 @@ public class Reserva extends Entidade {
 	/**
 	 * @return the funcionario
 	 */
-	public Funcionario getFuncionario() {
-		return funcionario;
+	public Usuario getFuncionario() {
+		return usuario;
 	}
 	/**
 	 * @param funcionario the funcionario to set
 	 */
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
+	public void setFuncionario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	/**
 	 * @return the cliente

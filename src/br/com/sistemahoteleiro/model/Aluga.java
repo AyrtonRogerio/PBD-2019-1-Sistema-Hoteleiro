@@ -42,8 +42,8 @@ public class Aluga extends Entidade {
 	private Quarto quarto;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "funcionario_id")
-	private Funcionario funcionario;
+	@JoinColumn(name = "usuario_id")
+	private Usuario usuario;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "caixa_id")
@@ -174,15 +174,15 @@ public class Aluga extends Entidade {
 	/**
 	 * @return the funcionario
 	 */
-	public Funcionario getFuncionario() {
-		return funcionario;
+	public Usuario getFuncionario() {
+		return usuario;
 	}
 
 	/**
 	 * @param funcionario the funcionario to set
 	 */
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
+	public void setFuncionario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	/**

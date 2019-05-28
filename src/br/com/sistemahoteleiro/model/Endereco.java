@@ -10,6 +10,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.cfg.annotations.Nullability;
+
 import br.com.sistemahoteleiro.enuns.TipoEstadoUF;
 
 /**

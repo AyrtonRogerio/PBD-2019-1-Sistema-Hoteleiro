@@ -51,7 +51,8 @@ public class App extends Application {
 			
 			home = FXMLLoader.load(getClass().getClassLoader().
 					getResource("br/com/sistemahoteleiro/view/Home.fxml"));
-			
+			login = FXMLLoader.load(getClass().getClassLoader().
+					getResource("br/com/sistemahoteleiro/view/Login.fxml"));
 			
 			
 		} catch (IOException e) {
@@ -59,11 +60,11 @@ public class App extends Application {
 //			Message.getInstance().viewMessage(AlertType.ERROR, "Erro ao carregar!", "Ocorreu um erro ao tentar carregar os componentes gráficos!", "" + e.getMessage());
 		}
 
-		//sceneLogin = new Scene(login);
+		sceneLogin = new Scene(login);
 		sceneHome = new Scene(home);
 		
-		//primaryStage.setScene(sceneLogin);
-		primaryStage.setScene(sceneHome);
+		primaryStage.setScene(sceneLogin);
+//		primaryStage.setScene(sceneHome);
 		primaryStage.centerOnScreen();
 		primaryStage.show();
 		stage = primaryStage;
@@ -84,6 +85,10 @@ public class App extends Application {
 		
 		if(nameStage.equals("Home")) {
 			stage.setScene(sceneHome);
+		}
+		
+		if(nameStage.equals("Login")) {
+			stage.setScene(sceneLogin);
 		}
 		
 	}
