@@ -100,6 +100,18 @@
                   </Menu>
                   <Menu mnemonicParsing="false">
                     <items>
+                      <MenuItem mnemonicParsing="false" text="Caixa" />
+                    </items>
+                     <graphic>
+                        <ImageView fitHeight="80.0" fitWidth="80.0">
+                           <image>
+                              <Image url="@../../../../../res/money.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Menu>
+                  <Menu mnemonicParsing="false">
+                    <items>
                       <MenuItem fx:id="funcMenuItem" mnemonicParsing="false" onAction="#action" text="Funcionários" />
                     </items>
                      <graphic>

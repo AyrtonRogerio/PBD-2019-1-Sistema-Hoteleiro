@@ -108,9 +108,6 @@ public class App extends Application {
 		return login;
 	}
 
-	/**
-	 * @return the Pane quarto
-	 */
 
 	
 	
