@@ -23,151 +23,160 @@ import javafx.scene.control.TableView;
  */
 public class ControlerAluga implements Initializable {
 
-    @FXML
-    private Tab alugadosListTab;
+	@FXML
+	private Tab alugadosListTab;
 
-    @FXML
-    private JFXButton pesqAluguelBtn;
+	@FXML
+	private JFXButton pesqAluguelBtn;
 
-    @FXML
-    private JFXTextField pesqAluguelField;
+	@FXML
+	private JFXTextField pesqAluguelField;
 
-    @FXML
-    private JFXButton novoAluguelBtn;
+	@FXML
+	private JFXButton novoAluguelBtn;
 
-    @FXML
-    private JFXButton atualizarAluguelTabelaBtn;
+	@FXML
+	private JFXButton atualizarAluguelTabelaBtn;
 
-    @FXML
-    private TableView<Aluga> alugListTabela;
+	@FXML
+	private TableView<?> alugListTabela;
 
-    @FXML
-    private TableColumn<Aluga, ?> alugNomeCliCol;
+	@FXML
+	private TableColumn<?, ?> alugNomeCliCol;
 
-    @FXML
-    private TableColumn<Aluga, ?> alugCpfCliCol;
+	@FXML
+	private TableColumn<?, ?> alugCpfCliCol;
 
-    @FXML
-    private TableColumn<Aluga, ?> alugNumQuartCol;
+	@FXML
+	private TableColumn<?, ?> alugCnpjCol;
 
-    @FXML
-    private TableColumn<Aluga, ?> alugDataEntradaCol;
+	@FXML
+	private TableColumn<?, ?> alugNumQuartCol;
 
-    @FXML
-    private TableColumn<Aluga, ?> alugHoraEntradaCol;
+	@FXML
+	private TableColumn<?, ?> alugDataEntradaCol;
 
-    @FXML
-    private TableColumn<Aluga, ?> alugDataSaidaCol;
+	@FXML
+	private TableColumn<?, ?> alugHoraEntradaCol;
 
-    @FXML
-    private TableColumn<Aluga, ?> alugHoraSaidaCol;
+	@FXML
+	private TableColumn<?, ?> alugDataSaidaCol;
 
-    @FXML
-    private TableColumn<Aluga, ?> alugSituacaoCol;
+	@FXML
+	private TableColumn<?, ?> alugHoraSaidaCol;
 
-    @FXML
-    private Tab novoAluguelTab;
+	@FXML
+	private TableColumn<?, ?> alugSituacaoCol;
 
-    @FXML
-    private Tab alugClienteTab;
+	@FXML
+	private JFXButton editarAluguelBtn;
 
-    @FXML
-    private JFXButton alugPesqClientBtn;
+	@FXML
+	private Tab novoAluguelTab;
 
-    @FXML
-    private JFXTextField alugPesqClientField;
+	@FXML
+	private Tab alugClienteTab;
 
-    @FXML
-    private JFXButton alugAtualizarCliTabelaBtn;
+	@FXML
+	private JFXButton alugPesqClientBtn;
 
-    @FXML
-    private TableView<?> alugClienteTabela;
+	@FXML
+	private JFXTextField alugPesqClientField;
 
-    @FXML
-    private TableColumn<?, ?> alugNomeCol;
+	@FXML
+	private JFXButton alugAtualizarCliTabelaBtn;
 
-    @FXML
-    private TableColumn<?, ?> alugRgCol;
+	@FXML
+	private TableView<?> novoClienteTabela;
 
-    @FXML
-    private TableColumn<?, ?> alugCpfCol;
+	@FXML
+	private TableColumn<?, ?> novoNomeCol;
 
-    @FXML
-    private JFXButton alugVoltarListAlugBtn;
+	@FXML
+	private TableColumn<?, ?> novoRgCol;
 
-    @FXML
-    private JFXButton alugContCadBtn;
+	@FXML
+	private TableColumn<?, ?> novoCpfCol;
 
-    @FXML
-    private Tab alugListQuartTab;
+	@FXML
+	private TableColumn<?, ?> novoCnpjCol;
 
-    @FXML
-    private JFXButton alugPesqQuartoBtn;
+	@FXML
+	private JFXButton alugVoltarListAlugBtn;
 
-    @FXML
-    private JFXTextField alugPesqQuartoField;
+	@FXML
+	private JFXButton alugContCadBtn;
 
-    @FXML
-    private JFXButton alugAtualizaQuartTabelaBtn;
+	@FXML
+	private Tab alugListQuartTab;
 
-    @FXML
-    private TableView<?> alugQuartoTabela;
+	@FXML
+	private JFXButton alugPesqQuartoBtn;
 
-    @FXML
-    private TableColumn<?, ?> alugQuartoCol;
+	@FXML
+	private JFXTextField alugPesqQuartoField;
 
-    @FXML
-    private TableColumn<?, ?> alugQtCamasCol;
+	@FXML
+	private JFXButton alugAtualizaQuartTabelaBtn;
 
-    @FXML
-    private TableColumn<?, ?> alugTipoCol;
+	@FXML
+	private TableView<?> alugQuartoTabela;
 
-    @FXML
-    private TableColumn<?, ?> alugDisponivelCol;
+	@FXML
+	private TableColumn<?, ?> novoQuartoCol;
 
-    @FXML
-    private JFXButton alugVoltarQuartBtn;
+	@FXML
+	private TableColumn<?, ?> novoQtCamasCol;
 
-    @FXML
-    private JFXButton alugContQuartBtn;
+	@FXML
+	private TableColumn<?, ?> novoTipoCol;
 
-    @FXML
-    private Tab alugDadosGeralTab;
+	@FXML
+	private TableColumn<?, ?> novoDisponivelCol;
 
-    @FXML
-    private JFXTextField alugValorDiariaField;
+	@FXML
+	private JFXButton alugVoltarQuartBtn;
 
-    @FXML
-    private JFXDatePicker alugSaidaDateP;
+	@FXML
+	private JFXButton alugContQuartBtn;
 
-    @FXML
-    private JFXTimePicker alugSaidaTimeP;
+	@FXML
+	private Tab alugDadosGeralTab;
 
-    @FXML
-    private JFXButton alugFinalizarBtn;
+	@FXML
+	private JFXTextField novoValorDiariaField;
 
-    @FXML
-    private JFXButton alugVoltarDadosGeraisBtn;
+	@FXML
+	private JFXDatePicker novoSaidaDateP;
 
-    @FXML
-    private JFXButton alugAtualizaBtn;
+	@FXML
+	private JFXTimePicker novoSaidaTimeP;
 
-    @FXML
-    private JFXDatePicker alugEntradaDateP;
+	@FXML
+	private JFXButton alugFinalizarBtn;
 
-    @FXML
-    private JFXTimePicker alugEntradaTimeP;
+	@FXML
+	private JFXButton alugVoltarDadosGeraisBtn;
 
-    @FXML
-    private JFXCheckBox alugSituacaoCBox;
+	@FXML
+	private JFXButton alugAtualizaBtn;
 
-    @FXML
-    private JFXTextField alugValorTotalField;
+	@FXML
+	private JFXDatePicker novoEntradaDateP;
 
-    @FXML
-    void action(ActionEvent event) {
+	@FXML
+	private JFXTimePicker novoEntradaTimeP;
 
-    }
+	@FXML
+	private JFXCheckBox novoSituacaoCBox;
+
+	@FXML
+	private JFXTextField novoValorTotalField;
+
+	@FXML
+	void action(ActionEvent event) {
+
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -176,4 +185,3 @@ public class ControlerAluga implements Initializable {
 	}
 
 }
-

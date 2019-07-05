@@ -10,6 +10,7 @@ import javax.persistence.TypedQuery;
 
 import br.com.sistemahoteleiro.exception.DaoException;
 import br.com.sistemahoteleiro.model.Quarto;
+import br.com.sistemahoteleiro.model.QuartoView;
 import br.com.sistemahoteleiro.util.SQLUtil;
 
 /**
@@ -27,11 +28,11 @@ public class DaoQuarto extends DaoGeneric<Quarto> implements IDaoQuarto{
 	}
 
 	@Override
-	public List<Quarto> searchBuscarTodos(String string) throws DaoException {
+	public List<QuartoView> buscarDisponivel(String string) throws DaoException {
 		// TODO Auto-generated method stub
 		
 		try {
-			TypedQuery<Quarto> typedQuery = entityManager().createQuery(SQLUtil.BUSCAR_BUSCA_QUARTO, class1);
+			TypedQuery<QuartoView> typedQuery = entityManager().createQuery(SQLUtil.BUSCAR_QUARTO_VIEW_DISP, QuartoView.class);
 			typedQuery.setParameter("busca", "%" + string + "%");
 						
 			return typedQuery.getResultList();
@@ -49,5 +50,17 @@ public class DaoQuarto extends DaoGeneric<Quarto> implements IDaoQuarto{
 			throw new DaoException("Erro na busca de " + class1.getSimpleName() + " " + e.getMessage());
 		}
 	}
+	
+//	public List<QuartoView> buscarQuartosDisponiveisView(String busca){
+//		
+//		
+//		TypedQuery<QuartoView> typedQuery = entityManager().createQuery(arg0, arg1)
+//		
+//		
+//		
+//		
+//		
+//	}
+	
 	
 }

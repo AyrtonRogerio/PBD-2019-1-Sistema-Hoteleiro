@@ -623,16 +623,6 @@ public class ControlerFuncionario implements Initializable {
 			};
 		});
 
-		try
-
-		{
-			usuarios = Facade.getInstance().searchAllUsuario();
-			funcListTabela.getItems().setAll(usuarios);
-		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 	}
 
 	/**

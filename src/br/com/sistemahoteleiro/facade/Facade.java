@@ -3,6 +3,7 @@
  */
 package br.com.sistemahoteleiro.facade;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import br.com.sistemahoteleiro.business.BusinessAdministrador;
@@ -39,6 +40,7 @@ import br.com.sistemahoteleiro.exception.BusinessException;
 import br.com.sistemahoteleiro.model.Administrador;
 import br.com.sistemahoteleiro.model.Aluga;
 import br.com.sistemahoteleiro.model.Caixa;
+import br.com.sistemahoteleiro.model.CaixaView;
 import br.com.sistemahoteleiro.model.Cliente;
 import br.com.sistemahoteleiro.model.Contato;
 import br.com.sistemahoteleiro.model.Endereco;
@@ -48,6 +50,7 @@ import br.com.sistemahoteleiro.model.Parcela;
 import br.com.sistemahoteleiro.model.PessoaFisica;
 import br.com.sistemahoteleiro.model.PessoaJuridica;
 import br.com.sistemahoteleiro.model.Quarto;
+import br.com.sistemahoteleiro.model.QuartoView;
 import br.com.sistemahoteleiro.model.Reserva;
 import br.com.sistemahoteleiro.model.SuperUsuario;
 import br.com.sistemahoteleiro.model.Usuario;
@@ -204,6 +207,19 @@ public class Facade implements IFacade {
 		// TODO Auto-generated method stub
 		businessCaixa.disable(caixa);
 	}
+	
+	@Override
+	public Caixa buscarCaixaPorData(LocalDate date) throws BusinessException {
+		// TODO Auto-generated method stub
+		return businessCaixa.buscarPorData(date);
+	}
+
+	@Override
+	public Caixa buscarCaixaPorAnterior() throws BusinessException {
+		// TODO Auto-generated method stub
+		return businessCaixa.buscarPorAnterior();
+	}
+	
 
 	//Contato
 	
@@ -462,9 +478,9 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public List<Quarto> seearchBuscarTodosQuarto(String busca) throws BusinessException {
+	public List<QuartoView> buscarQuartoViewDisponivel(String busca) throws BusinessException {
 		// TODO Auto-generated method stub
-		return businessQuarto.searchBuscarTodos(busca);
+		return businessQuarto.buscarDisponivel(busca);
 	}
 	
 	@Override
@@ -615,6 +631,8 @@ public class Facade implements IFacade {
 	public List<Usuario> seearchBuscarTodosUsuario(String busca) throws BusinessException {
 		// TODO Auto-generated method stub
 		return businessUsuario.searchBuscarTodos(busca);
-	}	
+	}
+
+	
 	
 }

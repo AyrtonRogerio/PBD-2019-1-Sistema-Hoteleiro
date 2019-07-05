@@ -11,6 +11,7 @@ import br.com.sistemahoteleiro.exception.BusinessException;
 import br.com.sistemahoteleiro.exception.DaoException;
 import br.com.sistemahoteleiro.exception.ValidationException;
 import br.com.sistemahoteleiro.model.Quarto;
+import br.com.sistemahoteleiro.model.QuartoView;
 
 
 /**
@@ -50,11 +51,11 @@ public class BusinessQuarto extends BusinessGeneric<Quarto> implements IBusiness
 	
 	
 	@Override
-	public List<Quarto> searchBuscarTodos(String string) throws BusinessException {
+	public List<QuartoView> buscarDisponivel(String string) throws BusinessException {
 		// TODO Auto-generated method stub
 		 
 		try {
-			List<Quarto> quartos = daoQuarto.searchBuscarTodos(string);
+			List<QuartoView> quartos = daoQuarto.buscarDisponivel(string);
 		
 			return quartos;
 		

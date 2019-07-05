@@ -31,6 +31,8 @@ public class ControlerHome implements Initializable {
 	private Pane quartoPane;
 	private Pane reservaPane;
 	private Pane configurarPane;
+	private Pane alugaPane;
+	private Pane caixaPane;
 
 	@FXML
 	private MenuItem inicioMenuItem;
@@ -66,22 +68,27 @@ public class ControlerHome implements Initializable {
 	private MenuItem sairMenuItem;
 
 	@FXML
+	private MenuItem caixaMenuItem;
+
+	@FXML
+	private MenuItem alugarMenuItem;
+
+	@FXML
 	private AnchorPane pane;
 
 	@FXML
 	void action(ActionEvent event) {
 
-		if(event.getSource() == sairMenuItem) {
+		if (event.getSource() == sairMenuItem) {
 			System.exit(0);
 		}
-		
-		if(event.getSource() == logoutMenuItem) {
-			
-			
+
+		if (event.getSource() == logoutMenuItem) {
+
 			App.changeStage("Login");
-			
+
 		}
-		
+
 		if (event.getSource() == reservasMenuItem) {
 			updateFrame("reserva");
 		}
@@ -101,7 +108,15 @@ public class ControlerHome implements Initializable {
 		if (event.getSource() == configMenuItem) {
 			updateFrame("configurar");
 		}
+		
+		if(event.getSource() == alugarMenuItem) {
+			updateFrame("alugar");
+		}
 
+		if(event.getSource() == caixaMenuItem) {
+			updateFrame("caixa");
+		}
+		
 	}
 
 	@Override
@@ -124,6 +139,12 @@ public class ControlerHome implements Initializable {
 			configurarPane = FXMLLoader
 					.load(getClass().getClassLoader().getResource("br/com/sistemahoteleiro/view/ResetarSenha.fxml"));
 
+			alugaPane = FXMLLoader
+					.load(getClass().getClassLoader().getResource("br/com/sistemahoteleiro/view/Aluga.fxml"));
+			
+			caixaPane = FXMLLoader
+					.load(getClass().getClassLoader().getResource("br/com/sistemahoteleiro/view/Caixa.fxml"));
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -132,6 +153,11 @@ public class ControlerHome implements Initializable {
 		}
 	}
 
+	
+	/**
+	 * Método que recebe uma string referente a tela para ser exibida
+	 * @param nameFrame
+	 */
 	public void updateFrame(String nameFrame) {
 
 		if (nameFrame.equalsIgnoreCase("cliente")) {
@@ -179,6 +205,24 @@ public class ControlerHome implements Initializable {
 			pane.getChildren().setAll(configurarPane);
 		}
 
+		if (nameFrame.equalsIgnoreCase("alugar")) {
+
+			AnchorPane.setBottomAnchor(alugaPane, 0.0);
+			AnchorPane.setLeftAnchor(alugaPane, 0.0);
+			AnchorPane.setRightAnchor(alugaPane, 0.0);
+			AnchorPane.setTopAnchor(alugaPane, 0.0);
+			pane.getChildren().setAll(alugaPane);
+		}
+
+		if (nameFrame.equalsIgnoreCase("caixa")) {
+
+			AnchorPane.setBottomAnchor(caixaPane, 0.0);
+			AnchorPane.setLeftAnchor(caixaPane, 0.0);
+			AnchorPane.setRightAnchor(caixaPane, 0.0);
+			AnchorPane.setTopAnchor(caixaPane, 0.0);
+			pane.getChildren().setAll(caixaPane);
+		}
+		
 	}
 
 }

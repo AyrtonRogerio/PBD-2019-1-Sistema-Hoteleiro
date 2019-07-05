@@ -12,6 +12,7 @@ import com.jfoenix.controls.JFXTextField;
 import br.com.sistemahoteleiro.exception.BusinessException;
 import br.com.sistemahoteleiro.facade.Facade;
 import br.com.sistemahoteleiro.model.Quarto;
+import br.com.sistemahoteleiro.model.QuartoView;
 import br.com.sistemahoteleiro.util.MaskFieldUtil;
 import br.com.sistemahoteleiro.view.Message;
 import javafx.event.ActionEvent;
@@ -29,8 +30,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class ControlerQuarto implements Initializable {
 
-	private Quarto quarto, quartoAtualiza;
-	private List<Quarto> quartos = null;
+	private Quarto quarto;
+	private QuartoView quartoAtualiza;
+	private List<QuartoView> quartos = null;
 
 	@FXML
 	private Tab listaQuartosTab;
@@ -45,40 +47,40 @@ public class ControlerQuarto implements Initializable {
 	private JFXButton novoQuartBtn;
 
 	@FXML
-	private TableView<Quarto> quartoTabela;
+	private TableView<QuartoView> quartoTabela;
 
 	@FXML
-	private TableColumn<Quarto, Integer> quartoCol;
+	private TableColumn<QuartoView, Integer> quartoCol;
 
 	@FXML
-	private TableColumn<Quarto, Integer> qtCamasCol;
+	private TableColumn<QuartoView, Integer> qtCamasCol;
 
 	@FXML
-	private TableColumn<Quarto, String> tipoCol;
+	private TableColumn<QuartoView, String> tipoCol;
 
 	@FXML
-	private TableColumn<Quarto, Boolean> tvCaboCol;
+	private TableColumn<QuartoView, Boolean> tvCaboCol;
 
 	@FXML
-	private TableColumn<Quarto, Boolean> cofreCol;
+	private TableColumn<QuartoView, Boolean> cofreCol;
 
 	@FXML
-	private TableColumn<Quarto, Boolean> tvLedCol;
+	private TableColumn<QuartoView, Boolean> tvLedCol;
 
 	@FXML
-	private TableColumn<Quarto, Boolean> telCol;
+	private TableColumn<QuartoView, Boolean> telCol;
 
 	@FXML
-	private TableColumn<Quarto, Boolean> arCondCol;
+	private TableColumn<QuartoView, Boolean> arCondCol;
 
 	@FXML
-	private TableColumn<Quarto, Boolean> wifiCol;
+	private TableColumn<QuartoView, Boolean> wifiCol;
 
 	@FXML
-	private TableColumn<Quarto, Boolean> miniBarCol;
+	private TableColumn<QuartoView, Boolean> miniBarCol;
 
 	@FXML
-	private TableColumn<Quarto, Boolean> disponivelCol;
+	private TableColumn<QuartoView, Boolean> disponivelCol;
 
 	@FXML
 	private JFXButton editarQuartBtn;
@@ -144,7 +146,7 @@ public class ControlerQuarto implements Initializable {
 		if(event.getSource() == pesqQuartBtn) {
 			
 			try {
-				quartos = Facade.getInstance().seearchBuscarTodosQuarto(pesqQuartField.getText());
+				quartos = Facade.getInstance().buscarQuartoViewDisponivel(pesqQuartField.getText());
 				quartoTabela.getItems().setAll(quartos);
 			} catch (BusinessException e) {
 				// TODO Auto-generated catch block
@@ -171,7 +173,7 @@ public class ControlerQuarto implements Initializable {
 			try {
 				
 				Facade.getInstance().createOrUpdateQuarto(quarto);
-				quartos = Facade.getInstance().searchAllQuarto();
+//				quartos = Facade.getInstance().searchAllQuarto();
 				quartoTabela.getItems().setAll(quartos);
 				limparCampos();
 
@@ -199,7 +201,13 @@ public class ControlerQuarto implements Initializable {
 
 		if (event.getSource() == atualizaQuartCadBtn) {
 
-			atualizarQuarto(quartoAtualiza);
+			
+			try {
+				atualizarQuarto(Facade.getInstance().searchQuarto(quartoAtualiza.getId()));
+			} catch (BusinessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		}
 
@@ -222,19 +230,6 @@ public class ControlerQuarto implements Initializable {
 		wifiCol.setCellValueFactory(new PropertyValueFactory<>("wifi"));
 		miniBarCol.setCellValueFactory(new PropertyValueFactory<>("miniBar"));
 		disponivelCol.setCellValueFactory(new PropertyValueFactory<>("disponivel"));
-
-		try {
-
-			quartos = Facade.getInstance().searchAllQuarto();
-			quartoTabela.getItems().setAll(quartos);
-		
-		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Message.getInstance().viewMessage(AlertType.ERROR, "Erro", "Erro ao buscar registros dos quartos",
-					e.getMessage());
-		
-		}
 
 	}
 
@@ -317,8 +312,8 @@ public class ControlerQuarto implements Initializable {
 
 			limparCampos();
 
-			quartos = Facade.getInstance().searchAllQuarto();
-			quartoTabela.getItems().setAll(quartos);
+//			quartos = Facade.getInstance().searchAllQuarto();
+//			quartoTabela.getItems().setAll(quartos);
 
 			listaQuartosTab.getTabPane().getSelectionModel().select(listaQuartosTab);
 			novoAlugelTab.setDisable(true);

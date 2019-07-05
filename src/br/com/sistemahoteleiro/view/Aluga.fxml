@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
-<?import com.jfoenix.controls.JFXChipView?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTimePicker?>
@@ -28,7 +27,7 @@
          <tabs>
             <Tab fx:id="alugadosListTab" text="Alugados">
                <content>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
+                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <GridPane>
                            <columnConstraints>
@@ -61,6 +60,7 @@
                            <columns>
                               <TableColumn fx:id="alugNomeCliCol" prefWidth="75.0" text="Nome" />
                               <TableColumn fx:id="alugCpfCliCol" prefWidth="75.0" text="CPF" />
+                              <TableColumn fx:id="alugCnpjCol" prefWidth="75.0" text="CNPJ" />
                               <TableColumn fx:id="alugNumQuartCol" prefWidth="75.0" text="Quarto" />
                               <TableColumn fx:id="alugDataEntradaCol" prefWidth="75.0" text="Data entrada" />
                               <TableColumn fx:id="alugHoraEntradaCol" prefWidth="75.0" text="Hora entrada" />
@@ -71,7 +71,15 @@
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
                         </TableView>
+                        <JFXButton fx:id="editarAluguelBtn" onAction="#action" text="Editar">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </JFXButton>
                      </children>
                   </VBox>
                </content>
@@ -112,15 +120,19 @@
                                           <JFXButton fx:id="alugAtualizarCliTabelaBtn" disable="true" onAction="#action" text="Atualizar" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                                        </children>
                                     </GridPane>
-                                    <TableView fx:id="alugClienteTabela" prefHeight="200.0" prefWidth="200.0">
+                                    <TableView fx:id="novoClienteTabela" prefHeight="200.0" prefWidth="200.0">
                                        <columns>
-                                          <TableColumn fx:id="alugNomeCol" prefWidth="364.0" text="Nome" />
-                                          <TableColumn fx:id="alugRgCol" minWidth="0.0" prefWidth="151.0" text="RG" />
-                                          <TableColumn fx:id="alugCpfCol" prefWidth="228.0" text="CPF" />
+                                          <TableColumn fx:id="novoNomeCol" prefWidth="364.0" text="Nome" />
+                                          <TableColumn fx:id="novoRgCol" minWidth="0.0" prefWidth="151.0" text="RG" />
+                                          <TableColumn fx:id="novoCpfCol" prefWidth="228.0" text="CPF" />
+                                          <TableColumn fx:id="novoCnpjCol" prefWidth="75.0" text="CNPJ" />
                                        </columns>
                                        <VBox.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </VBox.margin>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
                                     </TableView>
                                     <GridPane>
                                        <columnConstraints>
@@ -179,10 +191,10 @@
                                     </GridPane>
                                     <TableView fx:id="alugQuartoTabela" prefHeight="312.0" prefWidth="1024.0">
                                        <columns>
-                                          <TableColumn fx:id="alugQuartoCol" prefWidth="96.0" text="Quarto" />
-                                          <TableColumn fx:id="alugQtCamasCol" prefWidth="193.0" text="Quantidade de camas" />
-                                          <TableColumn fx:id="alugTipoCol" prefWidth="622.0" text="Tipo" />
-                                          <TableColumn fx:id="alugDisponivelCol" prefWidth="102.0" text="Disponível" />
+                                          <TableColumn fx:id="novoQuartoCol" prefWidth="96.0" text="Quarto" />
+                                          <TableColumn fx:id="novoQtCamasCol" prefWidth="193.0" text="Quantidade de camas" />
+                                          <TableColumn fx:id="novoTipoCol" prefWidth="622.0" text="Tipo" />
+                                          <TableColumn fx:id="novoDisponivelCol" prefWidth="102.0" text="Disponível" />
                                        </columns>
                                        <VBox.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -240,18 +252,18 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                              <children>
-                                                <JFXTextField fx:id="alugValorDiariaField" onAction="#action" promptText="Valor da diária (R$)" text="100" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                <JFXTextField fx:id="novoValorDiariaField" onAction="#action" promptText="Valor da diária (R$)" text="100" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                                    <GridPane.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                    </GridPane.margin>
                                                 </JFXTextField>
-                                                <JFXDatePicker fx:id="alugSaidaDateP" onAction="#action" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                                                <JFXTimePicker fx:id="alugSaidaTimeP" onAction="#action" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                                                <JFXDatePicker fx:id="novoSaidaDateP" onAction="#action" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                                <JFXTimePicker fx:id="novoSaidaTimeP" onAction="#action" GridPane.columnIndex="4" GridPane.rowIndex="4" />
                                                 <JFXButton fx:id="alugFinalizarBtn" onAction="#action" text="Finalizar" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="12" />
                                                 <JFXButton fx:id="alugVoltarDadosGeraisBtn" onAction="#action" text="Voltar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="12" />
                                                 <JFXButton fx:id="alugAtualizaBtn" disable="true" layoutX="215.0" layoutY="42.0" onAction="#action" text="Atualizar" GridPane.columnIndex="3" GridPane.rowIndex="12" />
-                                                <JFXDatePicker fx:id="alugEntradaDateP" layoutX="490.0" layoutY="42.0" onAction="#action" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                                <JFXTimePicker fx:id="alugEntradaTimeP" layoutX="650.0" layoutY="42.0" onAction="#action" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                                <JFXDatePicker fx:id="novoEntradaDateP" layoutX="490.0" layoutY="42.0" onAction="#action" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                                <JFXTimePicker fx:id="novoEntradaTimeP" layoutX="650.0" layoutY="42.0" onAction="#action" GridPane.columnIndex="4" GridPane.rowIndex="2" />
                                                 <Label layoutX="490.0" layoutY="16.0" text="Saída:" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
                                                    <font>
                                                       <Font size="15.0" />
@@ -262,12 +274,12 @@
                                                       <Font size="15.0" />
                                                    </font>
                                                 </Label>
-                                                <JFXCheckBox fx:id="alugSituacaoCBox" onAction="#action" selected="true" text="Ativo" unCheckedColor="RED" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                                                <JFXCheckBox fx:id="novoSituacaoCBox" onAction="#action" selected="true" text="Ativo" unCheckedColor="RED" GridPane.columnIndex="3" GridPane.rowIndex="5">
                                                    <GridPane.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                    </GridPane.margin>
                                                 </JFXCheckBox>
-                                                <JFXTextField fx:id="alugValorTotalField" onAction="#action" promptText="Total (R$)" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                <JFXTextField fx:id="novoValorTotalField" onAction="#action" promptText="Total (R$)" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                                    <GridPane.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                    </GridPane.margin>
@@ -296,6 +308,5 @@
             </Tab>
          </tabs>
       </TabPane>
-      <JFXChipView />
    </children>
 </AnchorPane>

@@ -56,126 +56,138 @@ public class ControlerReserva implements Initializable {
 	private List<Aluga> alugas = null;
 
 	@FXML
-	private Tab reservaTab;
+    private Tab reservaTab;
 
-	@FXML
-	private JFXButton pesqReservBtn;
+    @FXML
+    private JFXButton pesqReservBtn;
 
-	@FXML
-	private JFXTextField pesqReservField;
+    @FXML
+    private JFXTextField pesqReservField;
 
-	@FXML
-	private JFXButton atualizaListReservBtn;
+    @FXML
+    private JFXButton atualizaListReservBtn;
 
-	@FXML
-	private JFXButton novaReservaBtn;
+    @FXML
+    private JFXButton novaReservaBtn;
 
-	@FXML
-	private TableView<Reserva> reservTabela;
+    @FXML
+    private TableView<?> reservTabela;
 
-	@FXML
-	private TableColumn<Reserva, ?> dataReservCol;
+    @FXML
+    private TableColumn<?, ?> nomeReservCol;
 
-	@FXML
-	private TableColumn<Reserva, ?> horaReservCol;
+    @FXML
+    private TableColumn<?, ?> cpfReservCol;
 
-	@FXML
-	private TableColumn<Reserva, ?> valorReservCol;
+    @FXML
+    private TableColumn<?, ?> cnpjReservCol;
 
-	@FXML
-	private TableColumn<Reserva, ?> situacaoReservCol;
+    @FXML
+    private TableColumn<?, ?> dataReservCol;
 
-	@FXML
-	private Tab novaReservaTab;
+    @FXML
+    private TableColumn<?, ?> horaReservCol;
 
-	@FXML
-	private Tab clienteTab;
+    @FXML
+    private TableColumn<?, ?> valorReservCol;
 
-	@FXML
-	private JFXButton pesqClientBtn;
+    @FXML
+    private TableColumn<?, ?> situacaoReservCol;
 
-	@FXML
-	private JFXTextField pesqClientField;
+    @FXML
+    private JFXButton editarBtn;
 
-	@FXML
-	private JFXButton atualizaCliTabelaBtn;
+    @FXML
+    private Tab novaReservaTab;
 
-	@FXML
-	private TableView<Cliente> clienteTabela;
+    @FXML
+    private Tab clienteTab;
 
-	@FXML
-	private TableColumn<?, ?> nomeCol;
+    @FXML
+    private JFXButton pesqClientBtn;
 
-	@FXML
-	private TableColumn<?, ?> rgCol;
+    @FXML
+    private JFXTextField pesqClientField;
 
-	@FXML
-	private TableColumn<?, ?> cpfCol;
+    @FXML
+    private JFXButton atualizaCliTabelaBtn;
 
-	@FXML
-	private JFXButton voltarListBtn;
+    @FXML
+    private TableView<?> clienteTabela;
 
-	@FXML
-	private JFXButton contCadBtn;
+    @FXML
+    private TableColumn<?, ?> novoNomeCol;
 
-	@FXML
-	private Tab listaQuartosTab;
+    @FXML
+    private TableColumn<?, ?> novoCpfCol;
 
-	@FXML
-	private JFXButton pesqQuartoBtn;
+    @FXML
+    private TableColumn<?, ?> novoCnpjCol;
 
-	@FXML
-	private JFXTextField pesqQuartoField;
+    @FXML
+    private JFXButton voltarListBtn;
 
-	@FXML
-	private JFXButton atualizarQuartTabelaBtn;
+    @FXML
+    private JFXButton contCadBtn;
 
-	@FXML
-	private TableView<?> quartoTabela;
+    @FXML
+    private Tab listaQuartosTab;
 
-	@FXML
-	private TableColumn<?, ?> quartoCol;
+    @FXML
+    private JFXButton pesqQuartoBtn;
 
-	@FXML
-	private TableColumn<?, ?> qtCamasCol;
+    @FXML
+    private JFXTextField pesqQuartoField;
 
-	@FXML
-	private TableColumn<?, ?> tipoCol;
+    @FXML
+    private JFXButton atualizarQuartTabelaBtn;
 
-	@FXML
-	private TableColumn<?, ?> disponivelCol;
+    @FXML
+    private TableView<?> quartoTabela;
 
-	@FXML
-	private JFXButton voltarQuartBtn;
+    @FXML
+    private TableColumn<?, ?> quartoCol;
 
-	@FXML
-	private JFXButton contQuartBtn;
+    @FXML
+    private TableColumn<?, ?> qtCamasCol;
 
-	@FXML
-	private Tab dadosGeraisTab;
+    @FXML
+    private TableColumn<?, ?> tipoCol;
 
-	@FXML
-	private JFXTextField reserValorField;
+    @FXML
+    private TableColumn<?, ?> disponivelCol;
 
-	@FXML
-	private JFXDatePicker reserDateP;
+    @FXML
+    private JFXButton voltarQuartBtn;
 
-	@FXML
-	private JFXTimePicker reserTimeP;
+    @FXML
+    private JFXButton contQuartBtn;
 
-	@FXML
-	private JFXButton reserFinalBtn;
+    @FXML
+    private Tab dadosGeraisTab;
 
-	@FXML
-	private JFXButton reserVoltarDadosGBtn;
+    @FXML
+    private JFXTextField reserValorField;
 
-	@FXML
-	private JFXCheckBox reserSituacaoCBox;
+    @FXML
+    private JFXDatePicker reserDateP;
 
-	@FXML
-	void action(ActionEvent event) {
+    @FXML
+    private JFXTimePicker reserTimeP;
 
-	}
+    @FXML
+    private JFXButton reserFinalBtn;
+
+    @FXML
+    private JFXButton reserVoltarDadosGBtn;
+
+    @FXML
+    private JFXCheckBox reserSituacaoCBox;
+
+    @FXML
+    void action(ActionEvent event) {
+
+    }
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -204,11 +216,11 @@ public class ControlerReserva implements Initializable {
 		 * Tabela Cliente da Tab Reserva
 		 */
 
-		nomeCol.setCellValueFactory(new PropertyValueFactory<>("nome"));
+		novoNomeCol.setCellValueFactory(new PropertyValueFactory<>("nome"));
 
-		rgCol.setCellValueFactory(new PropertyValueFactory<>("rg"));
+		novoCpfCol.setCellValueFactory(new PropertyValueFactory<>("rg"));
 
-		cpfCol.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+		novoCnpjCol.setCellValueFactory(new PropertyValueFactory<>("cpf"));
 
 		/**
 		 * Tabela Quarto da Tab Reserva

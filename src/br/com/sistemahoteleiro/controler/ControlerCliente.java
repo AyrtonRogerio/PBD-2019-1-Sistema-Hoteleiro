@@ -920,22 +920,6 @@ public class ControlerCliente implements Initializable {
 			};
 		});
 
-		try
-
-		{
-			pessoaFisicas = Facade.getInstance().searchAllPessoaFisica();
-			if(!pessoaFisicas.isEmpty()) {
-			cliTabela.getItems().setAll(pessoaFisicas);
-			}
-			pessoaJuridicas = Facade.getInstance().searchAllPessoaJuridica();
-			if(!pessoaJuridicas.isEmpty()) {
-			cliJuriTabela.getItems().setAll(pessoaJuridicas);
-			}
-			
-		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 	}
 

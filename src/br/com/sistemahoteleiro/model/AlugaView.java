@@ -3,33 +3,30 @@
  */
 package br.com.sistemahoteleiro.model;
 
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 
+import org.hibernate.annotations.Immutable;
+import org.hibernate.annotations.Subselect;
 
 /**
- * @author ayrtons
+ * @author ayrton
  *
  */
+@Immutable
 @Entity
-@Table(name = "aluga")
-@SequenceGenerator(name = Entidade.SEQUENCE_ENTIDADE, sequenceName = Aluga.SEQUENCE_ENTIDADE, initialValue = 1, allocationSize = 1)
-public class Aluga extends Entidade {
+@Subselect("SELECT * FROM aluga")
+public class AlugaView {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	protected static final String SEQUENCE_ENTIDADE = "aluga_sequence";
+	@Id
+	private Integer id;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cliente_id")
@@ -38,14 +35,6 @@ public class Aluga extends Entidade {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "quarto_id")	
 	private Quarto quarto;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "usuario_id")
-	private Usuario usuario;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "caixa_id")
-	private Caixa caixa;
 	
 	
 	@Column(name = "data_entrada")
@@ -69,90 +58,21 @@ public class Aluga extends Entidade {
 	@Column(name = "valor_diaria")
 	private double valorDiaria;
 	
-	
-	
+	@Column
+	private boolean status;
+
 	/**
-	 * @return the dataEntrada
+	 * @return the id
 	 */
-	public LocalDate getDataEntrada() {
-		return dataEntrada;
+	public Integer getId() {
+		return id;
 	}
-	
+
 	/**
-	 * @param dataEntrada the dataEntrada to set
+	 * @param id the id to set
 	 */
-	public void setDataEntrada(LocalDate dataEntrada) {
-		this.dataEntrada = dataEntrada;
-	}
-	
-	/**
-	 * @return the horaEntrada
-	 */
-	public LocalTime getHoraEntrada() {
-		return horaEntrada;
-	}
-	
-	/**
-	 * @param horaEntrada the horaEntrada to set
-	 */
-	public void setHoraEntrada(LocalTime horaEntrada) {
-		this.horaEntrada = horaEntrada;
-	}
-	
-	/**
-	 * @return the dataSaida
-	 */
-	public LocalDate getDataSaida() {
-		return dataSaida;
-	}
-	
-	/**
-	 * @param dataSaida the dataSaida to set
-	 */
-	public void setDataSaida(LocalDate dataSaida) {
-		this.dataSaida = dataSaida;
-	}
-	
-	/**
-	 * @return the horaSaida
-	 */
-	public LocalTime getHoraSaida() {
-		return horaSaida;
-	}
-	
-	/**
-	 * @param horaSaida the horaSaida to set
-	 */
-	public void setHoraSaida(LocalTime horaSaida) {
-		this.horaSaida = horaSaida;
-	}
-	
-	/**
-	 * @return the diaria
-	 */
-	public int getDiaria() {
-		return diaria;
-	}
-	
-	/**
-	 * @param diaria the diaria to set
-	 */
-	public void setDiaria(int diaria) {
-		this.diaria = diaria;
-	}
-	
-	/**
-	 * @return the valorDiaria
-	 */
-	public double getValorDiaria() {
-		return valorDiaria;
-	}
-	
-	/**
-	 * @param valorDiaria the valorDiaria to set
-	 */
-	public void setValorDiaria(double valorDiaria) {
-		this.valorDiaria = valorDiaria;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	/**
@@ -170,34 +90,6 @@ public class Aluga extends Entidade {
 	}
 
 	/**
-	 * @return the funcionario
-	 */
-	public Usuario getFuncionario() {
-		return usuario;
-	}
-
-	/**
-	 * @param funcionario the funcionario to set
-	 */
-	public void setFuncionario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-	/**
-	 * @return the caixa
-	 */
-	public Caixa getCaixa() {
-		return caixa;
-	}
-
-	/**
-	 * @param caixa the caixa to set
-	 */
-	public void setCaixa(Caixa caixa) {
-		this.caixa = caixa;
-	}
-
-	/**
 	 * @return the quarto
 	 */
 	public Quarto getQuarto() {
@@ -210,6 +102,103 @@ public class Aluga extends Entidade {
 	public void setQuarto(Quarto quarto) {
 		this.quarto = quarto;
 	}
-	
+
+	/**
+	 * @return the dataEntrada
+	 */
+	public LocalDate getDataEntrada() {
+		return dataEntrada;
+	}
+
+	/**
+	 * @param dataEntrada the dataEntrada to set
+	 */
+	public void setDataEntrada(LocalDate dataEntrada) {
+		this.dataEntrada = dataEntrada;
+	}
+
+	/**
+	 * @return the horaEntrada
+	 */
+	public LocalTime getHoraEntrada() {
+		return horaEntrada;
+	}
+
+	/**
+	 * @param horaEntrada the horaEntrada to set
+	 */
+	public void setHoraEntrada(LocalTime horaEntrada) {
+		this.horaEntrada = horaEntrada;
+	}
+
+	/**
+	 * @return the dataSaida
+	 */
+	public LocalDate getDataSaida() {
+		return dataSaida;
+	}
+
+	/**
+	 * @param dataSaida the dataSaida to set
+	 */
+	public void setDataSaida(LocalDate dataSaida) {
+		this.dataSaida = dataSaida;
+	}
+
+	/**
+	 * @return the horaSaida
+	 */
+	public LocalTime getHoraSaida() {
+		return horaSaida;
+	}
+
+	/**
+	 * @param horaSaida the horaSaida to set
+	 */
+	public void setHoraSaida(LocalTime horaSaida) {
+		this.horaSaida = horaSaida;
+	}
+
+	/**
+	 * @return the diaria
+	 */
+	public int getDiaria() {
+		return diaria;
+	}
+
+	/**
+	 * @param diaria the diaria to set
+	 */
+	public void setDiaria(int diaria) {
+		this.diaria = diaria;
+	}
+
+	/**
+	 * @return the valorDiaria
+	 */
+	public double getValorDiaria() {
+		return valorDiaria;
+	}
+
+	/**
+	 * @param valorDiaria the valorDiaria to set
+	 */
+	public void setValorDiaria(double valorDiaria) {
+		this.valorDiaria = valorDiaria;
+	}
+
+	/**
+	 * @return the status
+	 */
+	public boolean isStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
 	
 }

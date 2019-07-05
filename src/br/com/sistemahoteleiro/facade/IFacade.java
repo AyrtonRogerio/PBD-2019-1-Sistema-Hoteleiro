@@ -3,12 +3,14 @@
  */
 package br.com.sistemahoteleiro.facade;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import br.com.sistemahoteleiro.exception.BusinessException;
 import br.com.sistemahoteleiro.model.Administrador;
 import br.com.sistemahoteleiro.model.Aluga;
 import br.com.sistemahoteleiro.model.Caixa;
+import br.com.sistemahoteleiro.model.CaixaView;
 import br.com.sistemahoteleiro.model.Cliente;
 import br.com.sistemahoteleiro.model.Contato;
 import br.com.sistemahoteleiro.model.Endereco;
@@ -18,6 +20,7 @@ import br.com.sistemahoteleiro.model.Parcela;
 import br.com.sistemahoteleiro.model.PessoaFisica;
 import br.com.sistemahoteleiro.model.PessoaJuridica;
 import br.com.sistemahoteleiro.model.Quarto;
+import br.com.sistemahoteleiro.model.QuartoView;
 import br.com.sistemahoteleiro.model.Reserva;
 import br.com.sistemahoteleiro.model.SuperUsuario;
 import br.com.sistemahoteleiro.model.Usuario;
@@ -86,6 +89,10 @@ public interface IFacade {
 	public void removeCaixa(Caixa caixa) throws BusinessException;
 
 	public void disableCaixa(Caixa caixa) throws BusinessException;
+	
+	public Caixa buscarCaixaPorData(LocalDate date) throws BusinessException;
+	
+	public Caixa buscarCaixaPorAnterior() throws BusinessException;
 
 	//Contato
 
@@ -183,7 +190,7 @@ public interface IFacade {
 
 	public List<Quarto> searchAllQuarto() throws BusinessException;
 	
-	public List<Quarto> seearchBuscarTodosQuarto(String busca) throws BusinessException;
+	public List<QuartoView> buscarQuartoViewDisponivel(String busca) throws BusinessException;
 
 	public void removeQuarto(Quarto quarto) throws BusinessException;
 
