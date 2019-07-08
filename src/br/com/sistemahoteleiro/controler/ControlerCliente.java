@@ -58,7 +58,7 @@ public class ControlerCliente implements Initializable {
 	private Tab listaClienteTab;
 
 	@FXML
-	private JFXTextField buscCliField;
+	private JFXTextField buscCliField;//
 
 	@FXML
 	private JFXButton buscCliBtn;
@@ -142,58 +142,58 @@ public class ControlerCliente implements Initializable {
 	private GridPane CliJuriGridLay;
 
 	@FXML
-	private JFXTextField razaoSociCliField;
+	private JFXTextField razaoSociCliField;//
 
 	@FXML
-	private JFXTextField cnpjCliField;
+	private JFXTextField cnpjCliField;//
 
 	@FXML
-	private JFXTextField nomeCliField;
+	private JFXTextField nomeCliField;//
 	@FXML
-	private JFXCheckBox statusClienteCBox;
+	private JFXCheckBox statusClienteCBox;//
 
 	@FXML
 	private GridPane CliFisGridLay;
 
 	@FXML
-	private JFXTextField cpfCliField;
+	private JFXTextField cpfCliField;//
 
 	@FXML
-	private JFXDatePicker dataCli;
+	private JFXDatePicker dataCli;//
 
 	@FXML
-	private JFXComboBox<TipoSexo> sexoCliCobBox;
+	private JFXComboBox<TipoSexo> sexoCliCobBox;//
 
 	@FXML
-	private JFXComboBox<TipoEstadoCivil> estadCivCliCobBox;
+	private JFXComboBox<TipoEstadoCivil> estadCivCliCobBox;//
 
 	@FXML
-	private JFXComboBox<TipoOcupacao> ocupacaoCliCobBox;
+	private JFXComboBox<TipoOcupacao> ocupacaoCliCobBox;//
 	@FXML
-	private JFXTextField rgCliField;
+	private JFXTextField rgCliField;//
 
 	@FXML
 	private Tab endClienteTab;
 
 	@FXML
-	private JFXTextField ruaEndCliField;
+	private JFXTextField ruaEndCliField;//
 
 	@FXML
-	private JFXTextField cepEndCliField;
+	private JFXTextField cepEndCliField;//
 
 	@FXML
-	private JFXTextField numEndCliField;
+	private JFXTextField numEndCliField;//
 
 	@FXML
-	private JFXTextField bairroEndCliField;
+	private JFXTextField bairroEndCliField;//
 
 	@FXML
-	private JFXTextField cidadeEndCliField;
+	private JFXTextField cidadeEndCliField;//
 
 	@FXML
-	private JFXComboBox<TipoEstadoUF> ufEndCliCobBox;
+	private JFXComboBox<TipoEstadoUF> ufEndCliCobBox;//
 	@FXML
-	private JFXCheckBox statusEnderecoCBox;
+	private JFXCheckBox statusEnderecoCBox;//
 
 	@FXML
 	private JFXButton voltarEndCliBtn;
@@ -205,16 +205,16 @@ public class ControlerCliente implements Initializable {
 	private Tab contClienteTab;
 
 	@FXML
-	private JFXTextField celularContCliField;
+	private JFXTextField celularContCliField;//
 
 	@FXML
-	private JFXTextField foneContCliField;
+	private JFXTextField foneContCliField;//
 
 	@FXML
-	private JFXTextField emailContCliField;
+	private JFXTextField emailContCliField;//
 
 	@FXML
-	private JFXCheckBox statusContatoCBox;
+	private JFXCheckBox statusContatoCBox;//
 
 	@FXML
 	private JFXButton voltarContCliBtn;
@@ -791,6 +791,51 @@ public class ControlerCliente implements Initializable {
 	 */
 	public void limparCampos() {
 
+		buscCliField.clear();
+		
+		razaoSociCliField.clear();
+		
+		cnpjCliField.clear();
+		
+		nomeCliField.clear();
+		
+		statusClienteCBox.setSelected(true);
+		
+		cpfCliField.clear();
+		
+		dataCli.getEditor().clear();
+		
+		sexoCliCobBox.getEditor().clear();
+		
+		estadCivCliCobBox.getEditor().clear();
+		
+		ocupacaoCliCobBox.getEditor().clear();
+		
+		rgCliField.clear();
+		
+		ruaEndCliField.clear();
+		
+		cepEndCliField.clear();
+		
+		numEndCliField.clear();
+		
+		bairroEndCliField.clear();
+		
+		cidadeEndCliField.clear();
+		
+		ufEndCliCobBox.getEditor().clear();
+		
+		statusEnderecoCBox.setSelected(true);
+		
+		celularContCliField.clear();
+		
+		foneContCliField.clear();
+		
+		emailContCliField.clear();
+		
+		statusContatoCBox.setSelected(true);
+		
+		
 	}
 
 	/**

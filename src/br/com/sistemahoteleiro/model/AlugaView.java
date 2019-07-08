@@ -34,7 +34,7 @@ public class AlugaView {
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "quarto_id")	
-	private Quarto quarto;
+	private QuartoView quarto;
 	
 	
 	@Column(name = "data_entrada")
@@ -92,14 +92,14 @@ public class AlugaView {
 	/**
 	 * @return the quarto
 	 */
-	public Quarto getQuarto() {
+	public QuartoView getQuarto() {
 		return quarto;
 	}
 
 	/**
 	 * @param quarto the quarto to set
 	 */
-	public void setQuarto(Quarto quarto) {
+	public void setQuarto(QuartoView quarto) {
 		this.quarto = quarto;
 	}
 

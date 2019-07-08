@@ -14,6 +14,6 @@ import br.com.sistemahoteleiro.model.Cliente;
  */
 public interface IDaoCliente extends IDaoGeneric<Cliente> {
 
-	
+	public List<Cliente> buscarCliente(String busca) throws DaoException;
 	
 }

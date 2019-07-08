@@ -39,6 +39,7 @@ import br.com.sistemahoteleiro.business.IBusinessUsuario;
 import br.com.sistemahoteleiro.exception.BusinessException;
 import br.com.sistemahoteleiro.model.Administrador;
 import br.com.sistemahoteleiro.model.Aluga;
+import br.com.sistemahoteleiro.model.AlugaView;
 import br.com.sistemahoteleiro.model.Caixa;
 import br.com.sistemahoteleiro.model.CaixaView;
 import br.com.sistemahoteleiro.model.Cliente;
@@ -176,6 +177,12 @@ public class Facade implements IFacade {
 		businessAluga.disable(aluga);
 	}
 
+	@Override
+	public List<AlugaView> buscarAlugadosView(String busca) throws BusinessException {
+		// TODO Auto-generated method stub
+		return businessAluga.buscarAlugados(busca);
+	}
+	
 	//Caixa
 	
 	@Override
@@ -632,6 +639,8 @@ public class Facade implements IFacade {
 		// TODO Auto-generated method stub
 		return businessUsuario.searchBuscarTodos(busca);
 	}
+
+	
 
 	
 	

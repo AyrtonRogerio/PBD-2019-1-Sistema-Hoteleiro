@@ -23,17 +23,20 @@ public class SQLUtil {
 	public static final String BUSCAR_BUSCA_CLIENTE_JURIDICO = "select cj from PessoaJuridica cj where lower(str(cj.nome)) like :busca "
 			+ "or lower(str(cj.razaoSocial)) like :busca or cj.cnpj like :busca";
 
-//	public static final String BUSCAR_CAIXA_DATA = "select c from Caixa c where c.dataAbertura = :dataAbertura";
-//
-//	public static final String BUSCAR_CAIXA_ANTERIOR = "select c from Caixa where id = (select max(id) from Caixa)";
+	public static final String BUSCAR_CAIXA_DATA = "select c from Caixa c where c.dataAbertura = :dataAbertura";
+
+	public static final String BUSCAR_CAIXA_ANTERIOR = "select c from Caixa where id = (select max(id) from Caixa)";
+
+	public static final String BUSCAR_CLIENTES_FISICO_JURIDICO = "SELECT DISTINCT e FROM Cliente e, PessoaFisica pf, PessoaJuridica pj "
+			+ "WHERE lower(str(e.nome)) like :busca or lower(str(pf.cpf)) like :busca or lower(str(pj.cnpj)) like :busca";
 
 	// VIEWS
 	public static final String BUSCAR_QUARTO_VIEW_DISP = "select q from QuartoView q where (lower(str(q.tipoQuarto))) like :busca and disponivel = true";
 
-	public static final String BUSCAR_ALUGA_VIEW_DISP = "select a from AlugaView a ";
-
-	public static final String BUSCAR_CAIXA_DATA = "select c from CaixaView c where c.dataAbertura = :dataAbertura";
-
-	public static final String BUSCAR_CAIXA_ANTERIOR = "select c from CaixaView where id = (select max(id) from Caixa)";
+	public static final String BUSCAR_ALUGA_VIEW_DISP = "select a.dataEntrada, a.horaEntrada, a.dataSaida, a.horaSaida, "
+			+ "a.status, q.numero "
+			+ "from AlugaView a inner join Cliente c, PessoaFisica pf, PessoaJuridica pj on a.cliente_id = c.id inner join QuartoView q on "
+			+ "a.quarto_id = q.id where lower(str(c.nome)) like :busca or lower(str(pf.cpf)) like :busca or "
+			+ "lower(str(pj.cnpj)) like :busca or lower(str(q.numero)) like :busca";
 
 }

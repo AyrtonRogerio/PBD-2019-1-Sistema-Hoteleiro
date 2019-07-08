@@ -9,6 +9,7 @@ import java.util.List;
 import br.com.sistemahoteleiro.exception.BusinessException;
 import br.com.sistemahoteleiro.model.Administrador;
 import br.com.sistemahoteleiro.model.Aluga;
+import br.com.sistemahoteleiro.model.AlugaView;
 import br.com.sistemahoteleiro.model.Caixa;
 import br.com.sistemahoteleiro.model.CaixaView;
 import br.com.sistemahoteleiro.model.Cliente;
@@ -77,6 +78,8 @@ public interface IFacade {
 	public void removeAluga(Aluga aluga) throws BusinessException;
 
 	public void disableAluga(Aluga aluga) throws BusinessException;
+	
+	public List<AlugaView> buscarAlugadosView(String busca) throws BusinessException;
 
 	//Caixa
 
