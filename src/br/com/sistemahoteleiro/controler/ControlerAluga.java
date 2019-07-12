@@ -3,6 +3,7 @@ package br.com.sistemahoteleiro.controler;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
@@ -11,8 +12,10 @@ import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
 
+import br.com.sistemahoteleiro.exception.BusinessException;
+import br.com.sistemahoteleiro.facade.Facade;
 import br.com.sistemahoteleiro.model.Aluga;
-import br.com.sistemahoteleiro.model.AlugaView;
+import br.com.sistemahoteleiro.model.AlugaPessoaFisicaView;
 import br.com.sistemahoteleiro.model.Caixa;
 import br.com.sistemahoteleiro.model.Cliente;
 import br.com.sistemahoteleiro.model.PessoaFisica;
@@ -21,12 +24,14 @@ import br.com.sistemahoteleiro.model.Quarto;
 import br.com.sistemahoteleiro.model.QuartoView;
 import br.com.sistemahoteleiro.model.Usuario;
 import br.com.sistemahoteleiro.util.MaskFieldUtil;
+import br.com.sistemahoteleiro.view.Message;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
@@ -35,12 +40,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class ControlerAluga implements Initializable {
 
-	private Quarto quarto;
+	private QuartoView quartoView;
 	private Aluga aluga;
-	private Cliente Cliente;
+	private Cliente cliente;
 	private Caixa caixa;
 	private Usuario usuario;
-
+	
 	@FXML
 	private Tab alugadosListTab;
 
@@ -65,70 +70,69 @@ public class ControlerAluga implements Initializable {
 	@FXML
 	private Tab cliFisiTab;
 
-	//Tabela de listagem de alugueis de cliente físico 
+	// Tabela de listagem de alugueis de cliente físico
 	@FXML
-	private TableView<AlugaView> cliFisTabela;
+	private TableView<AlugaPessoaFisicaView> cliFisTabela;
 
 	@FXML
-	private TableColumn<AlugaView, Cliente> nomeCliFisCol;
+	private TableColumn<AlugaPessoaFisicaView, PessoaFisica> nomeCliFisCol;
 
 	@FXML
-	private TableColumn<AlugaView, Cliente> cpfCliFisCol;
+	private TableColumn<AlugaPessoaFisicaView, PessoaFisica> cpfCliFisCol;
 
 	@FXML
-	private TableColumn<AlugaView, QuartoView> quartoCliFisCol;
+	private TableColumn<AlugaPessoaFisicaView, QuartoView> quartoCliFisCol;
 
 	@FXML
-	private TableColumn<AlugaView, LocalDate> dataEntCliFisCol;
+	private TableColumn<AlugaPessoaFisicaView, LocalDate> dataEntCliFisCol;
 
 	@FXML
-	private TableColumn<AlugaView, LocalTime> horaEntCliFisCol;
+	private TableColumn<AlugaPessoaFisicaView, LocalTime> horaEntCliFisCol;
 
 	@FXML
-	private TableColumn<AlugaView, LocalDate> dataSaidaCliFisCol;
+	private TableColumn<AlugaPessoaFisicaView, LocalDate> dataSaidaCliFisCol;
 
 	@FXML
-	private TableColumn<AlugaView, LocalTime> horaSaidaCliFisCol;
+	private TableColumn<AlugaPessoaFisicaView, LocalTime> horaSaidaCliFisCol;
 
 	@FXML
-	private TableColumn<AlugaView, Boolean> situacaoCliFisCol;
+	private TableColumn<AlugaPessoaFisicaView, Boolean> situacaoCliFisCol;
 
-	//Fim tabela
-	
-	
-	//Tabela de listagem de alugueis de cliente jurídico
+	// Fim tabela
+
+	// Tabela de listagem de alugueis de cliente jurídico
 	@FXML
 	private Tab cliJuriTab;
 
 	@FXML
-	private TableView<AlugaView> cliJuriTabela;
+	private TableView<AlugaPessoaFisicaView> cliJuriTabela;
 
 	@FXML
-	private TableColumn<AlugaView, Cliente> nomeCliJurCol;
+	private TableColumn<AlugaPessoaFisicaView, PessoaJuridica> nomeCliJurCol;
 
 	@FXML
-	private TableColumn<AlugaView, Cliente> cnpjCliJurCol;
+	private TableColumn<AlugaPessoaFisicaView, PessoaJuridica> cnpjCliJurCol;
 
 	@FXML
-	private TableColumn<AlugaView, QuartoView> quartoCliJurCol;
+	private TableColumn<AlugaPessoaFisicaView, QuartoView> quartoCliJurCol;
 
 	@FXML
-	private TableColumn<AlugaView, LocalDate> dataEntCliJurCol;
+	private TableColumn<AlugaPessoaFisicaView, LocalDate> dataEntCliJurCol;
 
 	@FXML
-	private TableColumn<AlugaView, LocalTime> horaEntCliJurCol;
+	private TableColumn<AlugaPessoaFisicaView, LocalTime> horaEntCliJurCol;
 
 	@FXML
-	private TableColumn<AlugaView, LocalDate> dataSaidaCliJurCol;
+	private TableColumn<AlugaPessoaFisicaView, LocalDate> dataSaidaCliJurCol;
 
 	@FXML
-	private TableColumn<AlugaView, LocalTime> horaSaidaCliJurCol;
+	private TableColumn<AlugaPessoaFisicaView, LocalTime> horaSaidaCliJurCol;
 
 	@FXML
-	private TableColumn<AlugaView, Boolean> situacaoCliJurCol;
+	private TableColumn<AlugaPessoaFisicaView, Boolean> situacaoCliJurCol;
 
-	//Fim tabela
-	
+	// Fim tabela
+
 	@FXML
 	private JFXButton editarAluguelBtn;
 
@@ -153,8 +157,7 @@ public class ControlerAluga implements Initializable {
 	@FXML
 	private JFXRadioButton novoCliJuriRadio;
 
-	
-	//Tabela de listagem de cliente físico para novo aluguel
+	// Tabela de listagem de cliente físico para novo aluguel
 	@FXML
 	private Tab novoCliFisiTab;
 
@@ -167,10 +170,9 @@ public class ControlerAluga implements Initializable {
 	@FXML
 	private TableColumn<PessoaFisica, String> cpfCliCol;
 
-	//Fim tabela
-	
-	
-	//Tabela de listagem de cliente juridico para novo aluguel
+	// Fim tabela
+
+	// Tabela de listagem de cliente juridico para novo aluguel
 	@FXML
 	private Tab novoCliJuriTab;
 
@@ -183,8 +185,8 @@ public class ControlerAluga implements Initializable {
 	@FXML
 	private TableColumn<PessoaJuridica, String> cnpjJuriCol;
 
-	//Fim tabela
-	
+	// Fim tabela
+
 	@FXML
 	private JFXButton alugVoltarListAlugBtn;
 
@@ -203,8 +205,8 @@ public class ControlerAluga implements Initializable {
 	@FXML
 	private JFXButton alugAtualizaQuartTabelaBtn;
 
-	//Tabela de listagem de quartos disponiveis para um novo aluguel
-	
+	// Tabela de listagem de quartos disponiveis para um novo aluguel
+
 	@FXML
 	private TableView<QuartoView> alugQuartoTabela;
 
@@ -220,8 +222,8 @@ public class ControlerAluga implements Initializable {
 	@FXML
 	private TableColumn<QuartoView, Boolean> novoDisponivelCol;
 
-	//Fim tabela
-	
+	// Fim tabela
+
 	@FXML
 	private JFXButton alugVoltarQuartBtn;
 
@@ -261,212 +263,247 @@ public class ControlerAluga implements Initializable {
 	@FXML
 	private JFXTextField novoValorTotalField;
 
-	
-	
 	@FXML
 	void action(ActionEvent event) {
 
-		//Eventos da seção de listagem de alugueis
-		
-		if(event.getSource() == cliFisiRadio) {
-			
+		// Eventos da seção de listagem de alugueis
+
+		if (event.getSource() == cliFisiRadio) {
+
 			cliFisiRadio.setSelected(true);
 			cliJuriRadio.setSelected(false);
 			cliFisiTab.setDisable(false);
 			cliJuriTab.setDisable(true);
 			cliFisiTab.getTabPane().getSelectionModel().select(cliFisiTab);
 		}
-		
-		if(event.getSource() == cliJuriRadio) {
-			
-			
+
+		if (event.getSource() == cliJuriRadio) {
+
 			cliJuriRadio.setSelected(true);
 			cliFisiRadio.setSelected(false);
-		
+
 			cliFisiTab.setDisable(true);
 			cliJuriTab.setDisable(false);
 			cliJuriTab.getTabPane().getSelectionModel().select(cliJuriTab);
 		}
-		
+
 		/**
-		 * Buscar alugueis 
+		 * Buscar alugueis
 		 */
-		if(event.getSource() == pesqAluguelBtn) {
-			
-			
+		if (event.getSource() == pesqAluguelBtn) {
+
 			/**
-			 * Buscar por cliente físico 
+			 * Buscar por cliente físico
 			 */
-			if(cliFisiRadio.isSelected()) {
-				
+			if (cliFisiRadio.isSelected()) {
+
 				cliFisiRadio.setSelected(true);
 				cliJuriRadio.setSelected(false);
-		
+				
+				
 			}
-			
+
 			/**
 			 * Buscar por cliente juridico
 			 */
-			if(cliJuriRadio.isSelected()) {
-				
+			if (cliJuriRadio.isSelected()) {
+
 				cliJuriRadio.setSelected(true);
 				cliFisiRadio.setSelected(false);
-		
+
 			}
-			
+
 		}
-		
-		
-		if(event.getSource() == novoAluguelBtn) {
-			
-			
+
+		if (event.getSource() == novoAluguelBtn) {
+
 			novoAluguelTab.setDisable(false);
 			novoAluguelTab.getTabPane().getSelectionModel().select(novoAluguelTab);
-			
+
 		}
-		
-		
-		if(event.getSource() == editarAluguelBtn) {
-			
-			
-			
+
+		if (event.getSource() == editarAluguelBtn) {
+
 		}
-		
-		//Fim dos eventos da seção de listagem de alugueis
-		
-		//--------------------------------------------------------------------------------
-		
-		//eventos da seção de novo aluguel - Cliente
-		
-		if(event.getSource() == novoCliFisiRadio) {
-			
+
+		// Fim dos eventos da seção de listagem de alugueis
+
+		// --------------------------------------------------------------------------------
+
+		// eventos da seção de novo aluguel - Cliente
+
+		if (event.getSource() == novoCliFisiRadio) {
+
 			novoCliFisiRadio.setSelected(true);
 			novoCliJuriRadio.setSelected(false);
 			novoCliFisiTab.setDisable(false);
 			novoCliJuriTab.setDisable(true);
 			novoCliFisiTab.getTabPane().getSelectionModel().select(novoCliFisiTab);
-			
+
 		}
-		
-		if(event.getSource() == novoCliJuriRadio) {
-			
+
+		if (event.getSource() == novoCliJuriRadio) {
+
 			novoCliFisiRadio.setSelected(false);
 			novoCliJuriRadio.setSelected(true);
 			novoCliFisiTab.setDisable(true);
 			novoCliJuriTab.setDisable(false);
 			novoCliJuriTab.getTabPane().getSelectionModel().select(novoCliJuriTab);
 		}
-		
-		
-		if(event.getSource() == alugPesqClientBtn) {
-			
-			
+
+		if (event.getSource() == alugPesqClientBtn) {
+
 			/**
 			 * cliente fisico selecionado
 			 */
-			if(novoCliFisiRadio.isSelected()) {
+			if (novoCliFisiRadio.isSelected()) {
+
 				
+				try {
+					
+					novoCliTabela.getItems().setAll(Facade.getInstance().
+							buscarPessoasFisica(alugPesqClientField.getText()));
+					limparCamposPesquisa();
+				} catch (BusinessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
-			
+
 			/**
 			 * cliente juridico selecionado
 			 */
-			if(novoCliJuriRadio.isSelected()) {
+			if (novoCliJuriRadio.isSelected()) {
+
+				try {
+					novoCliJuriTabela.getItems().setAll(Facade.getInstance().
+							buscarPessoasJuridica(alugPesqClientField.getText()));
+					limparCamposPesquisa();
+				} catch (BusinessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 			}
-			
+
 		}
-		
+
 		/**
 		 * Volta para a seção de listagem de alugueis
 		 */
-		if(event.getSource() == alugVoltarListAlugBtn) {
-			
+		if (event.getSource() == alugVoltarListAlugBtn) {
+
 			novoAluguelTab.setDisable(true);
 			alugadosListTab.getTabPane().getSelectionModel().select(alugadosListTab);
-			
+
 		}
-		
+
 		/**
 		 * Continua para o Tab quartos
 		 */
-		if(event.getSource() == alugContCadBtn) {
-			
-			
+		if (event.getSource() == alugContCadBtn) {
+
+			if(novoCliTabela.getSelectionModel().getSelectedItem() != null) {
+
+				cliente = novoCliTabela.getSelectionModel().getSelectedItem();
+
+			} else if (novoCliJuriTabela.getSelectionModel().getSelectedItem() != null) {
+
+				cliente = novoCliJuriTabela.getSelectionModel().getSelectedItem();
+
+			}
+
 			alugListQuartTab.setDisable(false);
 			alugListQuartTab.getTabPane().getSelectionModel().select(alugListQuartTab);
 			
 		}
-		
+
 		// Fim dos eventos da seção de novo aluguel - Cliente
-		
-		//-------------------------------------------------------------
-		
-		//eventos da seção de novo aluguel - Quarto
-		
-		if(event.getSource() == alugPesqQuartoBtn) {
-			
-			
+
+		// -------------------------------------------------------------
+
+		// eventos da seção de novo aluguel - Quarto
+
+		if (event.getSource() == alugPesqQuartoBtn) {
+
+			try {
+				alugQuartoTabela.getItems().setAll(Facade.getInstance().
+						buscarQuartoViewDisponivel(alugPesqQuartoField.getText()));
+				limparCamposPesquisa();
+			} catch (BusinessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		}
-		
+
 		/**
-		 * volta para a seção do cliente 
+		 * volta para a seção do cliente
 		 */
-		if(event.getSource() == alugVoltarQuartBtn) {
-			
+		if (event.getSource() == alugVoltarQuartBtn) {
+
 			alugClienteTab.getTabPane().getSelectionModel().select(alugClienteTab);
-			
+
 		}
-		
+
 		/**
 		 * continua para a seção do dados do aluguel
 		 */
-		if(event.getSource() == alugContQuartBtn) {
-			
-			alugDadosGeralTab.setDisable(false);
-			alugDadosGeralTab.getTabPane().getSelectionModel().select(alugDadosGeralTab);
-			
-		}		
-		//Fim dos eventos da seção de quartos
-		
-		//-------------------------------------------------------------------------------
-		
-		//Eventos da seção de dados gerais 
-		
-		
+		if (event.getSource() == alugContQuartBtn) {
+
+			if (alugQuartoTabela.getSelectionModel().getSelectedItem() != null) {
+				quartoView = alugQuartoTabela.getSelectionModel().getSelectedItem();
+
+				alugDadosGeralTab.setDisable(false);
+				alugDadosGeralTab.getTabPane().getSelectionModel().select(alugDadosGeralTab);
+
+			} else {
+				Message.getInstance().viewMessage(AlertType.WARNING, "Atenção!", "Quarto não selecionado!",
+						"Selecione um quarto para prosseguir!");
+			}
+
+
+		}
+		// Fim dos eventos da seção de quartos
+
+		// -------------------------------------------------------------------------------
+
+		// Eventos da seção de dados gerais
+
 		/**
 		 * Voltar pra seção de listagem de quartos
 		 */
-		if(event.getSource() == alugVoltarDadosGeraisBtn) {
-			
+		if (event.getSource() == alugVoltarDadosGeraisBtn) {
+
 			alugListQuartTab.getTabPane().getSelectionModel().select(alugListQuartTab);
-			
+
 		}
-		
-		
+
 		/**
 		 * Finalizar o cadastro de um aluguel
 		 */
-		if(event.getSource() == alugFinalizarBtn) {
-			
-			
+		if (event.getSource() == alugFinalizarBtn) {
+
+			try {
+				cadastrarAluguel(quartoView);
+				
+			} catch (BusinessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Message.getInstance().viewMessage(AlertType.ERROR, "Erro!", "Erro ao cadastrar!", e.getMessage());
+			}
 			
 		}
-		
+
 		/**
 		 * Atualizar o aluguel
 		 */
-		if(event.getSource() == alugAtualizaBtn) {
-			
-			
-			
+		if (event.getSource() == alugAtualizaBtn) {
+
 		}
-		
+
 	}
 
-	
-	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -475,7 +512,6 @@ public class ControlerAluga implements Initializable {
 
 	}
 
-	
 	/**
 	 * Método para iniciar componentes da tela de aluguel
 	 */
@@ -522,16 +558,16 @@ public class ControlerAluga implements Initializable {
 		/**
 		 * Tabela do cliente físico para um novo cadastro de aluguel.
 		 */
-		nomeCliCol.setCellValueFactory(new PropertyValueFactory<>(""));
+		nomeCliCol.setCellValueFactory(new PropertyValueFactory<>("nome"));
 
-		cpfCliCol.setCellValueFactory(new PropertyValueFactory<>(""));
+		cpfCliCol.setCellValueFactory(new PropertyValueFactory<>("cpf"));
 
 		/**
 		 * Tabela do cliente jurídico para um novo cadastro de aluguel.
 		 */
-		nomeCliJuriCol.setCellValueFactory(new PropertyValueFactory<>(""));
+		nomeCliJuriCol.setCellValueFactory(new PropertyValueFactory<>("nome"));
 
-		cnpjJuriCol.setCellValueFactory(new PropertyValueFactory<>(""));
+		cnpjJuriCol.setCellValueFactory(new PropertyValueFactory<>("cnpj"));
 
 		/**
 		 * Tabela de quartos
@@ -548,15 +584,22 @@ public class ControlerAluga implements Initializable {
 		MaskFieldUtil.monetaryField(novoValorDiariaField);
 
 	}
-
-	public void limparCampos() {
-
+	
+	public void limparCamposPesquisa() {
+		
 		pesqAluguelField.clear();
 
 		alugPesqClientField.clear();
 
 		alugPesqQuartoField.clear();
 
+		
+	}
+	
+
+	public void limparCampos() {
+
+		
 		novoValorDiariaField.clear();
 
 		novoSaidaDateP.getEditor().clear();
@@ -575,15 +618,43 @@ public class ControlerAluga implements Initializable {
 
 	public void atualizarAluguel() {
 
-		
-		
-		
 	}
 
-	public void cadastrarAluguel() {
+	public void cadastrarAluguel(QuartoView q) throws BusinessException {
 
+		aluga = new Aluga();
 		
+		Caixa c = Facade.getInstance().searchCaixa(ControlerLogin.getCaixa().getId());
+
+		int dias = novoSaidaDateP.getValue().compareTo(novoEntradaDateP.getValue());
 		
+		System.out.println("dias da reserva: " + dias);
+		
+		aluga.setDiaria(dias);
+		aluga.setValorDiaria(Double.parseDouble(novoValorDiariaField.getText()));
+		
+		aluga.setValorTotal((aluga.getValorDiaria() * dias));
+		c.setEntrada(c.getSaldo() + aluga.getValorTotal());
+		
+		aluga.setCaixa(c);
+
+		aluga.setDataEntrada(novoEntradaDateP.getValue());
+		aluga.setHoraEntrada(novoEntradaTimeP.getValue());
+
+		aluga.setDataSaida(novoSaidaDateP.getValue());
+		aluga.setHoraSaida(novoSaidaTimeP.getValue());
+
+
+
+		aluga.setStatus(novoSituacaoCBox.isSelected());
+
+		aluga.setFuncionario(ControlerLogin.getUsuario());
+
+		aluga.setCliente(cliente);
+
+		aluga.setQuarto(Facade.getInstance().searchQuarto(q.getId()));
+		
+		Facade.getInstance().createOrUpdateAluga(aluga);
 		
 	}
 

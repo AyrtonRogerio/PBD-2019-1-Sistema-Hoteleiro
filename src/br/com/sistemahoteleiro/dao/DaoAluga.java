@@ -5,12 +5,13 @@ package br.com.sistemahoteleiro.dao;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 import br.com.sistemahoteleiro.exception.DaoException;
 import br.com.sistemahoteleiro.model.Aluga;
-import br.com.sistemahoteleiro.model.AlugaView;
+import br.com.sistemahoteleiro.model.AlugaPessoaFisicaView;
 import br.com.sistemahoteleiro.util.SQLUtil;
 
 /**
@@ -28,10 +29,12 @@ public class DaoAluga extends DaoGeneric<Aluga> implements IDaoAluga {
 	}
 
 	
-	public List<AlugaView> buscarAlugados(String busca) throws DaoException {
+	
+	
+	public List<AlugaPessoaFisicaView> buscarAlugados(String busca) throws DaoException {
 		
 		try {
-		TypedQuery<AlugaView> typedQuery = entityManager().createQuery(SQLUtil.BUSCAR_ALUGA_VIEW_DISP, AlugaView.class);
+		TypedQuery<AlugaPessoaFisicaView> typedQuery = entityManager().createQuery(SQLUtil.BUSCAR_ALUGA_VIEW_FISICA, AlugaPessoaFisicaView.class);
 		typedQuery.setParameter("busca", "%" + busca + "%");
 		return typedQuery.getResultList();
 		}catch (NoResultException e) {
@@ -43,9 +46,36 @@ public class DaoAluga extends DaoGeneric<Aluga> implements IDaoAluga {
 			// TODO: handle exception
 			e.printStackTrace();
 			System.err.println(e.getMessage());
-			throw new DaoException("Erro ao buscar " + AlugaView.class.getSimpleName() + " " + e.getMessage());
+			throw new DaoException("Erro ao buscar " + AlugaPessoaFisicaView.class.getSimpleName() + " " + e.getMessage());
 		}
 		
 	}
+
+
+
+
+	@Override
+	public EntityManager entityManager() {
+		// TODO Auto-generated method stub
+		return super.entityManager();
+	}
+
+
+
+
+	@Override
+	public void create(Aluga t) throws DaoException {
+		// TODO Auto-generated method stub
+		EntityManager em = entityManager();
+		
+		em.persist(t);
+		em.refresh(t.getCaixa());
+		em.refresh(t.getCliente());
+		em.refresh(t.getUsuario());
+		em.refresh(t.getQuarto());
+		
+	}
+
+
 	
 }

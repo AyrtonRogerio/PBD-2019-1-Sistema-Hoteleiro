@@ -12,6 +12,7 @@ import br.com.sistemahoteleiro.exception.DaoException;
 import br.com.sistemahoteleiro.exception.ValidationException;
 import br.com.sistemahoteleiro.model.Cliente;
 import br.com.sistemahoteleiro.model.PessoaFisica;
+import br.com.sistemahoteleiro.model.PessoaFisicaView;
 
 /**
  * @author ayrtons
@@ -59,11 +60,11 @@ public class BusinessPessoaFisica extends BusinessGeneric<PessoaFisica> implemen
 	}
 	
 	@Override
-	public List<PessoaFisica> searchBuscarTodos(String string) throws BusinessException {
+	public List<PessoaFisica> buscarTodos(String string) throws BusinessException {
 		// TODO Auto-generated method stub
 		 
 		try {
-			List<PessoaFisica> pessoaFisicas = daoPessoaFisica.searchBuscarTodos(string);
+			List<PessoaFisica> pessoaFisicas = daoPessoaFisica.buscarTodos(string);
 		
 			return pessoaFisicas;
 		
@@ -74,6 +75,20 @@ public class BusinessPessoaFisica extends BusinessGeneric<PessoaFisica> implemen
 		}
 	}
 	
-	
+	@Override
+	public List<PessoaFisicaView> buscarTodosView(String string) throws BusinessException {
+		// TODO Auto-generated method stub
+		 
+		try {
+			List<PessoaFisicaView> pessoaFisicas = daoPessoaFisica.buscarTodosView(string);
+		
+			return pessoaFisicas;
+		
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BusinessException(e.getMessage());
+		}
+	}
 
 }

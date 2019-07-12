@@ -37,6 +37,16 @@ public class BusinessCliente extends BusinessGeneric<Cliente> implements IBusine
 		
 	}
 
-	
+	public List<Cliente> buscarCliente(String buscar) throws BusinessException{
+		
+		try {
+			return daoCliente.buscarCliente(buscar);
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BusinessException(e.getMessage());
+		}
+		
+	}
 	
 }

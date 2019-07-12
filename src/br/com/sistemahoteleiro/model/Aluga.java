@@ -11,6 +11,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -31,19 +32,19 @@ public class Aluga extends Entidade {
 	private static final long serialVersionUID = 1L;
 	protected static final String SEQUENCE_ENTIDADE = "aluga_sequence";
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "quarto_id")	
 	private Quarto quarto;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "caixa_id")
 	private Caixa caixa;
 	
@@ -70,6 +71,8 @@ public class Aluga extends Entidade {
 	private double valorDiaria;
 	
 	
+	@Column(name = "valor_total")
+	private double valorTotal;
 	
 	/**
 	 * @return the dataEntrada
@@ -209,6 +212,34 @@ public class Aluga extends Entidade {
 	 */
 	public void setQuarto(Quarto quarto) {
 		this.quarto = quarto;
+	}
+
+	/**
+	 * @return the usuario
+	 */
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	/**
+	 * @param usuario the usuario to set
+	 */
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	/**
+	 * @return the valorTotal
+	 */
+	public double getValorTotal() {
+		return valorTotal;
+	}
+
+	/**
+	 * @param valorTotal the valorTotal to set
+	 */
+	public void setValorTotal(double valorTotal) {
+		this.valorTotal = valorTotal;
 	}
 	
 	

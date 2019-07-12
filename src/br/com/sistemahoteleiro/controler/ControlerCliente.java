@@ -23,6 +23,7 @@ import br.com.sistemahoteleiro.model.Cliente;
 import br.com.sistemahoteleiro.model.Contato;
 import br.com.sistemahoteleiro.model.Endereco;
 import br.com.sistemahoteleiro.model.PessoaFisica;
+import br.com.sistemahoteleiro.model.PessoaFisicaView;
 import br.com.sistemahoteleiro.model.PessoaJuridica;
 import br.com.sistemahoteleiro.util.MaskFieldUtil;
 import br.com.sistemahoteleiro.view.Message;
@@ -79,7 +80,7 @@ public class ControlerCliente implements Initializable {
 	private Tab cliFisiTab;
 
 	@FXML
-	private TableView<PessoaFisica> cliTabela;
+	private TableView<PessoaFisicaView> cliTabela;
 
 	@FXML
 	private TableColumn<PessoaFisica, String> nomeCliCol;
@@ -236,8 +237,8 @@ public class ControlerCliente implements Initializable {
 			if (cliFisiRadio.isSelected()) {
 				cliJuriRadio.setSelected(false);
 				try {
-					pessoaFisicas = Facade.getInstance().seearchBuscarTodosPessoasFisica(buscCliField.getText());
-					cliTabela.getItems().setAll(pessoaFisicas);
+//					pessoaFisicas = Facade.getInstance().buscarPessoasFisica(buscCliField.getText());
+					cliTabela.getItems().setAll(Facade.getInstance().buscarPessoasFisicaView(buscCliField.getText()));
 				} catch (BusinessException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -247,8 +248,8 @@ public class ControlerCliente implements Initializable {
 
 				cliJuriRadio.setSelected(false);
 				try {
-					pessoaJuridicas = Facade.getInstance().searchBuscarTodosPessoasJuridica(buscCliField.getText());
-					cliTabela.getItems().setAll(pessoaFisicas);
+					pessoaJuridicas = Facade.getInstance().buscarPessoasJuridica(buscCliField.getText());
+//					cliTabela.getItems().setAll(pessoaFisicas);
 				} catch (BusinessException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -424,8 +425,8 @@ public class ControlerCliente implements Initializable {
 			try
 
 			{
-				pessoaFisicas = Facade.getInstance().searchAllPessoaFisica();
-				cliTabela.getItems().setAll(pessoaFisicas);
+//				pessoaFisicas = Facade.getInstance().searchAllPessoaFisica();
+//				cliTabela.getItems().setAll(pessoaFisicas);
 				
 				pessoaJuridicas = Facade.getInstance().searchAllPessoaJuridica();
 				cliJuriTabela.getItems().setAll(pessoaJuridicas);
@@ -455,7 +456,7 @@ public class ControlerCliente implements Initializable {
 
 			{
 				pessoaFisicas = Facade.getInstance().searchAllPessoaFisica();
-				cliTabela.getItems().setAll(pessoaFisicas);
+//				cliTabela.getItems().setAll(pessoaFisicas);
 				
 				pessoaJuridicas = Facade.getInstance().searchAllPessoaJuridica();
 				cliJuriTabela.getItems().setAll(pessoaJuridicas);
@@ -519,7 +520,7 @@ public class ControlerCliente implements Initializable {
 					"O cliente foi cadastrado com sucesso!");
 
 			pessoaFisicas = Facade.getInstance().searchAllPessoaFisica();
-			cliTabela.getItems().setAll(pessoaFisicas);
+//			cliTabela.getItems().setAll(pessoaFisicas);
 
 			dadosCliTab.setDisable(true);
 			endClienteTab.setDisable(true);
@@ -594,7 +595,7 @@ public class ControlerCliente implements Initializable {
 	 */
 	public void preencherCamposFisico() {
 
-		clienteAtualiza = cliTabela.getSelectionModel().getSelectedItem();
+//		clienteAtualiza = cliTabela.getSelectionModel().getSelectedItem();
 
 		if (clienteAtualiza instanceof PessoaFisica) {
 

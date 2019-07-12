@@ -11,7 +11,6 @@ import javax.persistence.TypedQuery;
 
 import br.com.sistemahoteleiro.exception.DaoException;
 import br.com.sistemahoteleiro.model.Cliente;
-import br.com.sistemahoteleiro.model.ClienteView;
 import br.com.sistemahoteleiro.util.SQLUtil;
 
 /**
@@ -63,7 +62,12 @@ public class DaoCliente extends DaoGeneric<Cliente> implements IDaoCliente{
 //	public static void main(String[] args) {
 //		DaoCliente daoCliente = new DaoCliente();
 //		
-//		System.out.println(daoCliente.buscarCliente("a"));
+//		try {
+//			System.out.println(daoCliente.buscarCliente("a"));
+//		} catch (DaoException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 //		
 //	}
 }

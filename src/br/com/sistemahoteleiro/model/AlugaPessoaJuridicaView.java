@@ -23,14 +23,14 @@ import org.hibernate.annotations.Subselect;
 @Immutable
 @Entity
 @Subselect("SELECT * FROM aluga")
-public class AlugaView {
+public class AlugaPessoaJuridicaView {
 
 	@Id
 	private Integer id;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "cliente_id")
-	private Cliente cliente;
+	@JoinColumn(name = "pessoa_juridica")
+	private PessoaJuridica pessoaJuridica;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "quarto_id")	
@@ -75,19 +75,7 @@ public class AlugaView {
 		this.id = id;
 	}
 
-	/**
-	 * @return the cliente
-	 */
-	public Cliente getCliente() {
-		return cliente;
-	}
 
-	/**
-	 * @param cliente the cliente to set
-	 */
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
 
 	/**
 	 * @return the quarto
@@ -200,5 +188,6 @@ public class AlugaView {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
+
 	
 }

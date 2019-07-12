@@ -31,12 +31,33 @@ public class SQLUtil {
 			+ "WHERE lower(str(e.nome)) like :busca or lower(str(pf.cpf)) like :busca or lower(str(pj.cnpj)) like :busca";
 
 	// VIEWS
+	
+	public static final String BUSCAR_PESSOAS_FISICAS_VIEW = "select pf from PessoaFisicaView pf "
+			+ "inner join Endereco e on pf.endereco.id = e.id where lower(str(pf.nome)) like :busca or pf.cpf = :busca";
+	
+	public static final String BUSCAR_PESSOAS_JURIDICAS_VIEW = "select pj from PessoaJuridaView pj "
+			+ "inner join Endereco e on pj.endereco_id = e.id where lower(str(pj.nome)) like :busca or pj.cnpj = :busca";
+	
 	public static final String BUSCAR_QUARTO_VIEW_DISP = "select q from QuartoView q where (lower(str(q.tipoQuarto))) like :busca and disponivel = true";
 
-	public static final String BUSCAR_ALUGA_VIEW_DISP = "select a.dataEntrada, a.horaEntrada, a.dataSaida, a.horaSaida, "
-			+ "a.status, q.numero "
-			+ "from AlugaView a inner join Cliente c, PessoaFisica pf, PessoaJuridica pj on a.cliente_id = c.id inner join QuartoView q on "
-			+ "a.quarto_id = q.id where lower(str(c.nome)) like :busca or lower(str(pf.cpf)) like :busca or "
-			+ "lower(str(pj.cnpj)) like :busca or lower(str(q.numero)) like :busca";
+	public static final String BUSCAR_ALUGA_VIEW_FISICA = "select a.dataEntrada, a.horaEntrada, a.dataSaida, a.horaSaida, "
+			+ "a.status, q.numero from AlugaView a inner join PessoaFisica pf on a.cliente_id = pf.id inner join QuartoView q on "
+			+ "a.quarto_id = q.id where lower(str(pf.nome)) like :busca or lower(str(pf.cpf)) like :busca or lower(str(q.numero)) like :busca";
 
+	public static final String BUSCAR_ALUGA_VIEW_JURIDICA = "select a.dataEntrada, a.horaEntrada, a.dataSaida, a.horaSaida, "
+			+ "a.status, q.numero from AlugaView a inner join PessoaJuridica pj on a.cliente_id = pj.id inner join QuartoView q on "
+			+ "a.quarto_id = q.id where lower(str(pj.nome)) like :busca or lower(str(pj.cnpj)) like :busca or lower(str(q.numero)) like :busca";
+	
+	public static final String BUSCAR_RESERVA_VIEW_FISICA = "";
+	
+	public static final String BUSCAR_RESERVA_VIEW_JURIDICA = "";
+	
+	
+	//Procedures
+	
+	
+	
+	//Triggers
+	
+	
 }

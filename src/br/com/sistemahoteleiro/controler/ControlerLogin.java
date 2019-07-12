@@ -44,7 +44,7 @@ public class ControlerLogin implements Initializable {
 	@FXML
 	private JFXButton sairBtn;
 
-	private Usuario usuario;
+	private static Usuario usuario;
 
 	private Facade facade = Facade.getInstance();
 
@@ -141,4 +141,10 @@ public class ControlerLogin implements Initializable {
 		
 	}
 
+	public static Usuario getUsuario() {
+		
+		return usuario;
+		
+	}
+	
 }

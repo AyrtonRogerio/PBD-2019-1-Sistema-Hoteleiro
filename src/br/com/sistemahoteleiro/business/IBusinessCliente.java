@@ -15,6 +15,6 @@ import br.com.sistemahoteleiro.model.Cliente;
  */
 public interface IBusinessCliente extends IBusinessGeneric<Cliente> {
 
-	
+	public List<Cliente> buscarCliente(String buscar) throws BusinessException;
 	
 }

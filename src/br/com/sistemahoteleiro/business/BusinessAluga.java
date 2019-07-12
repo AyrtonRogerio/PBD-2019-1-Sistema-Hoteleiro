@@ -11,7 +11,7 @@ import br.com.sistemahoteleiro.exception.BusinessException;
 import br.com.sistemahoteleiro.exception.DaoException;
 import br.com.sistemahoteleiro.exception.ValidationException;
 import br.com.sistemahoteleiro.model.Aluga;
-import br.com.sistemahoteleiro.model.AlugaView;
+import br.com.sistemahoteleiro.model.AlugaPessoaFisicaView;
 
 /**
  * @author ayrtons
@@ -39,7 +39,7 @@ public class BusinessAluga extends BusinessGeneric<Aluga> implements IBusinessAl
 
 
 	@Override
-	public List<AlugaView> buscarAlugados(String busca) throws BusinessException {
+	public List<AlugaPessoaFisicaView> buscarAlugados(String busca) throws BusinessException {
 		// TODO Auto-generated method stub
 		
 		try {

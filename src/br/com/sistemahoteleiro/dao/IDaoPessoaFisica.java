@@ -7,6 +7,7 @@ import java.util.List;
 
 import br.com.sistemahoteleiro.exception.DaoException;
 import br.com.sistemahoteleiro.model.PessoaFisica;
+import br.com.sistemahoteleiro.model.PessoaFisicaView;
 
 /**
  * @author ayrtons
@@ -14,6 +15,8 @@ import br.com.sistemahoteleiro.model.PessoaFisica;
  */
 public interface IDaoPessoaFisica extends IDaoGeneric<PessoaFisica> {
 
-	public List<PessoaFisica> searchBuscarTodos(String string) throws DaoException;
+	public List<PessoaFisica> buscarTodos(String string) throws DaoException;
+	
+	public List<PessoaFisicaView> buscarTodosView(String string) throws DaoException;
 	
 }

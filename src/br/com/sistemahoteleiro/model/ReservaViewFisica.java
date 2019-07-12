@@ -23,7 +23,7 @@ import org.hibernate.annotations.Subselect;
 @Immutable
 @Entity
 @Subselect("SELECT * FROM reserva")
-public class ReservaView {
+public class ReservaViewFisica {
 
 	@Id 
 	private Integer id;
@@ -37,8 +37,8 @@ public class ReservaView {
 	private Usuario usuario;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "cliente_id")
-	private Cliente cliente;
+	@JoinColumn(name = "pessoa_fisica")
+	private PessoaFisica pessoaFisica;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "quarto_id")

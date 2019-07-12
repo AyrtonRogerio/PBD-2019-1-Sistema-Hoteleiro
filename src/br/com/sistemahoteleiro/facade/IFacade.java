@@ -9,7 +9,7 @@ import java.util.List;
 import br.com.sistemahoteleiro.exception.BusinessException;
 import br.com.sistemahoteleiro.model.Administrador;
 import br.com.sistemahoteleiro.model.Aluga;
-import br.com.sistemahoteleiro.model.AlugaView;
+import br.com.sistemahoteleiro.model.AlugaPessoaFisicaView;
 import br.com.sistemahoteleiro.model.Caixa;
 import br.com.sistemahoteleiro.model.CaixaView;
 import br.com.sistemahoteleiro.model.Cliente;
@@ -19,6 +19,7 @@ import br.com.sistemahoteleiro.model.Funcionario;
 import br.com.sistemahoteleiro.model.Log;
 import br.com.sistemahoteleiro.model.Parcela;
 import br.com.sistemahoteleiro.model.PessoaFisica;
+import br.com.sistemahoteleiro.model.PessoaFisicaView;
 import br.com.sistemahoteleiro.model.PessoaJuridica;
 import br.com.sistemahoteleiro.model.Quarto;
 import br.com.sistemahoteleiro.model.QuartoView;
@@ -79,7 +80,7 @@ public interface IFacade {
 
 	public void disableAluga(Aluga aluga) throws BusinessException;
 	
-	public List<AlugaView> buscarAlugadosView(String busca) throws BusinessException;
+	public List<AlugaPessoaFisicaView> buscarAlugadosView(String busca) throws BusinessException;
 
 	//Caixa
 
@@ -165,7 +166,9 @@ public interface IFacade {
 
 	public List<PessoaFisica> searchAllPessoaFisica() throws BusinessException;
 
-	public List<PessoaFisica> seearchBuscarTodosPessoasFisica(String busca) throws BusinessException;
+	public List<PessoaFisica> buscarPessoasFisica(String busca) throws BusinessException;
+	
+	public List<PessoaFisicaView> buscarPessoasFisicaView(String busca) throws BusinessException;
 	
 	public void removePessoaFisica(PessoaFisica pessoaFisica) throws BusinessException;
 
@@ -179,7 +182,7 @@ public interface IFacade {
 
 	public List<PessoaJuridica> searchAllPessoaJuridica() throws BusinessException;
 	
-	public List<PessoaJuridica> searchBuscarTodosPessoasJuridica(String busca) throws BusinessException;
+	public List<PessoaJuridica> buscarPessoasJuridica(String busca) throws BusinessException;
 
 	public void removePessoaJuridica(PessoaJuridica pessoaJuridica) throws BusinessException;
 
@@ -229,13 +232,14 @@ public interface IFacade {
 	
 	public Cliente searchCliente(int id) throws BusinessException;
 
-	public List<Cliente> searchAllCliente() throws BusinessException;
-	
+	public List<Cliente> searchAllCliente() throws BusinessException;	
 
 	public void removeCliente(Cliente cliente) throws BusinessException;
 
 	public void disableCliente(Cliente cliente) throws BusinessException;
 
+	public List<Cliente> buscarCliente(String buscar) throws BusinessException;
+	
 	
 	//Usuario
 

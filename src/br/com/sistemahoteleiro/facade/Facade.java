@@ -39,7 +39,7 @@ import br.com.sistemahoteleiro.business.IBusinessUsuario;
 import br.com.sistemahoteleiro.exception.BusinessException;
 import br.com.sistemahoteleiro.model.Administrador;
 import br.com.sistemahoteleiro.model.Aluga;
-import br.com.sistemahoteleiro.model.AlugaView;
+import br.com.sistemahoteleiro.model.AlugaPessoaFisicaView;
 import br.com.sistemahoteleiro.model.Caixa;
 import br.com.sistemahoteleiro.model.CaixaView;
 import br.com.sistemahoteleiro.model.Cliente;
@@ -49,6 +49,7 @@ import br.com.sistemahoteleiro.model.Funcionario;
 import br.com.sistemahoteleiro.model.Log;
 import br.com.sistemahoteleiro.model.Parcela;
 import br.com.sistemahoteleiro.model.PessoaFisica;
+import br.com.sistemahoteleiro.model.PessoaFisicaView;
 import br.com.sistemahoteleiro.model.PessoaJuridica;
 import br.com.sistemahoteleiro.model.Quarto;
 import br.com.sistemahoteleiro.model.QuartoView;
@@ -178,7 +179,7 @@ public class Facade implements IFacade {
 	}
 
 	@Override
-	public List<AlugaView> buscarAlugadosView(String busca) throws BusinessException {
+	public List<AlugaPessoaFisicaView> buscarAlugadosView(String busca) throws BusinessException {
 		// TODO Auto-generated method stub
 		return businessAluga.buscarAlugados(busca);
 	}
@@ -409,11 +410,17 @@ public class Facade implements IFacade {
 	}
 	
 	@Override
-	public List<PessoaFisica> seearchBuscarTodosPessoasFisica(String busca) throws BusinessException {
+	public List<PessoaFisica> buscarPessoasFisica(String busca) throws BusinessException {
 		// TODO Auto-generated method stub
-		return businessPessoaFisica.searchBuscarTodos(busca);
+		return businessPessoaFisica.buscarTodos(busca);
 	}
 
+	@Override
+	public List<PessoaFisicaView> buscarPessoasFisicaView(String busca) throws BusinessException {
+		// TODO Auto-generated method stub
+		return businessPessoaFisica.buscarTodosView(busca);
+	}
+	
 	@Override
 	public void removePessoaFisica(PessoaFisica pessoaFisica) throws BusinessException {
 		// TODO Auto-generated method stub
@@ -447,7 +454,7 @@ public class Facade implements IFacade {
 	}
 	
 	@Override
-	public List<PessoaJuridica> searchBuscarTodosPessoasJuridica(String busca) throws BusinessException {
+	public List<PessoaJuridica> buscarPessoasJuridica(String busca) throws BusinessException {
 		// TODO Auto-generated method stub
 		return businessPessoaJuridica.searchBuscarTodos(busca);
 	}
@@ -597,6 +604,12 @@ public class Facade implements IFacade {
 		businessCliente.disable(cliente);
 	}
 
+	@Override
+	public List<Cliente> buscarCliente(String buscar) throws BusinessException {
+		// TODO Auto-generated method stub
+		return businessCliente.buscarCliente(buscar);
+	}
+	
 	//Usuario
 	@Override
 	public void createOrUpdateUsuario(Usuario usuario) throws BusinessException {
@@ -639,6 +652,8 @@ public class Facade implements IFacade {
 		// TODO Auto-generated method stub
 		return businessUsuario.searchBuscarTodos(busca);
 	}
+
+	
 
 	
 
