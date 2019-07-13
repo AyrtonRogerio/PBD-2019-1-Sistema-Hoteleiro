@@ -31,9 +31,9 @@ public abstract class Cliente extends Entidade{
 
 	protected static final String SEQUENCE_ENTIDADE = "cliente_seuqence";
 	
-	@Column(length = 50, nullable = false, unique = true)
+	@Column(length = 50, nullable = false)
 	private String nome;
-	
+		
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "contato_id")
 	private Contato contato;
@@ -56,6 +56,7 @@ public abstract class Cliente extends Entidade{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	
 	/**
 	 * @return the contato

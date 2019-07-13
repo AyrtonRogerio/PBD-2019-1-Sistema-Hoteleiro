@@ -11,7 +11,9 @@ import br.com.sistemahoteleiro.exception.BusinessException;
 import br.com.sistemahoteleiro.exception.DaoException;
 import br.com.sistemahoteleiro.exception.ValidationException;
 import br.com.sistemahoteleiro.model.PessoaFisica;
+import br.com.sistemahoteleiro.model.PessoaFisicaView;
 import br.com.sistemahoteleiro.model.PessoaJuridica;
+import br.com.sistemahoteleiro.model.PessoaJuridicaView;
 
 /**
  * @author ayrtons
@@ -44,6 +46,22 @@ public class BusinessPessoaJuridica extends BusinessGeneric<PessoaJuridica> impl
 			List<PessoaJuridica> pessoaJuridicas = daoPessoaJuridica.searchBuscarTodos(string);
 		
 			return pessoaJuridicas;
+		
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BusinessException(e.getMessage());
+		}
+	}
+	
+	@Override
+	public List<PessoaJuridicaView> buscarPessoasJuridicasView(String string) throws BusinessException {
+		// TODO Auto-generated method stub
+		 
+		try {
+			List<PessoaJuridicaView> pessoaFisicas = daoPessoaJuridica.buscarPessoasJuridicasView(string);
+		
+			return pessoaFisicas;
 		
 		} catch (DaoException e) {
 			// TODO Auto-generated catch block

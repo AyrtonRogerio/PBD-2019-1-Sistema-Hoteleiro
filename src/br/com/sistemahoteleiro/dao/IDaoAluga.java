@@ -8,6 +8,7 @@ import java.util.List;
 import br.com.sistemahoteleiro.exception.DaoException;
 import br.com.sistemahoteleiro.model.Aluga;
 import br.com.sistemahoteleiro.model.AlugaPessoaFisicaView;
+import br.com.sistemahoteleiro.model.AlugaPessoaJuridicaView;
 
 /**
  * @author ayrtons
@@ -16,6 +17,8 @@ import br.com.sistemahoteleiro.model.AlugaPessoaFisicaView;
 public interface IDaoAluga extends IDaoGeneric<Aluga> {
 
 	
-	public List<AlugaPessoaFisicaView> buscarAlugados(String busca) throws DaoException; 
+	public List<AlugaPessoaFisicaView> buscarAlugadosFisicosView(String busca) throws DaoException; 
+	
+	public List<AlugaPessoaJuridicaView> buscarAlugadosJuridicosView(String busca) throws DaoException;
 	
 }

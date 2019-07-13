@@ -16,9 +16,12 @@ import br.com.sistemahoteleiro.exception.BusinessException;
 import br.com.sistemahoteleiro.facade.Facade;
 import br.com.sistemahoteleiro.model.Aluga;
 import br.com.sistemahoteleiro.model.AlugaPessoaFisicaView;
+import br.com.sistemahoteleiro.model.AlugaPessoaJuridicaView;
 import br.com.sistemahoteleiro.model.Caixa;
 import br.com.sistemahoteleiro.model.Cliente;
+import br.com.sistemahoteleiro.model.Endereco;
 import br.com.sistemahoteleiro.model.PessoaFisica;
+import br.com.sistemahoteleiro.model.PessoaFisicaView;
 import br.com.sistemahoteleiro.model.PessoaJuridica;
 import br.com.sistemahoteleiro.model.Quarto;
 import br.com.sistemahoteleiro.model.QuartoView;
@@ -29,6 +32,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
@@ -45,6 +49,8 @@ public class ControlerAluga implements Initializable {
 	private Cliente cliente;
 	private Caixa caixa;
 	private Usuario usuario;
+	private List<AlugaPessoaFisicaView>  fisicas;
+//	private List<Al>
 	
 	@FXML
 	private Tab alugadosListTab;
@@ -75,13 +81,13 @@ public class ControlerAluga implements Initializable {
 	private TableView<AlugaPessoaFisicaView> cliFisTabela;
 
 	@FXML
-	private TableColumn<AlugaPessoaFisicaView, PessoaFisica> nomeCliFisCol;
+	private TableColumn<AlugaPessoaFisicaView, String> nomeCliFisCol;
 
 	@FXML
-	private TableColumn<AlugaPessoaFisicaView, PessoaFisica> cpfCliFisCol;
+	private TableColumn<AlugaPessoaFisicaView, String> cpfCliFisCol;
 
 	@FXML
-	private TableColumn<AlugaPessoaFisicaView, QuartoView> quartoCliFisCol;
+	private TableColumn<AlugaPessoaFisicaView, Quarto> quartoCliFisCol;
 
 	@FXML
 	private TableColumn<AlugaPessoaFisicaView, LocalDate> dataEntCliFisCol;
@@ -105,31 +111,31 @@ public class ControlerAluga implements Initializable {
 	private Tab cliJuriTab;
 
 	@FXML
-	private TableView<AlugaPessoaFisicaView> cliJuriTabela;
+	private TableView<AlugaPessoaJuridicaView> cliJuriTabela;
 
 	@FXML
-	private TableColumn<AlugaPessoaFisicaView, PessoaJuridica> nomeCliJurCol;
+	private TableColumn<AlugaPessoaJuridicaView, String> nomeCliJurCol;
 
 	@FXML
-	private TableColumn<AlugaPessoaFisicaView, PessoaJuridica> cnpjCliJurCol;
+	private TableColumn<AlugaPessoaJuridicaView, String> cnpjCliJurCol;
 
 	@FXML
-	private TableColumn<AlugaPessoaFisicaView, QuartoView> quartoCliJurCol;
+	private TableColumn<AlugaPessoaJuridicaView, Quarto> quartoCliJurCol;
 
 	@FXML
-	private TableColumn<AlugaPessoaFisicaView, LocalDate> dataEntCliJurCol;
+	private TableColumn<AlugaPessoaJuridicaView, LocalDate> dataEntCliJurCol;
 
 	@FXML
-	private TableColumn<AlugaPessoaFisicaView, LocalTime> horaEntCliJurCol;
+	private TableColumn<AlugaPessoaJuridicaView, LocalTime> horaEntCliJurCol;
 
 	@FXML
-	private TableColumn<AlugaPessoaFisicaView, LocalDate> dataSaidaCliJurCol;
+	private TableColumn<AlugaPessoaJuridicaView, LocalDate> dataSaidaCliJurCol;
 
 	@FXML
-	private TableColumn<AlugaPessoaFisicaView, LocalTime> horaSaidaCliJurCol;
+	private TableColumn<AlugaPessoaJuridicaView, LocalTime> horaSaidaCliJurCol;
 
 	@FXML
-	private TableColumn<AlugaPessoaFisicaView, Boolean> situacaoCliJurCol;
+	private TableColumn<AlugaPessoaJuridicaView, Boolean> situacaoCliJurCol;
 
 	// Fim tabela
 
@@ -299,8 +305,18 @@ public class ControlerAluga implements Initializable {
 
 				cliFisiRadio.setSelected(true);
 				cliJuriRadio.setSelected(false);
-				
-				
+
+				try {
+					
+					fisicas = Facade.getInstance().buscarAlugadosFisicosView(pesqAluguelField.getText());
+					
+					cliFisTabela.getItems()
+							.setAll(fisicas);
+				} catch (BusinessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
 			}
 
 			/**
@@ -311,6 +327,13 @@ public class ControlerAluga implements Initializable {
 				cliJuriRadio.setSelected(true);
 				cliFisiRadio.setSelected(false);
 
+				try {
+					cliJuriTabela.getItems().setAll(Facade.getInstance().buscarAlugadosJuridicosView(pesqAluguelField.getText()));
+				} catch (BusinessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}
 
 		}
@@ -358,11 +381,10 @@ public class ControlerAluga implements Initializable {
 			 */
 			if (novoCliFisiRadio.isSelected()) {
 
-				
 				try {
-					
-					novoCliTabela.getItems().setAll(Facade.getInstance().
-							buscarPessoasFisica(alugPesqClientField.getText()));
+
+					novoCliTabela.getItems()
+							.setAll(Facade.getInstance().buscarPessoasFisica(alugPesqClientField.getText()));
 					limparCamposPesquisa();
 				} catch (BusinessException e) {
 					// TODO Auto-generated catch block
@@ -376,14 +398,14 @@ public class ControlerAluga implements Initializable {
 			if (novoCliJuriRadio.isSelected()) {
 
 				try {
-					novoCliJuriTabela.getItems().setAll(Facade.getInstance().
-							buscarPessoasJuridica(alugPesqClientField.getText()));
+					novoCliJuriTabela.getItems()
+							.setAll(Facade.getInstance().buscarPessoasJuridica(alugPesqClientField.getText()));
 					limparCamposPesquisa();
 				} catch (BusinessException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+
 			}
 
 		}
@@ -403,7 +425,7 @@ public class ControlerAluga implements Initializable {
 		 */
 		if (event.getSource() == alugContCadBtn) {
 
-			if(novoCliTabela.getSelectionModel().getSelectedItem() != null) {
+			if (novoCliTabela.getSelectionModel().getSelectedItem() != null) {
 
 				cliente = novoCliTabela.getSelectionModel().getSelectedItem();
 
@@ -415,7 +437,7 @@ public class ControlerAluga implements Initializable {
 
 			alugListQuartTab.setDisable(false);
 			alugListQuartTab.getTabPane().getSelectionModel().select(alugListQuartTab);
-			
+
 		}
 
 		// Fim dos eventos da seção de novo aluguel - Cliente
@@ -427,14 +449,14 @@ public class ControlerAluga implements Initializable {
 		if (event.getSource() == alugPesqQuartoBtn) {
 
 			try {
-				alugQuartoTabela.getItems().setAll(Facade.getInstance().
-						buscarQuartoViewDisponivel(alugPesqQuartoField.getText()));
+				alugQuartoTabela.getItems()
+						.setAll(Facade.getInstance().buscarQuartoViewDisponivel(alugPesqQuartoField.getText()));
 				limparCamposPesquisa();
 			} catch (BusinessException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		}
 
 		/**
@@ -462,7 +484,6 @@ public class ControlerAluga implements Initializable {
 						"Selecione um quarto para prosseguir!");
 			}
 
-
 		}
 		// Fim dos eventos da seção de quartos
 
@@ -486,13 +507,13 @@ public class ControlerAluga implements Initializable {
 
 			try {
 				cadastrarAluguel(quartoView);
-				
+
 			} catch (BusinessException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				Message.getInstance().viewMessage(AlertType.ERROR, "Erro!", "Erro ao cadastrar!", e.getMessage());
 			}
-			
+
 		}
 
 		/**
@@ -520,41 +541,131 @@ public class ControlerAluga implements Initializable {
 		/**
 		 * Dados da tabela de alugados para cliente físico
 		 */
-		nomeCliFisCol.setCellValueFactory(new PropertyValueFactory<>(""));
+		nomeCliFisCol.setCellValueFactory(new PropertyValueFactory<>("nome"));
 
-		cpfCliFisCol.setCellValueFactory(new PropertyValueFactory<>(""));
+		cpfCliFisCol.setCellValueFactory(new PropertyValueFactory<>("cpf"));
 
-		quartoCliFisCol.setCellValueFactory(new PropertyValueFactory<>(""));
+		quartoCliFisCol.setCellValueFactory(new PropertyValueFactory<>("quarto"));
 
-		dataEntCliFisCol.setCellValueFactory(new PropertyValueFactory<>(""));
+		dataEntCliFisCol.setCellValueFactory(new PropertyValueFactory<>("dataEntrada"));
 
-		horaEntCliFisCol.setCellValueFactory(new PropertyValueFactory<>(""));
+		horaEntCliFisCol.setCellValueFactory(new PropertyValueFactory<>("horaEntrada"));
 
-		dataSaidaCliFisCol.setCellValueFactory(new PropertyValueFactory<>(""));
+		dataSaidaCliFisCol.setCellValueFactory(new PropertyValueFactory<>("dataSaida"));
 
-		horaSaidaCliFisCol.setCellValueFactory(new PropertyValueFactory<>(""));
+		horaSaidaCliFisCol.setCellValueFactory(new PropertyValueFactory<>("horaSaida"));
 
-		situacaoCliFisCol.setCellValueFactory(new PropertyValueFactory<>(""));
+		situacaoCliFisCol.setCellValueFactory(new PropertyValueFactory<>("status"));
 
+		nomeCliFisCol.setCellFactory(coluna -> {
+			return new TableCell<AlugaPessoaFisicaView, String>() {
+				protected void updateItem(String item, boolean empty) {
+					super.updateItem(item, empty);
+
+					if (item == null || empty) {
+						setText(null);
+					} else {
+						setText("" + item);
+					}
+				}
+			};
+		});
+
+		cpfCliFisCol.setCellFactory(coluna -> {
+			return new TableCell<AlugaPessoaFisicaView, String>() {
+				protected void updateItem(String item, boolean empty) {
+					super.updateItem(item, empty);
+
+					if (item == null || empty) {
+						setText(null);
+					} else {
+						setText("" + item);
+					}
+				}
+			};
+		});
+
+		quartoCliFisCol.setCellFactory(coluna -> {
+			return new TableCell<AlugaPessoaFisicaView, Quarto>() {
+				protected void updateItem(Quarto item, boolean empty) {
+					super.updateItem(item, empty);
+
+					if (item == null || empty) {
+						setText(null);
+					} else {
+						setText("" + item.getNumQuarto());
+					}
+
+				}
+			};
+		});
+
+		
+		
 		/**
 		 * dados da tabela de alugados para cliente jurídico
 		 */
-		nomeCliJurCol.setCellValueFactory(new PropertyValueFactory<>(""));
+		nomeCliJurCol.setCellValueFactory(new PropertyValueFactory<>("nome"));
 
-		cnpjCliJurCol.setCellValueFactory(new PropertyValueFactory<>(""));
+		cnpjCliJurCol.setCellValueFactory(new PropertyValueFactory<>("cnpj"));
 
-		quartoCliJurCol.setCellValueFactory(new PropertyValueFactory<>(""));
+		quartoCliJurCol.setCellValueFactory(new PropertyValueFactory<>("quarto"));
 
-		dataEntCliJurCol.setCellValueFactory(new PropertyValueFactory<>(""));
+		dataEntCliJurCol.setCellValueFactory(new PropertyValueFactory<>("dataEntrada"));
 
-		horaEntCliJurCol.setCellValueFactory(new PropertyValueFactory<>(""));
+		horaEntCliJurCol.setCellValueFactory(new PropertyValueFactory<>("horaEntrada"));
 
-		dataSaidaCliJurCol.setCellValueFactory(new PropertyValueFactory<>(""));
+		dataSaidaCliJurCol.setCellValueFactory(new PropertyValueFactory<>("dataSaida"));
 
-		horaSaidaCliJurCol.setCellValueFactory(new PropertyValueFactory<>(""));
+		horaSaidaCliJurCol.setCellValueFactory(new PropertyValueFactory<>("horaSaida"));
 
-		situacaoCliJurCol.setCellValueFactory(new PropertyValueFactory<>(""));
+		situacaoCliJurCol.setCellValueFactory(new PropertyValueFactory<>("status"));
 
+		nomeCliJurCol.setCellFactory(coluna -> {
+			return new TableCell<AlugaPessoaJuridicaView, String>() {
+				protected void updateItem(String item, boolean empty) {
+					super.updateItem(item, empty);
+
+					if (item == null || empty) {
+						setText(null);
+					} else {
+						setText("" + item);
+					}
+				}
+			};
+		});
+
+		cnpjCliJurCol.setCellFactory(coluna -> {
+			return new TableCell<AlugaPessoaJuridicaView, String>() {
+				protected void updateItem(String item, boolean empty) {
+					super.updateItem(item, empty);
+
+					if (item == null || empty) {
+						setText(null);
+					} else {
+						setText("" + item);
+					}
+				}
+			};
+		});
+
+		quartoCliJurCol.setCellFactory(coluna -> {
+			return new TableCell<AlugaPessoaJuridicaView, Quarto>() {
+				protected void updateItem(Quarto item, boolean empty) {
+					super.updateItem(item, empty);
+
+					if (item == null || empty) {
+						setText(null);
+					} else {
+						setText("" + item.getNumQuarto());
+					}
+
+				}
+			};
+		});
+
+		
+		
 		/**
 		 * Tabela do cliente físico para um novo cadastro de aluguel.
 		 */
@@ -584,22 +695,19 @@ public class ControlerAluga implements Initializable {
 		MaskFieldUtil.monetaryField(novoValorDiariaField);
 
 	}
-	
+
 	public void limparCamposPesquisa() {
-		
+
 		pesqAluguelField.clear();
 
 		alugPesqClientField.clear();
 
 		alugPesqQuartoField.clear();
 
-		
 	}
-	
 
 	public void limparCampos() {
 
-		
 		novoValorDiariaField.clear();
 
 		novoSaidaDateP.getEditor().clear();
@@ -616,26 +724,26 @@ public class ControlerAluga implements Initializable {
 
 	}
 
-	public void atualizarAluguel() {
+	public void atualizarAluguel(Aluga aluga) {
 
 	}
 
 	public void cadastrarAluguel(QuartoView q) throws BusinessException {
 
 		aluga = new Aluga();
-		
+
 		Caixa c = Facade.getInstance().searchCaixa(ControlerLogin.getCaixa().getId());
 
 		int dias = novoSaidaDateP.getValue().compareTo(novoEntradaDateP.getValue());
-		
+
 		System.out.println("dias da reserva: " + dias);
-		
+
 		aluga.setDiaria(dias);
 		aluga.setValorDiaria(Double.parseDouble(novoValorDiariaField.getText()));
-		
+
 		aluga.setValorTotal((aluga.getValorDiaria() * dias));
 		c.setEntrada(c.getSaldo() + aluga.getValorTotal());
-		
+
 		aluga.setCaixa(c);
 
 		aluga.setDataEntrada(novoEntradaDateP.getValue());
@@ -644,8 +752,6 @@ public class ControlerAluga implements Initializable {
 		aluga.setDataSaida(novoSaidaDateP.getValue());
 		aluga.setHoraSaida(novoSaidaTimeP.getValue());
 
-
-
 		aluga.setStatus(novoSituacaoCBox.isSelected());
 
 		aluga.setFuncionario(ControlerLogin.getUsuario());
@@ -653,9 +759,9 @@ public class ControlerAluga implements Initializable {
 		aluga.setCliente(cliente);
 
 		aluga.setQuarto(Facade.getInstance().searchQuarto(q.getId()));
-		
+
 		Facade.getInstance().createOrUpdateAluga(aluga);
-		
+
 	}
 
 }

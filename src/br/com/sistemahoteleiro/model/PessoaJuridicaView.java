@@ -37,6 +37,9 @@ public class PessoaJuridicaView {
 	@JoinColumn(name = "endereco_id")
 	private Endereco endereco;
 	
+	@Column(nullable = false, unique = true)
+	private String cnpj;
+	
 	@Column
 	private boolean status = true;
 	
@@ -108,6 +111,20 @@ public class PessoaJuridicaView {
 	 */
 	public void setStatus(boolean status) {
 		this.status = status;
+	}
+
+	/**
+	 * @return the cnpj
+	 */
+	public String getCnpj() {
+		return cnpj;
+	}
+
+	/**
+	 * @param cnpj the cnpj to set
+	 */
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
 	}
 
 	

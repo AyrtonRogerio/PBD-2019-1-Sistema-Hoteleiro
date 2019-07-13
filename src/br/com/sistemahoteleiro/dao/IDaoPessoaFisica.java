@@ -17,6 +17,6 @@ public interface IDaoPessoaFisica extends IDaoGeneric<PessoaFisica> {
 
 	public List<PessoaFisica> buscarTodos(String string) throws DaoException;
 	
-	public List<PessoaFisicaView> buscarTodosView(String string) throws DaoException;
+	public List<PessoaFisicaView> buscarPessoasFisicasView(String string) throws DaoException;
 	
 }

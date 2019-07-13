@@ -35,18 +35,16 @@ public class SQLUtil {
 	public static final String BUSCAR_PESSOAS_FISICAS_VIEW = "select pf from PessoaFisicaView pf "
 			+ "inner join Endereco e on pf.endereco.id = e.id where lower(str(pf.nome)) like :busca or pf.cpf = :busca";
 	
-	public static final String BUSCAR_PESSOAS_JURIDICAS_VIEW = "select pj from PessoaJuridaView pj "
-			+ "inner join Endereco e on pj.endereco_id = e.id where lower(str(pj.nome)) like :busca or pj.cnpj = :busca";
+	public static final String BUSCAR_PESSOAS_JURIDICAS_VIEW = "select pj from PessoaJuridicaView pj "
+			+ "inner join Endereco e on pj.endereco.id = e.id where lower(str(pj.nome)) like :busca or pj.cnpj = :busca";
 	
 	public static final String BUSCAR_QUARTO_VIEW_DISP = "select q from QuartoView q where (lower(str(q.tipoQuarto))) like :busca and disponivel = true";
 
-	public static final String BUSCAR_ALUGA_VIEW_FISICA = "select a.dataEntrada, a.horaEntrada, a.dataSaida, a.horaSaida, "
-			+ "a.status, q.numero from AlugaView a inner join PessoaFisica pf on a.cliente_id = pf.id inner join QuartoView q on "
-			+ "a.quarto_id = q.id where lower(str(pf.nome)) like :busca or lower(str(pf.cpf)) like :busca or lower(str(q.numero)) like :busca";
+	public static final String BUSCAR_ALUGA_VIEW_FISICA = "select a from AlugaPessoaFisicaView a"
+			+ " inner join Quarto q on a.quarto.id = q.id where lower(str(a.nome)) like :busca or lower(str(a.cpf)) like :busca";
 
-	public static final String BUSCAR_ALUGA_VIEW_JURIDICA = "select a.dataEntrada, a.horaEntrada, a.dataSaida, a.horaSaida, "
-			+ "a.status, q.numero from AlugaView a inner join PessoaJuridica pj on a.cliente_id = pj.id inner join QuartoView q on "
-			+ "a.quarto_id = q.id where lower(str(pj.nome)) like :busca or lower(str(pj.cnpj)) like :busca or lower(str(q.numero)) like :busca";
+	public static final String BUSCAR_ALUGA_VIEW_JURIDICA = "select a from AlugaPessoaJuridicaView a "
+			+ "inner join Quarto q on a.quarto.id = q.id where lower(str(a.nome)) like :busca or lower(str(a.cnpj)) like :busca";
 	
 	public static final String BUSCAR_RESERVA_VIEW_FISICA = "";
 	

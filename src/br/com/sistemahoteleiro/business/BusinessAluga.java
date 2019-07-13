@@ -12,6 +12,7 @@ import br.com.sistemahoteleiro.exception.DaoException;
 import br.com.sistemahoteleiro.exception.ValidationException;
 import br.com.sistemahoteleiro.model.Aluga;
 import br.com.sistemahoteleiro.model.AlugaPessoaFisicaView;
+import br.com.sistemahoteleiro.model.AlugaPessoaJuridicaView;
 
 /**
  * @author ayrtons
@@ -39,11 +40,11 @@ public class BusinessAluga extends BusinessGeneric<Aluga> implements IBusinessAl
 
 
 	@Override
-	public List<AlugaPessoaFisicaView> buscarAlugados(String busca) throws BusinessException {
+	public List<AlugaPessoaFisicaView> buscarAlugadosFisicosView(String busca) throws BusinessException {
 		// TODO Auto-generated method stub
 		
 		try {
-			return daoAluga.buscarAlugados(busca);
+			return daoAluga.buscarAlugadosFisicosView(busca);
 		} catch (DaoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -51,6 +52,19 @@ public class BusinessAluga extends BusinessGeneric<Aluga> implements IBusinessAl
 		}
 	}
 
-	 
+
+	@Override
+	public List<AlugaPessoaJuridicaView> buscarAlugadosJuridicosView(String busca) throws BusinessException {
+		// TODO Auto-generated method stub
+		try {
+			return daoAluga.buscarAlugadosJuridicosView(busca);
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BusinessException(e.getMessage());
+		}
+	}
+
+
 	
 }

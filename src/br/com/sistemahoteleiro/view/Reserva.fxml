@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTimePicker?>
 <?import javafx.geometry.Insets?>
@@ -39,6 +40,7 @@
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
                               <JFXButton fx:id="pesqReservBtn" onAction="#action" text="Pesquisar" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -53,25 +55,64 @@
                               </JFXTextField>
                               <JFXButton fx:id="atualizaListReservBtn" disable="true" onAction="#action" text="Atualizar" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                               <JFXButton fx:id="novaReservaBtn" onAction="#action" text="Nova reserva" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <JFXRadioButton fx:id="cliFisiRadio" onAction="#action" selected="true" text="Cliente Fisico" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </GridPane.margin>
+                              </JFXRadioButton>
+                              <JFXRadioButton fx:id="cliJuriRadio" onAction="#action" text="Cliente Juridico" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </GridPane.margin>
+                              </JFXRadioButton>
                            </children>
                         </GridPane>
-                        <TableView fx:id="reservTabela" prefHeight="200.0" prefWidth="200.0">
-                          <columns>
-                              <TableColumn fx:id="nomeReservCol" prefWidth="75.0" text="Nome" />
-                              <TableColumn fx:id="cpfReservCol" prefWidth="75.0" text="CPF" />
-                              <TableColumn fx:id="cnpjReservCol" prefWidth="75.0" text="CNPJ" />
-                            <TableColumn fx:id="dataReservCol" prefWidth="121.0" text="Data Reserva" />
-                            <TableColumn fx:id="horaReservCol" prefWidth="143.0" text="Hora da Reserva" />
-                              <TableColumn fx:id="valorReservCol" prefWidth="75.0" text="Valor" />
-                              <TableColumn fx:id="situacaoReservCol" prefWidth="75.0" text="Situação" />
-                          </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                           <VBox.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </VBox.margin>
-                        </TableView>
+                        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+                           <tabs>
+                              <Tab fx:id="cliFisiTab" text="Cliente fisico">
+                                 <content>
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <TableView fx:id="cliFisTabela" prefHeight="169.0" prefWidth="590.0">
+                                             <columns>
+                                                <TableColumn fx:id="nomeCliFisCol" prefWidth="89.0" text="Nome" />
+                                                <TableColumn fx:id="cpfCliFisCol" prefWidth="75.0" text="CPF" />
+                                                <TableColumn fx:id="quartoCliFisCol" prefWidth="75.0" text="Quarto" />
+                                                <TableColumn fx:id="dataEntCliFisCol" prefWidth="75.0" text="Data reserva" />
+                                                <TableColumn fx:id="horaEntCliFisCol" prefWidth="75.0" text="Hora reserva" />
+                                                <TableColumn fx:id="situacaoCliFisCol" prefWidth="70.0" text="Situação" />
+                                             </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                          </TableView>
+                                       </children>
+                                    </VBox>
+                                 </content>
+                              </Tab>
+                              <Tab fx:id="cliJuriTab" disable="true" text="Cliente juridico">
+                                 <content>
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <TableView fx:id="cliJuriTabela" prefHeight="169.0" prefWidth="590.0">
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                             <columns>
+                                                <TableColumn fx:id="nomeCliJurCol" prefWidth="75.0" text="Nome" />
+                                                <TableColumn fx:id="cnpjCliJurCol" prefWidth="75.0" text="CNPJ" />
+                                                <TableColumn fx:id="quartoCliJurCol" prefWidth="75.0" text="Quarto" />
+                                                <TableColumn fx:id="dataEntCliJurCol" prefWidth="75.0" text="Data reserva" />
+                                                <TableColumn fx:id="horaEntCliJurCol" prefWidth="75.0" text="Hora reserva" />
+                                                <TableColumn fx:id="situacaoCliJurCol" prefWidth="70.0" text="Situação" />
+                                             </columns>
+                                          </TableView>
+                                       </children>
+                                    </VBox>
+                                 </content>
+                              </Tab>
+                           </tabs>
+                        </TabPane>
                         <JFXButton fx:id="editarBtn" onAction="#action" text="Editar" />
                      </children>
                   </VBox>
@@ -95,6 +136,7 @@
                                        <rowConstraints>
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <VBox.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -111,21 +153,59 @@
                                              </GridPane.margin>
                                           </JFXTextField>
                                           <JFXButton fx:id="atualizaCliTabelaBtn" disable="true" onAction="#action" text="Atualiza" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <JFXRadioButton fx:id="novoCliFisiRadio" onAction="#action" selected="true" text="Cliente Fisico" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </GridPane.margin>
+                                          </JFXRadioButton>
+                                          <JFXRadioButton fx:id="novoCliJuriRadio" onAction="#action" text="Cliente Juridico" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </GridPane.margin>
+                                          </JFXRadioButton>
                                        </children>
                                     </GridPane>
-                                    <TableView fx:id="clienteTabela" prefHeight="200.0" prefWidth="200.0">
-                                       <columns>
-                                          <TableColumn fx:id="novoNomeCol" prefWidth="364.0" text="Nome" />
-                                          <TableColumn fx:id="novoCpfCol" prefWidth="228.0" text="CPF" />
-                                          <TableColumn fx:id="novoCnpjCol" prefWidth="75.0" text="CNPJ" />
-                                       </columns>
-                                       <VBox.margin>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </VBox.margin>
-                                       <columnResizePolicy>
-                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                       </columnResizePolicy>
-                                    </TableView>
+                                    <TabPane prefHeight="257.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+                                       <tabs>
+                                          <Tab fx:id="novoCliFisiTab" text="Cliente fisico">
+                                             <content>
+                                                <VBox prefHeight="200.0" prefWidth="100.0">
+                                                   <children>
+                                                      <TableView fx:id="novoCliTabela" prefHeight="233.0" prefWidth="790.0">
+                                                         <columns>
+                                                            <TableColumn fx:id="nomeCliCol" prefWidth="89.0" text="Nome" />
+                                                            <TableColumn fx:id="cpfCliCol" prefWidth="75.0" text="CPF" />
+                                                         </columns>
+                                                         <columnResizePolicy>
+                                                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                         </columnResizePolicy>
+                                                         <VBox.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </VBox.margin>
+                                                      </TableView>
+                                                   </children>
+                                                </VBox>
+                                             </content>
+                                          </Tab>
+                                          <Tab fx:id="novoCliJuriTab" disable="true" text="Cliente juridico">
+                                             <content>
+                                                <VBox prefHeight="200.0" prefWidth="100.0">
+                                                   <children>
+                                                      <TableView fx:id="novoCliJuriTabela" prefHeight="169.0" prefWidth="590.0">
+                                                         <columns>
+                                                            <TableColumn fx:id="nomeCliJuriCol" prefWidth="89.0" text="Nome" />
+                                                            <TableColumn fx:id="cnpjJuriCol" prefWidth="75.0" text="CNPJ" />
+                                                         </columns>
+                                                         <columnResizePolicy>
+                                                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                         </columnResizePolicy>
+                                                      </TableView>
+                                                   </children>
+                                                </VBox>
+                                             </content>
+                                          </Tab>
+                                       </tabs>
+                                    </TabPane>
                                     <GridPane>
                                        <columnConstraints>
                                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -138,11 +218,10 @@
                                        <rowConstraints>
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
-                                          <JFXButton fx:id="voltarListBtn" onAction="#action" text="Voltar" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                          <JFXButton fx:id="contCadBtn" onAction="#action" text="Continuar" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                          <JFXButton fx:id="voltarListBtn" onAction="#action" text="Voltar" GridPane.columnIndex="2" />
+                                          <JFXButton fx:id="contCadBtn" onAction="#action" text="Continuar" GridPane.columnIndex="3" />
                                        </children>
                                     </GridPane>
                                  </children>
@@ -181,16 +260,13 @@
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </VBox.margin>
                                     </GridPane>
-                                    <TableView fx:id="quartoTabela" prefHeight="312.0" prefWidth="1024.0">
+                                    <TableView fx:id="alugQuartoTabela" prefHeight="312.0" prefWidth="1024.0">
                                        <columns>
-                                          <TableColumn fx:id="quartoCol" prefWidth="96.0" text="Quarto" />
-                                          <TableColumn fx:id="qtCamasCol" prefWidth="193.0" text="Quantidade de camas" />
-                                          <TableColumn fx:id="tipoCol" prefWidth="622.0" text="Tipo" />
-                                          <TableColumn fx:id="disponivelCol" prefWidth="102.0" text="Disponível" />
+                                          <TableColumn fx:id="novoQuartoCol" prefWidth="96.0" text="Quarto" />
+                                          <TableColumn fx:id="novoQtCamasCol" prefWidth="193.0" text="Quantidade de camas" />
+                                          <TableColumn fx:id="novoTipoCol" prefWidth="622.0" text="Tipo" />
+                                          <TableColumn fx:id="novoDisponivelCol" prefWidth="102.0" text="Disponível" />
                                        </columns>
-                                       <VBox.margin>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </VBox.margin>
                                        <columnResizePolicy>
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                        </columnResizePolicy>
@@ -243,21 +319,21 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
-                                                <JFXTextField fx:id="reserValorField" onAction="#action" promptText="Valor de adiantamento (R$)" GridPane.rowIndex="4">
+                                                <JFXTextField fx:id="valorField" onAction="#action" promptText="Valor de adiantamento (R$)" GridPane.rowIndex="4">
                                                    <GridPane.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                    </GridPane.margin>
                                                 </JFXTextField>
-                                                <JFXDatePicker fx:id="reserDateP" onAction="#action" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                                <JFXTimePicker fx:id="reserTimeP" onAction="#action" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                                                <JFXButton fx:id="reserFinalBtn" onAction="#action" text="Finalizar" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="12" />
-                                                <JFXButton fx:id="reserVoltarDadosGBtn" onAction="#action" text="Voltar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="12" />
+                                                <JFXDatePicker fx:id="reservaDateP" onAction="#action" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                                <JFXTimePicker fx:id="reservaTimeP" onAction="#action" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                                                <JFXButton fx:id="finalizarReservBtn" onAction="#action" text="Finalizar" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="12" />
+                                                <JFXButton fx:id="voltarDadosGBtn" onAction="#action" text="Voltar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="12" />
                                                 <Label text="Entrada" GridPane.columnIndex="2" GridPane.rowIndex="3">
                                                    <font>
                                                       <Font size="15.0" />
                                                    </font>
                                                 </Label>
-                                                <JFXCheckBox fx:id="reserSituacaoCBox" onAction="#action" text="Ativo" unCheckedColor="RED" GridPane.rowIndex="6">
+                                                <JFXCheckBox fx:id="situacaoCBox" onAction="#action" selected="true" text="Ativo" unCheckedColor="RED" GridPane.rowIndex="6">
                                                    <GridPane.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                    </GridPane.margin>

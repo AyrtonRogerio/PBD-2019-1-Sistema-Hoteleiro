@@ -3,13 +3,10 @@
  */
 package br.com.sistemahoteleiro.model;
 
-import java.io.IOException;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import javax.net.ssl.SSLServerSocket;
-import javax.net.ssl.SSLServerSocketFactory;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -24,20 +21,27 @@ import org.hibernate.annotations.Subselect;
  */
 @Immutable
 @Entity
-@Subselect("SELECT * FROM aluga")
+@Subselect("SELECT DISTINCT a.*, f.cpf, f.nome FROM aluga a, pessoa_fisica f WHERE a.cliente_id = f.id")
 public class AlugaPessoaFisicaView {
 	
 	
 	@Id
 	private Integer id;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "pessoa_fisica")
-	private PessoaFisica pessoaFisica;
+	@OneToOne
+	@JoinColumn(name = "cliente_id")
+	private Cliente cliente;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@Column(length = 50, nullable = false)
+	private String nome;
+	
+	@Column(nullable = false, unique = true)
+	private String cpf;
+	
+	
+	@OneToOne
 	@JoinColumn(name = "quarto_id")	
-	private QuartoView quarto;
+	private Quarto quarto;
 	
 	
 	@Column(name = "data_entrada")
@@ -83,14 +87,14 @@ public class AlugaPessoaFisicaView {
 	/**
 	 * @return the quarto
 	 */
-	public QuartoView getQuarto() {
+	public Quarto getQuarto() {
 		return quarto;
 	}
 
 	/**
 	 * @param quarto the quarto to set
 	 */
-	public void setQuarto(QuartoView quarto) {
+	public void setQuarto(Quarto quarto) {
 		this.quarto = quarto;
 	}
 
@@ -193,17 +197,61 @@ public class AlugaPessoaFisicaView {
 	}
 
 	/**
-	 * @return the pessoaFisica
+	 * @return the cliente
 	 */
-	public PessoaFisica getPessoaFisica() {
-		return pessoaFisica;
+	public Cliente getCliente() {
+		return cliente;
 	}
 
 	/**
-	 * @param pessoaFisica the pessoaFisica to set
+	 * @param cliente the cliente to set
 	 */
-	public void setPessoaFisica(PessoaFisica pessoaFisica) {
-		this.pessoaFisica = pessoaFisica;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
+
+	/**
+	 * @return the nome
+	 */
+	public String getNome() {
+		return nome;
+	}
+
+	/**
+	 * @param nome the nome to set
+	 */
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	/**
+	 * @return the cpf
+	 */
+	public String getCpf() {
+		return cpf;
+	}
+
+	/**
+	 * @param cpf the cpf to set
+	 */
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+//	/**
+//	 * @return the pessoaFisica
+//	 */
+//	public PessoaFisica getPessoaFisica() {
+//		return pessoaFisica;
+//	}
+//
+//	/**
+//	 * @param pessoaFisica the pessoaFisica to set
+//	 */
+//	public void setPessoaFisica(PessoaFisica pessoaFisica) {
+//		this.pessoaFisica = pessoaFisica;
+//	}
+	
+	
 	
 }

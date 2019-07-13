@@ -22,19 +22,25 @@ import org.hibernate.annotations.Subselect;
  */
 @Immutable
 @Entity
-@Subselect("SELECT * FROM aluga")
+@Subselect("SELECT DISTINCT a.*, j.cnpj, j.nome FROM aluga a, pessoa_juridica j WHERE a.cliente_id = j.id")
 public class AlugaPessoaJuridicaView {
 
 	@Id
 	private Integer id;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "pessoa_juridica")
-	private PessoaJuridica pessoaJuridica;
+	@OneToOne
+	@JoinColumn(name = "cliente_id")
+	private Cliente cliente;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@Column(length = 50, nullable = false)
+	private String nome;
+	
+	@Column(nullable = false, unique = true)
+	private String cnpj;
+	
+	@OneToOne
 	@JoinColumn(name = "quarto_id")	
-	private QuartoView quarto;
+	private Quarto quarto;
 	
 	
 	@Column(name = "data_entrada")
@@ -80,14 +86,14 @@ public class AlugaPessoaJuridicaView {
 	/**
 	 * @return the quarto
 	 */
-	public QuartoView getQuarto() {
+	public Quarto getQuarto() {
 		return quarto;
 	}
 
 	/**
 	 * @param quarto the quarto to set
 	 */
-	public void setQuarto(QuartoView quarto) {
+	public void setQuarto(Quarto quarto) {
 		this.quarto = quarto;
 	}
 
@@ -187,6 +193,34 @@ public class AlugaPessoaJuridicaView {
 	 */
 	public void setStatus(boolean status) {
 		this.status = status;
+	}
+
+	/**
+	 * @return the cliente
+	 */
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	/**
+	 * @param cliente the cliente to set
+	 */
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	/**
+	 * @return the nome
+	 */
+	public String getNome() {
+		return nome;
+	}
+
+	/**
+	 * @param nome the nome to set
+	 */
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	

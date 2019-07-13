@@ -76,11 +76,11 @@ public class BusinessPessoaFisica extends BusinessGeneric<PessoaFisica> implemen
 	}
 	
 	@Override
-	public List<PessoaFisicaView> buscarTodosView(String string) throws BusinessException {
+	public List<PessoaFisicaView> buscarPessoasFisicasView(String string) throws BusinessException {
 		// TODO Auto-generated method stub
 		 
 		try {
-			List<PessoaFisicaView> pessoaFisicas = daoPessoaFisica.buscarTodosView(string);
+			List<PessoaFisicaView> pessoaFisicas = daoPessoaFisica.buscarPessoasFisicasView(string);
 		
 			return pessoaFisicas;
 		

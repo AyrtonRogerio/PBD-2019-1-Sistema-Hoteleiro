@@ -10,6 +10,7 @@ import br.com.sistemahoteleiro.exception.BusinessException;
 import br.com.sistemahoteleiro.model.Administrador;
 import br.com.sistemahoteleiro.model.Aluga;
 import br.com.sistemahoteleiro.model.AlugaPessoaFisicaView;
+import br.com.sistemahoteleiro.model.AlugaPessoaJuridicaView;
 import br.com.sistemahoteleiro.model.Caixa;
 import br.com.sistemahoteleiro.model.CaixaView;
 import br.com.sistemahoteleiro.model.Cliente;
@@ -21,6 +22,7 @@ import br.com.sistemahoteleiro.model.Parcela;
 import br.com.sistemahoteleiro.model.PessoaFisica;
 import br.com.sistemahoteleiro.model.PessoaFisicaView;
 import br.com.sistemahoteleiro.model.PessoaJuridica;
+import br.com.sistemahoteleiro.model.PessoaJuridicaView;
 import br.com.sistemahoteleiro.model.Quarto;
 import br.com.sistemahoteleiro.model.QuartoView;
 import br.com.sistemahoteleiro.model.Reserva;
@@ -80,7 +82,9 @@ public interface IFacade {
 
 	public void disableAluga(Aluga aluga) throws BusinessException;
 	
-	public List<AlugaPessoaFisicaView> buscarAlugadosView(String busca) throws BusinessException;
+	public List<AlugaPessoaFisicaView> buscarAlugadosFisicosView(String busca) throws BusinessException;
+	
+	public List<AlugaPessoaJuridicaView> buscarAlugadosJuridicosView(String busca) throws BusinessException;
 
 	//Caixa
 
@@ -183,6 +187,8 @@ public interface IFacade {
 	public List<PessoaJuridica> searchAllPessoaJuridica() throws BusinessException;
 	
 	public List<PessoaJuridica> buscarPessoasJuridica(String busca) throws BusinessException;
+	
+	public List<PessoaJuridicaView> buscarPessoasJuridicasView(String busca) throws BusinessException;
 
 	public void removePessoaJuridica(PessoaJuridica pessoaJuridica) throws BusinessException;
 
@@ -201,7 +207,7 @@ public interface IFacade {
 	public void removeQuarto(Quarto quarto) throws BusinessException;
 
 	public void disableQuarto(Quarto quarto) throws BusinessException;
-
+	
 	//Reserva
 
 	public void createOrUpdateReserva(Reserva reserva) throws BusinessException;

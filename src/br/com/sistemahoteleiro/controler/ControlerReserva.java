@@ -15,9 +15,12 @@ import javax.persistence.criteria.CriteriaBuilder.In;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
 import br.com.sistemahoteleiro.model.Aluga;
+import br.com.sistemahoteleiro.model.AlugaPessoaFisicaView;
+import br.com.sistemahoteleiro.model.AlugaPessoaJuridicaView;
 import br.com.sistemahoteleiro.model.Caixa;
 import br.com.sistemahoteleiro.model.Cliente;
 import br.com.sistemahoteleiro.model.Funcionario;
@@ -28,6 +31,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -71,28 +75,58 @@ public class ControlerReserva implements Initializable {
     private JFXButton novaReservaBtn;
 
     @FXML
-    private TableView<?> reservTabela;
+    private JFXRadioButton cliFisiRadio;
 
     @FXML
-    private TableColumn<?, ?> nomeReservCol;
+    private JFXRadioButton cliJuriRadio;
 
     @FXML
-    private TableColumn<?, ?> cpfReservCol;
+    private Tab cliFisiTab;
 
     @FXML
-    private TableColumn<?, ?> cnpjReservCol;
+    private TableView<?> cliFisTabela;
 
     @FXML
-    private TableColumn<?, ?> dataReservCol;
+    private TableColumn<?, ?> nomeCliFisCol;
 
     @FXML
-    private TableColumn<?, ?> horaReservCol;
+    private TableColumn<?, ?> cpfCliFisCol;
 
     @FXML
-    private TableColumn<?, ?> valorReservCol;
+    private TableColumn<?, ?> quartoCliFisCol;
 
     @FXML
-    private TableColumn<?, ?> situacaoReservCol;
+    private TableColumn<?, ?> dataEntCliFisCol;
+
+    @FXML
+    private TableColumn<?, ?> horaEntCliFisCol;
+
+    @FXML
+    private TableColumn<?, ?> situacaoCliFisCol;
+
+    @FXML
+    private Tab cliJuriTab;
+
+    @FXML
+    private TableView<?> cliJuriTabela;
+
+    @FXML
+    private TableColumn<?, ?> nomeCliJurCol;
+
+    @FXML
+    private TableColumn<?, ?> cnpjCliJurCol;
+
+    @FXML
+    private TableColumn<?, ?> quartoCliJurCol;
+
+    @FXML
+    private TableColumn<?, ?> dataEntCliJurCol;
+
+    @FXML
+    private TableColumn<?, ?> horaEntCliJurCol;
+
+    @FXML
+    private TableColumn<?, ?> situacaoCliJurCol;
 
     @FXML
     private JFXButton editarBtn;
@@ -113,16 +147,34 @@ public class ControlerReserva implements Initializable {
     private JFXButton atualizaCliTabelaBtn;
 
     @FXML
-    private TableView<?> clienteTabela;
+    private JFXRadioButton novoCliFisiRadio;
 
     @FXML
-    private TableColumn<?, ?> novoNomeCol;
+    private JFXRadioButton novoCliJuriRadio;
 
     @FXML
-    private TableColumn<?, ?> novoCpfCol;
+    private Tab novoCliFisiTab;
 
     @FXML
-    private TableColumn<?, ?> novoCnpjCol;
+    private TableView<?> novoCliTabela;
+
+    @FXML
+    private TableColumn<?, ?> nomeCliCol;
+
+    @FXML
+    private TableColumn<?, ?> cpfCliCol;
+
+    @FXML
+    private Tab novoCliJuriTab;
+
+    @FXML
+    private TableView<?> novoCliJuriTabela;
+
+    @FXML
+    private TableColumn<?, ?> nomeCliJuriCol;
+
+    @FXML
+    private TableColumn<?, ?> cnpjJuriCol;
 
     @FXML
     private JFXButton voltarListBtn;
@@ -143,19 +195,19 @@ public class ControlerReserva implements Initializable {
     private JFXButton atualizarQuartTabelaBtn;
 
     @FXML
-    private TableView<?> quartoTabela;
+    private TableView<?> alugQuartoTabela;
 
     @FXML
-    private TableColumn<?, ?> quartoCol;
+    private TableColumn<?, ?> novoQuartoCol;
 
     @FXML
-    private TableColumn<?, ?> qtCamasCol;
+    private TableColumn<?, ?> novoQtCamasCol;
 
     @FXML
-    private TableColumn<?, ?> tipoCol;
+    private TableColumn<?, ?> novoTipoCol;
 
     @FXML
-    private TableColumn<?, ?> disponivelCol;
+    private TableColumn<?, ?> novoDisponivelCol;
 
     @FXML
     private JFXButton voltarQuartBtn;
@@ -167,28 +219,27 @@ public class ControlerReserva implements Initializable {
     private Tab dadosGeraisTab;
 
     @FXML
-    private JFXTextField reserValorField;
+    private JFXTextField valorField;
 
     @FXML
-    private JFXDatePicker reserDateP;
+    private JFXDatePicker reservaDateP;
 
     @FXML
-    private JFXTimePicker reserTimeP;
+    private JFXTimePicker reservaTimeP;
 
     @FXML
-    private JFXButton reserFinalBtn;
+    private JFXButton finalizarReservBtn;
 
     @FXML
-    private JFXButton reserVoltarDadosGBtn;
+    private JFXButton voltarDadosGBtn;
 
     @FXML
-    private JFXCheckBox reserSituacaoCBox;
+    private JFXCheckBox situacaoCBox;
 
     @FXML
     void action(ActionEvent event) {
 
     }
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -201,38 +252,147 @@ public class ControlerReserva implements Initializable {
 	public void carregarCamposReserva() {
 
 		/**
-		 * Tabela Reserva List
+		 * Dados da tabela de reservados para cliente físico
 		 */
+		nomeCliFisCol.setCellValueFactory(new PropertyValueFactory<>("nome"));
 
-		dataReservCol.setCellValueFactory(new PropertyValueFactory<>("dataReserva"));
+		cpfCliFisCol.setCellValueFactory(new PropertyValueFactory<>("cpf"));
 
-		horaReservCol.setCellValueFactory(new PropertyValueFactory<>("horaReserva"));
+		quartoCliFisCol.setCellValueFactory(new PropertyValueFactory<>("quarto"));
 
-		valorReservCol.setCellValueFactory(new PropertyValueFactory<>("valor"));
+		dataEntCliFisCol.setCellValueFactory(new PropertyValueFactory<>("dataEntrada"));
 
-		situacaoReservCol.setCellValueFactory(new PropertyValueFactory<>("situacao"));
+		horaEntCliFisCol.setCellValueFactory(new PropertyValueFactory<>("horaEntrada"));
+
+		situacaoCliFisCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+//		nomeCliFisCol.setCellFactory(coluna -> {
+//			return new TableCell<AlugaPessoaFisicaView, String>() {
+//				protected void updateItem(String item, boolean empty) {
+//					super.updateItem(item, empty);
+//
+//					if (item == null || empty) {
+//						setText(null);
+//					} else {
+//						setText("" + item);
+//					}
+//				}
+//			};
+//		});
+//
+//		cpfCliFisCol.setCellFactory(coluna -> {
+//			return new TableCell<AlugaPessoaFisicaView, String>() {
+//				protected void updateItem(String item, boolean empty) {
+//					super.updateItem(item, empty);
+//
+//					if (item == null || empty) {
+//						setText(null);
+//					} else {
+//						setText("" + item);
+//					}
+//				}
+//			};
+//		});
+//
+//		quartoCliFisCol.setCellFactory(coluna -> {
+//			return new TableCell<AlugaPessoaFisicaView, Quarto>() {
+//				protected void updateItem(Quarto item, boolean empty) {
+//					super.updateItem(item, empty);
+//
+//					if (item == null || empty) {
+//						setText(null);
+//					} else {
+//						setText("" + item.getNumQuarto());
+//					}
+//
+//				}
+//			};
+//		});
+		
+		/**
+		 * dados da tabela de alugados para cliente jurídico
+		 */
+		nomeCliJurCol.setCellValueFactory(new PropertyValueFactory<>("nome"));
+
+		cnpjCliJurCol.setCellValueFactory(new PropertyValueFactory<>("cnpj"));
+
+		quartoCliJurCol.setCellValueFactory(new PropertyValueFactory<>("quarto"));
+
+		dataEntCliJurCol.setCellValueFactory(new PropertyValueFactory<>("dataEntrada"));
+
+		horaEntCliJurCol.setCellValueFactory(new PropertyValueFactory<>("horaEntrada"));
+
+		situacaoCliJurCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+//		nomeCliJurCol.setCellFactory(coluna -> {
+//			return new TableCell<AlugaPessoaJuridicaView, String>() {
+//				protected void updateItem(String item, boolean empty) {
+//					super.updateItem(item, empty);
+//
+//					if (item == null || empty) {
+//						setText(null);
+//					} else {
+//						setText("" + item);
+//					}
+//				}
+//			};
+//		});
+//
+//		cnpjCliJurCol.setCellFactory(coluna -> {
+//			return new TableCell<AlugaPessoaJuridicaView, String>() {
+//				protected void updateItem(String item, boolean empty) {
+//					super.updateItem(item, empty);
+//
+//					if (item == null || empty) {
+//						setText(null);
+//					} else {
+//						setText("" + item);
+//					}
+//				}
+//			};
+//		});
+//
+//		quartoCliJurCol.setCellFactory(coluna -> {
+//			return new TableCell<AlugaPessoaJuridicaView, Quarto>() {
+//				protected void updateItem(Quarto item, boolean empty) {
+//					super.updateItem(item, empty);
+//
+//					if (item == null || empty) {
+//						setText(null);
+//					} else {
+//						setText("" + item.getNumQuarto());
+//					}
+//
+//				}
+//			};
+//		});
+
+		
+		
+		/**
+		 * Tabela do cliente físico para um novo cadastro de reserva.
+		 */
+		nomeCliCol.setCellValueFactory(new PropertyValueFactory<>("nome"));
+
+		cpfCliCol.setCellValueFactory(new PropertyValueFactory<>("cpf"));
 
 		/**
-		 * Tabela Cliente da Tab Reserva
+		 * Tabela do cliente jurídico para um novo cadastro de reserva.
 		 */
+		nomeCliJuriCol.setCellValueFactory(new PropertyValueFactory<>("nome"));
 
-		novoNomeCol.setCellValueFactory(new PropertyValueFactory<>("nome"));
-
-		novoCpfCol.setCellValueFactory(new PropertyValueFactory<>("rg"));
-
-		novoCnpjCol.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+		cnpjJuriCol.setCellValueFactory(new PropertyValueFactory<>("cnpj"));
 
 		/**
-		 * Tabela Quarto da Tab Reserva
+		 * Tabela de quartos
 		 */
+		novoQuartoCol.setCellValueFactory(new PropertyValueFactory<>("numQuarto"));
 
-		quartoCol.setCellValueFactory(new PropertyValueFactory<>("numQuarto"));
+		novoQtCamasCol.setCellValueFactory(new PropertyValueFactory<>("qtdCamas"));
 
-		qtCamasCol.setCellValueFactory(new PropertyValueFactory<>("qtdCamas"));
+		novoTipoCol.setCellValueFactory(new PropertyValueFactory<>("tipoQuarto"));
 
-		tipoCol.setCellValueFactory(new PropertyValueFactory<>("tipoQuarto"));
-
-		disponivelCol.setCellValueFactory(new PropertyValueFactory<>("disponivel"));
+		novoDisponivelCol.setCellValueFactory(new PropertyValueFactory<>("disponivel"));
 
 	}
 
@@ -256,13 +416,13 @@ public class ControlerReserva implements Initializable {
 
 		pesqQuartoField.clear();
 
-		reserValorField.clear();
+		valorField.clear();
 
-		reserDateP.setValue(null);
+		reservaDateP.setValue(null);
 
-		reserTimeP.setValue(null);
+		reservaTimeP.setValue(null);
 
-		reserSituacaoCBox.setSelected(true);
+		situacaoCBox.setSelected(true);
 
 	}
 }

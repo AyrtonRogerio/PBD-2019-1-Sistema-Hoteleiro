@@ -53,7 +53,7 @@ public class DaoPessoaFisica extends DaoGeneric<PessoaFisica> implements IDaoPes
 	}
 	
 	@Override
-	public List<PessoaFisicaView> buscarTodosView(String string) throws DaoException {
+	public List<PessoaFisicaView> buscarPessoasFisicasView(String string) throws DaoException {
 		// TODO Auto-generated method stub
 		
 		try {
@@ -72,7 +72,7 @@ public class DaoPessoaFisica extends DaoGeneric<PessoaFisica> implements IDaoPes
 			// TODO: handle exception
 			e.printStackTrace();
 			System.err.println(e.getMessage());
-			throw new DaoException("Erro na busca de " + class1.getSimpleName() + " " + e.getMessage());
+			throw new DaoException("Erro na busca de " + PessoaFisicaView.class.getSimpleName() + " " + e.getMessage());
 		}
 	}
 	

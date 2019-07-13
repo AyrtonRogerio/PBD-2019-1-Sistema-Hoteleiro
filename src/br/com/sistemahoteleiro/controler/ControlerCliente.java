@@ -25,6 +25,7 @@ import br.com.sistemahoteleiro.model.Endereco;
 import br.com.sistemahoteleiro.model.PessoaFisica;
 import br.com.sistemahoteleiro.model.PessoaFisicaView;
 import br.com.sistemahoteleiro.model.PessoaJuridica;
+import br.com.sistemahoteleiro.model.PessoaJuridicaView;
 import br.com.sistemahoteleiro.util.MaskFieldUtil;
 import br.com.sistemahoteleiro.view.Message;
 import javafx.event.ActionEvent;
@@ -48,6 +49,11 @@ public class ControlerCliente implements Initializable {
 //	private Cliente clienteFisico, clienteJuridico, clienteAtualiza;
 	private PessoaFisica clienteFisico, fisica;
 	private PessoaJuridica clienteJuridico, juridica;
+	
+	private PessoaFisicaView pFisicaView;
+	
+	private PessoaJuridicaView pJuridicaView;
+	
 	private Cliente clienteAtualiza;
 	private List<PessoaFisica> pessoaFisicas;
 	private List<PessoaJuridica> pessoaJuridicas;
@@ -83,40 +89,40 @@ public class ControlerCliente implements Initializable {
 	private TableView<PessoaFisicaView> cliTabela;
 
 	@FXML
-	private TableColumn<PessoaFisica, String> nomeCliCol;
+	private TableColumn<PessoaFisicaView, String> nomeCliCol;
 
 	@FXML
-	private TableColumn<PessoaFisica, String> cpfCliCol;
+	private TableColumn<PessoaFisicaView, String> cpfCliCol;
 
 	@FXML
-	private TableColumn<PessoaFisica, Endereco> ruaCliCol;
+	private TableColumn<PessoaFisicaView, Endereco> ruaCliCol;
 
 	@FXML
-	private TableColumn<PessoaFisica, Endereco> bairroCliCol;
+	private TableColumn<PessoaFisicaView, Endereco> bairroCliCol;
 
 	@FXML
-	private TableColumn<PessoaFisica, Endereco> numCliCol;
+	private TableColumn<PessoaFisicaView, Endereco> numCliCol;
 
 	@FXML
 	private Tab cliJuriTab;
 
 	@FXML
-	private TableView<PessoaJuridica> cliJuriTabela;
+	private TableView<PessoaJuridicaView> cliJuriTabela;
 
 	@FXML
-	private TableColumn<PessoaJuridica, String> nomeCliJuriCol;
+	private TableColumn<PessoaJuridicaView, String> nomeCliJuriCol;
 
 	@FXML
-	private TableColumn<PessoaJuridica, String> cnpjJuriCol;
+	private TableColumn<PessoaJuridicaView, String> cnpjJuriCol;
 
 	@FXML
-	private TableColumn<PessoaJuridica, Endereco> ruaCliJuriCol;
+	private TableColumn<PessoaJuridicaView, Endereco> ruaCliJuriCol;
 
 	@FXML
-	private TableColumn<PessoaJuridica, Endereco> bairroCliJuriCol;
+	private TableColumn<PessoaJuridicaView, Endereco> bairroCliJuriCol;
 
 	@FXML
-	private TableColumn<PessoaJuridica, Endereco> numCliJuriCol;
+	private TableColumn<PessoaJuridicaView, Endereco> numCliJuriCol;
 
 	@FXML
 	private JFXButton detalhesCliBtn;
@@ -229,6 +235,28 @@ public class ControlerCliente implements Initializable {
 	@FXML
 	void action(ActionEvent event) {
 
+		
+		if(event.getSource() == cliFisiRadio) {
+			
+			cliFisiRadio.setSelected(true);
+			cliJuriRadio.setSelected(false);
+			cliFisiTab.setDisable(false);
+			cliJuriTab.setDisable(true);
+			cliFisiTab.getTabPane().getSelectionModel().select(cliFisiTab);
+			
+		}
+		
+		if(event.getSource() == cliJuriRadio) {
+			
+			cliJuriRadio.setSelected(true);
+			cliFisiRadio.setSelected(false);
+			cliJuriTab.setDisable(false);
+			cliFisiTab.setDisable(true);
+			cliJuriTab.getTabPane().getSelectionModel().select(cliJuriTab);
+			
+		}
+		
+		
 		/**
 		 * Evento para buscar clientes.
 		 */
@@ -248,8 +276,8 @@ public class ControlerCliente implements Initializable {
 
 				cliJuriRadio.setSelected(false);
 				try {
-					pessoaJuridicas = Facade.getInstance().buscarPessoasJuridica(buscCliField.getText());
-//					cliTabela.getItems().setAll(pessoaFisicas);
+					
+					cliJuriTabela.getItems().setAll(Facade.getInstance().buscarPessoasJuridicasView(buscCliField.getText()));
 				} catch (BusinessException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -422,19 +450,10 @@ public class ControlerCliente implements Initializable {
 
 			}
 
-			try
+				cliTabela.getItems().clear();
+				
 
-			{
-//				pessoaFisicas = Facade.getInstance().searchAllPessoaFisica();
-//				cliTabela.getItems().setAll(pessoaFisicas);
-				
-				pessoaJuridicas = Facade.getInstance().searchAllPessoaJuridica();
-				cliJuriTabela.getItems().setAll(pessoaJuridicas);
-				
-			} catch (BusinessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				cliJuriTabela.getItems().clear();
 
 		}
 
@@ -442,28 +461,28 @@ public class ControlerCliente implements Initializable {
 		 * Evento pra atualizar o cliente
 		 */
 		if (event.getSource() == atualizarCliBtn) {
+	
 			cadastCliBtn.setDisable(false);
 			atualizarCliBtn.setDisable(true);
 
-			atualizarCliente(clienteAtualiza);
+			if(cliFisiRadio.isSelected()) {
+				
+				atualizarCliente(fisica);
+				
+			}
+			
+			if(cliJuriRadio.isSelected()) {
+			
+				atualizarCliente(juridica);
+				
+			}
+			
+			
 
 			dadosCliTab.setDisable(true);
 			endClienteTab.setDisable(true);
 			contClienteTab.setDisable(true);
 			listaClienteTab.getTabPane().getSelectionModel().select(listaClienteTab);
-
-			try
-
-			{
-				pessoaFisicas = Facade.getInstance().searchAllPessoaFisica();
-//				cliTabela.getItems().setAll(pessoaFisicas);
-				
-				pessoaJuridicas = Facade.getInstance().searchAllPessoaJuridica();
-				cliJuriTabela.getItems().setAll(pessoaJuridicas);
-			} catch (BusinessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 
 		}
 
@@ -519,9 +538,6 @@ public class ControlerCliente implements Initializable {
 			Message.getInstance().viewMessage(AlertType.CONFIRMATION, "Cadastrado", "Cliente foi cadastrado!",
 					"O cliente foi cadastrado com sucesso!");
 
-			pessoaFisicas = Facade.getInstance().searchAllPessoaFisica();
-//			cliTabela.getItems().setAll(pessoaFisicas);
-
 			dadosCliTab.setDisable(true);
 			endClienteTab.setDisable(true);
 			contClienteTab.setDisable(true);
@@ -574,9 +590,6 @@ public class ControlerCliente implements Initializable {
 			Message.getInstance().viewMessage(AlertType.CONFIRMATION, "Cadastrado", "Cliente foi cadastrado!",
 					"O cliente foi cadastrado com sucesso!");
 
-			pessoaJuridicas = Facade.getInstance().searchAllPessoaJuridica();
-			cliJuriTabela.getItems().setAll(pessoaJuridicas);
-
 			dadosCliTab.setDisable(true);
 			endClienteTab.setDisable(true);
 			contClienteTab.setDisable(true);
@@ -595,16 +608,13 @@ public class ControlerCliente implements Initializable {
 	 */
 	public void preencherCamposFisico() {
 
-//		clienteAtualiza = cliTabela.getSelectionModel().getSelectedItem();
-
-		if (clienteAtualiza instanceof PessoaFisica) {
-
 			CliFisGridLay.setDisable(false);
 			CliJuriGridLay.setDisable(true);
 
 			try {
 
-				fisica = Facade.getInstance().searchPessoaFisica(clienteAtualiza.getId());
+				pFisicaView = cliTabela.getSelectionModel().getSelectedItem();
+				fisica = Facade.getInstance().searchPessoaFisica(pFisicaView.getId());
 
 				System.out.println(fisica.getCpf());
 			} catch (BusinessException e) {
@@ -639,7 +649,7 @@ public class ControlerCliente implements Initializable {
 			emailContCliField.setText(fisica.getContato().getEmail());
 			statusContatoCBox.setSelected(fisica.getContato().isStatus());
 
-		}
+		
 
 		
 
@@ -650,18 +660,16 @@ public class ControlerCliente implements Initializable {
 	 */
 	public void preencherCamposJuridicos() {
 		
-		
-		clienteAtualiza = cliJuriTabela.getSelectionModel().getSelectedItem();
-		
-		if (clienteAtualiza instanceof PessoaJuridica) {
-
 			// Pane da pessoa Jurídica habilitado, pane da pessoa física desabilitado
 			CliFisGridLay.setDisable(false);
 			CliJuriGridLay.setDisable(true);
 
 			try {
 
-				juridica = Facade.getInstance().searchPessoaJuridica(clienteAtualiza.getId());
+				pJuridicaView = cliJuriTabela.getSelectionModel().getSelectedItem();
+				
+ 
+				juridica = Facade.getInstance().searchPessoaJuridica(pJuridicaView.getId());
 
 			} catch (BusinessException e) {
 				// TODO Auto-generated catch block
@@ -691,7 +699,7 @@ public class ControlerCliente implements Initializable {
 			emailContCliField.setText(juridica.getContato().getEmail());
 			statusContatoCBox.setSelected(juridica.getContato().isStatus());
 
-		}
+
 		
 	}
 
@@ -784,6 +792,11 @@ public class ControlerCliente implements Initializable {
 			}
 
 		}
+		
+		cliTabela.getItems().clear();
+		
+
+		cliJuriTabela.getItems().clear();
 
 	}
 
@@ -869,7 +882,7 @@ public class ControlerCliente implements Initializable {
 		numCliCol.setCellValueFactory(new PropertyValueFactory<>("endereco"));
 
 		ruaCliCol.setCellFactory(coluna -> {
-			return new TableCell<PessoaFisica, Endereco>() {
+			return new TableCell<PessoaFisicaView, Endereco>() {
 				protected void updateItem(Endereco item, boolean empty) {
 					super.updateItem(item, empty);
 
@@ -884,7 +897,7 @@ public class ControlerCliente implements Initializable {
 		});
 
 		bairroCliCol.setCellFactory(coluna -> {
-			return new TableCell<PessoaFisica, Endereco>() {
+			return new TableCell<PessoaFisicaView, Endereco>() {
 
 				protected void updateItem(Endereco item, boolean empty) {
 					super.updateItem(item, empty);
@@ -900,7 +913,7 @@ public class ControlerCliente implements Initializable {
 		});
 
 		numCliCol.setCellFactory(coluna -> {
-			return new TableCell<PessoaFisica, Endereco>() {
+			return new TableCell<PessoaFisicaView, Endereco>() {
 				protected void updateItem(Endereco item, boolean empty) {
 					super.updateItem(item, empty);
 
@@ -921,7 +934,7 @@ public class ControlerCliente implements Initializable {
 		numCliJuriCol.setCellValueFactory(new PropertyValueFactory<>("endereco"));
 
 		ruaCliJuriCol.setCellFactory(coluna -> {
-			return new TableCell<PessoaJuridica, Endereco>() {
+			return new TableCell<PessoaJuridicaView, Endereco>() {
 				protected void updateItem(Endereco item, boolean empty) {
 					super.updateItem(item, empty);
 
@@ -936,7 +949,7 @@ public class ControlerCliente implements Initializable {
 		});
 
 		bairroCliJuriCol.setCellFactory(coluna -> {
-			return new TableCell<PessoaJuridica, Endereco>() {
+			return new TableCell<PessoaJuridicaView, Endereco>() {
 
 				protected void updateItem(Endereco item, boolean empty) {
 					super.updateItem(item, empty);
@@ -952,7 +965,7 @@ public class ControlerCliente implements Initializable {
 		});
 
 		numCliJuriCol.setCellFactory(coluna -> {
-			return new TableCell<PessoaJuridica, Endereco>() {
+			return new TableCell<PessoaJuridicaView, Endereco>() {
 				protected void updateItem(Endereco item, boolean empty) {
 					super.updateItem(item, empty);
 

@@ -64,7 +64,7 @@
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </GridPane.margin>
                                     </JFXButton>
-                                    <JFXRadioButton fx:id="cliFisiRadio" onAction="#action" text="Cliente Fisico" GridPane.rowIndex="2">
+                                    <JFXRadioButton fx:id="cliFisiRadio" onAction="#action" selected="true" text="Cliente Fisico" GridPane.rowIndex="2">
                                        <GridPane.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </GridPane.margin>
@@ -103,7 +103,7 @@
                                           </VBox>
                                        </content>
                                   </Tab>
-                                  <Tab fx:id="cliJuriTab" text="Cliente juridico">
+                                  <Tab fx:id="cliJuriTab" disable="true" text="Cliente juridico">
                                        <content>
                                           <VBox prefHeight="200.0" prefWidth="100.0">
                                              <children>
@@ -148,7 +148,7 @@
                   </VBox>
                </content>
             </Tab>
-          <Tab fx:id="dadosCliTab" closable="false" text="Dados Gerais">
+          <Tab fx:id="dadosCliTab" closable="false" disable="true" text="Dados Gerais">
                <content>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
@@ -299,7 +299,7 @@
                   </VBox>
                </content>
           </Tab>
-          <Tab fx:id="endClienteTab" closable="false" text="Endereço">
+          <Tab fx:id="endClienteTab" closable="false" disable="true" text="Endereço">
                <content>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
@@ -361,7 +361,7 @@
                   </VBox>
                </content>
           </Tab>
-            <Tab fx:id="contClienteTab" closable="false" text="Contatos">
+            <Tab fx:id="contClienteTab" closable="false" disable="true" text="Contatos">
                <content>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
