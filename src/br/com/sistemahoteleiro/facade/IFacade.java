@@ -26,6 +26,7 @@ import br.com.sistemahoteleiro.model.PessoaJuridicaView;
 import br.com.sistemahoteleiro.model.Quarto;
 import br.com.sistemahoteleiro.model.QuartoView;
 import br.com.sistemahoteleiro.model.Reserva;
+import br.com.sistemahoteleiro.model.ReservaViewFisica;
 import br.com.sistemahoteleiro.model.SuperUsuario;
 import br.com.sistemahoteleiro.model.Usuario;
 
@@ -215,6 +216,8 @@ public interface IFacade {
 	public Reserva searchReserva(int id) throws BusinessException;
 
 	public List<Reserva> searchAllReserva() throws BusinessException;
+	
+	public List<ReservaViewFisica> buscarReservadosFisicosView(String busca) throws BusinessException;
 
 	public void removeReserva(Reserva reserva) throws BusinessException;
 

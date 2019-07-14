@@ -38,11 +38,9 @@ public class AlugaPessoaFisicaView {
 	@Column(nullable = false, unique = true)
 	private String cpf;
 	
-	
 	@OneToOne
 	@JoinColumn(name = "quarto_id")	
 	private Quarto quarto;
-	
 	
 	@Column(name = "data_entrada")
 	private LocalDate dataEntrada;

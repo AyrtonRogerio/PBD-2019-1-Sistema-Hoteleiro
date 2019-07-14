@@ -5,11 +5,16 @@ package br.com.sistemahoteleiro.business;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 import br.com.sistemahoteleiro.dao.DaoReserva;
 import br.com.sistemahoteleiro.dao.IDaoReserva;
+import br.com.sistemahoteleiro.exception.BusinessException;
+import br.com.sistemahoteleiro.exception.DaoException;
 import br.com.sistemahoteleiro.exception.ValidationException;
+import br.com.sistemahoteleiro.model.AlugaPessoaFisicaView;
 import br.com.sistemahoteleiro.model.Reserva;
+import br.com.sistemahoteleiro.model.ReservaViewFisica;
 
 /**
  * @author ayrtons
@@ -56,5 +61,19 @@ public class BusinessReserva extends BusinessGeneric<Reserva> implements IBusine
 		}
 		
 	}
+	
+	@Override
+	public List<ReservaViewFisica> buscarReservadosFisicosView(String busca) throws BusinessException {
+		// TODO Auto-generated method stub
+		
+		try {
+			return daoReserva.buscarReservadosFisicosView(busca);
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BusinessException(e.getMessage());
+		}
+	}
+	
 
 }

@@ -287,7 +287,6 @@ public class ControlerAluga implements Initializable {
 
 			cliJuriRadio.setSelected(true);
 			cliFisiRadio.setSelected(false);
-
 			cliFisiTab.setDisable(true);
 			cliJuriTab.setDisable(false);
 			cliJuriTab.getTabPane().getSelectionModel().select(cliJuriTab);
@@ -732,7 +731,7 @@ public class ControlerAluga implements Initializable {
 
 		aluga = new Aluga();
 
-		Caixa c = Facade.getInstance().searchCaixa(ControlerLogin.getCaixa().getId());
+		caixa = Facade.getInstance().searchCaixa(ControlerLogin.getCaixa().getId());
 
 		int dias = novoSaidaDateP.getValue().compareTo(novoEntradaDateP.getValue());
 
@@ -742,9 +741,9 @@ public class ControlerAluga implements Initializable {
 		aluga.setValorDiaria(Double.parseDouble(novoValorDiariaField.getText()));
 
 		aluga.setValorTotal((aluga.getValorDiaria() * dias));
-		c.setEntrada(c.getSaldo() + aluga.getValorTotal());
+		caixa.setEntrada(caixa.getSaldo() + aluga.getValorTotal());
 
-		aluga.setCaixa(c);
+		aluga.setCaixa(caixa);
 
 		aluga.setDataEntrada(novoEntradaDateP.getValue());
 		aluga.setHoraEntrada(novoEntradaTimeP.getValue());

@@ -18,15 +18,24 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
+
+import br.com.sistemahoteleiro.exception.BusinessException;
+import br.com.sistemahoteleiro.facade.Facade;
 import br.com.sistemahoteleiro.model.Aluga;
 import br.com.sistemahoteleiro.model.AlugaPessoaFisicaView;
 import br.com.sistemahoteleiro.model.AlugaPessoaJuridicaView;
 import br.com.sistemahoteleiro.model.Caixa;
 import br.com.sistemahoteleiro.model.Cliente;
 import br.com.sistemahoteleiro.model.Funcionario;
+import br.com.sistemahoteleiro.model.PessoaFisica;
+import br.com.sistemahoteleiro.model.PessoaJuridica;
 import br.com.sistemahoteleiro.model.Quarto;
+import br.com.sistemahoteleiro.model.QuartoView;
 import br.com.sistemahoteleiro.model.Reserva;
+import br.com.sistemahoteleiro.model.ReservaViewFisica;
 import br.com.sistemahoteleiro.model.Usuario;
+import br.com.sistemahoteleiro.util.MaskFieldUtil;
+import br.com.sistemahoteleiro.view.Message;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -34,6 +43,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
@@ -46,18 +56,12 @@ public class ControlerReserva implements Initializable {
 	 * Atributos
 	 */
 	private Reserva reserva;
-	private Aluga aluga;
-	private Cliente clienteReserva, clienteAluga;
+	private Cliente cliente;
 	private Caixa caixa;
-	private Funcionario funcionario;
+//	private Funcionario funcionario;
+	private QuartoView quartoView;
 
-	/**
-	 * Atributos List
-	 */
-	private List<Quarto> quartos = null;
-	private List<Cliente> clientes = null;
-	private List<Reserva> reservas = null;
-	private List<Aluga> alugas = null;
+
 
 	@FXML
     private Tab reservaTab;
@@ -84,25 +88,25 @@ public class ControlerReserva implements Initializable {
     private Tab cliFisiTab;
 
     @FXML
-    private TableView<?> cliFisTabela;
+    private TableView<ReservaViewFisica> cliFisTabela;
 
     @FXML
-    private TableColumn<?, ?> nomeCliFisCol;
+    private TableColumn<ReservaViewFisica, String> nomeCliFisCol;
 
     @FXML
-    private TableColumn<?, ?> cpfCliFisCol;
+    private TableColumn<ReservaViewFisica, String> cpfCliFisCol;
 
     @FXML
-    private TableColumn<?, ?> quartoCliFisCol;
+    private TableColumn<ReservaViewFisica, Quarto> quartoCliFisCol;
 
     @FXML
-    private TableColumn<?, ?> dataEntCliFisCol;
+    private TableColumn<ReservaViewFisica, LocalDate> dataEntCliFisCol;
 
     @FXML
-    private TableColumn<?, ?> horaEntCliFisCol;
+    private TableColumn<ReservaViewFisica, LocalTime> horaEntCliFisCol;
 
     @FXML
-    private TableColumn<?, ?> situacaoCliFisCol;
+    private TableColumn<ReservaViewFisica, Boolean> situacaoCliFisCol;
 
     @FXML
     private Tab cliJuriTab;
@@ -111,22 +115,22 @@ public class ControlerReserva implements Initializable {
     private TableView<?> cliJuriTabela;
 
     @FXML
-    private TableColumn<?, ?> nomeCliJurCol;
+    private TableColumn<?, String> nomeCliJurCol;
 
     @FXML
-    private TableColumn<?, ?> cnpjCliJurCol;
+    private TableColumn<?, String> cnpjCliJurCol;
 
     @FXML
-    private TableColumn<?, ?> quartoCliJurCol;
+    private TableColumn<?, Quarto> quartoCliJurCol;
 
     @FXML
-    private TableColumn<?, ?> dataEntCliJurCol;
+    private TableColumn<?, LocalDate> dataEntCliJurCol;
 
     @FXML
-    private TableColumn<?, ?> horaEntCliJurCol;
+    private TableColumn<?, LocalTime> horaEntCliJurCol;
 
     @FXML
-    private TableColumn<?, ?> situacaoCliJurCol;
+    private TableColumn<?, Boolean> situacaoCliJurCol;
 
     @FXML
     private JFXButton editarBtn;
@@ -156,25 +160,25 @@ public class ControlerReserva implements Initializable {
     private Tab novoCliFisiTab;
 
     @FXML
-    private TableView<?> novoCliTabela;
+    private TableView<PessoaFisica> novoCliTabela;
 
     @FXML
-    private TableColumn<?, ?> nomeCliCol;
+    private TableColumn<PessoaFisica, String> nomeCliCol;
 
     @FXML
-    private TableColumn<?, ?> cpfCliCol;
+    private TableColumn<PessoaFisica, String> cpfCliCol;
 
     @FXML
     private Tab novoCliJuriTab;
 
     @FXML
-    private TableView<?> novoCliJuriTabela;
+    private TableView<PessoaJuridica> novoCliJuriTabela;
 
     @FXML
-    private TableColumn<?, ?> nomeCliJuriCol;
+    private TableColumn<PessoaJuridica, String> nomeCliJuriCol;
 
     @FXML
-    private TableColumn<?, ?> cnpjJuriCol;
+    private TableColumn<PessoaJuridica, String> cnpjJuriCol;
 
     @FXML
     private JFXButton voltarListBtn;
@@ -195,19 +199,19 @@ public class ControlerReserva implements Initializable {
     private JFXButton atualizarQuartTabelaBtn;
 
     @FXML
-    private TableView<?> alugQuartoTabela;
+    private TableView<QuartoView> alugQuartoTabela;
 
     @FXML
-    private TableColumn<?, ?> novoQuartoCol;
+    private TableColumn<QuartoView, Integer> novoQuartoCol;
 
     @FXML
-    private TableColumn<?, ?> novoQtCamasCol;
+    private TableColumn<QuartoView, Integer> novoQtCamasCol;
 
     @FXML
-    private TableColumn<?, ?> novoTipoCol;
+    private TableColumn<QuartoView, String> novoTipoCol;
 
     @FXML
-    private TableColumn<?, ?> novoDisponivelCol;
+    private TableColumn<QuartoView, Boolean> novoDisponivelCol;
 
     @FXML
     private JFXButton voltarQuartBtn;
@@ -239,11 +243,257 @@ public class ControlerReserva implements Initializable {
     @FXML
     void action(ActionEvent event) {
 
+    	
+    	
+    	if(event.getSource() == cliFisiRadio) {
+    	
+    		cliFisiRadio.setSelected(true);
+			cliJuriRadio.setSelected(false);
+			cliFisiTab.setDisable(false);
+			cliJuriTab.setDisable(true);
+			cliFisiTab.getTabPane().getSelectionModel().select(cliFisiTab);
+    	}
+    	
+    	if(event.getSource() == cliJuriRadio) {
+    		
+    		cliJuriRadio.setSelected(true);
+			cliFisiRadio.setSelected(false);
+			cliFisiTab.setDisable(true);
+			cliJuriTab.setDisable(false);
+			cliJuriTab.getTabPane().getSelectionModel().select(cliJuriTab);
+    	}
+    	
+    	if(event.getSource() == pesqReservBtn) {
+    		
+    		/**
+			 * Buscar por cliente físico
+			 */
+			if (cliFisiRadio.isSelected()) {
+
+				cliFisiRadio.setSelected(true);
+				cliJuriRadio.setSelected(false);
+
+//				try {
+					
+//					fisicas = Facade.getInstance().buscarAlugadosFisicosView(pesqAluguelField.getText());
+					
+//					cliFisTabela.getItems()
+//							.setAll(fisicas);
+//				} catch (BusinessException e) {
+					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+
+			}
+
+			/**
+			 * Buscar por cliente juridico
+			 */
+			if (cliJuriRadio.isSelected()) {
+
+				cliJuriRadio.setSelected(true);
+				cliFisiRadio.setSelected(false);
+
+//				try {
+//					cliJuriTabela.getItems().setAll(Facade.getInstance().buscarAlugadosJuridicosView(pesqAluguelField.getText()));
+//				} catch (BusinessException e) {
+//					 TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+				
+			}
+    		
+    	}
+    	
+    	if(event.getSource() == novaReservaBtn) {
+    		
+    		novaReservaTab.setDisable(false);
+    		novaReservaTab.getTabPane().getSelectionModel().select(novaReservaTab);
+    		
+    	}
+    	
+    	if(event.getSource() == editarBtn) {
+    		
+    	}
+    	
+    	//Fim dos eventos da seção de listagem de reservas
+    	
+    	//---------------------------------------------------------------------------
+    	
+    	//eventos da seção de nova reserva - Cliente
+    	
+    	if (event.getSource() == novoCliFisiRadio) {
+
+			novoCliFisiRadio.setSelected(true);
+			novoCliJuriRadio.setSelected(false);
+			novoCliFisiTab.setDisable(false);
+			novoCliJuriTab.setDisable(true);
+			novoCliFisiTab.getTabPane().getSelectionModel().select(novoCliFisiTab);
+
+		}
+
+		if (event.getSource() == novoCliJuriRadio) {
+
+			novoCliFisiRadio.setSelected(false);
+			novoCliJuriRadio.setSelected(true);
+			novoCliFisiTab.setDisable(true);
+			novoCliJuriTab.setDisable(false);
+			novoCliJuriTab.getTabPane().getSelectionModel().select(novoCliJuriTab);
+		}
+    	
+		if (event.getSource() == pesqClientBtn) {
+
+			/**
+			 * cliente fisico selecionado
+			 */
+			if (novoCliFisiRadio.isSelected()) {
+
+				try {
+
+					novoCliTabela.getItems()
+							.setAll(Facade.getInstance().buscarPessoasFisica(pesqClientField.getText()));
+					limparCamposPesquisa();
+				} catch (BusinessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			/**
+			 * cliente juridico selecionado
+			 */
+			if (novoCliJuriRadio.isSelected()) {
+
+				try {
+					novoCliJuriTabela.getItems()
+							.setAll(Facade.getInstance().buscarPessoasJuridica(pesqClientField.getText()));
+					limparCamposPesquisa();
+				} catch (BusinessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+
+		}
+
+		/**
+		 * Volta para a seção de listagem de alugueis
+		 */
+		if (event.getSource() == voltarListBtn) {
+
+			novaReservaTab.setDisable(true);
+			reservaTab.getTabPane().getSelectionModel().select(reservaTab);
+
+		}
+		
+		/**
+		 * Continua para o Tab quartos
+		 */
+		if (event.getSource() == contCadBtn) {
+
+			if (novoCliTabela.getSelectionModel().getSelectedItem() != null) {
+
+				cliente = novoCliTabela.getSelectionModel().getSelectedItem();
+
+			} else if (novoCliJuriTabela.getSelectionModel().getSelectedItem() != null) {
+
+				cliente = novoCliJuriTabela.getSelectionModel().getSelectedItem();
+
+			}
+
+			listaQuartosTab.setDisable(false);
+			listaQuartosTab.getTabPane().getSelectionModel().select(listaQuartosTab);
+
+		}
+		
+		// Fim dos eventos da seção de novo aluguel - Cliente
+
+				// -------------------------------------------------------------
+
+				// eventos da seção de novo aluguel - Quarto
+
+				if (event.getSource() == pesqQuartoBtn) {
+
+					try {
+						alugQuartoTabela.getItems()
+								.setAll(Facade.getInstance().buscarQuartoViewDisponivel(pesqQuartoField.getText()));
+						limparCamposPesquisa();
+					} catch (BusinessException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				}
+
+				/**
+				 * volta para a seção do cliente
+				 */
+				if (event.getSource() == voltarQuartBtn) {
+
+					clienteTab.getTabPane().getSelectionModel().select(clienteTab);
+
+				}
+
+				/**
+				 * continua para a seção do dados do aluguel
+				 */
+				if (event.getSource() == contQuartBtn) {
+
+					if (alugQuartoTabela.getSelectionModel().getSelectedItem() != null) {
+						quartoView = alugQuartoTabela.getSelectionModel().getSelectedItem();
+
+						dadosGeraisTab.setDisable(false);
+						dadosGeraisTab.getTabPane().getSelectionModel().select(dadosGeraisTab);
+
+					} else {
+						Message.getInstance().viewMessage(AlertType.WARNING, "Atenção!", "Quarto não selecionado!",
+								"Selecione um quarto para prosseguir!");
+					}
+
+				}
+				// Fim dos eventos da seção de quartos
+
+				// -------------------------------------------------------------------------------
+		
+				// Eventos da seção de dados gerais
+
+				/**
+				 * Voltar pra seção de listagem de quartos
+				 */
+				if (event.getSource() == voltarDadosGBtn) {
+
+					dadosGeraisTab.getTabPane().getSelectionModel().select(dadosGeraisTab);
+
+				}
+
+				/**
+				 * Finalizar o cadastro de um aluguel
+				 */
+				if (event.getSource() == finalizarReservBtn) {
+
+					try {
+						cadastrarReserva(quartoView);
+
+					} catch (BusinessException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						Message.getInstance().viewMessage(AlertType.ERROR, "Erro!", "Erro ao cadastrar!", e.getMessage());
+					}
+
+				}
+
+
+		
     }
+    	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 
+		mascaras();
+		carregarCamposReserva();
+		
 	}
 
 	/**
@@ -396,12 +646,20 @@ public class ControlerReserva implements Initializable {
 
 	}
 
-	/**
-	 * Método para cadastrar a Reserva
-	 */
-	public void cadastrarReserva() {
 
-		reserva = new Reserva();
+	public void mascaras() {
+		
+		MaskFieldUtil.monetaryField(valorField);
+		
+	}
+	
+	public void limparCamposPesquisa() {
+
+		pesqReservField.clear();
+
+		pesqClientField.clear();
+
+		pesqQuartoField.clear();
 
 	}
 
@@ -410,9 +668,6 @@ public class ControlerReserva implements Initializable {
 	 */
 	public void limparCamposReserva() {
 
-		pesqReservField.clear();
-
-		pesqClientField.clear();
 
 		pesqQuartoField.clear();
 
@@ -425,4 +680,36 @@ public class ControlerReserva implements Initializable {
 		situacaoCBox.setSelected(true);
 
 	}
+	
+	
+	/**
+	 * Método para cadastrar a Reserva
+	 * @throws BusinessException 
+	 */
+	public void cadastrarReserva(QuartoView q) throws BusinessException {
+
+		reserva = new Reserva();
+
+		caixa = Facade.getInstance().searchCaixa(ControlerLogin.getCaixa().getId());
+		
+		reserva.setCaixa(caixa);
+		
+		reserva.setFuncionario(ControlerLogin.getUsuario());
+		
+		reserva.setCliente(cliente);
+		
+		reserva.setDataReserva(reservaDateP.getValue());
+		
+		reserva.setHoraReserva(reservaTimeP.getValue());
+		
+		reserva.setSituacao(situacaoCBox.isSelected());
+		
+		reserva.setQuarto(Facade.getInstance().searchQuarto(q.getId()));
+		
+		reserva.setValor(Double.parseDouble(valorField.getText()));
+		
+		Facade.getInstance().createOrUpdateReserva(reserva);
+	}
+	
+	
 }

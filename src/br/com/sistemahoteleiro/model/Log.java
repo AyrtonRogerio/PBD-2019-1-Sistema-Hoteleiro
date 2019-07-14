@@ -42,9 +42,6 @@ public class Log extends Entidade{
 	private LocalDate data;
 	
 	
-	@Column
-	private LocalTime hora;
-	
 	/**
 	 * @return the autor
 	 */
@@ -99,20 +96,6 @@ public class Log extends Entidade{
 	 */
 	public void setData(LocalDate data) {
 		this.data = data;
-	}
-	
-	/**
-	 * @return the hora
-	 */
-	public LocalTime getHora() {
-		return hora;
-	}
-	
-	/**
-	 * @param hora the hora to set
-	 */
-	public void setHora(LocalTime hora) {
-		this.hora = hora;
 	}
 	
 	

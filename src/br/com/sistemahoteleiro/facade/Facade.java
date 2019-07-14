@@ -56,6 +56,7 @@ import br.com.sistemahoteleiro.model.PessoaJuridicaView;
 import br.com.sistemahoteleiro.model.Quarto;
 import br.com.sistemahoteleiro.model.QuartoView;
 import br.com.sistemahoteleiro.model.Reserva;
+import br.com.sistemahoteleiro.model.ReservaViewFisica;
 import br.com.sistemahoteleiro.model.SuperUsuario;
 import br.com.sistemahoteleiro.model.Usuario;
 
@@ -544,6 +545,12 @@ public class Facade implements IFacade {
 	}
 
 	@Override
+	public List<ReservaViewFisica> buscarReservadosFisicosView(String busca) throws BusinessException {
+		// TODO Auto-generated method stub
+		return businessReserva.buscarReservadosFisicosView(busca);
+	}
+	
+	@Override
 	public void removeReserva(Reserva reserva) throws BusinessException {
 		// TODO Auto-generated method stub
 		businessReserva.remove(reserva);
@@ -666,6 +673,8 @@ public class Facade implements IFacade {
 		// TODO Auto-generated method stub
 		return businessUsuario.searchBuscarTodos(busca);
 	}
+
+
 
 
 }
