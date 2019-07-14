@@ -56,6 +56,42 @@ public class SQLUtil {
 	
 	
 	//Triggers
-	
+	public static final String GATILHO_ALUGA_ATUALIZAR_SALDO_CAIXA_ = "CREATE OR REPLACE FUNCTION atualizar_saldo_caixa()" + 
+			"RETURNS TRIGGER AS $$" + 
+			"	DECLARE " + 
+			"	id_caixa INTEGER;" + 
+			"	id_aluga INTEGER;" + 
+			"	saldo_total_aluga DOUBLE PRECISION;" + 
+			"	n_saldo_caixa DOUBLE PRECISION;" + 
+			"	saldo_caixa DOUBLE PRECISION;" + 
+			"	" + 
+			"BEGIN " + 
+			"	" + 
+			"	IF(TG_OP = 'INSERT') THEN" + 
+			"		id_caixa := NEW.caixa_id;" + 
+			"		id_aluga := NEW.id;" + 
+			"	ELSIF(TG_OP = 'UPDATE') THEN" + 
+			"		id_caixa := OLD.caixa_id;" + 
+			"		id_aluga := OLD.id;" + 
+			"	END IF;" + 
+			"	" + 
+			"	IF EXISTS (SELECT a FROM aluga AS a WHERE a.caixa_id = id_caixa) THEN" + 
+			"			SELECT SUM(c.saldo) INTO saldo_caixa FROM caixa c WHERE c.id = id_caixa;" + 
+			"			" + 
+			"			SELECT a.valor_total INTO saldo_total_aluga FROM aluga a WHERE a.id = id_aluga;" + 
+			"			n" + 
+			"			SELECT (saldo_total_aluga + saldo_caixa) INTO n_saldo_caixa;" + 
+			"			" + 
+			"			UPDATE caixa SET saldo = n_saldo_caixa WHERE id = id_caixa;" + 
+			"	END IF;" + 
+			"	RETURN NULL;" + 
+			"END; " + 
+			"$$ LANGUAGE plpgsql;" + 
+			"" + 
+			"CREATE TRIGGER atualizar_saldo_caixa" + 
+			"AFTER INSERT OR UPDATE " + 
+			"ON aluga" + 
+			"FOR EACH ROW " + 
+			"EXECUTE PROCEDURE atualizar_saldo_caixa();";
 	
 }
