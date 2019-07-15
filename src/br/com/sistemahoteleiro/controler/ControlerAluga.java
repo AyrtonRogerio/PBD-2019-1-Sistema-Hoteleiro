@@ -270,6 +270,24 @@ public class ControlerAluga implements Initializable {
 	private JFXTextField novoValorTotalField;
 
 	@FXML
+    private Tab infoTab;
+
+    @FXML
+    private JFXDatePicker dataInicioDateP;
+
+    @FXML
+    private JFXDatePicker dataFimDateP;
+
+    @FXML
+    private JFXTextField saldoInfoField;
+
+    @FXML
+    private JFXButton buscarInfoBtn;
+
+    @FXML
+    private JFXButton voltarListBtn;
+	
+	@FXML
 	void action(ActionEvent event) {
 
 		// Eventos da seção de listagem de alugueis
@@ -521,7 +539,27 @@ public class ControlerAluga implements Initializable {
 		if (event.getSource() == alugAtualizaBtn) {
 
 		}
+		
+		if(event.getSource() == voltarListBtn) {
+			
+			alugadosListTab.getTabPane().getSelectionModel().select(alugadosListTab);
+			
+		}
 
+		if(event.getSource() == buscarInfoBtn) {
+			
+			
+			try {
+				saldoInfoField.setText(""+Facade.getInstance().buscarValorTotalDeAlugados(dataInicioDateP.getValue(), dataFimDateP.getValue()));
+			} catch (BusinessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Message.getInstance().viewMessage(AlertType.ERROR, "Erro!", "Erro ao buscar!", "Erro ao buscar valores totais!");
+			}
+			
+			
+		}
+		
 	}
 
 	@Override

@@ -33,6 +33,7 @@ import br.com.sistemahoteleiro.model.Quarto;
 import br.com.sistemahoteleiro.model.QuartoView;
 import br.com.sistemahoteleiro.model.Reserva;
 import br.com.sistemahoteleiro.model.ReservaViewFisica;
+import br.com.sistemahoteleiro.model.ReservaViewJuridica;
 import br.com.sistemahoteleiro.model.Usuario;
 import br.com.sistemahoteleiro.util.MaskFieldUtil;
 import br.com.sistemahoteleiro.view.Message;
@@ -112,25 +113,25 @@ public class ControlerReserva implements Initializable {
     private Tab cliJuriTab;
 
     @FXML
-    private TableView<?> cliJuriTabela;
+    private TableView<ReservaViewJuridica> cliJuriTabela;
 
     @FXML
-    private TableColumn<?, String> nomeCliJurCol;
+    private TableColumn<ReservaViewJuridica, String> nomeCliJurCol;
 
     @FXML
-    private TableColumn<?, String> cnpjCliJurCol;
+    private TableColumn<ReservaViewJuridica, String> cnpjCliJurCol;
 
     @FXML
-    private TableColumn<?, Quarto> quartoCliJurCol;
+    private TableColumn<ReservaViewJuridica, Quarto> quartoCliJurCol;
 
     @FXML
-    private TableColumn<?, LocalDate> dataEntCliJurCol;
+    private TableColumn<ReservaViewJuridica, LocalDate> dataEntCliJurCol;
 
     @FXML
-    private TableColumn<?, LocalTime> horaEntCliJurCol;
+    private TableColumn<ReservaViewJuridica, LocalTime> horaEntCliJurCol;
 
     @FXML
-    private TableColumn<?, Boolean> situacaoCliJurCol;
+    private TableColumn<ReservaViewJuridica, Boolean> situacaoCliJurCol;
 
     @FXML
     private JFXButton editarBtn;
@@ -241,6 +242,24 @@ public class ControlerReserva implements Initializable {
     private JFXCheckBox situacaoCBox;
 
     @FXML
+    private Tab infoTab;
+
+    @FXML
+    private JFXDatePicker dataInicioDateP;
+
+    @FXML
+    private JFXDatePicker dataFimDateP;
+
+    @FXML
+    private JFXTextField saldoInfoField;
+
+    @FXML
+    private JFXButton buscarInfoBtn;
+
+    @FXML
+    private JFXButton voltarListBtn1;
+    
+    @FXML
     void action(ActionEvent event) {
 
     	
@@ -273,16 +292,16 @@ public class ControlerReserva implements Initializable {
 				cliFisiRadio.setSelected(true);
 				cliJuriRadio.setSelected(false);
 
-//				try {
+				try {
 					
-//					fisicas = Facade.getInstance().buscarAlugadosFisicosView(pesqAluguelField.getText());
 					
-//					cliFisTabela.getItems()
-//							.setAll(fisicas);
-//				} catch (BusinessException e) {
+					
+					cliFisTabela.getItems()
+							.setAll(Facade.getInstance().buscarReservadosFisicosView(pesqReservField.getText()));
+				} catch (BusinessException e) {
 					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
+					e.printStackTrace();
+				}
 
 			}
 
@@ -294,12 +313,12 @@ public class ControlerReserva implements Initializable {
 				cliJuriRadio.setSelected(true);
 				cliFisiRadio.setSelected(false);
 
-//				try {
-//					cliJuriTabela.getItems().setAll(Facade.getInstance().buscarAlugadosJuridicosView(pesqAluguelField.getText()));
-//				} catch (BusinessException e) {
+				try {
+					cliJuriTabela.getItems().setAll(Facade.getInstance().buscarReservadosJuridicosView(pesqReservField.getText()));
+				} catch (BusinessException e) {
 //					 TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
+					e.printStackTrace();
+				}
 				
 			}
     		
@@ -483,6 +502,18 @@ public class ControlerReserva implements Initializable {
 
 				}
 
+				
+		if(event.getSource() == buscarInfoBtn) {
+			
+			try {
+				saldoInfoField.setText(""+Facade.getInstance().buscarValorTotalDeReservas(dataInicioDateP.getValue(), dataFimDateP.getValue()));
+			} catch (BusinessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Message.getInstance().viewMessage(AlertType.ERROR, "Erro", "Erro ao buscar", "Erro ao buscar valores!");
+			}
+			
+		}
 
 		
     }
@@ -516,48 +547,48 @@ public class ControlerReserva implements Initializable {
 
 		situacaoCliFisCol.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-//		nomeCliFisCol.setCellFactory(coluna -> {
-//			return new TableCell<AlugaPessoaFisicaView, String>() {
-//				protected void updateItem(String item, boolean empty) {
-//					super.updateItem(item, empty);
-//
-//					if (item == null || empty) {
-//						setText(null);
-//					} else {
-//						setText("" + item);
-//					}
-//				}
-//			};
-//		});
-//
-//		cpfCliFisCol.setCellFactory(coluna -> {
-//			return new TableCell<AlugaPessoaFisicaView, String>() {
-//				protected void updateItem(String item, boolean empty) {
-//					super.updateItem(item, empty);
-//
-//					if (item == null || empty) {
-//						setText(null);
-//					} else {
-//						setText("" + item);
-//					}
-//				}
-//			};
-//		});
-//
-//		quartoCliFisCol.setCellFactory(coluna -> {
-//			return new TableCell<AlugaPessoaFisicaView, Quarto>() {
-//				protected void updateItem(Quarto item, boolean empty) {
-//					super.updateItem(item, empty);
-//
-//					if (item == null || empty) {
-//						setText(null);
-//					} else {
-//						setText("" + item.getNumQuarto());
-//					}
-//
-//				}
-//			};
-//		});
+		nomeCliFisCol.setCellFactory(coluna -> {
+			return new TableCell<ReservaViewFisica, String>() {
+				protected void updateItem(String item, boolean empty) {
+					super.updateItem(item, empty);
+
+					if (item == null || empty) {
+						setText(null);
+					} else {
+						setText("" + item);
+					}
+				}
+			};
+		});
+
+		cpfCliFisCol.setCellFactory(coluna -> {
+			return new TableCell<ReservaViewFisica, String>() {
+				protected void updateItem(String item, boolean empty) {
+					super.updateItem(item, empty);
+
+					if (item == null || empty) {
+						setText(null);
+					} else {
+						setText("" + item);
+					}
+				}
+			};
+		});
+
+		quartoCliFisCol.setCellFactory(coluna -> {
+			return new TableCell<ReservaViewFisica, Quarto>() {
+				protected void updateItem(Quarto item, boolean empty) {
+					super.updateItem(item, empty);
+
+					if (item == null || empty) {
+						setText(null);
+					} else {
+						setText("" + item.getNumQuarto());
+					}
+
+				}
+			};
+		});
 		
 		/**
 		 * dados da tabela de alugados para cliente jurídico
@@ -574,48 +605,48 @@ public class ControlerReserva implements Initializable {
 
 		situacaoCliJurCol.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-//		nomeCliJurCol.setCellFactory(coluna -> {
-//			return new TableCell<AlugaPessoaJuridicaView, String>() {
-//				protected void updateItem(String item, boolean empty) {
-//					super.updateItem(item, empty);
-//
-//					if (item == null || empty) {
-//						setText(null);
-//					} else {
-//						setText("" + item);
-//					}
-//				}
-//			};
-//		});
-//
-//		cnpjCliJurCol.setCellFactory(coluna -> {
-//			return new TableCell<AlugaPessoaJuridicaView, String>() {
-//				protected void updateItem(String item, boolean empty) {
-//					super.updateItem(item, empty);
-//
-//					if (item == null || empty) {
-//						setText(null);
-//					} else {
-//						setText("" + item);
-//					}
-//				}
-//			};
-//		});
-//
-//		quartoCliJurCol.setCellFactory(coluna -> {
-//			return new TableCell<AlugaPessoaJuridicaView, Quarto>() {
-//				protected void updateItem(Quarto item, boolean empty) {
-//					super.updateItem(item, empty);
-//
-//					if (item == null || empty) {
-//						setText(null);
-//					} else {
-//						setText("" + item.getNumQuarto());
-//					}
-//
-//				}
-//			};
-//		});
+		nomeCliJurCol.setCellFactory(coluna -> {
+			return new TableCell<ReservaViewJuridica, String>() {
+				protected void updateItem(String item, boolean empty) {
+					super.updateItem(item, empty);
+
+					if (item == null || empty) {
+						setText(null);
+					} else {
+						setText("" + item);
+					}
+				}
+			};
+		});
+
+		cnpjCliJurCol.setCellFactory(coluna -> {
+			return new TableCell<ReservaViewJuridica, String>() {
+				protected void updateItem(String item, boolean empty) {
+					super.updateItem(item, empty);
+
+					if (item == null || empty) {
+						setText(null);
+					} else {
+						setText("" + item);
+					}
+				}
+			};
+		});
+
+		quartoCliJurCol.setCellFactory(coluna -> {
+			return new TableCell<ReservaViewJuridica, Quarto>() {
+				protected void updateItem(Quarto item, boolean empty) {
+					super.updateItem(item, empty);
+
+					if (item == null || empty) {
+						setText(null);
+					} else {
+						setText("" + item.getNumQuarto());
+					}
+
+				}
+			};
+		});
 
 		
 		

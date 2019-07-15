@@ -3,6 +3,7 @@
  */
 package br.com.sistemahoteleiro.business;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import br.com.sistemahoteleiro.dao.DaoAluga;
@@ -58,6 +59,19 @@ public class BusinessAluga extends BusinessGeneric<Aluga> implements IBusinessAl
 		// TODO Auto-generated method stub
 		try {
 			return daoAluga.buscarAlugadosJuridicosView(busca);
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BusinessException(e.getMessage());
+		}
+	}
+
+
+	@Override
+	public double buscarValorTotalDeAlugados(LocalDate data1, LocalDate data2) throws BusinessException {
+		// TODO Auto-generated method stub
+		try {
+			return daoAluga.valorTotalDeAlugados(data1, data2);
 		} catch (DaoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

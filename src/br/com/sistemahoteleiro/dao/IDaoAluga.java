@@ -3,6 +3,7 @@
  */
 package br.com.sistemahoteleiro.dao;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import br.com.sistemahoteleiro.exception.DaoException;
@@ -20,5 +21,7 @@ public interface IDaoAluga extends IDaoGeneric<Aluga> {
 	public List<AlugaPessoaFisicaView> buscarAlugadosFisicosView(String busca) throws DaoException; 
 	
 	public List<AlugaPessoaJuridicaView> buscarAlugadosJuridicosView(String busca) throws DaoException;
+	
+	public double valorTotalDeAlugados(LocalDate data1, LocalDate data2) throws DaoException;
 	
 }

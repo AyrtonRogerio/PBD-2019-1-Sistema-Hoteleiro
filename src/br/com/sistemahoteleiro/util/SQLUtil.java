@@ -40,6 +40,8 @@ public class SQLUtil {
 	
 	public static final String BUSCAR_QUARTO_VIEW_DISP = "select q from QuartoView q where (lower(str(q.tipoQuarto))) like :busca and disponivel = true";
 
+	
+	
 	public static final String BUSCAR_ALUGA_VIEW_FISICA = "select a from AlugaPessoaFisicaView a"
 			+ " inner join Quarto q on a.quarto.id = q.id where lower(str(a.nome)) like :busca or lower(str(a.cpf)) like :busca";
 
@@ -49,7 +51,8 @@ public class SQLUtil {
 	public static final String BUSCAR_RESERVA_VIEW_FISICA = "select r from ReservaViewFisica r "
 			+ "inner join Quarto q on r.quarto.id = q.id where lower(str(r.nome)) like :busca or lower(str(r.cpf)) like :busca";
 	
-	public static final String BUSCAR_RESERVA_VIEW_JURIDICA = "";
+	public static final String BUSCAR_RESERVA_VIEW_JURIDICA = "select r from ReservaViewJuridica r "
+			+ "inner join Quarto q on r.quarto.id = q.id where lower(str(r.nome)) like :busca or lower(str(r.cnpj)) like :busca";
 	
 	
 	//Procedures

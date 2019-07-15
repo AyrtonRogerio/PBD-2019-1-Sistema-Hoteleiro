@@ -22,7 +22,7 @@ import org.hibernate.annotations.Subselect;
  */
 @Immutable
 @Entity
-@Subselect("SELECT DISTINTIC r.*, f.cpf, f.nome FROM reserva r, pessoa_fisica f WHERE r.cliente_id = f.id")
+@Subselect("SELECT DISTINCT r.*, f.cpf, f.nome FROM reserva r, pessoa_fisica f WHERE r.cliente_id = f.id")
 public class ReservaViewFisica {
 
 	@Id 

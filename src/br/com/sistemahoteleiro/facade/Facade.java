@@ -57,6 +57,7 @@ import br.com.sistemahoteleiro.model.Quarto;
 import br.com.sistemahoteleiro.model.QuartoView;
 import br.com.sistemahoteleiro.model.Reserva;
 import br.com.sistemahoteleiro.model.ReservaViewFisica;
+import br.com.sistemahoteleiro.model.ReservaViewJuridica;
 import br.com.sistemahoteleiro.model.SuperUsuario;
 import br.com.sistemahoteleiro.model.Usuario;
 
@@ -191,6 +192,12 @@ public class Facade implements IFacade {
 	public List<AlugaPessoaJuridicaView> buscarAlugadosJuridicosView(String busca) throws BusinessException {
 		// TODO Auto-generated method stub
 		return businessAluga.buscarAlugadosJuridicosView(busca);
+	}
+	
+	@Override
+	public double buscarValorTotalDeAlugados(LocalDate data1, LocalDate data2) throws BusinessException {
+		// TODO Auto-generated method stub
+		return businessAluga.buscarValorTotalDeAlugados(data1, data2);
 	}
 	
 	//Caixa
@@ -551,6 +558,18 @@ public class Facade implements IFacade {
 	}
 	
 	@Override
+	public List<ReservaViewJuridica> buscarReservadosJuridicosView(String busca) throws BusinessException {
+		// TODO Auto-generated method stub
+		return businessReserva.buscarReservadosJuridicosView(busca);
+	}
+	
+	@Override
+	public double buscarValorTotalDeReservas(LocalDate data1, LocalDate data2) throws BusinessException {
+		// TODO Auto-generated method stub
+		return businessReserva.buscarValorTotalDeReservas(data1, data2);
+	}
+	
+	@Override
 	public void removeReserva(Reserva reserva) throws BusinessException {
 		// TODO Auto-generated method stub
 		businessReserva.remove(reserva);
@@ -673,6 +692,12 @@ public class Facade implements IFacade {
 		// TODO Auto-generated method stub
 		return businessUsuario.searchBuscarTodos(busca);
 	}
+
+	
+
+	
+
+	
 
 
 

@@ -27,6 +27,7 @@ import br.com.sistemahoteleiro.model.Quarto;
 import br.com.sistemahoteleiro.model.QuartoView;
 import br.com.sistemahoteleiro.model.Reserva;
 import br.com.sistemahoteleiro.model.ReservaViewFisica;
+import br.com.sistemahoteleiro.model.ReservaViewJuridica;
 import br.com.sistemahoteleiro.model.SuperUsuario;
 import br.com.sistemahoteleiro.model.Usuario;
 
@@ -86,6 +87,8 @@ public interface IFacade {
 	public List<AlugaPessoaFisicaView> buscarAlugadosFisicosView(String busca) throws BusinessException;
 	
 	public List<AlugaPessoaJuridicaView> buscarAlugadosJuridicosView(String busca) throws BusinessException;
+	
+	public double buscarValorTotalDeAlugados(LocalDate data1, LocalDate data2) throws BusinessException;
 
 	//Caixa
 
@@ -219,9 +222,14 @@ public interface IFacade {
 	
 	public List<ReservaViewFisica> buscarReservadosFisicosView(String busca) throws BusinessException;
 
+	public List<ReservaViewJuridica> buscarReservadosJuridicosView(String busca) throws BusinessException;
+	
+	public double buscarValorTotalDeReservas(LocalDate data1, LocalDate data2) throws BusinessException;
+
 	public void removeReserva(Reserva reserva) throws BusinessException;
 
 	public void disableReserva(Reserva reserva) throws BusinessException;
+	
 
 	//SuperUsuario
 

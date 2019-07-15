@@ -11,6 +11,7 @@ import br.com.sistemahoteleiro.facade.Facade;
 import br.com.sistemahoteleiro.facade.IFacade;
 import br.com.sistemahoteleiro.model.SuperUsuario;
 import br.com.sistemahoteleiro.model.Usuario;
+import br.com.sistemahoteleiro.util.Backup;
 import br.com.sistemahoteleiro.view.Message;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -98,6 +99,8 @@ public class App extends Application {
 	public void stop() throws Exception {
 		// TODO Auto-generated method stub
 		super.stop();
+		
+		Backup.backup(System.getProperty("user.home")+"/Backup Sistema Hoteleiro");
 		System.exit(0);
 	}
 

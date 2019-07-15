@@ -3,7 +3,6 @@
  */
 package br.com.sistemahoteleiro.dao;
 
-import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -18,7 +17,6 @@ import br.com.sistemahoteleiro.exception.DaoException;
 import br.com.sistemahoteleiro.model.Aluga;
 import br.com.sistemahoteleiro.model.AlugaPessoaFisicaView;
 import br.com.sistemahoteleiro.model.AlugaPessoaJuridicaView;
-import br.com.sistemahoteleiro.util.ConvertLocalDate;
 import br.com.sistemahoteleiro.util.SQLUtil;
 
 /**
@@ -133,22 +131,6 @@ public class DaoAluga extends DaoGeneric<Aluga> implements IDaoAluga {
 		
 	}
 
-//	public static void main(String[] args) {
-//		
-//	
-//		System.out.println(LocalDate.now().toString()+" data");
-//		
-//		DaoAluga daoAluga = new DaoAluga();
-//		
-//		try {
-//			
-//			System.out.println(daoAluga.valorTotalDeAlugados( LocalDate.now(), LocalDate.now()));
-//		} catch (DaoException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//	}
 
 
 }

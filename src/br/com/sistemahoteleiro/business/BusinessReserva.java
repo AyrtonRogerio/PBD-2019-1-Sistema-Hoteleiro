@@ -15,6 +15,7 @@ import br.com.sistemahoteleiro.exception.ValidationException;
 import br.com.sistemahoteleiro.model.AlugaPessoaFisicaView;
 import br.com.sistemahoteleiro.model.Reserva;
 import br.com.sistemahoteleiro.model.ReservaViewFisica;
+import br.com.sistemahoteleiro.model.ReservaViewJuridica;
 
 /**
  * @author ayrtons
@@ -68,6 +69,31 @@ public class BusinessReserva extends BusinessGeneric<Reserva> implements IBusine
 		
 		try {
 			return daoReserva.buscarReservadosFisicosView(busca);
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BusinessException(e.getMessage());
+		}
+	}
+
+	@Override
+	public List<ReservaViewJuridica> buscarReservadosJuridicosView(String busca) throws BusinessException {
+		// TODO Auto-generated method stub
+		
+		try {
+			return daoReserva.buscarReservadosJuridicosView(busca);
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BusinessException(e.getMessage());
+		}
+	}
+	
+	@Override
+	public double buscarValorTotalDeReservas(LocalDate data1, LocalDate data2) throws BusinessException {
+		// TODO Auto-generated method stub
+		try {
+			return daoReserva.valorTotalDeReservas(data1, data2);
 		} catch (DaoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
