@@ -39,7 +39,27 @@ public class App extends Application {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		IFacade facade = Facade.getInstance();
+		
+//		SuperUsuario superUsuario = new SuperUsuario();
+//		
+//		superUsuario.setCargo(TipoCargo.SUPER_USUARIO);
+//		superUsuario.setCpf("111.424.924-60");
+//		superUsuario.setLogin("ayrton");
+//		superUsuario.setSenha("ayrton");
+//		superUsuario.setNome("Ayrton Rogerio");
+//		superUsuario.setRg("9.169.254");
+//		superUsuario.setStatus(true);
+//		
+//		try {
+//			facade.createOrUpdateSuperUsuario(superUsuario);
+//		} catch (BusinessException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
 		launch(args);
+		
+		
 		
 	}
 

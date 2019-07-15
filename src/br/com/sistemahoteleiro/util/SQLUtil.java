@@ -25,7 +25,7 @@ public class SQLUtil {
 
 	public static final String BUSCAR_CAIXA_DATA = "select c from Caixa c where c.dataAbertura = :dataAbertura";
 
-	public static final String BUSCAR_CAIXA_ANTERIOR = "select c from Caixa where id = (select max(id) from Caixa)";
+	public static final String BUSCAR_CAIXA_ANTERIOR = "select c from Caixa c where id = (select max(id) from Caixa)";
 
 	public static final String BUSCAR_CLIENTES_FISICO_JURIDICO = "SELECT DISTINCT e FROM Cliente e, PessoaFisica pf, PessoaJuridica pj "
 			+ "WHERE lower(str(e.nome)) like :busca or lower(str(pf.cpf)) like :busca or lower(str(pj.cnpj)) like :busca";
@@ -53,6 +53,20 @@ public class SQLUtil {
 	
 	
 	//Procedures
+	
+	public static final String STORED_PROCEDURES_CALCULAR_DIAS = "CREATE OR REPLACE FUNCTION calcular_dias(data_entrada date, data_saida date) \n" + 
+			"RETURNS integer AS $$\n" + 
+			"	\n" + 
+			"	DECLARE num_dias int;\n" + 
+			"	\n" + 
+			"BEGIN\n" + 
+			"\n" + 
+			"	SELECT abs(data_saida - data_entrada) INTO num_dias;\n" + 
+			"	\n" + 
+			"	RETURN num_dias;\n" + 
+			"	\n" + 
+			"END; $$ \n" + 
+			"LANGUAGE plpgsql;";
 	
 	
 	

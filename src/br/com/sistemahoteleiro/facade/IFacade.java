@@ -139,17 +139,17 @@ public interface IFacade {
 
 	public void disableFuncionario(Funcionario funcionario) throws BusinessException;
 
-	//Log
-
-	public void createOrUpdateLog(Log log) throws BusinessException;
-
-	public Log searchLog(int id) throws BusinessException;
-
-	public List<Log> searchAllLog() throws BusinessException;
-
-	public void removeLog(Log log) throws BusinessException;
-
-	public void disableLog(Log log) throws BusinessException;
+//	//Log
+//
+//	public void createOrUpdateLog(Log log) throws BusinessException;
+//
+//	public Log searchLog(int id) throws BusinessException;
+//
+//	public List<Log> searchAllLog() throws BusinessException;
+//
+//	public void removeLog(Log log) throws BusinessException;
+//
+//	public void disableLog(Log log) throws BusinessException;
 
 	//Parcela
 

@@ -109,14 +109,15 @@ public class ControlerLogin implements Initializable {
 
 				if (c != null) {
 
+					
 					caixa.setEntrada(c.getSaldo());
 					caixa.setSaida(0.00);
 					caixa.setSaldo(caixa.getEntrada() - caixa.getSaida());
 					caixa.setDataAbertura(localDate);
 					caixa.setDataFechamento(localDate);
 
-				} else {
-
+				}
+				else {
 					caixa.setEntrada(500.00);
 					caixa.setSaida(0.00);
 					caixa.setSaldo(caixa.getEntrada() - caixa.getSaida());
@@ -124,6 +125,7 @@ public class ControlerLogin implements Initializable {
 					caixa.setDataFechamento(localDate);
 				}
 
+				
 				Facade.getInstance().createOrUpdateCaixa(caixa);
 			}
 

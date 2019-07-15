@@ -1,0 +1,190 @@
+SQL Scripts
+
+// Procedures
+
+//Procedure da tabel aluga
+
+CREATE OR REPLACE FUNCTION valor_total_data_aluga(data1 date, data2 date) RETURNS double precision AS
+$$
+	DECLARE val DOUBLE PRECISION;
+BEGIN 
+
+	SELECT sum(aluga.valor_total) into val FROM aluga WHERE aluga.data_entrada BETWEEN data1 AND data2;
+	
+	RETURN CAST(val as double precision);
+END; $$
+LANGUAGE plpgsql;
+
+//Procedure da tabel reserva
+
+CREATE OR REPLACE FUNCTION soma_valor_reserva_data(data1 date, data2 date) RETURNS double precision AS
+$$
+	DECLARE valor_total DOUBLE PRECISION;
+BEGIN 
+
+	SELECT sum(valor) into valor_total FROM reserva WHERE reserva.data_reserva BETWEEN data1 AND data2;
+	
+	RETURN CAST(valor_total as double precision);
+END; $$
+LANGUAGE plpgsql;
+
+
+
+//Gatilho da tabela reserva que atualiza o caixa
+
+CREATE OR REPLACE FUNCTION reserva_atualizar_saldo_caixa() RETURNS TRIGGER AS $$
+	
+	DECLARE 
+	id_caixa INTEGER; 
+	id_reserva INTEGER;
+	saldo_total_reserva DOUBLE PRECISION; 
+	n_saldo_caixa DOUBLE PRECISION; 
+	saldo_caixa DOUBLE PRECISION;
+		
+BEGIN    
+							 
+		IF(TG_OP = 'INSERT') THEN
+			id_caixa := NEW.caixa_id; 
+			id_reserva := NEW.id; 
+			ELSIF(TG_OP = 'UPDATE') THEN 
+			id_caixa := OLD.caixa_id;
+			id_reserva := OLD.id;
+		END IF;
+						
+		IF EXISTS (SELECT r FROM reserva AS r WHERE r.caixa_id = id_caixa) THEN
+			SELECT SUM(c.saldo) INTO saldo_caixa FROM caixa c WHERE c.id = id_caixa;
+		
+			SELECT r.valor INTO saldo_total_reserva FROM reserva r WHERE r.id = id_reserva;
+
+			SELECT (saldo_total_reserva + saldo_caixa) INTO n_saldo_caixa;
+		
+			UPDATE caixa SET saldo = n_saldo_caixa WHERE id = id_caixa;
+		END IF; 
+	RETURN NULL; 
+END;  $$ 
+LANGUAGE plpgsql;  
+			 
+CREATE TRIGGER reserva_atualizar_saldo_caixa 
+AFTER INSERT OR UPDATE 
+ON reserva  
+FOR EACH ROW
+EXECUTE PROCEDURE reserva_atualizar_saldo_caixa();
+
+//Gatilho da tabela aluga que atualiza o caixa
+
+CREATE OR REPLACE FUNCTION atualizar_saldo_caixa()	RETURNS TRIGGER AS $$
+	
+	DECLARE
+	id_caixa INTEGER;
+	id_aluga INTEGER; 
+	saldo_total_aluga DOUBLE PRECISION;
+	n_saldo_caixa DOUBLE PRECISION;
+	saldo_caixa DOUBLE PRECISION; 
+				
+BEGIN  
+				
+		IF(TG_OP = 'INSERT') THEN
+				id_caixa := NEW.caixa_id;
+				id_aluga := NEW.id;
+		ELSIF(TG_OP = 'UPDATE') THEN
+				id_caixa := OLD.caixa_id; 
+				id_aluga := OLD.id; 
+		END IF;
+			
+		IF EXISTS (SELECT a FROM aluga AS a WHERE a.caixa_id = id_caixa) THEN
+			SELECT SUM(c.saldo) INTO saldo_caixa FROM caixa c WHERE c.id = id_caixa;
+					
+			SELECT a.valor_total INTO saldo_total_aluga FROM aluga a WHERE a.id = id_aluga;
+		
+			SELECT (saldo_total_aluga + saldo_caixa) INTO n_saldo_caixa;
+						 
+			UPDATE caixa SET saldo = n_saldo_caixa WHERE id = id_caixa;
+		END IF;
+	RETURN NULL; 
+END; $$ 
+LANGUAGE plpgsql; 
+			 
+CREATE TRIGGER atualizar_saldo_caixa
+AFTER INSERT OR UPDATE 
+ON aluga
+FOR EACH ROW  
+EXECUTE PROCEDURE atualizar_saldo_caixa();
+
+//Gatilhos de Log
+
+CREATE OR REPLACE FUNCTION gera_log() RETURNS TRIGGER	AS $$
+
+BEGIN 
+		INSERT INTO log (data, autor, alteracao, tabela)
+		VALUES (now(), user, TG_OP, TG_RELNAME); 
+	RETURN NEW;
+END; $$ 
+LANGUAGE plpgsql; 
+			 
+CREATE TRIGGER tr_gera_log_admin
+BEFORE INSERT OR UPDATE OR DELETE 
+ON administrador
+FOR EACH ROW 
+EXECUTE PROCEDURE gera_log();
+			 
+CREATE TRIGGER tr_gera_log_aluga
+BEFORE INSERT OR UPDATE OR DELETE 
+ON aluga
+FOR EACH ROW 
+EXECUTE PROCEDURE gera_log();
+			 
+CREATE TRIGGER tr_gera_log_caixa
+BEFORE INSERT OR UPDATE OR DELETE
+ON caixa
+FOR EACH ROW
+EXECUTE PROCEDURE gera_log();
+		 
+CREATE TRIGGER tr_gera_log_contato
+BEFORE INSERT OR UPDATE OR DELETE 
+ON contato
+FOR EACH ROW 
+EXECUTE PROCEDURE gera_log();
+			 
+CREATE TRIGGER tr_gera_log_endereco
+BEFORE INSERT OR UPDATE OR DELETE 
+ON endereco
+FOR EACH ROW 
+EXECUTE PROCEDURE gera_log();
+			 
+CREATE TRIGGER tr_gera_log_funcionario
+BEFORE INSERT OR UPDATE OR DELETE 
+ON funcionario
+FOR EACH ROW 
+EXECUTE PROCEDURE gera_log();
+			 
+CREATE TRIGGER tr_gera_log_pessoa_fisica
+BEFORE INSERT OR UPDATE OR DELETE
+ON pessoa_fisica
+FOR EACH ROW 
+EXECUTE PROCEDURE gera_log();
+			 
+CREATE TRIGGER tr_gera_log_pessoa_juridica
+BEFORE INSERT OR UPDATE OR DELETE
+ON pessoa_juridica
+FOR EACH ROW
+EXECUTE PROCEDURE gera_log();
+			 
+CREATE TRIGGER tr_gera_log_quarto
+BEFORE INSERT OR UPDATE OR DELETE 
+ON quarto
+FOR EACH ROW 
+EXECUTE PROCEDURE gera_log();
+		 
+CREATE TRIGGER tr_gera_log_reserva 
+BEFORE INSERT OR UPDATE OR DELETE 
+ON reserva
+FOR EACH ROW 
+EXECUTE PROCEDURE gera_log();
+			 
+CREATE TRIGGER tr_gera_log_super_usuario
+BEFORE INSERT OR UPDATE OR DELETE
+ON super_usuario
+FOR EACH ROW 
+EXECUTE PROCEDURE gera_log();
+
+			

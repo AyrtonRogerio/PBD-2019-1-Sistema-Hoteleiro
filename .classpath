@@ -16,8 +16,6 @@
 	<classpathentry exported="true" kind="lib" path="lib/hibernate-jpa-2.1-api-1.0.0.Final.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/iText-2.1.7.js2.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jandex-2.0.3.Final.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/jasperreports-6.6.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/jasperreports-fonts-light.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/javassist-3.20.0-GA.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/javax.xml.bind_2.2.12.v201410011542.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jboss-logging-3.3.0.Final.jar"/>
@@ -25,6 +23,8 @@
 	<classpathentry exported="true" kind="lib" path="lib/jdt-compiler-3.1.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/postgresql-42.2.5.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jfoenix-8.0.8.jar"/>
+	<classpathentry kind="lib" path="lib/jasperreports-6.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/jasperreports-fonts-light.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>

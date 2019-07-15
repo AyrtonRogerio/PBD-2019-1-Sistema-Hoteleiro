@@ -13,7 +13,7 @@ import br.com.sistemahoteleiro.business.BusinessCliente;
 import br.com.sistemahoteleiro.business.BusinessContato;
 import br.com.sistemahoteleiro.business.BusinessEndereco;
 import br.com.sistemahoteleiro.business.BusinessFuncionario;
-import br.com.sistemahoteleiro.business.BusinessLog;
+//import br.com.sistemahoteleiro.business.BusinessLog;
 import br.com.sistemahoteleiro.business.BusinessParcela;
 import br.com.sistemahoteleiro.business.BusinessPessoaFisica;
 import br.com.sistemahoteleiro.business.BusinessPessoaJuridica;
@@ -28,7 +28,7 @@ import br.com.sistemahoteleiro.business.IBusinessCliente;
 import br.com.sistemahoteleiro.business.IBusinessContato;
 import br.com.sistemahoteleiro.business.IBusinessEndereco;
 import br.com.sistemahoteleiro.business.IBusinessFuncionario;
-import br.com.sistemahoteleiro.business.IBusinessLog;
+//import br.com.sistemahoteleiro.business.IBusinessLog;
 import br.com.sistemahoteleiro.business.IBusinessParcela;
 import br.com.sistemahoteleiro.business.IBusinessPessoaFisica;
 import br.com.sistemahoteleiro.business.IBusinessPessoaJuridica;
@@ -87,7 +87,7 @@ public class Facade implements IFacade {
 	private IBusinessContato businessContato;
 	private IBusinessEndereco businessEndereco;
 	private IBusinessFuncionario businessFuncionario;
-	private IBusinessLog businessLog;
+//	private IBusinessLog businessLog;
 	private IBusinessParcela businessParcela;
 	private IBusinessPessoaFisica businessPessoaFisica;
 	private IBusinessPessoaJuridica businessPessoaJuridica;
@@ -105,7 +105,7 @@ public class Facade implements IFacade {
 		businessContato = new BusinessContato();
 		businessEndereco = new BusinessEndereco();
 		businessFuncionario = new BusinessFuncionario();
-		businessLog = new BusinessLog();
+//		businessLog = new BusinessLog();
 		businessParcela = new BusinessParcela();
 		businessPessoaFisica = new BusinessPessoaFisica();
 		businessPessoaJuridica = new BusinessPessoaJuridica();
@@ -336,35 +336,35 @@ public class Facade implements IFacade {
 
 	//Log
 	
-	@Override
-	public void createOrUpdateLog(Log log) throws BusinessException {
-		// TODO Auto-generated method stub
-		businessLog.createOrUpdate(log);
-	}
-
-	@Override
-	public Log searchLog(int id) throws BusinessException {
-		// TODO Auto-generated method stub
-		return businessLog.search(Log.class, id);
-	}
-
-	@Override
-	public List<Log> searchAllLog() throws BusinessException {
-		// TODO Auto-generated method stub
-		return businessLog.searchAll();
-	}
-
-	@Override
-	public void removeLog(Log log) throws BusinessException {
-		// TODO Auto-generated method stub
-		businessLog.remove(log);
-	}
-
-	@Override
-	public void disableLog(Log log) throws BusinessException {
-		// TODO Auto-generated method stub
-		businessLog.disable(log);
-	}
+//	@Override
+//	public void createOrUpdateLog(Log log) throws BusinessException {
+//		// TODO Auto-generated method stub
+//		businessLog.createOrUpdate(log);
+//	}
+//
+//	@Override
+//	public Log searchLog(int id) throws BusinessException {
+//		// TODO Auto-generated method stub
+//		return businessLog.search(Log.class, id);
+//	}
+//
+//	@Override
+//	public List<Log> searchAllLog() throws BusinessException {
+//		// TODO Auto-generated method stub
+//		return businessLog.searchAll();
+//	}
+//
+//	@Override
+//	public void removeLog(Log log) throws BusinessException {
+//		// TODO Auto-generated method stub
+//		businessLog.remove(log);
+//	}
+//
+//	@Override
+//	public void disableLog(Log log) throws BusinessException {
+//		// TODO Auto-generated method stub
+//		businessLog.disable(log);
+//	}
 
 	//Parcela
 	

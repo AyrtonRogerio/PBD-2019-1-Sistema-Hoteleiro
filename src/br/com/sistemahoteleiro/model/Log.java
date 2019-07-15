@@ -3,10 +3,14 @@
  */
 package br.com.sistemahoteleiro.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -18,16 +22,14 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "log")
-@SequenceGenerator(name = Entidade.SEQUENCE_ENTIDADE, sequenceName = Log.SEQUENCE_ENTIDADE, initialValue = 1, allocationSize = 1)
-public class Log extends Entidade{
+public class Log implements Serializable{
 
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	protected static final String SEQUENCE_ENTIDADE = "log_sequence";
-
+	@Id
+	@Column(columnDefinition = "serial")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
+	
 	@Column
 	private String autor;
 	
@@ -41,6 +43,7 @@ public class Log extends Entidade{
 	@Column
 	private LocalDate data;
 	
+	private static final long serialVersionUID = 1L;
 	
 	/**
 	 * @return the autor
@@ -96,6 +99,20 @@ public class Log extends Entidade{
 	 */
 	public void setData(LocalDate data) {
 		this.data = data;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public Integer getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 	

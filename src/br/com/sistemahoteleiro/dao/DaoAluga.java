@@ -3,16 +3,22 @@
  */
 package br.com.sistemahoteleiro.dao;
 
+import java.math.BigInteger;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.ParameterMode;
+import javax.persistence.Query;
+import javax.persistence.StoredProcedureQuery;
 import javax.persistence.TypedQuery;
 
 import br.com.sistemahoteleiro.exception.DaoException;
 import br.com.sistemahoteleiro.model.Aluga;
 import br.com.sistemahoteleiro.model.AlugaPessoaFisicaView;
 import br.com.sistemahoteleiro.model.AlugaPessoaJuridicaView;
+import br.com.sistemahoteleiro.util.ConvertLocalDate;
 import br.com.sistemahoteleiro.util.SQLUtil;
 
 /**
@@ -29,6 +35,7 @@ public class DaoAluga extends DaoGeneric<Aluga> implements IDaoAluga {
 		// TODO Auto-generated constructor stub
 	}
 
+	
 	public List<Aluga> buscarAlugadosPessoaFisica(String busca) throws DaoException{
 		
 		try {
@@ -57,6 +64,9 @@ public class DaoAluga extends DaoGeneric<Aluga> implements IDaoAluga {
 	public List<AlugaPessoaFisicaView> buscarAlugadosFisicosView(String busca) throws DaoException {
 
 		try {
+			
+			
+			
 			TypedQuery<AlugaPessoaFisicaView> typedQuery = entityManager().createQuery(SQLUtil.BUSCAR_ALUGA_VIEW_FISICA,
 					AlugaPessoaFisicaView.class);
 			typedQuery.setParameter("busca", "%" + busca + "%");
@@ -99,46 +109,46 @@ public class DaoAluga extends DaoGeneric<Aluga> implements IDaoAluga {
 
 	}
 
-//	@Override
-//	public EntityManager entityManager() {
-//		// TODO Auto-generated method stub
-//		return super.entityManager();
+	
+	public double valorTotalDeAlugados(LocalDate data1, LocalDate data2) throws DaoException {
+	
+		try {
+
+			StoredProcedureQuery query = entityManager().createStoredProcedureQuery("valor_total_data_aluga");
+			
+			query.registerStoredProcedureParameter(0, java.sql.Date.class, ParameterMode.IN);
+			query.registerStoredProcedureParameter(1, java.sql.Date.class, ParameterMode.IN);
+			
+			query.setParameter(0, java.sql.Date.valueOf(data1.toString()));
+			query.setParameter(1, java.sql.Date.valueOf(data2.toString()));
+			
+			double totalAluga =  (double) query.getSingleResult();
+
+			return totalAluga;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new DaoException("Erro ao buscar a quantidade de alugados!");
+		} 
+		
+	}
+
+//	public static void main(String[] args) {
+//		
+//	
+//		System.out.println(LocalDate.now().toString()+" data");
+//		
+//		DaoAluga daoAluga = new DaoAluga();
+//		
+//		try {
+//			
+//			System.out.println(daoAluga.valorTotalDeAlugados( LocalDate.now(), LocalDate.now()));
+//		} catch (DaoException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
 //	}
 
-//	@Override
-//	public void create(Aluga t) throws DaoException {
-//		// TODO Auto-generated method stub
-//		
-//		EntityManager em = entityManager();
-//		try {
-//		
-//			
-//			em.getTransaction().begin();
-//			em.persist(t);
-//
-//			em.merge(t.getCaixa());
-//			
-//			em.merge(t.getCliente());
-//			
-//			em.merge(t.getUsuario());
-//			
-//			em.merge(t.getQuarto());
-//			em.getTransaction().commit();
-//
-//			
-//		}catch (Exception e) {
-//			// TODO: handle exception
-//			em.getTransaction().rollback();
-//			e.printStackTrace();
-//			System.err.println(e.getMessage());
-//			throw new DaoException(e.getMessage());
-//			
-//		} finally {
-//			// TODO: handle finally clause
-//			em.close();
-//		}
-//				
-//		
-//	} 
 
 }

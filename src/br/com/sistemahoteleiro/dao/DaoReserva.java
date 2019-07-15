@@ -3,9 +3,12 @@
  */
 package br.com.sistemahoteleiro.dao;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.NoResultException;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureQuery;
 import javax.persistence.TypedQuery;
 
 import br.com.sistemahoteleiro.exception.DaoException;
@@ -49,5 +52,45 @@ public class DaoReserva extends DaoGeneric<Reserva> implements IDaoReserva{
 		}
 
 	}
+	
+	public double valorTotalDeReservas(LocalDate data1, LocalDate data2) throws DaoException {
+		
+		try {
+
+			StoredProcedureQuery query = entityManager().createStoredProcedureQuery("soma_valor_reserva_data");
+			
+			query.registerStoredProcedureParameter(0, java.sql.Date.class, ParameterMode.IN);
+			query.registerStoredProcedureParameter(1, java.sql.Date.class, ParameterMode.IN);
+			
+			query.setParameter(0, java.sql.Date.valueOf(data1.toString()));
+			query.setParameter(1, java.sql.Date.valueOf(data2.toString()));
+			
+			double total =  (double) query.getSingleResult();
+
+			return total;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new DaoException("Erro ao buscar o valor total das reserva!");
+		} 
+		
+	}
+	
+//	public static void main(String[] args) {
+//		
+//		
+//		System.out.println(LocalDate.now().toString()+" data");
+//		
+//		DaoReserva daoReserva = new DaoReserva();
+//		
+//		try {
+//			
+//			System.out.println(daoReserva.valorTotalDeReservas( LocalDate.now(), LocalDate.now()));
+//		} catch (DaoException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//	}
 	
 }

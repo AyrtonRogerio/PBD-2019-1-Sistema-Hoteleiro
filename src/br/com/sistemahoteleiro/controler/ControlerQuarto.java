@@ -173,8 +173,7 @@ public class ControlerQuarto implements Initializable {
 			try {
 				
 				Facade.getInstance().createOrUpdateQuarto(quarto);
-//				quartos = Facade.getInstance().searchAllQuarto();
-				quartoTabela.getItems().setAll(quartos);
+
 				limparCampos();
 
 				listaQuartosTab.getTabPane().getSelectionModel().select(listaQuartosTab);
